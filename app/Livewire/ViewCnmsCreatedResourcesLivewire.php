@@ -24,7 +24,7 @@ class ViewCnmsCreatedResourcesLivewire extends Component
 
     public function render()
     {
-        return view('livewire.view-cnms-created-resources-livewire', ['Resources' => CnmsResource::search($this->cnmsResourceSearch)->with(['user'])->paginate(15)]);
+        return view('livewire.view-cnms-created-resources-livewire', ['Resources' => CnmsResource::search($this->cnmsResourceSearch)->with(['user','category','assets'])->paginate(15)]);
     }
 
     public function exportCnmsResourcesPdf()

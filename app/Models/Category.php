@@ -11,13 +11,14 @@ class Category extends Model
 
     protected $fillable = ['category_type'];
 
-    public function assets(){
+    public function assets()
+    {
 
         return $this->hasMany(Asset::class);
-
     }
 
-
+    public function cnmsResources()
+    {
+        return $this->hasMany(CnmsResource::class);
+    }
 }
-
-

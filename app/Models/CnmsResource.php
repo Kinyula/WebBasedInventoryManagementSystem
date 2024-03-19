@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CnmsResource extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'category_id', 'asset_id','resource_name', 'status', 'college_name', 'asset_status'];
+    protected $fillable = ['user_id', 'category_id', 'asset_id', 'resource_name', 'status', 'college_name', 'asset_status'];
 
     public static function search($search)
     {
@@ -23,5 +23,21 @@ class CnmsResource extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function cnmsReports()
+    {
+        return $this->hasMany(CnmsReport::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class,'category_id', 'id');
+    }
+
+    public function assets()
+    {
+
+        return $this->belongsTo(Asset::class,'asset_id', 'id');
     }
 }
