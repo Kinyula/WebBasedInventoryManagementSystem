@@ -100,7 +100,7 @@
                     </td>
 
                     <td style="width: 100px;">
-                        <img src="{{ asset('storage/resource_images/'.$report['item']->resource_image) }}" alt="" srcset="">
+                       {{$report['item']->description}}
                     </td>
 
                     <td>

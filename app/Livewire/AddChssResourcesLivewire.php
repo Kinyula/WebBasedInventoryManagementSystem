@@ -13,7 +13,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class AddChssResourcesLivewire extends Component
 {
-    public $category_type, $resource_name, $college_name, $chssResourceImport, $university_store_resource_name;
+    public $category_type, $resource_name, $chssResourceImport, $university_store_resource_name;
 
     public function render()
     {
@@ -27,9 +27,7 @@ class AddChssResourcesLivewire extends Component
 
             'category_type' => 'required',
 
-            'resource_name' => 'required|confirmed',
-
-            'college_name' => 'required',
+            'resource_name' => 'required',
 
             'university_store_resource_name' => 'required',
 
@@ -39,16 +37,18 @@ class AddChssResourcesLivewire extends Component
 
         $chssResource->user_id = auth()->user()->id;
 
+        $chssResource->asset_id = $this->university_store_resource_name;
+
         $chssResource->category_id = $this->category_type;
 
         $chssResource->resource_name = $this->resource_name;
 
 
-        $chssResource->college_name = $this->college_name;
+        $chssResource->college_name = auth()->user()->college_name;
 
         $chssResource->save();
 
-        $this->reset(['category_type', 'resource_name', 'college_name', 'university_store_resource_name']);
+        $this->reset(['category_type', 'resource_name', 'university_store_resource_name']);
 
         session()->flash('addResources', 'A resource is added successfully.');
     }

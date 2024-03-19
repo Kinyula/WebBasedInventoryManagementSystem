@@ -2,8 +2,6 @@
 
 namespace App\Livewire;
 
-use App\Models\Asset;
-use App\Models\Category;
 use App\Models\CnmsReport;
 use App\Models\CnmsResource;
 use Livewire\Component;

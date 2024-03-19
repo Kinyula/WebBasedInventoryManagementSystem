@@ -15,6 +15,7 @@ use App\Http\Controllers\AddSuppliersController;
 use App\Http\Controllers\AddSupplierServicesController;
 use App\Http\Controllers\AssetStatusController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ChssReportController;
 use App\Http\Controllers\CnmsReportController;
 use App\Http\Controllers\CollegeInventoryManagerReportController;
 use App\Http\Controllers\CollegeResourceAllocationController;
@@ -32,6 +33,7 @@ use App\Http\Controllers\UpdateResourceAllocationStatusController;
 use App\Http\Controllers\ViewAllocatedResourcesController;
 use App\Http\Controllers\ViewAssistantInventoryManagersController;
 use App\Http\Controllers\ViewChssCreatedResourcesController;
+use App\Http\Controllers\ViewChssReportController;
 use App\Http\Controllers\ViewCiveCreatedResourcesController;
 use App\Http\Controllers\ViewCnmsCreatedResourcesController;
 use App\Http\Controllers\ViewCnmsReportController;
@@ -176,6 +178,11 @@ Route::middleware('auth')->group(function () {
 
         Route::get('UIMS/add-chss-resources', [AddChssResourceController::class, 'index']);
         Route::get('UIMS/view-chss-created-resources', [ViewChssCreatedResourcesController::class, 'index']);
+
+        // ------------------------------------ CHSS Reports Routes -------------------------------
+
+        Route::get('UIMS/chss-report', [ChssReportController::class, 'index']);
+        Route::get('UIMS/view-chss-report', [ViewChssReportController::class, 'index']);
 
         // End of College of Humanities and Social Science ( CHSS ) Routes
 

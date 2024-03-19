@@ -22,7 +22,7 @@ class ViewChssCreatedResourcesLivewire extends Component
 
     public function render()
     {
-        return view('livewire.view-chss-created-resources-livewire' , ['Resources' => ChssResource::search($this->chssResourceSearch)->with(['user'])->paginate(15)]);
+        return view('livewire.view-chss-created-resources-livewire' , ['Resources' => ChssResource::search($this->chssResourceSearch)->with(['user','category'])->paginate(15)]);
     }
 
     public function exportChssResourcesPdf()

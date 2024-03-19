@@ -8,7 +8,7 @@ use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Support\Facades\Hash;
+
 use Livewire\WithPagination;
 use Livewire\Component;
 
