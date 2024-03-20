@@ -12,7 +12,7 @@ use Maatwebsite\Excel\Facades\Excel;
 class AddCoBEResourcesLivewire extends Component
 {
 
-    public $category_type, $resource_name, $college_name, $cobeResourceImport, $university_store_resource_name;
+    public $category_type, $resource_name, $cobeResourceImport, $university_store_resource_name;
 
     public function render()
     {
@@ -26,11 +26,9 @@ class AddCoBEResourcesLivewire extends Component
 
             'category_type' => 'required',
 
-            'resource_name' => 'required|confirmed',
+            'resource_name' => 'required',
 
-            'college_name' => 'required',
-
-            'university_store_resource_name' => 'required',
+            'university_store_resource_name' => 'required|unique:co_b_e_resources,asset_id',
 
         ]);
 
@@ -44,11 +42,11 @@ class AddCoBEResourcesLivewire extends Component
 
         $cobeResource->resource_name = $this->resource_name;
 
-        $cobeResource->college_name = $this->college_name;
+        $cobeResource->college_name = auth()->user()->college_name;
 
         $cobeResource->save();
 
-        $this->reset(['category_type', 'resource_name', 'college_name','university_store_resource_name']);
+        $this->reset(['category_type', 'resource_name', 'university_store_resource_name']);
 
         session()->flash('addResources', 'A resource is added successfully.');
     }
