@@ -42,10 +42,15 @@
             <thead>
                 <tr>
                     <th class="table-plus datatable-nosort font-weight-bold">College inventory manager</th>
+
                     <th class="font-weight-bold">Category</th>
+
                     <th class="font-weight-bold">University store resource name</th>
+
                     <th class="font-weight-bold">College store resource name</th>
+
                     <th class="font-weight-bold">University store resource id</th>
+
                     <th class="font-weight-bold">College store resource id</th>
 
                     <th class="font-weight-bold">Resource image</th>
@@ -70,11 +75,11 @@
                         </td>
 
                         <td style="text-decoration:normal"><i class="bi bi-pencil p-2"></i>
-                            {{ $report->chssResources->id }}
+                            {{ $report->chssResources->category->category_type }}
                         </td>
 
                         <td style="text-decoration:normal">
-                            {{ $report->chssResources->assets->asset_type }}
+                            {{ $report->chssResources->resource_name }}
                         </td>
 
                         <td style="text-decoration:normal">

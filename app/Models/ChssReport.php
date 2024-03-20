@@ -39,6 +39,6 @@ class ChssReport extends Model
 
     public function chssResources()
     {
-        return $this->belongsTo(ChssResource::class);
+        return $this->belongsTo(ChssResource::class,'chss_resource_id','id');
     }
 }
