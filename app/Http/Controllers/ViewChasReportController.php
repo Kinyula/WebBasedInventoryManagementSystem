@@ -6,5 +6,8 @@ use Illuminate\Http\Request;
 
 class ViewChasReportController extends Controller
 {
-    //
+    public function index()
+    {
+        return view('view-chas-report');
+    }
 }

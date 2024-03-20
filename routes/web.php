@@ -15,6 +15,7 @@ use App\Http\Controllers\AddSuppliersController;
 use App\Http\Controllers\AddSupplierServicesController;
 use App\Http\Controllers\AssetStatusController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ChasReportController;
 use App\Http\Controllers\ChssReportController;
 use App\Http\Controllers\CnmsReportController;
 use App\Http\Controllers\CollegeInventoryManagerReportController;
@@ -32,6 +33,8 @@ use App\Http\Controllers\UpdateAssetStatusController;
 use App\Http\Controllers\UpdateResourceAllocationStatusController;
 use App\Http\Controllers\ViewAllocatedResourcesController;
 use App\Http\Controllers\ViewAssistantInventoryManagersController;
+use App\Http\Controllers\ViewChasCreatedResourcesController;
+use App\Http\Controllers\ViewChasReportController;
 use App\Http\Controllers\ViewChssCreatedResourcesController;
 use App\Http\Controllers\ViewChssReportController;
 use App\Http\Controllers\ViewCiveCreatedResourcesController;
@@ -169,6 +172,12 @@ Route::middleware('auth')->group(function () {
     // College of Health and Allied Science ( CHAS ) Routes
 
     Route::get('UIMS/add-chas-resources', [AddChasResourceController::class, 'index']);
+    Route::get('UIMS/view-chas-created-resources', [ViewChasCreatedResourcesController::class, 'index']);
+
+    // ------------------------------------------CHAS Report Routes -------------------------------------------
+
+    Route::get('UIMS/chas-report', [ChasReportController::class, 'index']);
+    Route::get('UIMS/view-chas-report', [ViewChasReportController::class, 'index']);
 
     // End of College of Health and Allied Science ( CHAS ) Routes
 

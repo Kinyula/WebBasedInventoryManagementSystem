@@ -2,47 +2,48 @@
 
 namespace App\Livewire;
 
+use App\Models\ChasResource;
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
 use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
 use Barryvdh\DomPDF\Facade\Pdf;
-use App\Models\ChasReport;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class ViewChasReportLivewire extends Component
+class ViewChasCreatedResourcesLivewire extends Component
 {
 
     use WithPagination;
 
-    public $chasReportSearch = '';
+    public $chasResourceSearch = '';
 
     protected $paginationTheme = 'tailwind';
 
     public function render()
     {
-        return view('livewire.view-chas-report-livewire' , ['Reports' => ChasReport::search($this->chasReportSearch)->with(['user', 'chasResources','category', 'assets'])->paginate(15)]);
+        return view('livewire.view-chas-created-resources-livewire' , ['Resources' => ChasResource::search($this->chasResourceSearch)->with(['user','category'])->paginate(15)]);
     }
 
-    public function exportChasReportPdf()
+    public function exportChasResourcesPdf()
     {
-        $Reports = [];
+        $Resources = [];
 
-        $data = ChasReport::with(['user'])->get();
+        $data = ChasResource::with(['user'])->get();
 
         foreach ($data as $item) {
 
-            // $QRCode = $this->generateQRCode('UDOM-' . time() . '-' . 'CNMS' . Hash::make($item->id) . '-' . 'report');
+            $QRCode = $this->generateQRCode('UDOM-' . time() . '-' . 'CHAS' . Hash::make($item->id) . '-' . 'assets');
 
-            $Reports[] = [
+            $Resources[] = [
                 'item' => $item,
-                // 'qrcode' => $QRCode
+                'qrcode' => $QRCode
             ];
         }
 
-        $pdf = Pdf::loadView("chas-resource-status-report-pdf", [
-            'Reports' => $Reports
+        $pdf = Pdf::loadView("chas-resources-assets-pdf", [
+            'Resources' => $Resources
         ]);
 
 
@@ -55,7 +56,7 @@ class ViewChasReportLivewire extends Component
             200,
             [
                 'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename=UDOM-CHAS-report.pdf'
+                'Content-Disposition' => 'inline; filename=UDOM-CHAS-assets.pdf'
             ]
         );
     }

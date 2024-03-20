@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class AddChasResourcesLivewire extends Component
 {
-    public $resource_name, $category_type, $college_name, $civeResourceImport, $university_store_resource_name;
+    public $resource_name, $category_type, $chasResourceImport, $university_store_resource_name;
 
     public function render()
     {
@@ -25,11 +25,9 @@ class AddChasResourcesLivewire extends Component
 
             'category_type' => 'required',
 
-            'resource_name' => 'required|confirmed',
+            'resource_name' => 'required',
 
-            'college_name' => 'required',
-
-            'university_store_resource_name' =>'required'
+            'university_store_resource_name' =>'required|unique:chas_resources,asset_id'
 
         ]);
 
@@ -43,12 +41,11 @@ class AddChasResourcesLivewire extends Component
 
         $chasResource->resource_name = $this->resource_name;
 
-
-        $chasResource->college_name = $this->college_name;
+        $chasResource->college_name = auth()->user()->college_name;
 
         $chasResource->save();
 
-        $this->reset(['category_type', 'resource_name', 'college_name', 'university_store_resource_name']);
+        $this->reset(['category_type', 'resource_name', 'university_store_resource_name']);
 
         session()->flash('addResources', 'A resource is added successfully.');
     }
@@ -58,7 +55,7 @@ class AddChasResourcesLivewire extends Component
 
         $this->validate(['chasResource' => 'required|mimes:xlsx,xls,csv']);
 
-        Excel::import(new ChasResourceImport, $this->civeResourceImport);
+        Excel::import(new ChasResourceImport, $this->chasResourceImport);
 
         session()->flash('message', 'CHAS resources are imported successfully');
     }
