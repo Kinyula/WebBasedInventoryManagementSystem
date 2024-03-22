@@ -2,13 +2,12 @@
 
 namespace App\Livewire;
 
-use App\Models\CobeReport;
-use App\Models\CoBEResource;
+use App\Models\CiveResource;
+use App\Models\Report;
+use Livewire\Component;
 use Livewire\WithFileUploads;
 
-use Livewire\Component;
-
-class CobeReportLivewire extends Component
+class CiveReportLivewire extends Component
 {
     use WithFileUploads;
 
@@ -16,11 +15,11 @@ class CobeReportLivewire extends Component
 
     public function render()
     {
-
-        return view('livewire.cobe-report-livewire', ['cobeResources' => CoBEResource::with(['category', 'user'])->get()]);
+        return view('livewire.cive-report-livewire', ['civeResources' => CiveResource::with(['category', 'user'])->get()]);
     }
 
-    public function addCobeReport()
+
+    public function addCiveReport()
     {
 
         $this->validate([
@@ -34,13 +33,13 @@ class CobeReportLivewire extends Component
 
         ]);
 
-        $cobeReport = new CobeReport();
+        $civeReport = new Report();
 
-        $cobeReport->user_id = auth()->user()->id;
+        $civeReport->user_id = auth()->user()->id;
 
-        $cobeReport->college_name = auth()->user()->college_name;
+        $civeReport->college_name = auth()->user()->college_name;
 
-        $cobeReport->description = $this->description;
+        $civeReport->description = $this->description;
 
         if (!is_null($this->resource_image)) {
 
@@ -51,18 +50,18 @@ class CobeReportLivewire extends Component
             $resource_image = $resource_image[2];
 
 
-            $cobeReport->resource_image = $resource_image;
+            $civeReport->resource_image = $resource_image;
         }
 
         else {
             session()->flash('errorMessage', 'Ooops! Resource image can not be empty!');
         }
 
-        $cobeReport->co_b_e_resource_id = $this->resource_name;
+        $civeReport->cive_resource_id = $this->resource_name;
 
 
 
-        $cobeReport->save();
+        $civeReport->save();
 
         $this->reset(['description', 'resource_name', 'resource_image']);
 

@@ -2,25 +2,25 @@
 
 namespace App\Livewire;
 
-use App\Models\CobeReport;
-use App\Models\CoBEResource;
+use App\Models\CoedReport;
+use App\Models\CoEDResource;
+use Livewire\Component;
 use Livewire\WithFileUploads;
 
-use Livewire\Component;
-
-class CobeReportLivewire extends Component
+class CoedReportLivewire extends Component
 {
+
     use WithFileUploads;
 
     public $resource_name, $resource_image, $description;
 
     public function render()
     {
-
-        return view('livewire.cobe-report-livewire', ['cobeResources' => CoBEResource::with(['category', 'user'])->get()]);
+        return view('livewire.coed-report-livewire', ['coedResources' => CoEDResource::with(['category', 'user'])->get()]);
     }
 
-    public function addCobeReport()
+
+    public function addCoedReport()
     {
 
         $this->validate([
@@ -34,13 +34,13 @@ class CobeReportLivewire extends Component
 
         ]);
 
-        $cobeReport = new CobeReport();
+        $coedReport = new CoedReport();
 
-        $cobeReport->user_id = auth()->user()->id;
+        $coedReport->user_id = auth()->user()->id;
 
-        $cobeReport->college_name = auth()->user()->college_name;
+        $coedReport->college_name = auth()->user()->college_name;
 
-        $cobeReport->description = $this->description;
+        $coedReport->description = $this->description;
 
         if (!is_null($this->resource_image)) {
 
@@ -51,18 +51,18 @@ class CobeReportLivewire extends Component
             $resource_image = $resource_image[2];
 
 
-            $cobeReport->resource_image = $resource_image;
+            $coedReport->resource_image = $resource_image;
         }
 
         else {
             session()->flash('errorMessage', 'Ooops! Resource image can not be empty!');
         }
 
-        $cobeReport->co_b_e_resource_id = $this->resource_name;
+        $coedReport->co_e_d_resource_id = $this->resource_name;
 
 
 
-        $cobeReport->save();
+        $coedReport->save();
 
         $this->reset(['description', 'resource_name', 'resource_image']);
 

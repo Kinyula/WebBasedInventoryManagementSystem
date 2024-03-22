@@ -2,7 +2,8 @@
     <div class="card-box mb-30 p-3">
         <h2 class="h4 pd-20 text-gray-600"><i class="bi bi-plus"></i> Compose {{ auth()->user()->college_name }} report
         </h2>
-        <img src="{{ asset('vendors/images/udom.png') }}" class="float-end  udom-logo" alt="" srcset="" style="float-end">
+        <img src="{{ asset('vendors/images/udom.png') }}" class="float-end  udom-logo" alt="" srcset=""
+            style="float-end">
     </div>
 
     <div class="card-box mb-30 p-3">
@@ -12,18 +13,16 @@
                 <strong>{{ session('addResources') }}</strong>
                 <button class="btn btn-close" data-bs-dismiss="alert"></button>
             </div>
-
         @endif
 
         @if (session()->has('errorMessage'))
-        <div role="alert" class="alert alert-danger alert-dismissible fade show">
-            <strong>{{ session('errorMessage') }}</strong>
-            <button class="btn btn-close" data-bs-dismiss="alert"></button>
-        </div>
+            <div role="alert" class="alert alert-danger alert-dismissible fade show">
+                <strong>{{ session('errorMessage') }}</strong>
+                <button class="btn btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        @endif
 
-    @endif
-
-        <form wire:submit.prevent = "addCobeReport">
+        <form wire:submit.prevent = "addCoedReport">
             <h2 class="h4 pd-20 text-gray-600">Report form
             </h2>
             <div class="mt-3">
@@ -32,7 +31,7 @@
                 <select type="select" wire:model= "resource_name"
                     class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full'>
                     <option value="">-- Select resource --</option>
-                    @foreach ($cobeResources as $resource)
+                    @foreach ($coedResources as $resource)
                         <option value="{{ $resource->id }}">{{ $resource->resource_name }}</option>
                     @endforeach
                 </select>
@@ -62,7 +61,6 @@
                     <strong class= 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>{{ $message }}</strong>
                 @enderror
             </div>
-
 
             <div>
                 <br>

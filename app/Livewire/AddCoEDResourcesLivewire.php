@@ -10,7 +10,7 @@ use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
 class AddCoEDResourcesLivewire extends Component
 {
-    public $coedResourceImport, $university_store_resource_name,$category_type, $resource_name, $college_name ;
+    public $coedResourceImport, $university_store_resource_name,$category_type, $resource_name;
 
     public function render()
     {
@@ -24,9 +24,7 @@ class AddCoEDResourcesLivewire extends Component
 
             'category_type' => 'required',
 
-            'resource_name' => 'required|confirmed',
-
-            'college_name' => 'required',
+            'resource_name' => 'required',
 
             'university_store_resource_name' => 'required',
 
@@ -42,11 +40,11 @@ class AddCoEDResourcesLivewire extends Component
 
         $coedResource->resource_name = $this->resource_name;
 
-        $coedResource->college_name = $this->college_name;
+        $coedResource->college_name = auth()->user()->college_name;
 
         $coedResource->save();
 
-        $this->reset(['category_type', 'resource_name', 'college_name','university_store_resource_name']);
+        $this->reset(['category_type', 'resource_name','university_store_resource_name']);
 
         session()->flash('addResources', 'A resource is added successfully.');
     }

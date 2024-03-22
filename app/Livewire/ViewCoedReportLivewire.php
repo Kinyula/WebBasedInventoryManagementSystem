@@ -2,35 +2,33 @@
 
 namespace App\Livewire;
 
-use App\Models\CobeReport;
+use App\Models\CoedReport;
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
 use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Livewire\Component;
 use Livewire\WithPagination;
 
-use Livewire\Component;
-
-class ViewCobeReportLivewire extends Component
+class ViewCoedReportLivewire extends Component
 {
-
     use WithPagination;
 
-    public $cobeReportSearch = '';
+    public $coedReportSearch = '';
 
     protected $paginationTheme = 'tailwind';
 
     public function render()
     {
-        return view('livewire.view-cobe-report-livewire', ['Reports' => CobeReport::search($this->cobeReportSearch)->with(['user', 'cobeResources','category', 'assets'])->paginate(15)]);
+        return view('livewire.view-coed-report-livewire', ['Reports' => CoedReport::search($this->coedReportSearch)->with(['user', 'coedResources', 'category', 'assets'])->paginate(15)]);
     }
 
-    public function exportCobeReportPdf()
+    public function exportCoedReportPdf()
     {
         $Reports = [];
 
-        $data = CobeReport::with(['user'])->get();
+        $data = CoedReport::with(['user'])->get();
 
         foreach ($data as $item) {
 
@@ -38,11 +36,12 @@ class ViewCobeReportLivewire extends Component
 
             $Reports[] = [
                 'item' => $item,
+
                 // 'qrcode' => $QRCode
             ];
         }
 
-        $pdf = Pdf::loadView("cobe-resource-status-report-pdf", [
+        $pdf = Pdf::loadView("coed-resource-status-report-pdf", [
             'Reports' => $Reports
         ]);
 
@@ -56,7 +55,7 @@ class ViewCobeReportLivewire extends Component
             200,
             [
                 'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename=UDOM-CoBE-report.pdf'
+                'Content-Disposition' => 'inline; filename=UDOM-CoED-report.pdf'
             ]
         );
     }
@@ -73,4 +72,3 @@ class ViewCobeReportLivewire extends Component
         return 'data:image/svg+xml;base64,' . base64_encode($writer->writeString($data));
     }
 }
-

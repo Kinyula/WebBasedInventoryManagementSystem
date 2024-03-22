@@ -17,7 +17,11 @@ use App\Http\Controllers\AssetStatusController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChasReportController;
 use App\Http\Controllers\ChssReportController;
+use App\Http\Controllers\CiveReportController;
 use App\Http\Controllers\CnmsReportController;
+use App\Http\Controllers\CobeReportController;
+use App\Http\Controllers\CoedReportController;
+use App\Http\Controllers\CoeseReportController;
 use App\Http\Controllers\CollegeInventoryManagerReportController;
 use App\Http\Controllers\CollegeResourceAllocationController;
 use App\Http\Controllers\EditAssetController;
@@ -41,8 +45,11 @@ use App\Http\Controllers\ViewCiveCreatedResourcesController;
 use App\Http\Controllers\ViewCnmsCreatedResourcesController;
 use App\Http\Controllers\ViewCnmsReportController;
 use App\Http\Controllers\ViewCoBECreatedResourcesController;
+use App\Http\Controllers\ViewCobeReportController;
 use App\Http\Controllers\ViewCoEDCreatedResourcesController;
+use App\Http\Controllers\ViewCoedReportController;
 use App\Http\Controllers\ViewCoESECreatedResourcesController;
+use App\Http\Controllers\ViewCoeseReportController;
 use App\Http\Controllers\ViewCollegeAllocationsController;
 use App\Http\Controllers\ViewCollegeInventoryManagerController;
 use App\Http\Controllers\ViewItemPDFController;
@@ -204,6 +211,10 @@ Route::middleware('auth')->group(function () {
         Route::get('UIMS/view-cive-created-resources', [ViewCiveCreatedResourcesController::class, 'index']);
         Route::get('UIMS/view-cive-resource-status/{id}', [EditCiveResourceStatusController::class, 'index']);
 
+
+        // ---------------------------------------- CIVE Report Routes ----------------------------------------------
+
+        Route::get('UIMS/cive-report', [CiveReportController::class, 'index']);
         // End of College of Informatics and Virtual Education ( CIVE )
 
         // -------------------------------------------------------------------------------------------------------------------------
@@ -221,10 +232,15 @@ Route::middleware('auth')->group(function () {
 
         // -------------------------------------------------------------------------------------------
 
-        // College of Business and Economics ( CoBE ) Routes
+        // College of Business and Economics ( CoBE ) Routes -----------------------------------------------
 
         Route::get('UIMS/add-cobe-resources', [AddCoBEResourceController::class, 'index']);
         Route::get('UIMS/view-cobe-created-resources', [ViewCoBECreatedResourcesController::class, 'index']);
+
+        // ------------------------------------ CoBE Report Routes ------------------------------------
+
+        Route::get('UIMS/cobe-report',[CobeReportController::class, 'index']);
+        Route::get('UIMS/view-cobe-report', [ViewCobeReportController::class, 'index']);
 
         // End of College of Business and Economics Routes
 
@@ -235,6 +251,11 @@ Route::middleware('auth')->group(function () {
         Route::get('UIMS/add-coese-resources', [AddCoESEResourcesController::class, 'index']);
         Route::get('UIMS/view-coese-created-resources', [ViewCoESECreatedResourcesController::class, 'index']);
 
+        // ------------------------------------------ CoESE Report Routes ---------------------------------------------------
+
+        Route::get('UIMS/coese-report', [CoeseReportController::class, 'index']);
+        Route::get('UIMS/view-coese-report', [ViewCoeseReportController::class, 'index']);
+
         // End of Earth Science and Engineering ( CoESE ) Routes
 
         // -----------------------------------------------------------------------------------------------
@@ -243,6 +264,11 @@ Route::middleware('auth')->group(function () {
 
         Route::get('UIMS/add-coed-resources', [AddCoEDResourceController::class, 'index']);
         Route::get('UIMS/view-coed-created-resources', [ViewCoEDCreatedResourcesController::class, 'index']);
+
+        // ---------------------------------------- CoED Report Routes -----------------------------------------------------
+
+        Route::get('UIMS/coed-report', [CoedReportController::class, 'index']);
+        Route::get('UIMS/view-coed-report', [ViewCoedReportController::class, 'index']);
 
         // End of College of Education ( CoED ) Routes
 

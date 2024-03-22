@@ -2,6 +2,6 @@
 
 @section('content')
 
-    @livewire('view-coed-created-resources-livewire')
+@livewire('view-coese-report-livewire')
 
 @endsection

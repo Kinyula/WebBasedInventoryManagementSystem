@@ -24,4 +24,16 @@ class CoBEResource extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class,'category_id', 'id');
+    }
+
+
+    public function assets()
+    {
+
+        return $this->belongsTo(Asset::class,'asset_id', 'id');
+    }
 }

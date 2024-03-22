@@ -9,10 +9,12 @@ use App\Models\CoESEResource;
 use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
 
+
 class AddCoESEResourcesLivewire extends Component
 {
 
-    public $coeseResourceImport, $university_store_resource_name,$category_type, $resource_name, $college_name ;
+
+    public $coeseResourceImport, $university_store_resource_name,$category_type, $resource_name;
 
     public function render()
     {
@@ -26,9 +28,7 @@ class AddCoESEResourcesLivewire extends Component
 
             'category_type' => 'required',
 
-            'resource_name' => 'required|confirmed',
-
-            'college_name' => 'required',
+            'resource_name' => 'required',
 
             'university_store_resource_name' => 'required',
 
@@ -44,11 +44,11 @@ class AddCoESEResourcesLivewire extends Component
 
         $coeseResource->resource_name = $this->resource_name;
 
-        $coeseResource->college_name = $this->college_name;
+        $coeseResource->college_name = auth()->user()->college_name;
 
         $coeseResource->save();
 
-        $this->reset(['category_type', 'resource_name', 'college_name','university_store_resource_name']);
+        $this->reset(['category_type', 'resource_name','university_store_resource_name']);
 
         session()->flash('addResources', 'A resource is added successfully.');
     }

@@ -8,7 +8,7 @@
 
     <div class="card-box mb-30 p-3">
 
-        <form wire:submit.prevent = 'exportCoeseReportPdf'>
+        <form wire:submit.prevent = 'exportCoedReportPdf'>
 
 
             <button type="submit"
@@ -24,7 +24,7 @@
                 <div class="form-group mb-0">
 
                     <input type="search" class="form-control search-input" placeholder="Search Here..."
-                        wire:model.live = 'coeseReportSearch' />
+                        wire:model.live = 'coedReportSearch' />
 
                 </div>
             </form>
@@ -42,10 +42,15 @@
             <thead>
                 <tr>
                     <th class="table-plus datatable-nosort font-weight-bold">College inventory manager</th>
+
                     <th class="font-weight-bold">Category</th>
+
                     <th class="font-weight-bold">University store resource name</th>
+
                     <th class="font-weight-bold">College store resource name</th>
+
                     <th class="font-weight-bold">University store resource id</th>
+
                     <th class="font-weight-bold">College store resource id</th>
 
                     <th class="font-weight-bold">Resource image</th>
@@ -70,25 +75,25 @@
                         </td>
 
                         <td style="text-decoration:normal"><i class="bi bi-pencil p-2"></i>
-                            {{ $report->coeseResources->category->category_type }}
+                            {{ $report->coedResources->category->category_type }}
                         </td>
 
                         <td style="text-decoration:normal">
-                            {{ $report->coeseResources->assets->asset_type }}
-                        </td>
-
-                        <td style="text-decoration:normal">
-
-                            {{ $report->coeseResources->resource_name }}
-                        </td>
-
-                        <td style="text-decoration:normal">
-                            {{ $report->coeseResources->asset_id }}
+                            {{ $report->coedResources->resource_name }}
                         </td>
 
                         <td style="text-decoration:normal">
 
-                            {{ $report->coeseResources->id }}
+                            {{ $report->coedResources->resource_name }}
+                        </td>
+
+                        <td style="text-decoration:normal">
+                            {{ $report->coedResources->asset_id }}
+                        </td>
+
+                        <td style="text-decoration:normal">
+
+                            {{ $report->coedResources->id }}
                         </td>
 
                         <td style="text-decoration:normal;width:100px;">

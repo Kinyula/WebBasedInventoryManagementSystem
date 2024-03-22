@@ -23,7 +23,7 @@
 
     @endif
 
-        <form wire:submit.prevent = "addCobeReport">
+        <form wire:submit.prevent = "addCiveReport">
             <h2 class="h4 pd-20 text-gray-600">Report form
             </h2>
             <div class="mt-3">
@@ -32,7 +32,7 @@
                 <select type="select" wire:model= "resource_name"
                     class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full'>
                     <option value="">-- Select resource --</option>
-                    @foreach ($cobeResources as $resource)
+                    @foreach ($civeResources as $resource)
                         <option value="{{ $resource->id }}">{{ $resource->resource_name }}</option>
                     @endforeach
                 </select>
