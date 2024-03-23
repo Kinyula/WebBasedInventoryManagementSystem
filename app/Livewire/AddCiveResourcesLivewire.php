@@ -25,7 +25,7 @@ class AddCiveResourcesLivewire extends Component
 
             'category_type' => 'required',
 
-            'resource_name' => 'required|confirmed',
+            'resource_name' => 'required|unique:cive_resources,resource_name',
 
             'college_name' => 'required',
 

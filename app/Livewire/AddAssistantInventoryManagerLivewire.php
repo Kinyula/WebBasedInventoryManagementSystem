@@ -26,7 +26,7 @@ class AddAssistantInventoryManagerLivewire extends Component
 
         $this->validate([
             'username' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique:users,email',
             'password' => 'required|confirmed',
             'password_confirmation' => 'required',
 

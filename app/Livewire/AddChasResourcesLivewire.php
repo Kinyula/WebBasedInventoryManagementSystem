@@ -25,7 +25,7 @@ class AddChasResourcesLivewire extends Component
 
             'category_type' => 'required',
 
-            'resource_name' => 'required',
+            'resource_name' => 'required|unique:chas_resources,resource_name',
 
             'university_store_resource_name' =>'required|unique:chas_resources,asset_id'
 

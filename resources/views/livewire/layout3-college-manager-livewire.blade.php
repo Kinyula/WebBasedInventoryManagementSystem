@@ -634,7 +634,7 @@
                                     <li><a href="{{ asset('UIMS/qr-code-reader') }}">
                                             Scan Qr code
                                         </a>
-                                    </li>
+                                    </li> 
 
                                 </ul>
 

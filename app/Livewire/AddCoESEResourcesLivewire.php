@@ -28,7 +28,7 @@ class AddCoESEResourcesLivewire extends Component
 
             'category_type' => 'required',
 
-            'resource_name' => 'required',
+            'resource_name' => 'required|unique:co_e_s_e_resources,resource_name',
 
             'university_store_resource_name' => 'required',
 

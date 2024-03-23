@@ -23,8 +23,8 @@ class AddAssetLivewire extends Component
         $this->validate([
 
             'category_type' => 'required',
-            
-            'asset_type' => 'required',
+
+            'asset_type' => 'required|unique:asset,asset_type',
 
         ]);
 
