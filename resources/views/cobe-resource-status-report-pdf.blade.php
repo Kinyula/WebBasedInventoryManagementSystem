@@ -16,6 +16,8 @@
             border-bottom: 1px solid black;
             border-collapse: collapse;
             padding: 10px;
+            position: absolute;
+            bottom: 75%;
         }
 
         /* td:nth-child(odd) {
@@ -53,46 +55,47 @@
             left: 10%;
         }
 
-        .printedMessage {
+        .collegeMessage {
 
             position: relative;
-            left: 80%;
+
+        }
+
+        .printedMessage {
+            position: relative;
+            left: 70%;
+            bottom: 8%;
         }
 
         .printedLabel {
             font-weight: bold;
             position: relative;
-            right: 15%;
-            top: 9%;
+
         }
 
         .collegeLabel {
             font-weight: bold;
             position: relative;
-            left: 10%;
-            bottom: 12%;
+            left: 2%;
+
         }
 
         .printedDate {
             position: relative;
-            top: 45px;
-            right: 15%;
-
+            left: 15%;
+            bottom: 40px;
             color: green;
         }
 
         .collegeName {
 
             position: relative;
-            bottom: 12%;
-
+            left: 17%;
+            bottom: 40px;
             color: green;
         }
 
-        .horizontalLine {
-            position: relative;
-            bottom: 10%;
-        }
+
 
     </style>
 
@@ -136,6 +139,17 @@
     </div>
     <br>
     <hr>
+    <div class="collegeMessage">
+        <span class="collegeLabel">College name : </span>
+
+        <h4 class="collegeName">{{ auth()->user()->college_name }}</h4>
+    </div>
+
+    <div class="printedMessage">
+        <span class="printedLabel">Printed date : </span>
+
+        <h4 class="printedDate">{{ \Carbon\Carbon::now()->format('d- m- Y') }}</h4>
+    </div>
     <br>
     <table>
         <thead>
@@ -188,21 +202,13 @@
         </tbody>
     </table>
 
-    <div class="printedMessage">
-        <span class="printedLabel">Printed date : </span>
 
-        <h4 class="printedDate">{{ \Carbon\Carbon::now()->format('d- m- Y') }}</h4>
-    </div>
 
     <br>
 
-    <div class="collegeMessage">
-        <span class="collegeLabel">College name : </span>
 
-        <h4 class="collegeName">{{ auth()->user()->college_name }}</h4>
-    </div>
 
-    <hr class="horizontalLine">
+
 </body>
 
 </html>
