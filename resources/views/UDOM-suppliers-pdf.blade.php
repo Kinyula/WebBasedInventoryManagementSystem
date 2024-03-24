@@ -63,35 +63,14 @@
             font-weight: bold;
             position: relative;
             right: 15%;
-            top: 9%;
-        }
-
-        .collegeLabel {
-            font-weight: bold;
-            position: relative;
-            left: 10%;
-            bottom: 12%;
+            top: 7%;
         }
 
         .printedDate {
             position: relative;
-            top: 45px;
-            right: 15%;
+            top: 2px;
 
             color: green;
-        }
-
-        .collegeName {
-
-            position: relative;
-            bottom: 12%;
-
-            color: green;
-        }
-
-        .horizontalLine {
-            position: relative;
-            bottom: 10%;
         }
 
     </style>
@@ -140,69 +119,61 @@
     <table>
         <thead>
             <tr>
-                <th class="table-plus datatable-nosort font-weight-bold">College inventory manager</th>
+                <th class="table-plus datatable-nosort font-weight-bold">Supplier's name</th>
 
 
-                <th class="font-weight-bold">University store resource id</th>
+                <th class="font-weight-bold">Supplier's location </th>
 
-                <th class="font-weight-bold">College store resource id</th>
+                <th class="font-weight-bold">Supplier's contacts</th>
 
-                <th class="font-weight-bold">Resource description</th>
 
-                <th class="font-weight-bold">College name</th>
+                <th class="font-weight-bold">Supplier's services</th>
 
-                <th class="font-weight-bold">Submission time</th>
+                <th class="font-weight-bold">Created time</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($Reports as $report)
+            @foreach ($Suppliers as $supplier)
                 <tr>
 
                     <td>
-                        <h5 class="font-16">{{ $report['item']->user->email }}</h5>
+                        <h5 class="font-16">{{ $supplier['item']->company_name }}</h5>
 
                     </td>
 
                     <td style="text-decoration:normal">
-                        {{ $report['item']->cobeResources->asset_id }}
+                        {{ $supplier['item']->company_location }}
                     </td>
+
 
                     <td style="text-decoration:normal">
-
-                        {{ $report['item']->cobeResources->id }}
+                        @foreach ($supplier['item']->phone as $supplierPhone)
+                            {{ $supplierPhone->phone_number }}
+                        @endforeach
                     </td>
 
-                    <td style="width: 100px;">
-                       {{$report['item']->description}}
+
+
+                    <td style="text-decoration:normal">
+                        @foreach ($supplier['item']->services as $supplierServices)
+                            {{ $supplierServices->services_offered }}
+                        @endforeach
                     </td>
+
+
 
                     <td>
-                        {{ $report['item']->college_name }}
-                    </td>
-                    <td>
-                        <span>{{ $report['item']->updated_at->format('d M Y h:i:s') }}</span>
+                        <span>{{ $supplier['item']->updated_at->format('d M Y h:i:s') }}</span>
                     </td>
 
                 </tr>
             @endforeach
         </tbody>
     </table>
-
     <div class="printedMessage">
         <span class="printedLabel">Printed date : </span>
-
         <h4 class="printedDate">{{ \Carbon\Carbon::now()->format('d- m- Y') }}</h4>
     </div>
-
-    <br>
-
-    <div class="collegeMessage">
-        <span class="collegeLabel">College name : </span>
-
-        <h4 class="collegeName">{{ auth()->user()->college_name }}</h4>
-    </div>
-
-    <hr class="horizontalLine">
 </body>
 
 </html>

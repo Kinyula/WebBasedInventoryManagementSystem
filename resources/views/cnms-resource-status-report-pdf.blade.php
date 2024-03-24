@@ -22,16 +22,21 @@
             background-color: lightgray
         } */
 
+
         .logo img {
             width: 80px;
             position: relative;
-            bottom: 20px;
+            bottom: 40px;
+            left: 90%;
         }
 
-        .udom-info {
+        .court-of-arms img {
             position: absolute;
-            left: 80%;
-            bottom: 85%;
+
+            bottom: 86%;
+            width: 80px;
+            border-radius: 50%;
+
         }
 
         .header {
@@ -39,18 +44,86 @@
             bottom: 50px;
             text-align: center;
         }
+
+        .header-text {
+            position: relative;
+            top: 10%;
+            width: 80%;
+            text-align: center;
+            left: 10%;
+        }
+
+        .printedMessage {
+
+            position: relative;
+            left: 80%;
+        }
+
+        .printedLabel {
+            font-weight: bold;
+            position: relative;
+            right: 15%;
+            top: 9%;
+        }
+
+        .collegeLabel {
+            font-weight: bold;
+            position: relative;
+            left: 10%;
+            bottom: 12%;
+        }
+
+        .printedDate {
+            position: relative;
+            top: 45px;
+            right: 15%;
+
+            color: green;
+        }
+
+        .collegeName {
+
+            position: relative;
+            bottom: 12%;
+
+            color: green;
+        }
+
+        .horizontalLine {
+            position: relative;
+            bottom: 10%;
+        }
+
     </style>
 
-    <div class="header">
-        <h3>THE UNIVERSITY OF DODOMA</h3>
-    </div>
+
     <div class="header-container">
+
+        <div class="header">
+
+            <h3 class="header-text">
+                THE UNITED REPUBLIC OF TANZANIA
+                MINISTRY OF EDUCATION, SCIENCE AND TECHNOLOGY <br>
+                THE UNIVERSITY OF DODOMA
+
+            </h3>
+
+            {{-- @if (auth()->user()->college_name === 'Not set' && auth()->user()->role_id === '0')
+                <h5>List of suppliers available</h5>
+            @else
+                <h4>{{ auth()->user()->college_name }}</h4>
+            @endif --}}
+
+        </div>
 
         <div class="logo">
             <img src="vendors/images/udom.png" alt="" srcset="">
         </div>
 
-        <div class="udom-info">
+        <div class="court-of-arms">
+            <img src="vendors/images/court-of-arms.jpg" alt="" srcset="">
+        </div>
+        {{-- <div class="udom-info">
             <h5>P.O BOX 259,</h5>
             <h5>DODOMA,</h5>
             <h5>
@@ -59,7 +132,7 @@
 
             </h5>
 
-        </div>
+        </div> --}}
     </div>
     <br>
     <hr>
@@ -74,7 +147,7 @@
 
                 <th class="font-weight-bold">College store resource id</th>
 
-                <th class="font-weight-bold">Resource image</th>
+                <th class="font-weight-bold">Resource description</th>
 
                 <th class="font-weight-bold">College name</th>
 
@@ -114,6 +187,22 @@
             @endforeach
         </tbody>
     </table>
+
+    <div class="printedMessage">
+        <span class="printedLabel">Printed date : </span>
+
+        <h4 class="printedDate">{{ \Carbon\Carbon::now()->format('d- m- Y') }}</h4>
+    </div>
+
+    <br>
+
+    <div class="collegeMessage">
+        <span class="collegeLabel">College name : </span>
+
+        <h4 class="collegeName">{{ auth()->user()->college_name }}</h4>
+    </div>
+
+    <hr class="horizontalLine">
 </body>
 
 </html>
