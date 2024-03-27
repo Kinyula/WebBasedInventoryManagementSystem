@@ -39,6 +39,41 @@
             bottom: 50px;
             text-align: center;
         }
+
+        .description-container {
+
+display: block;
+margin-top: 30px
+
+}
+
+.resource-name-label {
+font-weight: bold;
+}
+
+.resource-name {
+
+position: relative;
+top: 10px;
+}
+
+.description-label {
+
+font-weight: bold;
+}
+
+.description-message {
+
+position: relative;
+top: 10px;
+
+}
+
+.resource-name-container {
+
+display: block;
+
+}
     </style>
 
     <div class="header">

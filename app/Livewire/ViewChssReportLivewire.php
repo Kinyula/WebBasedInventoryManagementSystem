@@ -71,4 +71,12 @@ class ViewChssReportLivewire extends Component
 
         return 'data:image/svg+xml;base64,' . base64_encode($writer->writeString($data));
     }
+
+    public function deleteChssReport($id) {
+
+        $chssReport = ChssReport::findOrFail($id) ? ChssReport::findOrFail($id)->delete() : false;
+
+        session()->flash('deleteChssReport' , 'Report is deleted successfully!');
+
+    }
 }

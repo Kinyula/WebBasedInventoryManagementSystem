@@ -22,6 +22,7 @@ class ViewAllocatedResourcesLivewire extends Component
     public function deleteResources($id)
     {
         $delete_resource = ResourceAllocation::where("id", $id)->exists() ? ResourceAllocation::findOrFail($id)->delete() : false;
+        
         session()->flash('deleteResource', 'Resource is deleted successfully.');
     }
 }

@@ -72,4 +72,12 @@ class ViewCoeseReportLivewire extends Component
 
         return 'data:image/svg+xml;base64,' . base64_encode($writer->writeString($data));
     }
+
+    public function deleteCoeseReport($id) {
+
+        $coeseReport = CoeseReport::findOrFail($id) ? CoeseReport::findOrFail($id)->delete() : false;
+
+        session()->flash('deleteCoeseReport', 'Report is deleted successfully!');
+        
+    }
 }

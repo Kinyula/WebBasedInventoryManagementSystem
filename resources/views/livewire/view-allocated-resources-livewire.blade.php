@@ -3,11 +3,18 @@
     <div class="card-box mb-30 p-3">
 
         <h2 class="h5 pd-20">View allocated items to colleges</h2>
-        <img src="{{ asset('vendors/images/udom.png') }}" class="float-end  udom-logo" alt="" srcset="" style="float:inline-end">
+        <img src="{{ asset('vendors/images/udom.png') }}" class="float-end  udom-logo" alt="" srcset=""
+            style="float:inline-end">
     </div>
 
     <div class="card-box mb-30 p-3">
 
+        @if (session()->has('deleteResource'))
+            <div role="alert" class="alert alert-success alert-dismissible fade show">
+                <strong>{{ session('deleteResource') }}</strong>
+                <button class="btn btn-close"></button>
+            </div>
+        @endif
 
 
         <div class="header-search">
@@ -22,13 +29,6 @@
             </form>
         </div>
 
-
-        @if (session()->has('deleteResource'))
-            <div role="alert" class="alert alert-success alert-dismissible fade show">
-                <strong>{{ session('deleteResource') }}</strong>
-                <button class="btn btn-close"></button>
-            </div>
-        @endif
         <table class="data-table table nowrap ">
             <thead>
                 <tr>

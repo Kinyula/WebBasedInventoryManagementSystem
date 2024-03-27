@@ -18,7 +18,7 @@ class ViewCobeCreatedResourcesLivewire extends Component
     use WithPagination;
 
     protected $paginationTheme = 'tailwind';
-    
+
     public $cobeResourceSearch = '';
 
     public function render()
@@ -71,5 +71,13 @@ class ViewCobeCreatedResourcesLivewire extends Component
         $writer = new Writer($renderer);
 
         return 'data:image/svg+xml;base64,' . base64_encode($writer->writeString($data));
+    }
+
+    public function deleteCobeCreatedResource($id) {
+
+        $cobeResource = CoBEResource::findOrFail($id) ? CoBEResource::findOrFail($id)->delete() : false;
+
+        session()->flash('deleteResource', 'Resource is deleted successfully!');
+        
     }
 }

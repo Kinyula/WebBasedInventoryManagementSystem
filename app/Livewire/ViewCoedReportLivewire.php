@@ -71,4 +71,12 @@ class ViewCoedReportLivewire extends Component
 
         return 'data:image/svg+xml;base64,' . base64_encode($writer->writeString($data));
     }
+
+    public function deleteCoedReport($id)
+    {
+
+        $coedReport = CoedReport::findOrFail($id) ? CoedReport::findOrFail($id)->delete() : false;
+
+        session()->flash('deleteCoedReport', 'Report is deleted successfully!');
+    }
 }

@@ -72,5 +72,12 @@ class ViewCnmsReportLivewire extends Component
 
         return 'data:image/svg+xml;base64,' . base64_encode($writer->writeString($data));
     }
+
+    public function deleteCnmsReport($id) {
+
+        $cnmsReport = CnmsReport::findOrFail($id) ? CnmsReport::findOrFail($id)->delete() : false;
+
+        session()->flash('deleteCnmsReport', 'Report is deleted successfully!');
+    }
 }
 

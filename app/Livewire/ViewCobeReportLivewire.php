@@ -23,7 +23,7 @@ class ViewCobeReportLivewire extends Component
 
     public function render()
     {
-        return view('livewire.view-cobe-report-livewire', ['Reports' => CobeReport::search($this->cobeReportSearch)->with(['user', 'cobeResources','category', 'assets'])->paginate(15)]);
+        return view('livewire.view-cobe-report-livewire', ['Reports' => CobeReport::search($this->cobeReportSearch)->with(['user', 'cobeResources', 'category', 'assets'])->paginate(15)]);
     }
 
     public function exportCobeReportPdf()
@@ -72,5 +72,12 @@ class ViewCobeReportLivewire extends Component
 
         return 'data:image/svg+xml;base64,' . base64_encode($writer->writeString($data));
     }
-}
 
+    public function deleteCobeReport($id)
+    {
+
+        $cobeReport = CobeReport::findOrFail($id) ? CobeReport::findOrFail($id)->delete() : false;
+
+        session()->flash('deleteCobeReport', 'Report is deleted successfully!');
+    }
+}

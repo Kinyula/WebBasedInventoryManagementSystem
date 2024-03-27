@@ -94,6 +94,40 @@
             bottom: 40px;
             color: green;
         }
+
+        .description-container {
+
+display: block;
+margin-top: 30px
+}
+
+.resource-name-label {
+font-weight: bold;
+}
+
+.resource-name {
+
+position: relative;
+top: 10px;
+}
+
+.description-label {
+
+font-weight: bold;
+}
+
+.description-message {
+
+position: relative;
+top: 10px;
+
+}
+
+.resource-name-container {
+
+display: block;
+
+}
     </style>
 
 
@@ -153,34 +187,31 @@
         </thead>
         <tbody>
             @foreach ($Reports as $report)
-                <tr>
+            <tr>
 
-                    <td>
-                        <h5 class="font-16">{{ $report['item']->user->email }}</h5>
+                <td>
+                    <h5 class="font-16">{{ $report['item']->user->email }}</h5>
 
-                    </td>
+                </td>
 
-                    <td style="text-decoration:normal">
-                        {{ $report['item']->chasResources->asset_id }}
-                    </td>
+                <td style="text-decoration:normal">
+                    {{ $report['item']->chasResources->asset_id }}
+                </td>
 
-                    <td style="text-decoration:normal">
+                <td style="text-decoration:normal">
 
-                        {{ $report['item']->chasResources->id }}
-                    </td>
+                    {{ $report['item']->chasResources->id }}
+                </td>
 
-                    <td style="width: 100px;">
-                        {{ $report['item']->description }}
-                    </td>
 
-                    <td>
-                        {{ $report['item']->college_name }}
-                    </td>
-                    <td>
-                        <span>{{ $report['item']->updated_at->format('d M Y h:i:s') }}</span>
-                    </td>
+                <td>
+                    {{ $report['item']->college_name }}
+                </td>
+                <td>
+                    <span>{{ $report['item']->updated_at->format('d M Y h:i:s') }}</span>
+                </td>
 
-                </tr>
+            </tr>
             @endforeach
         </tbody>
     </table>
@@ -188,6 +219,37 @@
 
 
     <br>
+    <br>
+    <br>
+
+    <div class="resource-name-container">
+
+        <span class="resource-name-label">
+            Reported resource name
+        </span>
+
+        <br>
+
+        <span class="resource-name">
+
+            {{ $report['item']->chasResources->resource_name }}
+
+        </span>
+    </div>
+    <div class="description-container">
+
+        <span class="description-label">
+            Description on the reported resource
+        </span>
+
+        <br>
+
+        <span class="description-message">
+
+            {{ $report['item']->description }}
+
+        </span>
+    </div>
 
 
 

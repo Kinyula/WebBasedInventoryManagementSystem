@@ -73,4 +73,12 @@ class ViewCnmsCreatedResourcesLivewire extends Component
 
         return 'data:image/svg+xml;base64,' . base64_encode($writer->writeString($data));
     }
+
+    public function deleteCnmsCreatedResource($id) {
+
+        $cnmsResource = CnmsResource::findOrFail($id) ? CnmsResource::findOrFail($id)->delete() : false;
+
+        session()->flash('deleteResource', 'Resource is deleted succesfully!');
+        
+    }
 }

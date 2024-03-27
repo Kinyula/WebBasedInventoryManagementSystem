@@ -97,37 +97,38 @@
 
         .description-container {
 
-            display: block;
-            margin-top: 30px
-        }
+display: block;
+margin-top: 30px
 
-        .resource-name-label {
-            font-weight: bold;
-        }
+}
 
-        .resource-name {
+.resource-name-label {
+font-weight: bold;
+}
 
-            position: relative;
-            top: 10px;
-        }
+.resource-name {
 
-        .description-label {
+position: relative;
+top: 10px;
+}
 
-            font-weight: bold;
-        }
+.description-label {
 
-        .description-message {
+font-weight: bold;
+}
 
-            position: relative;
-            top: 10px;
+.description-message {
 
-        }
+position: relative;
+top: 10px;
 
-        .resource-name-container {
+}
 
-            display: block;
+.resource-name-container {
 
-        }
+display: block;
+
+}
     </style>
 
 
@@ -178,6 +179,8 @@
 
                 <th class="font-weight-bold">College store resource id</th>
 
+                <th class="font-weight-bold">Resource description</th>
+
                 <th class="font-weight-bold">College name</th>
 
                 <th class="font-weight-bold">Submission time</th>
@@ -193,14 +196,17 @@
                     </td>
 
                     <td style="text-decoration:normal">
-                        {{ $report['item']->cnmsResources->asset_id }}
+                        {{ $report['item']->civeResources->asset_id }}
                     </td>
 
                     <td style="text-decoration:normal">
 
-                        {{ $report['item']->cnmsResources->id }}
+                        {{ $report['item']->civeResources->id }}
                     </td>
 
+                    <td style="width: 100px;">
+                        {{ $report['item']->description }}
+                    </td>
 
                     <td>
                         {{ $report['item']->college_name }}
@@ -211,10 +217,9 @@
 
                 </tr>
             @endforeach
-
         </tbody>
-
     </table>
+
 
 
     <br>
@@ -231,7 +236,7 @@
 
         <span class="resource-name">
 
-            {{ $report['item']->cnmsResources->resource_name }}
+            {{ $report['item']->civeResources->resource_name }}
 
         </span>
     </div>
@@ -249,8 +254,6 @@
 
         </span>
     </div>
-
-
 
 
 

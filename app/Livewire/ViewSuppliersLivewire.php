@@ -24,7 +24,7 @@ class ViewSuppliersLivewire extends Component
     {
         $Suppliers = [];
 
-        $data = Supplier::with(['services','phone'])->get();
+        $data = Supplier::with(['services', 'phone'])->get();
 
         foreach ($data as $item) {
 
@@ -66,5 +66,12 @@ class ViewSuppliersLivewire extends Component
         $writer = new Writer($renderer);
 
         return 'data:image/svg+xml;base64,' . base64_encode($writer->writeString($data));
+    }
+
+    public function deleteSupplier($id)
+    {
+        $supplier = Supplier::findOrFail($id) ? Supplier::findOrFail($id)->delete() : false;
+
+        session()->flash('deleteSupplier', 'Supplier is deleted successfully!');
     }
 }

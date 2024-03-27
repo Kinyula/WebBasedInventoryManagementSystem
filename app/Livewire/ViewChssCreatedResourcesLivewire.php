@@ -22,7 +22,7 @@ class ViewChssCreatedResourcesLivewire extends Component
 
     public function render()
     {
-        return view('livewire.view-chss-created-resources-livewire' , ['Resources' => ChssResource::search($this->chssResourceSearch)->with(['user','category'])->paginate(15)]);
+        return view('livewire.view-chss-created-resources-livewire', ['Resources' => ChssResource::search($this->chssResourceSearch)->with(['user', 'category'])->paginate(15)]);
     }
 
     public function exportChssResourcesPdf()
@@ -70,5 +70,14 @@ class ViewChssCreatedResourcesLivewire extends Component
         $writer = new Writer($renderer);
 
         return 'data:image/svg+xml;base64,' . base64_encode($writer->writeString($data));
+    }
+
+    public function deleteChssCreatedResource($id)
+    {
+
+        $chssResource = ChssResource::findOrFail($id) ? ChssResource::findOrFail($id)->delete() : false;
+
+        session()->flash('deleteResource', 'Resource is deleted successfully!');
+        
     }
 }

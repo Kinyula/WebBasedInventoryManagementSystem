@@ -7,9 +7,9 @@
 
     <div class="card-box mb-30 p-3">
 
-        @if (session()->has('deletePhoneNumber'))
+        @if (session()->has('deleteSupplier'))
             <div role="alert" class="alert alert-success alert-dismissible fade show">
-                <strong>{{ session('deletePhoneNumber') }}</strong>
+                <strong>{{ session('deleteSupplier') }}</strong>
                 <button class="btn btn-close"></button>
             </div>
         @endif
@@ -87,7 +87,7 @@
                                             class="dw dw-edit2"></i> Edit</a>
 
                                     <button type="submit" class="dropdown-item"
-                                        onclick="confirm(`Are you sure you want to delete this {{ $supplier->compant_name }} 's  phone supplier ? `) || event.stopImmediatePropagation()"wire:click="deletePhoneNumber({{ $supplier->id }})"><i
+                                        onclick="confirm(`Are you sure you want to delete this {{ $supplier->compant_name }} 's  phone supplier ? `) || event.stopImmediatePropagation()"wire:click="deleteSupplier({{ $supplier->id }})"><i
                                             class="dw dw-delete-3"></i>Delete</button>
                                 </div>
                             </div>

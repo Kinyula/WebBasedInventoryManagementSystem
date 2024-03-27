@@ -6,9 +6,17 @@
             style="float:inline-end">
     </div>
 
+
     <div class="card-box mb-30 p-3">
 
-        <form wire:submit.prevent = 'exportCobeReportPdf'>
+        @if (session()->has('deleteCobeReport'))
+            <div role="alert" class="alert alert-success alert-dismissible fade show">
+                <strong>{{ session('addAnAssistant') }}</strong>
+                <button class="btn btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        @endif
+
+        <form wire:submit.prevent = 'exportCobeReportPdf()'>
 
 
             <button type="submit"
@@ -24,23 +32,18 @@
                 <div class="form-group mb-0">
 
                     <input type="search" class="form-control search-input" placeholder="Search Here..."
-                        wire:model.live = 'cnmsReportSearch' />
+                        wire:model.live = 'cobeReportSearch' />
 
                 </div>
             </form>
         </div>
 
 
-        @if (session()->has('deleteReport'))
-            <div role="alert" class="alert alert-success alert-dismissible fade show">
-                <strong>{{ session('deleteReport') }}</strong>
-                <button class="btn btn-close"></button>
-            </div>
-        @endif
 
         <table class="data-table table nowrap ">
             <thead>
                 <tr>
+                    <th class="table-plus datatable-nosort font-weight-bold">Select report</th>
                     <th class="table-plus datatable-nosort font-weight-bold">College inventory manager</th>
                     <th class="font-weight-bold">Category</th>
                     <th class="font-weight-bold">University store resource name</th>
@@ -64,6 +67,12 @@
                 @foreach ($Reports as $report)
                     <tr>
 
+                        <td>
+                            <form wire:submit = "reportIdForm()">
+                                <input type="checkbox" wire:model = "id"  value="{{$report->id}}" id="">
+                            </form>
+
+                        </td>
                         <td>
                             <h5 class="font-16">{{ $report->user->email }}</h5>
 
@@ -117,7 +126,7 @@
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 
                                     <button type="submit" class="dropdown-item"
-                                        wire:click = "deleteResources({{ $report->id }})"
+                                        wire:click = "deleteCobeReport({{ $report->id }})"
                                         onclick="confirm(`Are you sure you want to delete this report  from the list ? `) || event.stopImmediatePropagation()"><i
                                             class="dw dw-delete-3"></i>Delete</button>
                                 </div>

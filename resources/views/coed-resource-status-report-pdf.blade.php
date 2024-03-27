@@ -94,6 +94,41 @@
             bottom: 40px;
             color: green;
         }
+
+        .description-container {
+
+display: block;
+margin-top: 30px
+
+}
+
+.resource-name-label {
+font-weight: bold;
+}
+
+.resource-name {
+
+position: relative;
+top: 10px;
+}
+
+.description-label {
+
+font-weight: bold;
+}
+
+.description-message {
+
+position: relative;
+top: 10px;
+
+}
+
+.resource-name-container {
+
+display: block;
+
+}
     </style>
 
 
@@ -188,6 +223,37 @@
 
 
     <br>
+    <br>
+    <br>
+
+    <div class="resource-name-container">
+
+        <span class="resource-name-label">
+            Reported resource name
+        </span>
+
+        <br>
+
+        <span class="resource-name">
+
+            {{ $report['item']->coedResources->resource_name }}
+
+        </span>
+    </div>
+    <div class="description-container">
+
+        <span class="description-label">
+            Description on the reported resource
+        </span>
+
+        <br>
+
+        <span class="description-message">
+
+            {{ $report['item']->description }}
+
+        </span>
+    </div>
 
 
 

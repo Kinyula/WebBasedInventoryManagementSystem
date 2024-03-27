@@ -2,10 +2,18 @@
 
     <div class="card-box mb-30 p-3">
         <h2 class="h5 pd-20">View items ordered from manufacturers</h2>
-        <img src="{{ asset('vendors/images/udom.png') }}" class="float-end  udom-logo" alt="" srcset="" style="float:inline-end">
+        <img src="{{ asset('vendors/images/udom.png') }}" class="float-end  udom-logo" alt="" srcset=""
+            style="float:inline-end">
     </div>
 
     <div class="card-box mb-30 p-3">
+
+        @if (session()->has('deleteAsset'))
+            <div role="alert" class="alert alert-success alert-dismissible fade show">
+                <strong>{{ session('deleteAsset') }}</strong>
+                <button class="btn btn-close"></button>
+            </div>
+        @endif
 
         <form wire:submit.prevent = 'exportAssetsPdf'>
 
@@ -28,12 +36,7 @@
             </form>
         </div>
 
-        @if (session()->has('deleteAsset'))
-            <div role="alert" class="alert alert-success alert-dismissible fade show">
-                <strong>{{ session('deleteAsset') }}</strong>
-                <button class="btn btn-close"></button>
-            </div>
-        @endif
+
         <table class="data-table table nowrap ">
             <thead>
                 <tr>

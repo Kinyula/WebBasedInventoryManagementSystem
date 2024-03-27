@@ -67,6 +67,7 @@ class ViewItemsLivewire extends Component
     public function deleteItems($id)
     {
         $delete_item = Asset::where("id", $id)->exists() ? Asset::findOrFail($id)->delete() : false;
+        
         session()->flash('deleteAsset', 'Asset is deleted successfully.');
     }
 

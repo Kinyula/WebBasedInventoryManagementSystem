@@ -66,6 +66,7 @@
 
     <body class="font-sans antialiased">
 
+        @if (!Auth::check())
         <div class="pre-loader">
             <div class="pre-loader-box">
                 <div class="loader-logo">
@@ -78,6 +79,10 @@
                 <div class="loading-text">Loading...</div>
             </div>
         </div>
+        @else
+
+        @endif
+
 
         <div class="header">
             <div class="header-left">

@@ -70,4 +70,12 @@ class ViewCiveCreatedResourceLivewire extends Component
 
         return 'data:image/svg+xml;base64,' . base64_encode($writer->writeString($data));
     }
+
+    public function deleteCiveCreatedResource($id) {
+
+        $civeResource = CiveResource::findOrFail($id) ? CiveResource::findOrFail($id)->delete() : false;
+
+        session()->flash('deleteResource', 'Resource is deleted successfully!');
+        
+    }
 }

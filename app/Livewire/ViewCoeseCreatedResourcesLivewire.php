@@ -72,4 +72,10 @@ class ViewCoeseCreatedResourcesLivewire extends Component
 
         return 'data:image/svg+xml;base64,' . base64_encode($writer->writeString($data));
     }
+
+    public function deleteCoeseCreatedResource($id) {
+
+        $coeseResource = CoESEResource::findOrFail($id) ? CoESEResource::findOrFail($id)->delete() : false;
+        
+    }
 }

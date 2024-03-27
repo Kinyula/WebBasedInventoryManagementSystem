@@ -7,6 +7,13 @@
 
     <div class="card-box mb-30 p-3">
 
+        @if (session()->has('deleteResource'))
+        <div role="alert" class="alert alert-success alert-dismissible fade show">
+            <strong>{{ session('deleteResource') }}</strong>
+            <button class="btn btn-close"></button>
+        </div>
+    @endif
+    
         <form wire:submit.prevent = 'exportChasResourcesPdf'>
 
 
@@ -28,14 +35,6 @@
                 </div>
             </form>
         </div>
-
-
-        @if (session()->has('deleteResource'))
-            <div role="alert" class="alert alert-success alert-dismissible fade show">
-                <strong>{{ session('deleteResource') }}</strong>
-                <button class="btn btn-close"></button>
-            </div>
-        @endif
 
         <table class="data-table table nowrap ">
             <thead>
@@ -104,7 +103,7 @@
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 
                                     <button type="submit" class="dropdown-item"
-                                        wire:click = "deleteResources({{ $resource->id }})"
+                                        wire:click = "deleteChasCreatedResources({{ $resource->id }})"
                                         onclick="confirm(`Are you sure you want to delete this {{ $resource->resource_name }} asset  from the list ? `) || event.stopImmediatePropagation()"><i
                                             class="dw dw-delete-3"></i>Delete</button>
                                 </div>

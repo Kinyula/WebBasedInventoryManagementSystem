@@ -386,6 +386,8 @@ class ViewCollegeAllocationsLivewire extends Component
     public function deleteResources($id)
     {
         $delete_resource = ResourceAllocationToCollege::where("id", $id)->exists() ? ResourceAllocationToCollege::findOrFail($id)->delete() : false;
+
         session()->flash('deleteResource', 'Resource is deleted successfully.');
+        
     }
 }

@@ -94,6 +94,40 @@
             bottom: 40px;
             color: green;
         }
+
+        .description-container {
+
+display: block;
+margin-top: 30px
+}
+
+.resource-name-label {
+font-weight: bold;
+}
+
+.resource-name {
+
+position: relative;
+top: 10px;
+}
+
+.description-label {
+
+font-weight: bold;
+}
+
+.description-message {
+
+position: relative;
+top: 10px;
+
+}
+
+.resource-name-container {
+
+display: block;
+
+}
     </style>
 
 
@@ -144,8 +178,6 @@
 
                 <th class="font-weight-bold">College store resource id</th>
 
-                <th class="font-weight-bold">Resource description</th>
-
                 <th class="font-weight-bold">College name</th>
 
                 <th class="font-weight-bold">Submission time</th>
@@ -153,34 +185,31 @@
         </thead>
         <tbody>
             @foreach ($Reports as $report)
-                <tr>
+            <tr>
 
-                    <td>
-                        <h5 class="font-16">{{ $report['item']->user->email }}</h5>
+                <td>
+                    <h5 class="font-16">{{ $report['item']->user->email }}</h5>
 
-                    </td>
+                </td>
 
-                    <td style="text-decoration:normal">
-                        {{ $report['item']->chssResources->asset_id }}
-                    </td>
+                <td style="text-decoration:normal">
+                    {{ $report['item']->chssResources->asset_id }}
+                </td>
 
-                    <td style="text-decoration:normal">
+                <td style="text-decoration:normal">
 
-                        {{ $report['item']->chssResources->id }}
-                    </td>
+                    {{ $report['item']->chssResources->id }}
+                </td>
 
-                    <td style="width: 100px;">
-                        {{ $report['item']->description }}
-                    </td>
 
-                    <td>
-                        {{ $report['item']->college_name }}
-                    </td>
-                    <td>
-                        <span>{{ $report['item']->updated_at->format('d M Y h:i:s') }}</span>
-                    </td>
+                <td>
+                    {{ $report['item']->college_name }}
+                </td>
+                <td>
+                    <span>{{ $report['item']->updated_at->format('d M Y h:i:s') }}</span>
+                </td>
 
-                </tr>
+            </tr>
             @endforeach
         </tbody>
     </table>

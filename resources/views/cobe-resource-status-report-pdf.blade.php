@@ -95,6 +95,40 @@
             color: green;
         }
 
+        .description-container {
+
+display: block;
+margin-top: 30px
+
+}
+
+.resource-name-label {
+font-weight: bold;
+}
+
+.resource-name {
+
+position: relative;
+top: 10px;
+}
+
+.description-label {
+
+font-weight: bold;
+}
+
+.description-message {
+
+position: relative;
+top: 10px;
+
+}
+
+.resource-name-container {
+
+display: block;
+
+}
 
 
     </style>
@@ -156,12 +190,9 @@
             <tr>
                 <th class="table-plus datatable-nosort font-weight-bold">College inventory manager</th>
 
-
                 <th class="font-weight-bold">University store resource id</th>
 
                 <th class="font-weight-bold">College store resource id</th>
-
-                <th class="font-weight-bold">Resource description</th>
 
                 <th class="font-weight-bold">College name</th>
 
@@ -170,41 +201,69 @@
         </thead>
         <tbody>
             @foreach ($Reports as $report)
-                <tr>
 
-                    <td>
-                        <h5 class="font-16">{{ $report['item']->user->email }}</h5>
+            <tr>
 
-                    </td>
+                <td>
+                    <h5 class="font-16">{{ $report['item']->user->email }}</h5>
 
-                    <td style="text-decoration:normal">
-                        {{ $report['item']->cobeResources->asset_id }}
-                    </td>
+                </td>
 
-                    <td style="text-decoration:normal">
+                <td style="text-decoration:normal">
+                    {{ $report['item']->cobeResources->asset_id }}
+                </td>
 
-                        {{ $report['item']->cobeResources->id }}
-                    </td>
+                <td style="text-decoration:normal">
 
-                    <td style="width: 100px;">
-                       {{$report['item']->description}}
-                    </td>
+                    {{ $report['item']->cobeResources->id }}
+                </td>
 
-                    <td>
-                        {{ $report['item']->college_name }}
-                    </td>
-                    <td>
-                        <span>{{ $report['item']->updated_at->format('d M Y h:i:s') }}</span>
-                    </td>
 
-                </tr>
+                <td>
+                    {{ $report['item']->college_name }}
+                </td>
+                <td>
+                    <span>{{ $report['item']->updated_at->format('d M Y h:i:s') }}</span>
+                </td>
+
+            </tr>
             @endforeach
         </tbody>
     </table>
 
 
-
     <br>
+    <br>
+    <br>
+
+    <div class="resource-name-container">
+
+        <span class="resource-name-label">
+            Reported resource name
+        </span>
+
+        <br>
+
+        <span class="resource-name">
+
+            {{ $report['item']->cobeResources->resource_name }}
+
+        </span>
+    </div>
+    <div class="description-container">
+
+        <span class="description-label">
+            Description on the reported resource
+        </span>
+
+        <br>
+
+        <span class="description-message">
+
+            {{ $report['item']->description }}
+
+        </span>
+    </div>
 
 
 

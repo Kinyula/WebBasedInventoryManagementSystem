@@ -23,6 +23,7 @@ class ViewCollegeInventoryManagerLivewire extends Component
     public function deleteCollegeManager($id)
     {
         $delete_college_manager = User::where("id", $id)->exists() ? User::findOrFail($id)->delete() : false;
+        
         session()->flash('deleteCollegeManager', 'College manager is deleted successfully.');
     }
 }

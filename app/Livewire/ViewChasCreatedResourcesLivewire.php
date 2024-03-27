@@ -72,4 +72,12 @@ class ViewChasCreatedResourcesLivewire extends Component
 
         return 'data:image/svg+xml;base64,' . base64_encode($writer->writeString($data));
     }
+
+    public function deleteChasCreatedResources($id) {
+
+        $chasResource = ChasResource::findOrFail($id) ? ChasResource::findOrFail($id)->delete() : false;
+
+        session()->flash('deleteResource', 'Resource is deleted successfully!');
+
+    }
 }

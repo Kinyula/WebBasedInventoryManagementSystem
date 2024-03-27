@@ -71,4 +71,10 @@ class ViewChasReportLivewire extends Component
 
         return 'data:image/svg+xml;base64,' . base64_encode($writer->writeString($data));
     }
+
+    public function deleteChasReport($id) {
+        
+        $chasReport = ChasReport::findOrFail($id) ? ChasReport::findOrFail($id)->delete() : false;
+
+    }
 }

@@ -8,6 +8,13 @@
 
     <div class="card-box mb-30 p-3">
 
+        @if (session()->has('deleteCoedReport'))
+            <div role="alert" class="alert alert-success alert-dismissible fade show">
+                <strong>{{ session('deleteCoedReport') }}</strong>
+                <button class="btn btn-close"></button>
+            </div>
+        @endif
+
         <form wire:submit.prevent = 'exportCoedReportPdf'>
 
 
@@ -31,12 +38,7 @@
         </div>
 
 
-        @if (session()->has('deleteReport'))
-            <div role="alert" class="alert alert-success alert-dismissible fade show">
-                <strong>{{ session('deleteReport') }}</strong>
-                <button class="btn btn-close"></button>
-            </div>
-        @endif
+
 
         <table class="data-table table nowrap ">
             <thead>
@@ -122,7 +124,7 @@
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 
                                     <button type="submit" class="dropdown-item"
-                                        wire:click = "deleteResources({{ $report->id }})"
+                                        wire:click = "deleteCoedReport({{ $report->id }})"
                                         onclick="confirm(`Are you sure you want to delete this report  from the list ? `) || event.stopImmediatePropagation()"><i
                                             class="dw dw-delete-3"></i>Delete</button>
                                 </div>
