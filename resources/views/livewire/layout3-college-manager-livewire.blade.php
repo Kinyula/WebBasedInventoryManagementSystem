@@ -18,7 +18,7 @@
 
         <!-- Google Font -->
 
-        <link rel="stylesheet" href="{{asset('fontAwesome/css/all.css')}}">
+        <link rel="stylesheet" href="{{ asset('fontAwesome/css/all.css') }}">
         <!-- CSS -->
         <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/core.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/icon-font.min.css') }}" />
@@ -67,7 +67,7 @@
 
     <body class="font-sans antialiased">
 
-        @if (!Auth::check())
+
         <div class="pre-loader">
             <div class="pre-loader-box">
                 <div class="loader-logo">
@@ -80,9 +80,6 @@
                 <div class="loading-text">Loading...</div>
             </div>
         </div>
-        @else
-
-        @endif
 
 
         <div class="header">
