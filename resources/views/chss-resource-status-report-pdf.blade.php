@@ -182,7 +182,7 @@
         <h4 class="printedDate">{{ \Carbon\Carbon::now()->format('d- m- Y') }}</h4>
     </div>
     <br>
-    <table>
+    <table >
         <thead>
             <tr>
                 <th class="table-plus datatable-nosort font-weight-bold">College inventory manager</th>

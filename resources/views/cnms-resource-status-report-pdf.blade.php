@@ -414,7 +414,7 @@
         </style>
 
         <h2 class="more-information">More information about the resources</h2>
-        <table class="table">
+        <table class="table bg-white">
             <thead class="thead">
                 <tr class="tr">
                     <th class=" th table-plus datatable-nosort font-weight-bold">Resource name</th>
@@ -428,7 +428,7 @@
                 @foreach ($Reports as $report)
                     <tr>
                         <td class="td">
-                            <h5 class="font-16">{{ $report['item']->cobeResources->resource_name }}</h5>
+                            <h5 class="font-16">{{ $report['item']->cnmsResources->resource_name }}</h5>
 
                         </td>
 

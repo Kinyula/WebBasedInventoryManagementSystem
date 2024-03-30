@@ -37,7 +37,7 @@
             </form>
         </div>
 
-        <table class="data-table table nowrap ">
+        <table class="data-table table nowrap bg-white">
             <thead>
                 <tr>
                     <th class="table-plus datatable-nosort font-weight-bold">College inventory manager</th>
@@ -54,6 +54,8 @@
                     <th class="font-weight-bold">College name</th>
 
                     <th class="font-weight-bold">Submission time</th>
+
+                    <th class="font-weight-bold">Print report</th>
 
                     <th class="datatable-nosort font-weight-bold">Action</th>
                 </tr>
@@ -106,6 +108,13 @@
                         <td>
                             <span>{{ $report->updated_at->format('d M Y h:i:s') }}</span>
                         </td>
+
+                        <td style="text-decoration:normal">
+
+                            <input type="checkbox" wire:model = "reportId" value="{{ $report->id }}" id="">
+
+                        </td>
+
                         <td>
 
                             <div class="dropdown">

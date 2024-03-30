@@ -20,6 +20,9 @@ class ViewCoeseReportLivewire extends Component
 
     protected $paginationTheme = 'tailwind';
 
+    public $reportId = [];
+
+
     public function render()
     {
         return view('livewire.view-coese-report-livewire', ['Reports' => CoeseReport::search($this->coeseReportSearch)->with(['user', 'coeseResources', 'category', 'assets'])->paginate(15)]);
@@ -27,38 +30,74 @@ class ViewCoeseReportLivewire extends Component
 
     public function exportCoeseReportPdf()
     {
-        $Reports = [];
+        if (empty($this->reportId)) {
+            $Reports = [];
 
-        $data = CoeseReport::with(['user'])->get();
+            $data = CoeseReport::with(['user'])->get();
 
-        foreach ($data as $item) {
+            foreach ($data as $item) {
 
-            // $QRCode = $this->generateQRCode('UDOM-' . time() . '-' . 'CNMS' . Hash::make($item->id) . '-' . 'report');
+                // $QRCode = $this->generateQRCode('UDOM-' . time() . '-' . 'CNMS' . Hash::make($item->id) . '-' . 'report');
 
-            $Reports[] = [
-                'item' => $item,
+                $Reports[] = [
+                    'item' => $item,
 
-                // 'qrcode' => $QRCode
-            ];
+                    // 'qrcode' => $QRCode
+                ];
+            }
+
+            $pdf = Pdf::loadView("coese-resource-status-report-pdf", [
+                'Reports' => $Reports
+            ]);
+
+
+            $pdfOutput = $pdf->output();
+
+            return response()->stream(
+                function () use ($pdfOutput) {
+                    echo $pdfOutput;
+                },
+                200,
+                [
+                    'Content-Type' => 'application/pdf',
+                    'Content-Disposition' => 'inline; filename=UDOM-CoESE-report.pdf'
+                ]
+            );
+        } else {
+            $Reports = [];
+
+            $data = CoeseReport::with(['user'])->whereIn('id', $this->reportId)->get();
+
+            foreach ($data as $item) {
+
+                // $QRCode = $this->generateQRCode('UDOM-' . time() . '-' . 'CNMS' . Hash::make($item->id) . '-' . 'report');
+
+                $Reports[] = [
+                    'item' => $item,
+
+                    // 'qrcode' => $QRCode
+                ];
+            }
+
+            $pdf = Pdf::loadView("coese-resource-status-report-pdf", [
+                'Reports' => $Reports
+            ]);
+
+
+            $pdfOutput = $pdf->output();
+
+            return response()->stream(
+                function () use ($pdfOutput) {
+                    echo $pdfOutput;
+                },
+                200,
+                [
+                    'Content-Type' => 'application/pdf',
+                    'Content-Disposition' => 'inline; filename=UDOM-CoESE-report.pdf'
+                ]
+            );
         }
 
-        $pdf = Pdf::loadView("coese-resource-status-report-pdf", [
-            'Reports' => $Reports
-        ]);
-
-
-        $pdfOutput = $pdf->output();
-
-        return response()->stream(
-            function () use ($pdfOutput) {
-                echo $pdfOutput;
-            },
-            200,
-            [
-                'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename=UDOM-CoESE-report.pdf'
-            ]
-        );
     }
 
     private function generateQRCode($data): string
@@ -73,11 +112,11 @@ class ViewCoeseReportLivewire extends Component
         return 'data:image/svg+xml;base64,' . base64_encode($writer->writeString($data));
     }
 
-    public function deleteCoeseReport($id) {
+    public function deleteCoeseReport($id)
+    {
 
         $coeseReport = CoeseReport::findOrFail($id) ? CoeseReport::findOrFail($id)->delete() : false;
 
         session()->flash('deleteCoeseReport', 'Report is deleted successfully!');
-        
     }
 }

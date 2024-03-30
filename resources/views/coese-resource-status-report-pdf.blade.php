@@ -206,12 +206,12 @@
                     </td>
 
                     <td style="text-decoration:normal">
-                        {{ $report['item']->coedResources->asset_id }}
+                        {{ $report['item']->coeseResources->asset_id }}
                     </td>
 
                     <td style="text-decoration:normal">
 
-                        {{ $report['item']->coedResources->id }}
+                        {{ $report['item']->coeseResources->id }}
                     </td>
 
 
@@ -233,23 +233,23 @@
 
                 <span class="resource-name-label">
                     Reported resource name with a University of Dodoma store asset id of
-                    {{ $report['item']->coedResources->asset_id }}
+                    {{ $report['item']->coeseResources->asset_id }}
                 </span>
 
                 <br>
 
                 <span class="resource-name">
 
-                    {{ $report['item']->coedResources->resource_name }}
+                    {{ $report['item']->coeseResources->resource_name }}
 
                 </span>
             </div>
             <div class="description-container">
 
                 <span class="description-label">
-                    Description on the reported resource called {{ $report['item']->coedResources->resource_name }} with
+                    Description on the reported resource called {{ $report['item']->coeseResources->resource_name }} with
                     a
-                    University of Dodoma store asset id of {{ $report['item']->coedResources->asset_id }}
+                    University of Dodoma store asset id of {{ $report['item']->coeseResources->asset_id }}
                 </span>
 
                 <br>
@@ -429,7 +429,7 @@
                 @foreach ($Reports as $report)
                     <tr>
                         <td class="td">
-                            <h5 class="font-16">{{ $report['item']->coedResources->resource_name }}</h5>
+                            <h5 class="font-16">{{ $report['item']->coeseResources->resource_name }}</h5>
 
                         </td>
 

@@ -15,16 +15,13 @@
         </div>
     @endif
 
-        <form wire:submit.prevent = 'exportCoeseReportPdf'>
 
-
-            <button type="submit"
+            <button type="submit" wire:click = "exportCoeseReportPdf"
                 class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ms-4 float-end">
                 <i class="bi bi-download font-weight-bold p-1"></i>
                 Print report PDF
             </button>
 
-        </form>
 
         <div class="header-search mb-5">
             <form class="d-flex">
@@ -37,7 +34,7 @@
             </form>
         </div>
 
-        <table class="data-table table nowrap ">
+        <table class="data-table table nowrap bg-white">
             <thead>
                 <tr>
                     <th class="table-plus datatable-nosort font-weight-bold">College inventory manager</th>
@@ -54,6 +51,8 @@
                     <th class="font-weight-bold">College name</th>
 
                     <th class="font-weight-bold">Submission time</th>
+
+                    <th class="font-weight-bold">Print report</th>
 
                     <th class="datatable-nosort font-weight-bold">Action</th>
                 </tr>
@@ -106,6 +105,13 @@
                         <td>
                             <span>{{ $report->updated_at->format('d M Y h:i:s') }}</span>
                         </td>
+
+                        <td style="text-decoration:normal">
+
+                            <input type="checkbox" wire:model = "reportId" value="{{ $report->id }}" id="">
+
+                        </td>
+
                         <td>
 
                             <div class="dropdown">

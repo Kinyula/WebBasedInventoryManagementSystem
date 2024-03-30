@@ -55,6 +55,8 @@
 
                     <th class="font-weight-bold">Submission time</th>
 
+                    <th class="font-weight-bold">Print report</th>
+
                     <th class="datatable-nosort font-weight-bold">Action</th>
                 </tr>
             </thead>
@@ -69,25 +71,25 @@
                         </td>
 
                         <td style="text-decoration:normal"><i class="bi bi-pencil p-2"></i>
-                            {{ $report->cnmsResources->category->category_type }}
+                            {{ $report->civeResources->category->category_type }}
                         </td>
 
                         <td style="text-decoration:normal">
-                            {{ $report->cnmsResources->assets->asset_type }}
-                        </td>
-
-                        <td style="text-decoration:normal">
-
-                            {{ $report->cnmsResources->resource_name }}
-                        </td>
-
-                        <td style="text-decoration:normal">
-                            {{ $report->cnmsResources->asset_id }}
+                            {{ $report->civeResources->assets->asset_type }}
                         </td>
 
                         <td style="text-decoration:normal">
 
-                            {{ $report->cnmsResources->id }}
+                            {{ $report->civeResources->resource_name }}
+                        </td>
+
+                        <td style="text-decoration:normal">
+                            {{ $report->civeResources->asset_id }}
+                        </td>
+
+                        <td style="text-decoration:normal">
+
+                            {{ $report->civeResources->id }}
                         </td>
 
                         <td style="text-decoration:normal;width:100px;">
@@ -112,7 +114,7 @@
                             <input type="checkbox" wire:model = "reportId" value="{{ $report->id }}" id="">
 
                         </td>
-                        
+
                         <td>
 
                             <div class="dropdown">
