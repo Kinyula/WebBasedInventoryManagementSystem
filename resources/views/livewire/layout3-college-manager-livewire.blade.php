@@ -274,6 +274,8 @@
                             </ul>
                         </li>
 
+
+
                         @if (auth()->user()->college_name == 'College of Education ( CoED )')
                             <li class="dropdown">
                                 <a href="javascript:;" class="dropdown-toggle">
@@ -282,14 +284,28 @@
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/coed-report') }}">
-                                            Compose your report</a>
+                                            Compose your report details</a>
                                     </li>
 
                                 </ul>
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/view-coed-report') }}">
-                                            View your report</a>
+                                            View your report details</a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/inbox-reports') }}">
+                                            Send report</a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/reply-reports') }}">
+                                            View reply</a>
                                     </li>
 
                                 </ul>
@@ -304,14 +320,28 @@
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/cive-report') }}">
-                                            Compose your report</a>
+                                            Compose your report details</a>
                                     </li>
 
                                 </ul>
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/view-cive-report') }}">
-                                            View your report</a>
+                                            View your report details</a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/inbox-reports') }}">
+                                            Send report</a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/reply-reports') }}">
+                                            View reply</a>
                                     </li>
 
                                 </ul>
@@ -326,14 +356,28 @@
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/chas-report') }}">
-                                            Compose your report</a>
+                                            Compose your report details</a>
                                     </li>
 
                                 </ul>
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/view-chas-report') }}">
-                                            View your report</a>
+                                            View your report details</a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/inbox-reports') }}">
+                                            Send report</a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/reply-reports') }}">
+                                            View reply</a>
                                     </li>
 
                                 </ul>
@@ -348,14 +392,28 @@
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/coese-report') }}">
-                                            Compose your report</a>
+                                            Compose your report details</a>
                                     </li>
 
                                 </ul>
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/view-coese-report') }}">
-                                            View your report</a>
+                                            View your report details</a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/inbox-reports') }}">
+                                            Send report</a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/reply-reports') }}">
+                                            View reply</a>
                                     </li>
 
                                 </ul>
@@ -370,14 +428,28 @@
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/cobe-report') }}">
-                                            Compose your report</a>
+                                            Compose your report details</a>
                                     </li>
 
                                 </ul>
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/view-cobe-report') }}">
-                                            View your report</a>
+                                            View your report details</a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/inbox-reports') }}">
+                                            Send report</a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/reply-reports') }}">
+                                            View reply</a>
                                     </li>
 
                                 </ul>
@@ -392,14 +464,28 @@
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/cnms-report') }}">
-                                            Compose your report</a>
+                                            Compose your report details</a>
                                     </li>
 
                                 </ul>
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/view-cnms-report') }}">
-                                            View your report</a>
+                                            View your report details</a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/inbox-reports') }}">
+                                            Send report</a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/reply-reports') }}">
+                                            View reply</a>
                                     </li>
 
                                 </ul>
@@ -414,14 +500,28 @@
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/chss-report') }}">
-                                            Compose your report</a>
+                                            Compose your report details</a>
                                     </li>
 
                                 </ul>
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/view-chss-report') }}">
-                                            View your report</a>
+                                            View your report details</a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/inbox-reports') }}">
+                                            Send report</a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/reply-reports') }}">
+                                            View reply</a>
                                     </li>
 
                                 </ul>

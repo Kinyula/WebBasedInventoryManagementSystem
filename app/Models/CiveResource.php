@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CiveResource extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'category_id','asset_id', 'resource_name', 'status', 'college_name','asset_status'];
+    protected $fillable = ['user_id', 'category_id', 'asset_id', 'resource_name', 'status', 'college_name', 'asset_status'];
 
     public static function search($search)
     {

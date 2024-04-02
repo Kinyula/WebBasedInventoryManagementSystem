@@ -33,6 +33,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QrCodeDataController;
 use App\Http\Controllers\QrCodeReaderController;
 use App\Http\Controllers\ResourceAllocationController;
+use App\Http\Controllers\SendingReportsController;
 use App\Http\Controllers\UpdateAssetStatusController;
 use App\Http\Controllers\UpdateResourceAllocationStatusController;
 use App\Http\Controllers\ViewAllocatedResourcesController;
@@ -54,6 +55,7 @@ use App\Http\Controllers\ViewCollegeAllocationsController;
 use App\Http\Controllers\ViewCollegeInventoryManagerController;
 use App\Http\Controllers\ViewItemPDFController;
 use App\Http\Controllers\ViewPhoneNumbersController;
+use App\Http\Controllers\ViewReportsSentController;
 use App\Http\Controllers\ViewSuppliersController;
 use App\Models\Asset;
 use Illuminate\Support\Facades\Route;
@@ -290,6 +292,14 @@ Route::middleware('auth')->group(function () {
         Route::get('UIMS/qr-code-reader', [QrCodeReaderController::class, 'index']);
         Route::get('UIMS/qr-code-asset-update/{id}', [QrCodeDataController::class, 'index'])->name('qr-code-resource-update');
         Route::patch('/resource-update-status/{id}', [QrCodeDataController::class, 'update'])->name('resource-update');
+
+        // Sending Reports Routes -----------------------------------------------------------------------------
+
+        Route::get('UIMS/inbox-reports',[SendingReportsController::class, 'index']);
+        Route::get('UIMS/reply-reports', [ViewReportsSentController::class, 'index']);
+        
+        // End of Sending Reports Routes -----------------------------------------------------------------------------
 });
+
 
 require __DIR__.'/auth.php';

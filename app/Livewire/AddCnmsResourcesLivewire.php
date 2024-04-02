@@ -8,13 +8,18 @@ use Livewire\Component;
 use App\Models\Category;
 use App\Models\CnmsResource;
 use Maatwebsite\Excel\Facades\Excel;
+use Livewire\WithFileUploads;
 
 class AddCnmsResourcesLivewire extends Component
 {
-    public $category_type, $resource_name, $cnmsResourceImport, $university_store_resource_name;
+    use WithFileUploads;
+
+    public $category_type,$import_quantity, $resource_name,
+     $cnmsResourceImport, $university_store_resource_name;
+
     public function render()
     {
-        return view('livewire.add-cnms-resources-livewire', ['categories' => Category::get() , 'Assets' =>Asset::get()]);
+        return view('livewire.add-cnms-resources-livewire', ['categories' => Category::get(), 'Assets' => Asset::get()]);
     }
 
     public function addCnmsResources()
@@ -27,21 +32,27 @@ class AddCnmsResourcesLivewire extends Component
             'resource_name' => 'required|unique:cnms_resources,resource_name',
 
             'university_store_resource_name' => 'required',
+
+            'import_quantity' => 'required'
         ]);
 
-        $cnmsResource = new CnmsResource();
+        for ($i=0; $i < $this->import_quantity; $i++) {
 
-        $cnmsResource->user_id = auth()->user()->id;
+            $cnmsResource = new CnmsResource();
 
-        $cnmsResource->category_id = $this->category_type;
+            $cnmsResource->user_id = auth()->user()->id;
 
-        $cnmsResource->asset_id = $this->university_store_resource_name;
+            $cnmsResource->category_id = $this->category_type;
 
-        $cnmsResource->resource_name = $this->resource_name;
+            $cnmsResource->asset_id = $this->university_store_resource_name;
 
-        $cnmsResource->college_name = auth()->user()->college_name;
+            $cnmsResource->resource_name = $this->resource_name;
 
-        $cnmsResource->save();
+            $cnmsResource->college_name = auth()->user()->college_name;
+
+            $cnmsResource->save();
+        }
+
 
         $this->reset(['category_type', 'resource_name', 'university_store_resource_name']);
 
@@ -53,7 +64,7 @@ class AddCnmsResourcesLivewire extends Component
 
 
 
-        $this->validate(['civeResource' => 'required|mimes:xlsx,xls,csv']);
+        $this->validate(['cnmsResourceImport' => 'required|mimes:csv']);
 
         Excel::import(new CnmsResourceImport, $this->cnmsResourceImport);
 

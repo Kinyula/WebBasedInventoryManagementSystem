@@ -108,6 +108,15 @@
             color: white;
             text-decoration: none;
             font-weight: bolder;
+
+        }
+
+        .loginLink:hover {
+            background-color:white;
+            padding: 10px;
+            border-radius: 5px;
+            transition: 1s;
+            color: black
         }
 
 

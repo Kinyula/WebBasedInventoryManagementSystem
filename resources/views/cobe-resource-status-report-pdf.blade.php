@@ -276,6 +276,7 @@
                 padding: 10px;
                 position: absolute;
                 bottom: 40%;
+                width: 100%;
             }
 
             /* td:nth-child(odd) {

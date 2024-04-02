@@ -19,6 +19,8 @@
         <!-- Google Font -->
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
             rel="stylesheet" />
+            <link rel="stylesheet" href="{{ asset('fontAwesome/css/all.css') }}">
+
         <!-- CSS -->
         <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/core.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/icon-font.min.css') }}" />
@@ -276,9 +278,27 @@
 
                         <li class="dropdown">
                             <a href="javascript:;" class="dropdown-toggle">
-                                <span class="micon bi bi-people"></span><span class="mtext">College Managers</span>
+                                <span class="micon bi bi-folder"></span><span class="mtext">Reports</span>
                             </a>
 
+                            <ul class="submenu">
+                                <li><a href="{{ asset('UIMS/inbox-reports') }}">
+                                        Inbox</a>
+                                </li>
+
+                            </ul>
+
+                            <ul class="submenu">
+                                <li><a href="{{ asset('UIMS/reply-reports') }}">
+                                        Reply  report</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle">
+                                <span class="micon bi bi-people"></span><span class="mtext">College Managers</span>
+                            </a>
 
                             <ul class="submenu">
                                 <li><a href="{{ asset('UIMS/add-college-managers') }}">

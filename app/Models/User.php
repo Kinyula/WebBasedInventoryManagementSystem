@@ -99,4 +99,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(CoBEResource::class);
     }
+
+    public function sendingReports()
+    {
+        return $this->hasMany(SendingReport::class);
+    }
 }

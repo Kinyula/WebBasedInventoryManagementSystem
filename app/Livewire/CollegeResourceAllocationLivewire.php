@@ -7,10 +7,14 @@ use Livewire\Component;
 use App\Models\ResourceAllocation;
 use App\Models\Asset;
 use App\Models\ResourceAllocationToCollege;
+use Livewire\WithFileUploads;
 
 class CollegeResourceAllocationLivewire extends Component
 {
-    public $asset, $asset_quantity, $resource_allocated_college, $status;
+
+    use WithFileUploads;
+
+    public $asset, $asset_quantity, $resource_allocated_college, $status, $resource_file;
 
     public function render()
     {
@@ -28,7 +32,8 @@ class CollegeResourceAllocationLivewire extends Component
 
             'resource_allocated_college' => 'required',
 
-            'status' => 'required'
+            'status' => 'required',
+
 
 
         ]);
@@ -44,7 +49,6 @@ class CollegeResourceAllocationLivewire extends Component
         $resource->resource_allocated_college = $this->resource_allocated_college;
 
         $resource->status = $this->status;
-
 
         $resource->save();
 

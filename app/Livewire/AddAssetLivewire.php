@@ -24,7 +24,7 @@ class AddAssetLivewire extends Component
 
             'category_type' => 'required',
 
-            'asset_type' => 'required|unique:asset,asset_type',
+            'asset_type' => 'required|unique:assets,asset_type',
 
         ]);
 

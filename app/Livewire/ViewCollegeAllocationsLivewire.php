@@ -12,8 +12,10 @@ use BaconQrCode\Writer;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Hash;
 
+
 class ViewCollegeAllocationsLivewire extends Component
 {
+
 
     public $resourceSearch = '';
 
@@ -383,11 +385,19 @@ class ViewCollegeAllocationsLivewire extends Component
         return 'data:image/svg+xml;base64,' . base64_encode($writer->writeString($data));
     }
 
+    public function download($id){
+
+        $file = ResourceAllocationToCollege::where('id', $id)->first();
+
+
+        return response()->download(public_path('storage/resource_files/'.$file->resource_file));
+    }
+
     public function deleteResources($id)
     {
         $delete_resource = ResourceAllocationToCollege::where("id", $id)->exists() ? ResourceAllocationToCollege::findOrFail($id)->delete() : false;
 
         session()->flash('deleteResource', 'Resource is deleted successfully.');
-        
+
     }
 }
