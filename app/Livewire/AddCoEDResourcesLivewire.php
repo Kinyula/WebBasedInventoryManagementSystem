@@ -10,7 +10,8 @@ use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
 class AddCoEDResourcesLivewire extends Component
 {
-    public $coedResourceImport, $university_store_resource_name,$category_type, $resource_name;
+    public $coedResourceImport, $university_store_resource_name,
+    $category_type, $resource_name,$import_quantity;
 
     public function render()
     {
@@ -28,23 +29,29 @@ class AddCoEDResourcesLivewire extends Component
 
             'university_store_resource_name' => 'required',
 
+            'import_quantity' => 'required'
+
         ]);
 
-        $coedResource = new CoEDResource();
+        for ($i=0; $i <$this->import_quantity ; $i++) {
+            
+            $coedResource = new CoEDResource();
 
-        $coedResource->user_id = auth()->user()->id;
+            $coedResource->user_id = auth()->user()->id;
 
-        $coedResource->category_id = $this->category_type;
+            $coedResource->category_id = $this->category_type;
 
-        $coedResource->asset_id = $this->university_store_resource_name;
+            $coedResource->asset_id = $this->university_store_resource_name;
 
-        $coedResource->resource_name = $this->resource_name;
+            $coedResource->resource_name = $this->resource_name;
 
-        $coedResource->college_name = auth()->user()->college_name;
+            $coedResource->college_name = auth()->user()->college_name;
 
-        $coedResource->save();
+            $coedResource->save();
+        }
 
-        $this->reset(['category_type', 'resource_name','university_store_resource_name']);
+
+        $this->reset(['category_type', 'resource_name','university_store_resource_name', 'import_quantity']);
 
         session()->flash('addResources', 'A resource is added successfully.');
     }

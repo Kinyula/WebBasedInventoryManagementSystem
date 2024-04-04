@@ -274,7 +274,256 @@
                             </ul>
                         </li>
 
+                        @if (auth()->user()->college_name == 'College of Education ( CoED )')
+                            <li class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle">
+                                    <span class="micon bi bi-pencil-square"></span><span
+                                        class="mtext">Activities</span>
+                                </a>
 
+
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/add-coed-resources') }}">
+                                            Add resource
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/view-coed-created-resources') }}">
+                                            View created resources
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/qr-code-reader') }}">
+                                            Scan Qr code
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+                        @endif
+
+
+                        @if (auth()->user()->college_name == 'College of Informatics and Virtual Education ( CIVE )')
+                            <li class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle">
+                                    <span class="micon bi bi-pencil-square"></span><span
+                                        class="mtext">Activities</span>
+                                </a>
+
+
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/add-cive-resources') }}">
+                                            Add resource
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/view-cive-created-resources') }}">
+                                            View created resources
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/qr-code-reader') }}">
+                                            Scan Qr code
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+                        @endif
+                        @if (auth()->user()->college_name == 'College of Health and Allied Science ( CHAS )')
+                            <li class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle">
+                                    <span class="micon bi bi-pencil-square"></span><span
+                                        class="mtext">Activities</span>
+                                </a>
+
+
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/add-chas-resources') }}">
+                                            Add resource
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/view-chas-created-resources') }}">
+                                            View created resources
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/qr-code-reader') }}">
+                                            Scan Qr code
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+                        @endif
+
+                        @if (auth()->user()->college_name == 'College of Earth Sciences and Engineering ( CoESE )')
+                            <li class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle">
+                                    <span class="micon bi bi-pencil-square"></span><span
+                                        class="mtext">Activities</span>
+                                </a>
+
+
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/add-coese-resources') }}">
+                                            Add resource
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/view-coese-created-resources') }}">
+                                            View created resources
+                                        </a>
+                                    </li>
+
+                                </ul>
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/qr-code-reader') }}">
+                                            Scan Qr code
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+                        @endif
+
+                        @if (auth()->user()->college_name == 'College of Business and Economics ( CoBE )')
+                            <li class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle">
+                                    <span class="micon bi bi-pencil-square"></span><span
+                                        class="mtext">Activities</span>
+                                </a>
+
+
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/add-cobe-resources') }}">
+                                            Add resource
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/view-cobe-created-resources') }}">
+                                            View created resources
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/qr-code-reader') }}">
+                                            Scan Qr code
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+                        @endif
+
+                        @if (auth()->user()->college_name == 'College of Natural Mathematical Science ( CNMS ) ')
+                            <li class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle">
+                                    <span class="micon bi bi-pencil-square"></span><span
+                                        class="mtext">Activities</span>
+                                </a>
+
+
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/add-cnms-resources') }}">
+                                            Add resource
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/view-cnms-created-resources') }}">
+                                            View created resources
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/qr-code-reader') }}">
+                                            Scan Qr code
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+                        @endif
+
+                        @if (auth()->user()->college_name == 'College of Humanities and Social Science ( CHSS )')
+                            <li class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle">
+                                    <span class="micon bi bi-pencil-square"></span><span
+                                        class="mtext">Activities</span>
+                                </a>
+
+
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/add-chss-resources') }}">
+                                            Add resource
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/view-chss-created-resources') }}">
+                                            View created resources
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/qr-code-reader') }}">
+                                            Scan Qr code
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+                        @endif
 
                         @if (auth()->user()->college_name == 'College of Education ( CoED )')
                             <li class="dropdown">
@@ -638,7 +887,6 @@
                             </li>
                         @endif
 
-
                         @if (auth()->user()->college_name == 'College of Informatics and Virtual Education ( CIVE )')
                             <li class="dropdown">
                                 <a href="javascript:;" class="dropdown-toggle">
@@ -656,257 +904,7 @@
 
                             </li>
                         @endif
-                        @if (auth()->user()->college_name == 'College of Education ( CoED )')
-                            <li class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle">
-                                    <span class="micon bi bi-pencil-square"></span><span
-                                        class="mtext">Activities</span>
-                                </a>
 
-
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/add-coed-resources') }}">
-                                            Add resource
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/view-coed-created-resources') }}">
-                                            View created resources
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/qr-code-reader') }}">
-                                            Scan Qr code
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                            </li>
-                        @endif
-
-
-                        @if (auth()->user()->college_name == 'College of Informatics and Virtual Education ( CIVE )')
-                            <li class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle">
-                                    <span class="micon bi bi-pencil-square"></span><span
-                                        class="mtext">Activities</span>
-                                </a>
-
-
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/add-cive-resources') }}">
-                                            Add resource
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/view-cive-created-resources') }}">
-                                            View created resources
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/qr-code-reader') }}">
-                                            Scan Qr code
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                            </li>
-                        @endif
-
-                        @if (auth()->user()->college_name == 'College of Health and Allied Science ( CHAS )')
-                            <li class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle">
-                                    <span class="micon bi bi-pencil-square"></span><span
-                                        class="mtext">Activities</span>
-                                </a>
-
-
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/add-chas-resources') }}">
-                                            Add resource
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/view-chas-created-resources') }}">
-                                            View created resources
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/qr-code-reader') }}">
-                                            Scan Qr code
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                            </li>
-                        @endif
-
-                        @if (auth()->user()->college_name == 'College of Earth Sciences and Engineering ( CoESE )')
-                            <li class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle">
-                                    <span class="micon bi bi-pencil-square"></span><span
-                                        class="mtext">Activities</span>
-                                </a>
-
-
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/add-coese-resources') }}">
-                                            Add resource
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/view-coese-created-resources') }}">
-                                            View created resources
-                                        </a>
-                                    </li>
-
-                                </ul>
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/qr-code-reader') }}">
-                                            Scan Qr code
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                            </li>
-                        @endif
-
-                        @if (auth()->user()->college_name == 'College of Business and Economics ( CoBE )')
-                            <li class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle">
-                                    <span class="micon bi bi-pencil-square"></span><span
-                                        class="mtext">Activities</span>
-                                </a>
-
-
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/add-cobe-resources') }}">
-                                            Add resource
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/view-cobe-created-resources') }}">
-                                            View created resources
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/qr-code-reader') }}">
-                                            Scan Qr code
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                            </li>
-                        @endif
-
-                        @if (auth()->user()->college_name == 'College of Natural Mathematical Science ( CNMS ) ')
-                            <li class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle">
-                                    <span class="micon bi bi-pencil-square"></span><span
-                                        class="mtext">Activities</span>
-                                </a>
-
-
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/add-cnms-resources') }}">
-                                            Add resource
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/view-cnms-created-resources') }}">
-                                            View created resources
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/qr-code-reader') }}">
-                                            Scan Qr code
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                            </li>
-                        @endif
-
-                        @if (auth()->user()->college_name == 'College of Humanities and Social Science ( CHSS )')
-                            <li class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle">
-                                    <span class="micon bi bi-pencil-square"></span><span
-                                        class="mtext">Activities</span>
-                                </a>
-
-
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/add-chss-resources') }}">
-                                            Add resource
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/view-chss-created-resources') }}">
-                                            View created resources
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/qr-code-reader') }}">
-                                            Scan Qr code
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                            </li>
-                        @endif
                     </ul>
 
                 </div>
