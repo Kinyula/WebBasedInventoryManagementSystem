@@ -104,4 +104,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(SendingReport::class);
     }
+
+    public function repliesReports()
+    {
+        return $this->hasOne(Replies::class);
+    }
 }

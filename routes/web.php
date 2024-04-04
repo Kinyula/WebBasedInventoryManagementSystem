@@ -28,6 +28,7 @@ use App\Http\Controllers\EditAssetController;
 use App\Http\Controllers\EditCiveResourceStatusController;
 use App\Http\Controllers\EditCollegeNameController;
 use App\Http\Controllers\EditResourcesAllocationController;
+use App\Http\Controllers\MessagingReportController;
 use App\Http\Controllers\PhoneNumberController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QrCodeDataController;
@@ -297,8 +298,12 @@ Route::middleware('auth')->group(function () {
 
         Route::get('UIMS/inbox-reports',[SendingReportsController::class, 'index']);
         Route::get('UIMS/reply-reports', [ViewReportsSentController::class, 'index']);
-        
+
         // End of Sending Reports Routes -----------------------------------------------------------------------------
+
+        //------------------------------------------- Messaging Reports Routes -------------------------------------------------
+
+        Route::get('UIMS/messages', [MessagingReportController::class, 'index']);
 });
 
 

@@ -2,35 +2,33 @@
 
 namespace App\Livewire;
 
-use App\Models\SendingReport;
+use App\Models\Replies;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-
-class SendingReportsLivewire extends Component
+class RepliesLivewire extends Component
 {
-
     use WithFileUploads;
 
-    protected $paginationTheme = 'tailwind';
-
-    public $report_file;
+    public $report_file, $college_name;
 
     public function render()
     {
-        return view('livewire.sending-reports-livewire');
+        return view('livewire.replies-livewire');
     }
 
-    public function sendingReports()
+    public function replyReports()
     {
 
-        $this->validate(['report_file' => 'required|file|mimes:pdf']);
+        $this->validate(['report_file' => 'required|file|mimes:pdf', 'college_name' => 'required']);
 
-        $send = new SendingReport();
+        $send = new Replies();
 
         $send->user_id = auth()->user()->id;
 
         $send->college_name = auth()->user()->college_name;
+
+        $send->reply_to_specified_college = $this->college_name;
 
         if (!is_null($this->report_file)) {
 
@@ -41,13 +39,13 @@ class SendingReportsLivewire extends Component
             $report_file = $report_file[2];
 
             $send->report_file = $report_file;
-            
+
         }
 
         $send->save();
 
-        session()->flash('sendingReportMessage', 'Report sent successfully!');
+        session()->flash('replyReportMessage', 'Report replied successfully!');
 
-        $this->reset(['report_file']);
+        $this->reset(['report_file', 'college_name']);
     }
 }

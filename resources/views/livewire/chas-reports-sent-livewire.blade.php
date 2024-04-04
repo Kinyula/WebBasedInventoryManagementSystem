@@ -1,12 +1,7 @@
 <div>
     <div class="card-box mb-30 p-3">
-
-        @if (auth()->user()->college_name == 'Not set')
-            <h2 class="h4 pd-20 text-gray-600"><i class="bi bi-plus"></i>
-                Replies to reports sent
-            </h2>
-        @endif
-
+        <h2 class="h4 pd-20 text-gray-600"><i class="bi bi-plus"></i>  {{ auth()->user()->college_name }}
+        </h2>
         <img src="{{ asset('vendors/images/udom.png') }}" class="float-end  udom-logo" alt="" srcset=""
             style="float-end">
     </div>
@@ -14,17 +9,17 @@
     <div class="card-box mb-30 p-3">
         <h2 class="h4 pd-20 text-gray-600">Send report.</h2>
 
-        @if (session()->has('sendingReportMessage'))
-            <div role="alert" class="alert alert-success alert-dismissible fade show">
-                <strong>{{ session('sendingReportMessage') }}</strong>
-                <button class="btn btn-close" data-bs-dismiss="alert"></button>
-            </div>
-        @endif
+        @if (session()->has('chasReportMessage'))
+        <div role="alert" class="alert alert-success alert-dismissible fade show">
+            <strong>{{ session('chasReportMessage') }}</strong>
+            <button class="btn btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
 
 
-        <form wire:submit.prevent = "sendingReports">
+        <form wire:submit.prevent = "chasSendingReports">
 
-            {{-- Attach a Report file --}}
+            {{--Attach a Report file --}}
 
             <div class="mt-4">
                 <label for="report_file" class='block font-medium text-sm text-gray-700 dark:text-gray-300'>Attach a

@@ -11,7 +11,8 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class AddChasResourcesLivewire extends Component
 {
-    public $resource_name, $category_type, $chasResourceImport, $university_store_resource_name;
+    public $resource_name, $category_type, $chasResourceImport,
+     $university_store_resource_name, $import_quantity;
 
     public function render()
     {
@@ -27,25 +28,32 @@ class AddChasResourcesLivewire extends Component
 
             'resource_name' => 'required|unique:chas_resources,resource_name',
 
-            'university_store_resource_name' =>'required|unique:chas_resources,asset_id'
+            'university_store_resource_name' =>'required|unique:chas_resources,asset_id',
+
+            'import_quantity' => 'required'
 
         ]);
 
-        $chasResource = new ChasResource();
+        for ($i=0; $i < $this->import_quantity; $i++) {
 
-        $chasResource->user_id = auth()->user()->id;
+            $chasResource = new ChasResource();
 
-        $chasResource->category_id = $this->category_type;
+            $chasResource->user_id = auth()->user()->id;
 
-        $chasResource->asset_id = $this->university_store_resource_name;
+            $chasResource->category_id = $this->category_type;
 
-        $chasResource->resource_name = $this->resource_name;
+            $chasResource->asset_id = $this->university_store_resource_name;
 
-        $chasResource->college_name = auth()->user()->college_name;
+            $chasResource->resource_name = $this->resource_name;
 
-        $chasResource->save();
+            $chasResource->college_name = auth()->user()->college_name;
 
-        $this->reset(['category_type', 'resource_name', 'university_store_resource_name']);
+            $chasResource->save();
+            
+        }
+
+
+        $this->reset(['category_type','import_quantity', 'resource_name', 'university_store_resource_name']);
 
         session()->flash('addResources', 'A resource is added successfully.');
     }

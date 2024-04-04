@@ -1,16 +1,17 @@
 <div>
 
     <div class="card-box mb-30 p-3">
-        <h2 class="h5 pd-20">View sent report details from the {{ auth()->user()->college_name }}</h2>
+        <h2 class="h5 pd-20">View created details from the {{ auth()->user()->college_name }}</h2>
         <img src="{{ asset('vendors/images/udom.png') }}" class="float-end  udom-logo" alt="" srcset=""
             style="float:inline-end">
     </div>
 
     <div class="card-box mb-30 p-3">
 
-        @if (session()->has('deleteCnmsReport'))
+        @if (session()->has('deleteChasReport'))
+
         <div role="alert" class="alert alert-success alert-dismissible fade show">
-            <strong>{{ session('deleteCnmsReport') }}</strong>
+            <strong>{{ session('deleteChasReport') }}</strong>
             <button class="btn btn-close"></button>
         </div>
     @endif
@@ -20,7 +21,7 @@
                 <div class="form-group mb-0">
 
                     <input type="search" class="form-control search-input" placeholder="Search Here..."
-                        wire:model.live = 'cnmsReportSearch' />
+                        wire:model.live = 'chasReportSearch' />
 
                 </div>
             </form>
@@ -78,7 +79,7 @@
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 
                                     <button type="submit" class="dropdown-item"
-                                        wire:click = "deleteCnmsReport({{ $report->id }})"
+                                        wire:click = "deleteChasReport({{ $report->id }})"
                                         onclick="confirm(`Are you sure you want to delete this report  from the list ? `) || event.stopImmediatePropagation()"><i
                                             class="dw dw-delete-3"></i>Delete</button>
                                 </div>

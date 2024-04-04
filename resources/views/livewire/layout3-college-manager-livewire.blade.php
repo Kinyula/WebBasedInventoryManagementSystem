@@ -305,7 +305,7 @@
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/reply-reports') }}">
-                                            View reply</a>
+                                            View created report</a>
                                     </li>
 
                                 </ul>
@@ -341,7 +341,7 @@
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/reply-reports') }}">
-                                            View reply</a>
+                                            View created report</a>
                                     </li>
 
                                 </ul>
@@ -377,7 +377,7 @@
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/reply-reports') }}">
-                                            View reply</a>
+                                            View created report</a>
                                     </li>
 
                                 </ul>
@@ -413,7 +413,7 @@
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/reply-reports') }}">
-                                            View reply</a>
+                                            View created report</a>
                                     </li>
 
                                 </ul>
@@ -449,7 +449,7 @@
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/reply-reports') }}">
-                                            View reply</a>
+                                            View created report</a>
                                     </li>
 
                                 </ul>
@@ -485,7 +485,7 @@
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/reply-reports') }}">
-                                            View reply</a>
+                                            View created report</a>
                                     </li>
 
                                 </ul>
@@ -521,10 +521,139 @@
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/reply-reports') }}">
-                                            View reply</a>
+                                            View created report</a>
                                     </li>
 
                                 </ul>
+                            </li>
+                        @endif
+                        @if (auth()->user()->college_name == 'College of Health and Allied Science ( CHAS )')
+                            <li class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle">
+
+                                    <span class="micon bi bi-envelope"></span><span class="mtext">Message
+                                        reports</span>
+                                </a>
+
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/messages') }}">
+                                            View messages </a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+                        @endif
+
+                        @if (auth()->user()->college_name == 'College of Natural Mathematical Science ( CNMS ) ')
+                            <li class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle">
+
+                                    <span class="micon bi bi-envelope"></span><span class="mtext">Message
+                                        reports</span>
+                                </a>
+
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/messages') }}">
+                                            View messages </a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+                        @endif
+
+                        @if (auth()->user()->college_name == 'College of Education ( CoED )')
+                            <li class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle">
+
+                                    <span class="micon bi bi-envelope"></span><span class="mtext">Message
+                                        reports</span>
+                                </a>
+
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/messages') }}">
+                                            View messages </a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+                        @endif
+
+                        @if (auth()->user()->college_name == 'College of Humanities and Social Science ( CHSS )')
+                            <li class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle">
+
+                                    <span class="micon bi bi-envelope"></span><span class="mtext">Message
+                                        reports</span>
+                                </a>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/messages') }}">
+                                            View messages </a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+                        @endif
+
+                        @if (auth()->user()->college_name == 'College of Business and Economics ( CoBE )')
+                            <li class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle">
+
+                                    <span class="micon bi bi-envelope"></span><span class="mtext">Message
+                                        reports</span>
+                                </a>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/messages') }}">
+                                            View messages </a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+                        @endif
+
+                        @if (auth()->user()->college_name == 'College of Earth Sciences and Engineering ( CoESE )')
+                            <li class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle">
+
+                                    <span class="micon bi bi-envelope"></span><span class="mtext">Message
+                                        reports</span>
+                                </a>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/messages') }}">
+                                            View messages </a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+                        @endif
+
+
+                        @if (auth()->user()->college_name == 'College of Informatics and Virtual Education ( CIVE )')
+                            <li class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle">
+
+                                    <span class="micon bi bi-envelope"></span><span class="mtext">Message
+                                        reports</span>
+                                </a>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/messages') }}">
+                                            View messages </a>
+                                    </li>
+
+                                </ul>
+
                             </li>
                         @endif
                         @if (auth()->user()->college_name == 'College of Education ( CoED )')

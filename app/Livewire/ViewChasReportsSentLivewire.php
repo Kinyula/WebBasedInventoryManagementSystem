@@ -2,19 +2,22 @@
 
 namespace App\Livewire;
 
-use App\Models\SendingReport;
 use Livewire\Component;
+use App\Models\SendingReport;
+
 use Livewire\WithPagination;
 
-class ViewReportsSentLivewire extends Component
+class ViewChasReportsSentLivewire extends Component
 {
+
     use WithPagination;
 
     public function render()
     {
-        if (auth()->user()->college_name == 'College of Natural Mathematical Science ( CNMS ) ') {
+        if (auth()->user()->college_name == 'College of Health and Allied Science ( CHAS )') {
 
-            return view('livewire.view-reports-sent-livewire', ['Reports' => SendingReport::with(['user'])->where('college_name', auth()->user()->college_name)->paginate(15)]);
+            return view('livewire.view-chas-reports-sent-livewire', ['Reports' => SendingReport::with(['user'])->where('college_name', auth()->user()->college_name)->paginate(15)]);
+
         }
 
     }
