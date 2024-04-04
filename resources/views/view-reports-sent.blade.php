@@ -9,7 +9,38 @@
 
     @if (auth()->user()->college_name == 'College of Health and Allied Science ( CHAS )')
 
-        @livewire('view-chas-reports-sent-livewire')
+    @livewire('view-reports-sent-livewire')
+
+    @endif
+
+    @if (auth()->user()->college_name == 'College of Education ( CoED )')
+
+    @livewire('view-reports-sent-livewire')
+
+    @endif
+
+    @if (auth()->user()->college_name == 'College of Humanities and Social Science ( CHSS )')
+
+    @livewire('view-reports-sent-livewire')
+
+    @endif
+
+    @if (auth()->user()->college_name == 'College of Business and Economics ( CoBE )')
+
+    @livewire('view-reports-sent-livewire')
+
+    @endif
+
+    @if (auth()->user()->college_name == 'College of Earth Sciences and Engineering ( CoESE )')
+
+    @livewire('view-reports-sent-livewire')
+
+    @endif
+
+
+    @if (auth()->user()->college_name == 'College of Informatics and Virtual Education ( CIVE )')
+
+    @livewire('view-reports-sent-livewire')
 
     @endif
 

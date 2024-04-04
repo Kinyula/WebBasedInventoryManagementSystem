@@ -3,7 +3,12 @@
 
         @if (auth()->user()->college_name == 'Not set')
             <h2 class="h4 pd-20 text-gray-600"><i class="bi bi-plus"></i>
-                Replies to reports sent
+                Reports are sent here
+            </h2>
+
+            @else
+            <h2 class="h6 pd-20 text-gray-600"><i class="bi bi-plus"></i>
+                Reports sent by the {{auth()->user()->college_name}} to assistant inventory manager.
             </h2>
         @endif
 

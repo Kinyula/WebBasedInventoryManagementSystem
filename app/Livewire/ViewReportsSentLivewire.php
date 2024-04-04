@@ -17,6 +17,17 @@ class ViewReportsSentLivewire extends Component
             return view('livewire.view-reports-sent-livewire', ['Reports' => SendingReport::with(['user'])->where('college_name', auth()->user()->college_name)->paginate(15)]);
         }
 
+        if (auth()->user()->college_name == 'College of Health and Allied Science ( CHAS )') {
+
+            return view('livewire.view-reports-sent-livewire', ['Reports' => SendingReport::with(['user'])->where('college_name', auth()->user()->college_name)->paginate(15)]);
+        }
+
+
+        if (auth()->user()->college_name == 'College of Education ( CoED )') {
+
+            return view('livewire.view-reports-sent-livewire', ['Reports' => SendingReport::with(['user'])->where('college_name', auth()->user()->college_name)->paginate(15)]);
+        }
+
     }
 
     public function download($id){

@@ -18,6 +18,7 @@ class SendingReportsLivewire extends Component
 
     public function render()
     {
+
         return view('livewire.sending-reports-livewire');
     }
 
@@ -41,7 +42,7 @@ class SendingReportsLivewire extends Component
             $report_file = $report_file[2];
 
             $send->report_file = $report_file;
-            
+
         }
 
         $send->save();
