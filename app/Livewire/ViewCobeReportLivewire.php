@@ -9,6 +9,7 @@ use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\File;
 
 use Livewire\Component;
 
@@ -115,7 +116,16 @@ class ViewCobeReportLivewire extends Component
     public function deleteCobeReport($id)
     {
 
-        $cobeReport = CobeReport::findOrFail($id) ? CobeReport::findOrFail($id)->delete() : false;
+        $cobeReport = CobeReport::findOrFail($id);
+
+        $cobeReportFile = $cobeReport->resource_image;
+
+        if (File::exists(public_path('storage/resource_images/'.$cobeReportFile))) {
+
+            File::delete(public_path('storage/resource_images/'.$cobeReportFile));
+
+            $cobeReport->delete();
+        }
 
         session()->flash('deleteCobeReport', 'Report is deleted successfully!');
     }

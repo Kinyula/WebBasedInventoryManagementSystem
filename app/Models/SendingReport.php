@@ -11,6 +11,17 @@ class SendingReport extends Model
 
     protected $fillable = ['user_id', 'college_name', 'report_file'];
 
+    public static function search($search){
+
+        if (auth()->user()->college_name == 'Not set') {
+
+            return empty($search) ? static::query() : static::query()
+            ->where('college_name','ILIKE','%'.$search.'%');
+
+        }
+
+    }
+    
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');

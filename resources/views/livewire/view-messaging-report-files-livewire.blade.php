@@ -8,9 +8,9 @@
 
     <div class="card-box mb-30 p-3">
 
-        @if (session()->has('deleteCnmsReport'))
+        @if (session()->has('deleteReport'))
         <div role="alert" class="alert alert-success alert-dismissible fade show">
-            <strong>{{ session('deleteCnmsReport') }}</strong>
+            <strong>{{ session('deleteReport') }}</strong>
             <button class="btn btn-close"></button>
         </div>
     @endif
@@ -25,7 +25,7 @@
                 <div class="form-group mb-0">
 
                     <input type="search" class="form-control search-input" placeholder="Search Here..."
-                        wire:model.live = 'cnmsReportSearch' />
+                        wire:model.live = 'replySearch' />
 
                 </div>
             </form>
@@ -94,7 +94,7 @@
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 
                                     <button type="submit" class="dropdown-item"
-                                        wire:click = "deleteCnmsReport({{ $report->id }})"
+                                        wire:click = "deleteReport({{ $report->id }})"
                                         onclick="confirm(`Are you sure you want to delete this report  from the list ? `) || event.stopImmediatePropagation()"><i
                                          class="dw dw-delete-3"></i>Delete</button>
                                 </div>
@@ -148,7 +148,7 @@
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 
                                     <button type="submit" class="dropdown-item"
-                                        wire:click = "deleteCnmsReport({{ $report->id }})"
+                                        wire:click = "deleteReport({{ $report->id }})"
                                         onclick="confirm(`Are you sure you want to delete this report  from the list ? `) || event.stopImmediatePropagation()"><i
                                             class="dw dw-delete-3"></i>Delete</button>
                                 </div>
@@ -190,7 +190,7 @@
                         <td style="text-decoration:normal">
                             <input type="checkbox"  wire:model = "reportId" value="{{$report->id}}">
                         </td>
-                        
+
                         <td>
 
                             <div class="dropdown">
@@ -201,7 +201,7 @@
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 
                                     <button type="submit" class="dropdown-item"
-                                        wire:click = "deleteCnmsReport({{ $report->id }})"
+                                        wire:click = "deleteReport({{ $report->id }})"
                                         onclick="confirm(`Are you sure you want to delete this report  from the list ? `) || event.stopImmediatePropagation()"><i
                                             class="dw dw-delete-3"></i>Delete</button>
                                 </div>

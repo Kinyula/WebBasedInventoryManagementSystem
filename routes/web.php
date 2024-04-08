@@ -24,6 +24,7 @@ use App\Http\Controllers\CoedReportController;
 use App\Http\Controllers\CoeseReportController;
 use App\Http\Controllers\CollegeInventoryManagerReportController;
 use App\Http\Controllers\CollegeResourceAllocationController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\EditAssetController;
 use App\Http\Controllers\EditCiveResourceStatusController;
 use App\Http\Controllers\EditCollegeNameController;
@@ -193,118 +194,122 @@ Route::middleware('auth')->group(function () {
 
     //---------------------------------------------------------------------------------------------------
 
-        // College of Humanities and Social Science ( CHSS ) Routes
+    // College of Humanities and Social Science ( CHSS ) Routes
 
-        Route::get('UIMS/add-chss-resources', [AddChssResourceController::class, 'index']);
-        Route::get('UIMS/view-chss-created-resources', [ViewChssCreatedResourcesController::class, 'index']);
+    Route::get('UIMS/add-chss-resources', [AddChssResourceController::class, 'index']);
+    Route::get('UIMS/view-chss-created-resources', [ViewChssCreatedResourcesController::class, 'index']);
 
-        // ------------------------------------ CHSS Reports Routes -------------------------------
+    // ------------------------------------ CHSS Reports Routes -------------------------------
 
-        Route::get('UIMS/chss-report', [ChssReportController::class, 'index']);
-        Route::get('UIMS/view-chss-report', [ViewChssReportController::class, 'index']);
+    Route::get('UIMS/chss-report', [ChssReportController::class, 'index']);
+    Route::get('UIMS/view-chss-report', [ViewChssReportController::class, 'index']);
 
-        // End of College of Humanities and Social Science ( CHSS ) Routes
+    // End of College of Humanities and Social Science ( CHSS ) Routes
 
-        //---------------------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------------------
 
-        // College of Informatics and Virtual Education ( CIVE )
+    // College of Informatics and Virtual Education ( CIVE )
 
-        Route::get('UIMS/add-cive-resources', [AddCiveResourceController::class, 'index']);
-        Route::post('UIMS/add-cive-resources', [AddCiveResourceController::class, 'index']);
-        Route::get('UIMS/view-cive-created-resources', [ViewCiveCreatedResourcesController::class, 'index']);
-        Route::get('UIMS/view-cive-resource-status/{id}', [EditCiveResourceStatusController::class, 'index']);
+    Route::get('UIMS/add-cive-resources', [AddCiveResourceController::class, 'index']);
+    Route::post('UIMS/add-cive-resources', [AddCiveResourceController::class, 'index']);
+    Route::get('UIMS/view-cive-created-resources', [ViewCiveCreatedResourcesController::class, 'index']);
+    Route::get('UIMS/view-cive-resource-status/{id}', [EditCiveResourceStatusController::class, 'index']);
 
 
-        // ---------------------------------------- CIVE Report Routes ----------------------------------------------
+    // ---------------------------------------- CIVE Report Routes ----------------------------------------------
 
-        Route::get('UIMS/cive-report', [CiveReportController::class, 'index']);
-        // End of College of Informatics and Virtual Education ( CIVE )
+    Route::get('UIMS/cive-report', [CiveReportController::class, 'index']);
+    // End of College of Informatics and Virtual Education ( CIVE )
 
-        // -------------------------------------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------------------------------------
 
-        // College of Natural and Mathematical Science ( CNMS ) Routes
+    // College of Natural and Mathematical Science ( CNMS ) Routes
 
-        Route::get('UIMS/add-cnms-resources', [AddCnmsResourceController::class, 'index']);
-        Route::get('UIMS/view-cnms-created-resources', [ViewCnmsCreatedResourcesController::class, 'index']);
+    Route::get('UIMS/add-cnms-resources', [AddCnmsResourceController::class, 'index']);
+    Route::get('UIMS/view-cnms-created-resources', [ViewCnmsCreatedResourcesController::class, 'index']);
 
-        // ----------------------------------- CNMS Reports Routes -------------------------------
-        Route::get('UIMS/cnms-report', [CnmsReportController::class, 'index']);
-        Route::get('UIMS/view-cnms-report', [ViewCnmsReportController::class, 'index']);
+    // ----------------------------------- CNMS Reports Routes -------------------------------
+    Route::get('UIMS/cnms-report', [CnmsReportController::class, 'index']);
+    Route::get('UIMS/view-cnms-report', [ViewCnmsReportController::class, 'index']);
 
-        // End of College of Natural and Mathematical Science ( CNMS ) Routes
+    // End of College of Natural and Mathematical Science ( CNMS ) Routes
 
-        // -------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------
 
-        // College of Business and Economics ( CoBE ) Routes -----------------------------------------------
+    // College of Business and Economics ( CoBE ) Routes -----------------------------------------------
 
-        Route::get('UIMS/add-cobe-resources', [AddCoBEResourceController::class, 'index']);
-        Route::get('UIMS/view-cobe-created-resources', [ViewCoBECreatedResourcesController::class, 'index']);
+    Route::get('UIMS/add-cobe-resources', [AddCoBEResourceController::class, 'index']);
+    Route::get('UIMS/view-cobe-created-resources', [ViewCoBECreatedResourcesController::class, 'index']);
 
-        // ------------------------------------ CoBE Report Routes ------------------------------------
+    // ------------------------------------ CoBE Report Routes ------------------------------------
 
-        Route::get('UIMS/cobe-report',[CobeReportController::class, 'index']);
-        Route::get('UIMS/view-cobe-report', [ViewCobeReportController::class, 'index']);
+    Route::get('UIMS/cobe-report', [CobeReportController::class, 'index']);
+    Route::get('UIMS/view-cobe-report', [ViewCobeReportController::class, 'index']);
 
-        // End of College of Business and Economics Routes
+    // End of College of Business and Economics Routes
 
-        // ------------------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------------------
 
-        // College of Earth Science and Engineering ( CoESE ) Routes
+    // College of Earth Science and Engineering ( CoESE ) Routes
 
-        Route::get('UIMS/add-coese-resources', [AddCoESEResourcesController::class, 'index']);
-        Route::get('UIMS/view-coese-created-resources', [ViewCoESECreatedResourcesController::class, 'index']);
+    Route::get('UIMS/add-coese-resources', [AddCoESEResourcesController::class, 'index']);
+    Route::get('UIMS/view-coese-created-resources', [ViewCoESECreatedResourcesController::class, 'index']);
 
-        // ------------------------------------------ CoESE Report Routes ---------------------------------------------------
+    // ------------------------------------------ CoESE Report Routes ---------------------------------------------------
 
-        Route::get('UIMS/coese-report', [CoeseReportController::class, 'index']);
-        Route::get('UIMS/view-coese-report', [ViewCoeseReportController::class, 'index']);
+    Route::get('UIMS/coese-report', [CoeseReportController::class, 'index']);
+    Route::get('UIMS/view-coese-report', [ViewCoeseReportController::class, 'index']);
 
-        // End of Earth Science and Engineering ( CoESE ) Routes
+    // End of Earth Science and Engineering ( CoESE ) Routes
 
-        // -----------------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------
 
-        // College of Education ( CoED ) Routes
+    // College of Education ( CoED ) Routes
 
-        Route::get('UIMS/add-coed-resources', [AddCoEDResourceController::class, 'index']);
-        Route::get('UIMS/view-coed-created-resources', [ViewCoEDCreatedResourcesController::class, 'index']);
+    Route::get('UIMS/add-coed-resources', [AddCoEDResourceController::class, 'index']);
+    Route::get('UIMS/view-coed-created-resources', [ViewCoEDCreatedResourcesController::class, 'index']);
 
-        // ---------------------------------------- CoED Report Routes -----------------------------------------------------
+    // ---------------------------------------- CoED Report Routes -----------------------------------------------------
 
-        Route::get('UIMS/coed-report', [CoedReportController::class, 'index']);
-        Route::get('UIMS/view-coed-report', [ViewCoedReportController::class, 'index']);
+    Route::get('UIMS/coed-report', [CoedReportController::class, 'index']);
+    Route::get('UIMS/view-coed-report', [ViewCoedReportController::class, 'index']);
 
-        // End of College of Education ( CoED ) Routes
+    // End of College of Education ( CoED ) Routes
 
-        // --------------------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------------------
 
-        // Suppliers routes
+    // Suppliers routes
 
-        Route::get('UIMS/register-suppliers', [AddSuppliersController::class, 'index']);
-        Route::get('UIMS/register-supplier-phone-numbers', [AddSupplierPhoneNumbersController::class, 'index']);
-        Route::get('UIMS/register-supplier-services', [AddSupplierServicesController::class, 'index']);
-        Route::get('UIMS/view-suppliers', [ViewSuppliersController::class, 'index']);
+    Route::get('UIMS/register-suppliers', [AddSuppliersController::class, 'index']);
+    Route::get('UIMS/register-supplier-phone-numbers', [AddSupplierPhoneNumbersController::class, 'index']);
+    Route::get('UIMS/register-supplier-services', [AddSupplierServicesController::class, 'index']);
+    Route::get('UIMS/view-suppliers', [ViewSuppliersController::class, 'index']);
 
-        // End of Suppliers routes
+    // End of Suppliers routes
 
-        // --------------------------------------------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------------------------------------------
 
-        // Qr code reader routes
+    // Qr code reader routes
 
-        Route::get('UIMS/qr-code-reader', [QrCodeReaderController::class, 'index']);
-        Route::get('UIMS/qr-code-asset-update/{id}', [QrCodeDataController::class, 'index'])->name('qr-code-resource-update');
-        Route::patch('/resource-update-status/{id}', [QrCodeDataController::class, 'update'])->name('resource-update');
+    Route::get('UIMS/qr-code-reader', [QrCodeReaderController::class, 'index']);
+    Route::get('UIMS/qr-code-asset-update/{id}', [QrCodeDataController::class, 'index'])->name('qr-code-resource-update');
+    Route::patch('/resource-update-status/{id}', [QrCodeDataController::class, 'update'])->name('resource-update');
 
-        // Sending Reports Routes -----------------------------------------------------------------------------
+    // Sending Reports Routes -----------------------------------------------------------------------------
 
-        Route::get('UIMS/inbox-reports',[SendingReportsController::class, 'index']);
-        Route::get('UIMS/reply-reports', [ViewReportsSentController::class, 'index']);
+    Route::get('UIMS/inbox-reports', [SendingReportsController::class, 'index']);
+    Route::get('UIMS/reply-reports', [ViewReportsSentController::class, 'index']);
 
-        // End of Sending Reports Routes -----------------------------------------------------------------------------
+    // End of Sending Reports Routes -----------------------------------------------------------------------------
 
-        //------------------------------------------- Messaging Reports Routes -------------------------------------------------
+    //------------------------------------------- Messaging Reports Routes -------------------------------------------------
 
-        Route::get('UIMS/messages', [MessagingReportController::class, 'index']);
+    Route::get('UIMS/messages', [MessagingReportController::class, 'index']);
+
+    // --------------------------------- Jobs Routes -------------------------------------------------------------------------
+
+    Route::get('assistants', [Controller::class, 'export']);
 });
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

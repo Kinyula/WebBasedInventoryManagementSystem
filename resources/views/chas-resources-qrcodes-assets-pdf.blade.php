@@ -16,11 +16,17 @@
             border-bottom: 1px solid black;
             border-collapse: collapse;
             padding: 10px;
+            width: 100%;
+            border: none;
         }
 
         /* td:nth-child(odd) {
             background-color: lightgray
         } */
+
+        tr td {
+            text-align: center;
+        }
 
         .logo img {
             width: 80px;
@@ -102,25 +108,15 @@ display: block;
     <table>
         <thead>
             <tr>
-                <th>College inventory manager</th>
-                <th>Asset name</th>
+
                 <th>QR Code</th>
-                <th>College name</th>
-                <th>Allocation status</th>
-                <th>Asset status</th>
-                <th>Allocation time</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($Resources as $resource)
-                <tr>
-                    <td>{{ $resource['item']->user->email }}</td>
-                    <td>{{ $resource['item']->resource_name }}</td>
+                <tr >
                     <td><img src="{{ $resource['qrcode'] }}" alt="QR code"></td>
-                    <td>{{ $resource['item']->college_name }}</td>
-                    <td>{{ $resource['item']->status }}</td>
-                    <td>{{ $resource['item']->asset_status }}</td>
-                    <td>{{ $resource['item']->updated_at->format('d, M Y- h:i:s a') }}</td>
+
                 </tr>
             @endforeach
         </tbody>

@@ -10,6 +10,7 @@ use BaconQrCode\Writer;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\File;
 
 class ViewCoedReportLivewire extends Component
 {
@@ -114,7 +115,16 @@ class ViewCoedReportLivewire extends Component
     public function deleteCoedReport($id)
     {
 
-        $coedReport = CoedReport::findOrFail($id) ? CoedReport::findOrFail($id)->delete() : false;
+        $coedReport = CoedReport::findOrFail($id);
+
+        $coedReportFile = $coedReport->resource_image;
+
+        if (File::exists(public_path('storage/resource_images/'.$coedReportFile))) {
+
+            File::delete(public_path('storage/resource_images/'.$coedReportFile));
+
+            $coedReport->delete();
+        }
 
         session()->flash('deleteCoedReport', 'Report is deleted successfully!');
     }

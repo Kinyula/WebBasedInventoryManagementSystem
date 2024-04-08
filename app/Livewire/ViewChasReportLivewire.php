@@ -8,6 +8,7 @@ use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\ChasReport;
+use Illuminate\Support\Facades\File;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -80,7 +81,7 @@ class ViewChasReportLivewire extends Component
             $pdf = Pdf::loadView("chas-resource-status-report-pdf", [
                 'Reports' => $Reports
             ]);
-            
+
             $pdfOutput = $pdf->output();
 
             return response()->stream(
@@ -110,7 +111,15 @@ class ViewChasReportLivewire extends Component
 
     public function deleteChasReport($id)
     {
+        $chasReport = ChasReport::findOrFail($id);
 
-        $chasReport = ChasReport::findOrFail($id) ? ChasReport::findOrFail($id)->delete() : false;
+        $chasReportFile = $chasReport->resource_image;
+
+        if (File::exists(public_path('storage/resource_images/'.$chasReportFile))) {
+
+            File::delete(public_path('storage/resource_images/'.$chasReportFile));
+
+            $chasReport->delete();
+        }
     }
 }

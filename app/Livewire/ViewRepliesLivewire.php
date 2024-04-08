@@ -113,4 +113,11 @@ class ViewRepliesLivewire extends Component
 
         return response()->download(public_path('storage/report_files/' . $file_path->report_file));
     }
+
+    public function deleteReplies($id){
+
+        $message = MessagingReport::findOrFail($id) ? MessagingReport::findOrFail($id)->delete() : false;
+
+        session()->flash('deleteReplies', 'Reply is successfully deleted!');
+    }
 }

@@ -28,6 +28,25 @@ class ViewReportsSentLivewire extends Component
             return view('livewire.view-reports-sent-livewire', ['Reports' => SendingReport::with(['user'])->where('college_name', auth()->user()->college_name)->paginate(15)]);
         }
 
+        if (auth()->user()->college_name == 'College of Earth Sciences and Engineering ( CoESE )') {
+
+            return view('livewire.view-reports-sent-livewire', ['Reports' => SendingReport::with(['user'])->where('college_name', auth()->user()->college_name)->paginate(15)]);
+        }
+
+        if (auth()->user()->college_name == 'College of Humanities and Social Science ( CHSS )') {
+
+            return view('livewire.view-reports-sent-livewire', ['Reports' => SendingReport::with(['user'])->where('college_name', auth()->user()->college_name)->paginate(15)]);
+        }
+
+        if (auth()->user()->college_name == 'College of Informatics and Virtual Education ( CIVE )') {
+
+            return view('livewire.view-reports-sent-livewire', ['Reports' => SendingReport::with(['user'])->where('college_name', auth()->user()->college_name)->paginate(15)]);
+        }
+
+        if (auth()->user()->college_name == 'College of Business and Economics ( CoBE )') {
+
+            return view('livewire.view-reports-sent-livewire', ['Reports' => SendingReport::with(['user'])->where('college_name', auth()->user()->college_name)->paginate(15)]);
+        }
     }
 
     public function download($id){
@@ -35,6 +54,13 @@ class ViewReportsSentLivewire extends Component
         $file_path = SendingReport::where('id', $id)->first();
 
         return response()->download(public_path('storage/report_files/'.$file_path->report_file));
+
+    }
+
+    public function deleteReportSent($id){
+
+        dd($id);
+        $deleteReportSent = SendingReport::where('id', $id)->exists() ? SendingReport::findOrFail($id)->delete() : false;
 
     }
 }

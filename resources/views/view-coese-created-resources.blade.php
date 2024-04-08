@@ -2,6 +2,6 @@
 
 @section('content')
 
-@livewire('view-cive-created-resource-livewire')
+@livewire('view-coese-created-resources-livewire')
 
 @endsection

@@ -929,6 +929,8 @@
         <script src="{{ asset('src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
         <script src="{{ asset('src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
         <script src="{{ asset('vendors/scripts/dashboard.js') }}"></script>
+        <script src="{{asset('javascript/select-records.js')}}"></script>
+
 
         <!-- Google Tag Manager (noscript) -->
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS" height="0" width="0"

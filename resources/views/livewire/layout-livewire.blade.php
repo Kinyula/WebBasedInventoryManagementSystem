@@ -20,7 +20,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
             rel="stylesheet" />
             <link rel="stylesheet" href="{{ asset('fontAwesome/css/all.css') }}">
-            
+
         <!-- CSS -->
         <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/core.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/icon-font.min.css') }}" />
@@ -276,6 +276,50 @@
                             </ul>
                         </li>
 
+
+                        <li class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle">
+                                <span class="micon bi bi-pencil-square"></span><span class="mtext">Activities</span>
+                            </a>
+
+
+
+                            <ul class="submenu">
+                                <li><a href="{{ asset('UIMS/add-category') }}">
+                                        Add category
+                                    </a></li>
+
+                            </ul>
+
+                            <ul class="submenu">
+                                <li><a href="{{ asset('UIMS/add-asset') }}">
+                                        Add an asset
+                                    </a></li>
+
+                            </ul>
+
+                            <ul class="submenu">
+                                <li><a href="{{ asset('UIMS/add-asset-status') }}">
+                                        Add an allocation status
+                                    </a></li>
+
+                            </ul>
+
+                            <ul class="submenu">
+                                <li><a href="{{ asset('UIMS/resource-allocation') }}">
+                                        Resources allocation
+                                    </a></li>
+
+                            </ul>
+
+                            <ul class="submenu">
+                                <li><a href="{{ asset('UIMS/view-resource-allocation') }}">
+                                        View resources allocated
+                                    </a></li>
+
+                            </ul>
+                        </li>
+                        
                         <li class="dropdown">
                             <a href="javascript:;" class="dropdown-toggle">
                                 <span class="micon bi bi-people"></span><span class="mtext">Assistants</span>
@@ -321,49 +365,6 @@
 
                             </ul>
 
-                        </li>
-
-                        <li class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle">
-                                <span class="micon bi bi-pencil-square"></span><span class="mtext">Activities</span>
-                            </a>
-
-
-
-                            <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/add-category') }}">
-                                        Add category
-                                    </a></li>
-
-                            </ul>
-
-                            <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/add-asset') }}">
-                                        Add an asset
-                                    </a></li>
-
-                            </ul>
-
-                            <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/add-asset-status') }}">
-                                        Add an allocation status
-                                    </a></li>
-
-                            </ul>
-
-                            <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/resource-allocation') }}">
-                                        Resources allocation
-                                    </a></li>
-
-                            </ul>
-
-                            <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/view-resource-allocation') }}">
-                                        View resources allocated
-                                    </a></li>
-
-                            </ul>
                         </li>
 
                     </ul>

@@ -13,7 +13,8 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class AddChssResourcesLivewire extends Component
 {
-    public $category_type, $resource_name, $chssResourceImport, $university_store_resource_name;
+    public $category_type, $resource_name, $chssResourceImport,
+     $university_store_resource_name, $import_quantity;
 
     public function render()
     {
@@ -31,24 +32,31 @@ class AddChssResourcesLivewire extends Component
 
             'university_store_resource_name' => 'required',
 
+            'import_quantity' => 'required'
+
         ]);
 
-        $chssResource = new ChssResource();
+        for ($i=0; $i <$this->import_quantity ; $i++) {
 
-        $chssResource->user_id = auth()->user()->id;
+            $chssResource = new ChssResource();
 
-        $chssResource->asset_id = $this->university_store_resource_name;
+            $chssResource->user_id = auth()->user()->id;
 
-        $chssResource->category_id = $this->category_type;
+            $chssResource->asset_id = $this->university_store_resource_name;
 
-        $chssResource->resource_name = $this->resource_name;
+            $chssResource->category_id = $this->category_type;
+
+            $chssResource->resource_name = $this->resource_name;
 
 
-        $chssResource->college_name = auth()->user()->college_name;
+            $chssResource->college_name = auth()->user()->college_name;
 
-        $chssResource->save();
+            $chssResource->save();
 
-        $this->reset(['category_type', 'resource_name', 'university_store_resource_name']);
+        }
+
+
+        $this->reset(['category_type', 'resource_name', 'university_store_resource_name', 'import_quantity']);
 
         session()->flash('addResources', 'A resource is added successfully.');
     }

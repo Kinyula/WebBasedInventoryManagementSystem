@@ -78,7 +78,7 @@
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 
                                     <button type="submit" class="dropdown-item"
-                                        wire:click = "deleteCnmsReport({{ $report->id }})"
+                                        wire:click = "deleteReportSent({{ $report->id }})"
                                         onclick="confirm(`Are you sure you want to delete this report  from the list ? `) || event.stopImmediatePropagation()"><i
                                             class="dw dw-delete-3"></i>Delete</button>
                                 </div>

@@ -51,7 +51,9 @@
                 </tr>
             </thead>
             <tbody>
+
                 {{-- @dd($Resources) --}}
+
                 @foreach ($Resources as $resource)
                     <tr>
 
@@ -87,7 +89,6 @@
                                     class="bg-gray-500 hover:bg-gray-400 text-white font-bold p-2 rounded">{{ $resource->asset_status }}</button>
                             </a>
                         </td>
-
 
                         <td style="text-decoration:normal">
 

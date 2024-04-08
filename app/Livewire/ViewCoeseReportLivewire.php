@@ -10,6 +10,7 @@ use BaconQrCode\Writer;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\File;
 
 class ViewCoeseReportLivewire extends Component
 {
@@ -115,7 +116,16 @@ class ViewCoeseReportLivewire extends Component
     public function deleteCoeseReport($id)
     {
 
-        $coeseReport = CoeseReport::findOrFail($id) ? CoeseReport::findOrFail($id)->delete() : false;
+        $coeseReport = CoeseReport::findOrFail($id);
+
+        $coeseReportFile = $coeseReport->resource_image;
+
+        if (File::exists(public_path('storage/resource_images/'.$coeseReportFile))) {
+
+            File::delete(public_path('storage/resource_images/'.$coeseReportFile));
+
+            $coeseReport->delete();
+        }
 
         session()->flash('deleteCoeseReport', 'Report is deleted successfully!');
     }

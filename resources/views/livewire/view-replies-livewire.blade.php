@@ -8,9 +8,9 @@
 
     <div class="card-box mb-30 p-3">
 
-        @if (session()->has('deleteCnmsReport'))
+        @if (session()->has('deleteReplies'))
             <div role="alert" class="alert alert-success alert-dismissible fade show">
-                <strong>{{ session('deleteCnmsReport') }}</strong>
+                <strong>{{ session('deleteReplies') }}</strong>
                 <button class="btn btn-close"></button>
             </div>
         @endif
@@ -31,8 +31,6 @@
                 </div>
             </form>
         </div>
-
-
 
         <table class="data-table table nowrap ">
             <thead>
@@ -81,7 +79,7 @@
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 
                                         <button type="submit" class="dropdown-item"
-                                            wire:click = "deleteCnmsReport({{ $report->id }})"
+                                            wire:click = "deleteReplies({{ $report->id }})"
                                             onclick="confirm(`Are you sure you want to delete this report  from the list ? `) || event.stopImmediatePropagation()"><i
                                                 class="dw dw-delete-3"></i>Delete</button>
                                     </div>
@@ -123,7 +121,7 @@
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 
                                         <button type="submit" class="dropdown-item"
-                                            wire:click = "deleteCnmsReport({{ $report->id }})"
+                                            wire:click = "deleteReplies({{ $report->id }})"
                                             onclick="confirm(`Are you sure you want to delete this report  from the list ? `) || event.stopImmediatePropagation()"><i
                                                 class="dw dw-delete-3"></i>Delete</button>
                                     </div>
@@ -132,6 +130,169 @@
                         </tr>
                     @endforeach
                 @endif
+
+                @if (auth()->user()->college_name == 'College of Business and Economics ( CoBE )')
+                    @foreach ($Reports as $report)
+                        <tr>
+
+                            <td>
+                                <h5 class="font-16">{{ $report->user->email }}</h5>
+
+                            </td>
+
+                            <td style="text-decoration:normal"><i class="bi bi-pencil p-2"></i>
+                                {{ $report->college_name }}
+                            </td>
+
+                            <td>
+                                <span>{{ $report->updated_at->format('d M Y h:i:s') }}</span>
+                            </td>
+
+                            <td style="text-decoration:normal">
+                                <input type="checkbox" wire:model = "reportId" value="{{ $report->id }}">
+                            </td>
+
+                            <td>
+
+                                <div class="dropdown">
+                                    <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+                                        href="#" role="button" data-toggle="dropdown">
+                                        <i class="dw dw-more"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+
+                                        <button type="submit" class="dropdown-item"
+                                            wire:click = "deleteReplies({{ $report->id }})"
+                                            onclick="confirm(`Are you sure you want to delete this report  from the list ? `) || event.stopImmediatePropagation()"><i
+                                                class="dw dw-delete-3"></i>Delete</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+
+                @if (auth()->user()->college_name == 'College of Education ( CoED )')
+                    @foreach ($Reports as $report)
+                        <tr>
+
+                            <td>
+                                <h5 class="font-16">{{ $report->user->email }}</h5>
+
+                            </td>
+
+                            <td style="text-decoration:normal"><i class="bi bi-pencil p-2"></i>
+                                {{ $report->college_name }}
+                            </td>
+
+                            <td>
+                                <span>{{ $report->updated_at->format('d M Y h:i:s') }}</span>
+                            </td>
+
+                            <td style="text-decoration:normal">
+                                <input type="checkbox" wire:model = "reportId" value="{{ $report->id }}">
+                            </td>
+
+                            <td>
+
+                                <div class="dropdown">
+                                    <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+                                        href="#" role="button" data-toggle="dropdown">
+                                        <i class="dw dw-more"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+
+                                        <button type="submit" class="dropdown-item"
+                                            wire:click = "deleteReplies({{ $report->id }})"
+                                            onclick="confirm(`Are you sure you want to delete this report  from the list ? `) || event.stopImmediatePropagation()"><i
+                                                class="dw dw-delete-3"></i>Delete</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+                @if (auth()->user()->college_name == 'College of Humanities and Social Science ( CHSS )')
+                    @foreach ($Reports as $report)
+                        <tr>
+
+                            <td>
+                                <h5 class="font-16">{{ $report->user->email }}</h5>
+
+                            </td>
+
+                            <td style="text-decoration:normal"><i class="bi bi-pencil p-2"></i>
+                                {{ $report->college_name }}
+                            </td>
+
+                            <td>
+                                <span>{{ $report->updated_at->format('d M Y h:i:s') }}</span>
+                            </td>
+
+                            <td style="text-decoration:normal">
+                                <input type="checkbox" wire:model = "reportId" value="{{ $report->id }}">
+                            </td>
+
+                            <td>
+
+                                <div class="dropdown">
+                                    <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+                                        href="#" role="button" data-toggle="dropdown">
+                                        <i class="dw dw-more"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+
+                                        <button type="submit" class="dropdown-item"
+                                            wire:click = "deleteReplies({{ $report->id }})"
+                                            onclick="confirm(`Are you sure you want to delete this report  from the list ? `) || event.stopImmediatePropagation()"><i
+                                                class="dw dw-delete-3"></i>Delete</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+
+                @if (auth()->user()->college_name == 'College of Earth Sciences and Engineering ( CoESE )')
+                @foreach ($Reports as $report)
+                    <tr>
+
+                        <td>
+                            <h5 class="font-16">{{ $report->user->email }}</h5>
+
+                        </td>
+
+                        <td style="text-decoration:normal"><i class="bi bi-pencil p-2"></i>
+                            {{ $report->college_name }}
+                        </td>
+
+                        <td>
+                            <span>{{ $report->updated_at->format('d M Y h:i:s') }}</span>
+                        </td>
+
+                        <td style="text-decoration:normal">
+                            <input type="checkbox" wire:model = "reportId" value="{{ $report->id }}">
+                        </td>
+
+                        <td>
+
+                            <div class="dropdown">
+                                <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+                                    href="#" role="button" data-toggle="dropdown">
+                                    <i class="dw dw-more"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+
+                                    <button type="submit" class="dropdown-item"
+                                        wire:click = "deleteReplies({{ $report->id }})"
+                                        onclick="confirm(`Are you sure you want to delete this report  from the list ? `) || event.stopImmediatePropagation()"><i
+                                            class="dw dw-delete-3"></i>Delete</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            @endif
 
                 @if (auth()->user()->college_name == 'Not set')
                     @foreach ($Reports as $report)
@@ -164,9 +325,9 @@
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 
                                         <button type="submit" class="dropdown-item"
-                                            wire:click = "deleteCnmsReport({{ $report->id }})"
+                                            wire:click = "deleteReplies({{ $report->id }})"
                                             onclick="confirm(`Are you sure you want to delete this report  from the list ? `) || event.stopImmediatePropagation()"><i
-                                            class="dw dw-delete-3"></i>Delete</button>
+                                                class="dw dw-delete-3"></i>Delete</button>
                                     </div>
                                 </div>
                             </td>

@@ -14,7 +14,8 @@ class AddCoESEResourcesLivewire extends Component
 {
 
 
-    public $coeseResourceImport, $university_store_resource_name,$category_type, $resource_name;
+    public $coeseResourceImport, $university_store_resource_name,
+    $category_type, $resource_name, $import_quantity;
 
     public function render()
     {
@@ -32,34 +33,40 @@ class AddCoESEResourcesLivewire extends Component
 
             'university_store_resource_name' => 'required',
 
+            'import_quantity' => 'required'
+
         ]);
 
-        $coeseResource = new CoESEResource();
+        for ($i=0; $i <$this->import_quantity ; $i++) {
 
-        $coeseResource->user_id = auth()->user()->id;
+            $coeseResource = new CoESEResource();
 
-        $coeseResource->category_id = $this->category_type;
+            $coeseResource->user_id = auth()->user()->id;
 
-        $coeseResource->asset_id = $this->university_store_resource_name;
+            $coeseResource->category_id = $this->category_type;
 
-        $coeseResource->resource_name = $this->resource_name;
+            $coeseResource->asset_id = $this->university_store_resource_name;
 
-        $coeseResource->college_name = auth()->user()->college_name;
+            $coeseResource->resource_name = $this->resource_name;
 
-        $coeseResource->save();
+            $coeseResource->college_name = auth()->user()->college_name;
 
-        $this->reset(['category_type', 'resource_name','university_store_resource_name']);
+            $coeseResource->save();
+        }
+
+
+        $this->reset(['category_type', 'resource_name','university_store_resource_name', 'import_quantity']);
 
         session()->flash('addResources', 'A resource is added successfully.');
     }
 
-    public function importCoeseResources()
-    {
+    // public function importCoeseResources()
+    // {
 
-        $this->validate(['coeseResourceImport' => 'required|mimes:xlsx,xls,csv']);
+    //     $this->validate(['coeseResourceImport' => 'required|mimes:xlsx,xls,csv']);
 
-        Excel::import(new CoESEResourceImport, $this->coeseResourceImport);
+    //     Excel::import(new CoESEResourceImport, $this->coeseResourceImport);
 
-        session()->flash('message', 'CoESE resources are imported successfully');
-    }
+    //     session()->flash('message', 'CoESE resources are imported successfully');
+    // }
 }

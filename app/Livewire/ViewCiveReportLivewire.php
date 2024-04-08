@@ -10,6 +10,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Report;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\File;
 
 
 class ViewCiveReportLivewire extends Component
@@ -111,6 +112,15 @@ class ViewCiveReportLivewire extends Component
     public function deleteCiveReport($id)
     {
 
-        $chasReport = Report::findOrFail($id) ? Report::findOrFail($id)->delete() : false;
+        $civeReport = Report::findOrFail($id);
+
+        $civeReportFile = $civeReport->resource_image;
+
+        if (File::exists(public_path('storage/resource_images/'.$civeReportFile))) {
+
+            File::delete(public_path('storage/resource_images/'.$civeReportFile));
+
+            $civeReport->delete();
+        }
     }
 }

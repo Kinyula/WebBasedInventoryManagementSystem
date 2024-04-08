@@ -10,6 +10,7 @@ use BaconQrCode\Writer;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\WithPagination;
 use Livewire\Component;
+use Illuminate\Support\Facades\File;
 
 class ViewChssReportLivewire extends Component
 {
@@ -24,7 +25,10 @@ class ViewChssReportLivewire extends Component
 
     public function render()
     {
-        return view('livewire.view-chss-report-livewire', ['Reports' => ChssReport::search($this->chssReportSearch)->with(['user', 'chssResources', 'category', 'assets'])->paginate(15)]);
+        if (auth()->user()->college_name == 'College of Humanities and Social Science ( CHSS )') {
+            return view('livewire.view-chss-report-livewire', ['Reports' => ChssReport::search($this->chssReportSearch)->with(['user', 'chssResources', 'category', 'assets'])->where('college_name', auth()->user()->college_name)->paginate(15)]);
+        }
+
     }
 
     public function exportCnmsReportPdf()
@@ -114,7 +118,16 @@ class ViewChssReportLivewire extends Component
     public function deleteChssReport($id)
     {
 
-        $chssReport = ChssReport::findOrFail($id) ? ChssReport::findOrFail($id)->delete() : false;
+        $chssReport = ChssReport::findOrFail($id);
+
+        $chasReportFile = $chssReport->resource_image;
+
+        if (File::exists(public_path('storage/resource_images/'.$chasReportFile))) {
+
+            File::delete(public_path('storage/resource_images/'.$chasReportFile));
+
+            $chssReport->delete();
+        }
 
         session()->flash('deleteChssReport', 'Report is deleted successfully!');
     }

@@ -278,6 +278,29 @@
 
                         <li class="dropdown">
                             <a href="javascript:;" class="dropdown-toggle">
+                                <span class="micon bi bi-pencil-square"></span><span class="mtext">Activities</span>
+                            </a>
+
+
+                            <ul class="submenu">
+                                <li><a href="{{ asset('UIMS/college-resource-allocation') }}">
+                                        Resource allocation to college
+                                    </a></li>
+
+                            </ul>
+
+                            <ul class="submenu">
+                                <li><a href="{{ asset('UIMS/view-resource-allocation') }}">
+                                        View allocated resources from university Inventory manager
+                                    </a></li>
+
+                            </ul>
+
+
+                        </li>
+                        
+                        <li class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle">
                                 <span class="micon bi bi-folder"></span><span class="mtext">Reports</span>
                             </a>
 
@@ -316,30 +339,6 @@
 
 
                         </li>
-
-                        <li class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle">
-                                <span class="micon bi bi-pencil-square"></span><span class="mtext">Activities</span>
-                            </a>
-
-
-                            <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/college-resource-allocation') }}">
-                                        Resource allocation to college
-                                    </a></li>
-
-                            </ul>
-
-                            <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/view-resource-allocation') }}">
-                                        View allocated resources from university Inventory manager
-                                    </a></li>
-
-                            </ul>
-
-
-                        </li>
-
 
                     </ul>
                 </div>

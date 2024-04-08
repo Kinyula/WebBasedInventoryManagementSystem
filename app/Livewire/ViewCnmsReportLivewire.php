@@ -8,7 +8,7 @@ use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
 use Barryvdh\DomPDF\Facade\Pdf;
-
+use Illuminate\Support\Facades\File;
 use Livewire\WithPagination;
 use Livewire\Component;
 
@@ -113,7 +113,16 @@ class ViewCnmsReportLivewire extends Component
 
     public function deleteCnmsReport($id) {
 
-        $cnmsReport = CnmsReport::findOrFail($id) ? CnmsReport::findOrFail($id)->delete() : false;
+        $cnmsReport = CnmsReport::findOrFail($id);
+
+        $cnmsReportFile = $cnmsReport->resource_image;
+
+        if (File::exists(public_path('storage/resource_images/'.$cnmsReportFile))) {
+
+            File::delete(public_path('storage/resource_images/'.$cnmsReportFile));
+
+            $cnmsReport->delete();
+        }
 
         session()->flash('deleteCnmsReport', 'Report is deleted successfully!');
     }

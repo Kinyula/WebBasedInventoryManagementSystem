@@ -35,7 +35,7 @@
                 <div class="form-group mb-0">
 
                     <input type="search" class="form-control search-input" placeholder="Search Here..."
-                        wire:model.live = 'ReportSearch' />
+                        wire:model.live = 'reportInformationSearch' />
 
                 </div>
             </form>

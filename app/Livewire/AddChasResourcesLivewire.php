@@ -26,9 +26,9 @@ class AddChasResourcesLivewire extends Component
 
             'category_type' => 'required',
 
-            'resource_name' => 'required|unique:chas_resources,resource_name',
+            'resource_name' => 'required',
 
-            'university_store_resource_name' =>'required|unique:chas_resources,asset_id',
+            'university_store_resource_name' =>'required',
 
             'import_quantity' => 'required'
 
@@ -49,7 +49,7 @@ class AddChasResourcesLivewire extends Component
             $chasResource->college_name = auth()->user()->college_name;
 
             $chasResource->save();
-            
+
         }
 
 

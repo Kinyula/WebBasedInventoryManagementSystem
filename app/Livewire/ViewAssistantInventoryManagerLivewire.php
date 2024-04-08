@@ -5,8 +5,10 @@ namespace App\Livewire;
 use App\Exports\AssistantInventoryManagerExport;
 use Livewire\Component;
 use App\Models\User;
+use Illuminate\Support\Facades\File;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
+
 
 class ViewAssistantInventoryManagerLivewire extends Component
 {
@@ -34,7 +36,16 @@ class ViewAssistantInventoryManagerLivewire extends Component
 
     public function deleteAssistant($id)
     {
-        $delete_assistant = User::where("id", $id)->exists() ? User::findOrFail($id)->delete() : false;
+        $assistant = User::findOrFail($id);
+
+        $assistant_profile = $assistant->profile_image;
+
+        if (File::exists(public_path('storage/profile_images/'.$assistant_profile))) {
+
+            File::delete(public_path('storage/profile_images/'.$assistant_profile));
+
+            $assistant->delete();
+        }
 
         session()->flash('deleteAssistant', 'Assistant is deleted successfully.');
     }

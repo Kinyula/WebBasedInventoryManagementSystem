@@ -16,12 +16,12 @@ class ChasResource extends Model
         return empty($search) ? static::query() : static::query()
 
             ->where("college_name", "ILIKE", "%$search%")
-            ->orWhere("status", "ILIKE", "%$search%")
+            ->orWhere("asset_status", "ILIKE", "%$search%")
             ->orWhere("resource_name", "ILIKE", "%$search%")
             ->orWhere("id", "ILIKE", "%$search%");
     }
 
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);

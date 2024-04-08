@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\File;
 
 class ReportInformationsLivewire extends Component
 {
+    public $reportInformationSearch = '';
+
     public function render()
     {
-        return view('livewire.report-informations-livewire', ['Reports' => SendingReport::with(['user'])->whereNot('college_name', 'Not set')->paginate(15)]);
+        return view('livewire.report-informations-livewire', ['Reports' => SendingReport::search($this->reportInformationSearch)->with(['user'])->whereNot('college_name', 'Not set')->paginate(15)]);
     }
 
     public function download($id)
