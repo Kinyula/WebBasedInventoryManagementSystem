@@ -100,7 +100,7 @@
 
             display: block;
             position: relative;
-            top: 1%;
+            top: 4%;
         }
 
         .resource-name-label {
@@ -130,7 +130,7 @@
             display: block;
 
             position: relative;
-            bottom: 3%;
+            top: 2%;
         }
 
         .header-container {
@@ -191,6 +191,8 @@
 
                 <th class="font-weight-bold">College store resource id</th>
 
+                <th class="font-weight-bold">Asset status</th>
+
                 <th class="font-weight-bold">College name</th>
 
                 <th class="font-weight-bold">Submission time</th>
@@ -214,6 +216,10 @@
                         {{ $report['item']->chasResources->id }}
                     </td>
 
+                    <td style="text-decoration:normal">
+
+                        {{ $report['item']->chasResources->asset_status }}
+                    </td>
 
                     <td>
                         {{ $report['item']->college_name }}
@@ -409,12 +415,18 @@
 
             .more-information {
                 position: relative;
-                top: 13%;
+                top: 22%;
                 text-align: center
             }
         </style>
-
+<br>
+<br>
+<br>
+<br>
+<br>
+{{--
         <h2 class="more-information">More information about the resources</h2>
+        <br> --}}
         <table class="table bg-white">
             <thead class="thead">
                 <tr class="tr">

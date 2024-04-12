@@ -9,7 +9,7 @@ class SendingReport extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'college_name', 'report_file'];
+    protected $fillable = ['user_id', 'college_name', 'report_file','resource_image'];
 
     public static function search($search){
 
@@ -21,7 +21,7 @@ class SendingReport extends Model
         }
 
     }
-    
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');

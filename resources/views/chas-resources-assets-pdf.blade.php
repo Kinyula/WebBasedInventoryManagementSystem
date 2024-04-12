@@ -114,13 +114,13 @@ display: block;
         <tbody>
             @foreach ($Resources as $resource)
                 <tr>
-                    <td>{{ $resource['item']->user->email }}</td>
-                    <td>{{ $resource['item']->resource_name }}</td>
+                    <td>{{ $resource->resource_name }}</td>
+                    {{-- <td>{{ $resource['item']->resource_name }}</td>
                     <td><img src="{{ $resource['qrcode'] }}" alt="QR code"></td>
                     <td>{{ $resource['item']->college_name }}</td>
                     <td>{{ $resource['item']->status }}</td>
                     <td>{{ $resource['item']->asset_status }}</td>
-                    <td>{{ $resource['item']->updated_at->format('d, M Y- h:i:s a') }}</td>
+                    <td>{{ $resource['item']->updated_at->format('d, M Y- h:i:s a') }}</td> --}}
                 </tr>
             @endforeach
         </tbody>

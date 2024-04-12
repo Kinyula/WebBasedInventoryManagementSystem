@@ -2,12 +2,13 @@
 
 namespace App\Livewire;
 
-use App\Imports\AssistantInventoryManagerImport;
+
+use App\Jobs\AssistantImportProcess;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Maatwebsite\Excel\Facades\Excel;
+
 
 class AddAssistantInventoryManagerLivewire extends Component
 {
@@ -67,8 +68,10 @@ class AddAssistantInventoryManagerLivewire extends Component
 
         $this->validate(['assistantInventoryManager' => 'required|mimes:xlsx,xls,csv']);
 
-        Excel::import(new AssistantInventoryManagerImport, $this->assistantInventoryManager);
+        dispatch(new AssistantImportProcess($this->assistantInventoryManager));
 
-        session()->flash('message', 'Assistant Inventory Managers are imported successfully');
+
+
+        session()->flash('message', 'We will notify you shortly...');
     }
 }

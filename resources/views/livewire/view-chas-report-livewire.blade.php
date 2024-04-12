@@ -49,6 +49,8 @@
 
                     <th class="font-weight-bold">College store resource name</th>
 
+                    <th class="font-weight-bold">Asset status</th>
+
                     <th class="font-weight-bold">University store resource id</th>
 
                     <th class="font-weight-bold">College store resource id</th>
@@ -87,6 +89,11 @@
                         <td style="text-decoration:normal">
 
                             {{ $report->chasResources->resource_name }}
+                        </td>
+
+                        <td style="text-decoration:normal">
+
+                            {{ $report->chasResources->asset_status }}
                         </td>
 
                         <td style="text-decoration:normal">

@@ -39,6 +39,7 @@
 
                 </div>
             </form>
+            
         </div>
 
         <table class="data-table table nowrap ">
@@ -47,6 +48,8 @@
                     <th class="table-plus datatable-nosort font-weight-bold">College inventory manager</th>
 
                     <th class="font-weight-bold">College name</th>
+
+                    <th class="font-weight-bold">Resource image</th>
 
                     <th class="font-weight-bold">Download report file</th>
 
@@ -67,6 +70,10 @@
 
                         <td style="text-decoration:normal"><i class="bi bi-pencil p-2"></i>
                             {{ $report->college_name }}
+                        </td>
+
+                        <td style="text-decoration: normal">
+                            <img src="{{asset('storage/report_image_files/'.$report->resource_image)}}" alt="" srcset="">
                         </td>
 
                         <td style="text-decoration:normal">

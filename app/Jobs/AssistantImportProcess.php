@@ -7,7 +7,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\AssistantInventoryManagerImport;
 
 class AssistantImportProcess implements ShouldQueue
 {
@@ -16,9 +17,12 @@ class AssistantImportProcess implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct()
-    {
+    public function __construct(
         
+        public $assistantInventoryManager
+    )
+    {
+
     }
 
     /**
@@ -26,6 +30,6 @@ class AssistantImportProcess implements ShouldQueue
      */
     public function handle(): void
     {
-
+        Excel::import(new AssistantInventoryManagerImport, $this->assistantInventoryManager);
     }
 }

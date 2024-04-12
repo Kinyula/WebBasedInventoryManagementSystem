@@ -8,9 +8,9 @@
 
     <div class="card-box mb-30 p-3">
 
-        @if (session()->has('deleteCnmsReport'))
+        @if (session()->has('deleteReport'))
         <div role="alert" class="alert alert-success alert-dismissible fade show">
-            <strong>{{ session('deleteCnmsReport') }}</strong>
+            <strong>{{ session('deleteReport') }}</strong>
             <button class="btn btn-close"></button>
         </div>
     @endif
@@ -33,6 +33,8 @@
 
                     <th class="font-weight-bold">College name</th>
 
+                    <th class="font-weight-bold">Report image</th>
+
                     <th class="font-weight-bold">Download report file</th>
 
                     <th class="font-weight-bold">Submission time</th>
@@ -52,6 +54,11 @@
 
                         <td style="text-decoration:normal"><i class="bi bi-pencil p-2"></i>
                             {{ $report->college_name }}
+                        </td>
+
+                        <td style="text-decoration: normal">
+
+                            <img src="{{asset('storage/report_image_files/'.$report->resource_image)}}" alt="" srcset="" width="200px;">
                         </td>
 
                         <td style="text-decoration:normal">

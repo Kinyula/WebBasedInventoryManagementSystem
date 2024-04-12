@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\SendingReport;
+use Illuminate\Support\Facades\File;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -59,8 +60,30 @@ class ViewReportsSentLivewire extends Component
 
     public function deleteReportSent($id){
 
-        dd($id);
-        $deleteReportSent = SendingReport::where('id', $id)->exists() ? SendingReport::findOrFail($id)->delete() : false;
+
+        $deleteReportSent = SendingReport::findOrFail($id);
+
+        $resource_image = $deleteReportSent->resource_image;
+
+        $report_file = $deleteReportSent->report_file;
+
+
+        if (File::exists(public_path('storage/report_image_files'.$resource_image))) {
+
+            File::delete(public_path('storage/report_image_files'.$resource_image));
+
+
+        }
+
+        if (File::exists(public_path('storage/report_files'.$resource_image))) {
+
+            File::delete(public_path('storage/report_files'.$resource_image));
+
+        }
+
+        $deleteReportSent->delete();
+
+        session()->flash('deleteReport', 'Report is deleted successfully!');
 
     }
 }

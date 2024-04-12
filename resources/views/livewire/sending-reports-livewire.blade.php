@@ -5,10 +5,9 @@
             <h2 class="h4 pd-20 text-gray-600"><i class="bi bi-plus"></i>
                 Reports are sent here
             </h2>
-
-            @else
+        @else
             <h2 class="h6 pd-20 text-gray-600"><i class="bi bi-plus"></i>
-                Reports sent by the {{auth()->user()->college_name}} to assistant inventory manager.
+                Reports sent by the {{ auth()->user()->college_name }} to assistant inventory manager.
             </h2>
         @endif
 
@@ -28,6 +27,21 @@
 
 
         <form wire:submit.prevent = "sendingReports">
+
+            {{-- Attach a Report image file --}}
+
+            <div class="mt-4">
+                <label for="report_image_file" class='block font-medium text-sm text-gray-700 dark:text-gray-300'>Attach
+                    a
+                    report image file
+                </label>
+                <input type="file" wire:model= "report_image_file"
+                    class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full'>
+                @error('report_image_file')
+                    <strong class= 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>{{ $message }}</strong>
+                @enderror
+            </div>
+
 
             {{-- Attach a Report file --}}
 

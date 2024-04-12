@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Jobs\ExportChasResourcesPdfJob;
 use App\Models\ChasResource;
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
 use BaconQrCode\Renderer\ImageRenderer;
@@ -14,138 +15,62 @@ use Livewire\WithPagination;
 class ViewChasCreatedResourcesLivewire extends Component
 {
 
+
     use WithPagination;
 
     public $chasResourceSearch = '';
 
     public $resourceId = [];
 
-    public $all = false;
-
     protected $paginationTheme = 'tailwind';
 
     public function render()
+
     {
+
         return view('livewire.view-chas-created-resources-livewire', ['Resources' => ChasResource::search($this->chasResourceSearch)->with(['user', 'category'])->paginate(15)]);
     }
 
     public function exportChasResourcesPdf()
     {
+        $chunkSize = 200;
+
         if (empty($this->resourceId)) {
 
-            if (empty($this->chasResourceSearch)) {
 
-                $Resources = [];
+            ChasResource::search($this->chasResourceSearch)->with(['user'])->chunk($chunkSize, function ($data) {
 
-                $data = ChasResource::with(['user'])->get();
+             ExportChasResourcesPdfJob::dispatch($data)->delay(now()->addSeconds(2));
 
-                foreach ($data as $item) {
+        });
 
-                    $QRCode = $this->generateQRCode($item->id);
+        session()->flash('exportResource', 'Resource PDF is ready to be exported...!');
 
-                    $Resources[] = [
-                        'item' => $item,
-                        'qrcode' => $QRCode
-                    ];
-                }
-
-                $pdf = Pdf::loadView("chas-resources-assets-pdf", [
-                    'Resources' => $Resources
-                ]);
-
-
-                $pdfOutput = $pdf->output();
-
-                return response()->stream(
-                    function () use ($pdfOutput) {
-                        echo $pdfOutput;
-                    },
-                    200,
-                    [
-                        'Content-Type' => 'application/pdf',
-                        'Content-Disposition' => 'inline; filename=UDOM-CHAS-assets.pdf'
-                    ]
-                );
-            }
-
-
-            else {
-
-                $Resources = [];
-
-                $data = ChasResource::with(['user'])->where('asset_status', $this->chasResourceSearch)->get();
-
-                foreach ($data as $item) {
-
-                    $QRCode = $this->generateQRCode($item->id);
-
-                    $Resources[] = [
-                        'item' => $item,
-                        'qrcode' => $QRCode
-                    ];
-                }
-
-                $pdf = Pdf::loadView("chas-resources-assets-pdf", [
-                    'Resources' => $Resources
-                ]);
-
-
-                $pdfOutput = $pdf->output();
-
-                return response()->stream(
-                    function () use ($pdfOutput) {
-                        echo $pdfOutput;
-                    },
-                    200,
-                    [
-                        'Content-Type' => 'application/pdf',
-                        'Content-Disposition' => 'inline; filename=UDOM-CHAS-assets.pdf'
-                    ]
-                );
-            }
-        } else {
-
-            $Resources = [];
-
-            $data = ChasResource::with(['user'])->whereIn('id', $this->resourceId)->get();
-
-            foreach ($data as $item) {
-
-                $QRCode = $this->generateQRCode($item->id);
-
-                $Resources[] = [
-                    'item' => $item,
-                    'qrcode' => $QRCode
-                ];
-            }
-
-            $pdf = Pdf::loadView("chas-resources-assets-pdf", [
-                'Resources' => $Resources
-            ]);
-
-
-            $pdfOutput = $pdf->output();
-
-            return response()->stream(
-                function () use ($pdfOutput) {
-                    echo $pdfOutput;
-                },
-                200,
-                [
-                    'Content-Type' => 'application/pdf',
-                    'Content-Disposition' => 'inline; filename=UDOM-CHAS-assets.pdf'
-                ]
-            );
         }
+
+        else {
+
+            ChasResource::search($this->chasResourceSearch)->with(['user'])->whereIn('id', $this->resourceId)->chunk($chunkSize, function ($data) {
+
+            ExportChasResourcesPdfJob::dispatch($data)->delay(now()->addSeconds(2));
+
+        });
+
+        session()->flash('exportResource', 'Selected resource PDF is ready to be exported...!');
+
+        }
+
     }
+
 
     public function printChasQrCodePdf()
     {
 
         if (empty($this->resourceId)) {
+
             $Resources = [];
 
-            $data = ChasResource::with(['user'])->get();
+            $data = ChasResource::search($this->chasResourceSearch)->with(['user'])->get();
 
             foreach ($data as $item) {
 
@@ -209,6 +134,7 @@ class ViewChasCreatedResourcesLivewire extends Component
             );
         }
     }
+
 
     private function generateQRCode($data): string
     {

@@ -8,6 +8,13 @@
 
     <div class="card-box mb-30 p-3">
 
+        @if (session()->has('exportResource'))
+        <div role="alert" class="alert alert-warning alert-dismissible fade show">
+            <strong>{{ session('exportResource') }}</strong>
+            <button class="btn btn-close"></button>
+        </div>
+    @endif
+
         @if (session()->has('deleteResource'))
             <div role="alert" class="alert alert-success alert-dismissible fade show">
                 <strong>{{ session('deleteResource') }}</strong>
@@ -39,10 +46,10 @@
 
         </form>
 
-        <div class="select-all float-end">
+        {{-- <div class="select-all float-end">
             <label for="">Select all</label>
             <input type="checkbox" wire:model = "all" name="" id="all">
-        </div>
+        </div> --}}
 
         <div class="header-search mb-5">
             <form class="d-flex">
@@ -129,7 +136,7 @@
                                     href="#" role="button" data-toggle="dropdown">
                                     <i class="dw dw-more"></i>
                                 </a>
-                                
+
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 
                                     <button type="submit" class="dropdown-item"
