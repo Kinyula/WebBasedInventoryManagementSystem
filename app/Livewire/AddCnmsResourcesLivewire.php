@@ -29,7 +29,7 @@ class AddCnmsResourcesLivewire extends Component
 
             'category_type' => 'required',
 
-            'resource_name' => 'required|unique:cnms_resources,resource_name',
+            'resource_name' => 'required',
 
             'university_store_resource_name' => 'required',
 

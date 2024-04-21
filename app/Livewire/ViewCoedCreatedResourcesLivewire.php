@@ -2,14 +2,11 @@
 
 namespace App\Livewire;
 
+use App\Jobs\ExportCoedQrCodesJob;
+use App\Jobs\ExportCoedResourcesPdfJob;
 use App\Models\CoEDResource;
-use BaconQrCode\Renderer\Image\SvgImageBackEnd;
-use BaconQrCode\Renderer\ImageRenderer;
-use BaconQrCode\Renderer\RendererStyle\RendererStyle;
-use BaconQrCode\Writer;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Support\Facades\Hash;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\File;
 
 use Livewire\Component;
 
@@ -22,64 +19,122 @@ class ViewCoedCreatedResourcesLivewire extends Component
 
     public $coedResourceSearch = '';
 
+    public $pdfFiles = [];
+
+    public $resourceId = [];
+
     public function render()
     {
+
+        $path = public_path('storage/resource_coed_files/');
+
+        $files = File::files($path);
+
+        foreach ($files as $file) {
+
+            $this->pdfFiles[] = $file->getPathname();
+
+        }
+
         return view('livewire.view-coed-created-resources-livewire', ['Resources' => CoEDResource::search($this->coedResourceSearch)->with(['user'])->paginate(15)]);
+    }
+
+    public function deleteFiles($pdf)
+    {
+
+        if (File::exists(storage_path('app/public/resource_coed_files/'.$pdf))) {
+
+            File::delete(storage_path('app/public/resource_coed_files/'.$pdf));
+
+            session()->flash('downloadSuccessMessage', 'The file is downloaded!');
+        }
+
+        else {
+
+            session()->flash('downloadErrorMessage', 'ERROR | 404 File not found please remember to refresh the page to view the remaining files!');
+        }
+
+
+    }
+
+    public function deleteFilesManually($file){
+
+
+
+        if (File::exists(storage_path('app/public/resource_coed_files/'.$file))) {
+
+            File::delete(storage_path('app/public/resource_coed_files/'.$file));
+
+            session()->flash('deleteErrorMessage', 'The file is deleted!');
+        }
+
+        else {
+            session()->flash('deleteErrorMessage', ' ERROR | 404 File not found please remember to refresh the page to view the remaining files!');
+        }
+
     }
 
     public function exportCoedResourcesPdf()
     {
-        $Resources = [];
+        $chunkSize = 200;
 
-        $data = CoEDResource::with(['user'])->get();
+        if (empty($this->resourceId)) {
 
-        foreach ($data as $item) {
+            CoEDResource::search($this->coedResourceSearch)->with(['user'])->chunk($chunkSize, function ($data) {
 
-            $QRCode = $this->generateQRCode('UDOM-' . time() . '-' . 'CoED' . Hash::make($item->id) . '-' . 'assets');
+                ExportCoedResourcesPdfJob::dispatch($data)->delay(now()->addSeconds(2));
+            });
 
-            $Resources[] = [
-                'item' => $item,
-                'qrcode' => $QRCode
-            ];
+            session()->flash('exportResource', 'Resource PDF is ready to be exported...!');
+
         }
 
-        $pdf = Pdf::loadView("cobe-resources-assets-pdf", [
-            'Resources' => $Resources
-        ]);
+
+        else {
+
+            CoEDResource::search($this->coedResourceSearch)->with(['user'])->whereIn('id', $this->resourceId)->chunk($chunkSize, function ($data) {
+
+                ExportCoedResourcesPdfJob::dispatch($data)->delay(now()->addSeconds(2));
+            });
 
 
-        $pdfOutput = $pdf->output();
+            session()->flash('exportResource', 'Selected resource PDF is ready to be exported...!');
 
-        return response()->stream(
-            function () use ($pdfOutput) {
-                echo $pdfOutput;
-            },
-            200,
-            [
-                'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename=UDOM-CoED-assets.pdf'
-            ]
-        );
+        }
     }
 
-    private function generateQRCode($data): string
+    public function printCoedQrCodePdf()
     {
-        $renderer = new ImageRenderer(
-            new RendererStyle(100),
-            new SvgImageBackEnd()
-        );
+        $chunkSize = 200;
 
-        $writer = new Writer($renderer);
+        if (empty($this->resourceId)) {
 
-        return 'data:image/svg+xml;base64,' . base64_encode($writer->writeString($data));
+            CoEDResource::search($this->coedResourceSearch)->with(['user'])->chunk($chunkSize, function ($data) {
+
+                ExportCoedQrCodesJob::dispatch($data)->delay(now()->addSeconds(2));
+            });
+
+            session()->flash('exportResource', 'Resource QR Codes are ready to be exported...!');
+
+        }
+
+        else {
+
+            CoEDResource::search($this->coedResourceSearch)->with(['user'])->whereIn('id', $this->resourceId)->chunk($chunkSize, function ($data) {
+
+                ExportCoedQrCodesJob::dispatch($data)->delay(now()->addSeconds(2));
+            });
+
+            session()->flash('exportResource', 'Selected resource QR Codes are ready to be exported...!');
+
+        }
     }
 
-    public function deleteCoedCreatedResource($id) {
+    public function deleteCoedCreatedResource($id)
+    {
 
         $coedResource = CoEDResource::findOrFail($id) ? CoEDResource::findOrFail($id)->delete() : false;
 
         session()->flash('deleteResource', 'Resource is deleted successfully!');
-        
     }
 }
-

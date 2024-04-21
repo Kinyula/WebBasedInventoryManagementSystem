@@ -9,7 +9,7 @@
                 <button class="btn btn-close" data-bs-dismiss="alert"></button>
             </div>
         @endif
-
+{{-- 
         <form wire:submit.prevent = "importChasResources">
 
             <div class="form-group display:block">
@@ -27,7 +27,7 @@
                 Import resources csv file
             </button>
 
-        </form>
+        </form> --}}
 
         <form wire:submit.prevent = "addChasResources">
             <div class="mt-3">

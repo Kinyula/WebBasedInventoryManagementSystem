@@ -11,7 +11,7 @@
         <h2 class="h4 pd-20 text-gray-600"><i class="bi bi-plus"></i> Add {{ auth()->user()->college_name }} resources
         </h2>
 
-        <form wire:submit.prevent = "importCiveResources">
+        {{-- <form wire:submit.prevent = "importCiveResources">
 
             <div class="form-group display:block">
                 <label for="">Upload the csv, xlsx, xls file</label>
@@ -28,7 +28,7 @@
                 Import resources file
             </button>
 
-        </form>
+        </form> --}}
 
         <form wire:submit.prevent = "addCiveResources">
             <div class="mt-3">
@@ -74,22 +74,17 @@
                 @enderror
             </div>
 
+
             <div class="mt-3">
-                <label for="college_name" class='block font-medium text-sm text-gray-700 dark:text-gray-300'>College
-                    name</label>
-                <select type="select" wire:model= "college_name"
-                    class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full'>
-                    <option value="">-- Select college --</option>
-
-                    <option value="College of Informatics and Virtual Education ( CIVE )">College of Informatics and
-                        Virtual Education ( CIVE )</option>
-
-                </select>
-
-                @error('college_name')
+                <label for="import_quantity" class='block font-medium text-sm text-gray-700 dark:text-gray-300'>Select
+                    quantity to import</label>
+                <input type="number" wire:model = "import_quantity">
+                <br>
+                @error('import_quantity')
                     <strong class= 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>{{ $message }}</strong>
                 @enderror
             </div>
+
             <div>
                 <br>
                 <button type="submit"

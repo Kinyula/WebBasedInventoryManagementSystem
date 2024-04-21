@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Jobs\ExportChasQrCodesJob;
 use App\Jobs\ExportChasResourcesPdfJob;
 use App\Models\ChasResource;
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
@@ -11,6 +12,7 @@ use BaconQrCode\Writer;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\File;
 
 class ViewChasCreatedResourcesLivewire extends Component
 {
@@ -24,11 +26,59 @@ class ViewChasCreatedResourcesLivewire extends Component
 
     protected $paginationTheme = 'tailwind';
 
+    protected $listeners = ['export' => '$refresh', 'saved' => '$refresh'];
+
+    public $pdfFiles = [];
+
+
+
     public function render()
 
     {
 
+        $path = public_path('storage/resource_files/');
+
+        $files = File::files($path);
+
+        foreach ($files as $file) {
+            $this->pdfFiles[] = $file->getPathname();
+        }
+
         return view('livewire.view-chas-created-resources-livewire', ['Resources' => ChasResource::search($this->chasResourceSearch)->with(['user', 'category'])->paginate(15)]);
+    }
+
+    public function deleteFiles($pdf)
+    {
+
+
+        if (File::exists(storage_path('app/public/resource_files/'.$pdf))) {
+
+            File::delete(storage_path('app/public/resource_files/'.$pdf));
+
+            session()->flash('downloadSuccessMessage', 'The file is downloaded!');
+        }
+
+        else {
+
+            session()->flash('downloadErrorMessage', 'ERROR 404 File not found please remember to refresh the page to view the remaining files!');
+        }
+
+
+    }
+
+    public function deleteFilesManually($file){
+
+        if (File::exists(storage_path('app/public/resource_files/'.$file))) {
+
+            File::delete(storage_path('app/public/resource_files/'.$file));
+
+            session()->flash('deleteErrorMessage', 'The file is deleted!');
+        }
+
+        else {
+            session()->flash('deleteErrorMessage', ' ERROR 404 File not found please remember to refresh the page to view the remaining files!');
+        }
+
     }
 
     public function exportChasResourcesPdf()
@@ -37,116 +87,60 @@ class ViewChasCreatedResourcesLivewire extends Component
 
         if (empty($this->resourceId)) {
 
-
             ChasResource::search($this->chasResourceSearch)->with(['user'])->chunk($chunkSize, function ($data) {
 
-             ExportChasResourcesPdfJob::dispatch($data)->delay(now()->addSeconds(2));
+                ExportChasResourcesPdfJob::dispatch($data)->delay(now()->addSeconds(2));
+            });
 
-        });
-
-        session()->flash('exportResource', 'Resource PDF is ready to be exported...!');
+            session()->flash('exportResource', 'Resource PDF is ready to be exported...!');
 
         }
+
 
         else {
 
-            ChasResource::search($this->chasResourceSearch)->with(['user'])->whereIn('id', $this->resourceId)->chunk($chunkSize, function ($data) {
+            ChasResource::search($this->chasResourceSearch)->with(['user'])->whereIn('id', $this->resourceId)->chunk($chunkSize, function ($data, $dataID) {
 
-            ExportChasResourcesPdfJob::dispatch($data)->delay(now()->addSeconds(2));
+                ExportChasResourcesPdfJob::dispatch($data)->delay(now()->addSeconds(2));
+                
+            });
 
-        });
-
-        session()->flash('exportResource', 'Selected resource PDF is ready to be exported...!');
+            session()->flash('exportResource', 'Selected resource PDF is ready to be exported...!');
 
         }
-
     }
 
 
     public function printChasQrCodePdf()
     {
+        $chunkSize = 200;
 
         if (empty($this->resourceId)) {
 
-            $Resources = [];
+            ChasResource::search($this->chasResourceSearch)->with(['user'])->chunk($chunkSize, function ($data) {
 
-            $data = ChasResource::search($this->chasResourceSearch)->with(['user'])->get();
+                ExportChasQrCodesJob::dispatch($data)->delay(now()->addSeconds(2));
+            });
 
-            foreach ($data as $item) {
+            session()->flash('exportResource', 'Resource QR Codes are ready to be exported...!');
 
-                $QRCode = $this->generateQRCode($item->id);
-
-                $Resources[] = [
-                    'item' => $item,
-                    'qrcode' => $QRCode
-                ];
-            }
-
-            $pdf = Pdf::loadView("chas-resources-qrcodes-assets-pdf", [
-                'Resources' => $Resources
-            ]);
+        }
 
 
-            $pdfOutput = $pdf->output();
+        else {
 
-            return response()->stream(
-                function () use ($pdfOutput) {
-                    echo $pdfOutput;
-                },
-                200,
-                [
-                    'Content-Type' => 'application/pdf',
-                    'Content-Disposition' => 'inline; filename=UDOM-CHAS-assets.pdf'
-                ]
-            );
-        } else {
+            ChasResource::search($this->chasResourceSearch)->with(['user'])->whereIn('id', $this->resourceId)->chunk($chunkSize, function ($data, $dataID) {
 
-            $Resources = [];
+                ExportChasQrCodesJob::dispatch($data,$dataID)->delay(now()->addSeconds(2));
+            });
 
-            $data = ChasResource::with(['user'])->whereIn('id', $this->resourceId)->get();
+            session()->flash('exportResource', 'Selected resource QR Codes are ready to be exported...!');
 
-            foreach ($data as $item) {
-
-                $QRCode = $this->generateQRCode($item->id);
-
-                $Resources[] = [
-                    'item' => $item,
-                    'qrcode' => $QRCode
-                ];
-            }
-
-            $pdf = Pdf::loadView("chas-resources-qrcodes-assets-pdf", [
-                'Resources' => $Resources
-            ]);
-
-
-            $pdfOutput = $pdf->output();
-
-            return response()->stream(
-                function () use ($pdfOutput) {
-                    echo $pdfOutput;
-                },
-                200,
-                [
-                    'Content-Type' => 'application/pdf',
-                    'Content-Disposition' => 'inline; filename=UDOM-CHAS-assets.pdf'
-                ]
-            );
         }
     }
 
 
-    private function generateQRCode($data): string
-    {
-        $renderer = new ImageRenderer(
-            new RendererStyle(100),
-            new SvgImageBackEnd()
-        );
 
-        $writer = new Writer($renderer);
-
-        return 'data:image/svg+xml;base64,' . base64_encode($writer->writeString($data));
-    }
 
     public function deleteChasCreatedResources($id)
     {
@@ -155,4 +149,11 @@ class ViewChasCreatedResourcesLivewire extends Component
 
         session()->flash('deleteResource', 'Resource is deleted successfully!');
     }
+
+
+
+    // public function a(){
+    //     dd('here');
+    // }
+
 }

@@ -25,7 +25,7 @@ class AddCoEDResourcesLivewire extends Component
 
             'category_type' => 'required',
 
-            'resource_name' => 'required|unique:co_e_d_resources,resource_name',
+            'resource_name' => 'required',
 
             'university_store_resource_name' => 'required',
 
@@ -34,7 +34,7 @@ class AddCoEDResourcesLivewire extends Component
         ]);
 
         for ($i=0; $i <$this->import_quantity ; $i++) {
-            
+
             $coedResource = new CoEDResource();
 
             $coedResource->user_id = auth()->user()->id;

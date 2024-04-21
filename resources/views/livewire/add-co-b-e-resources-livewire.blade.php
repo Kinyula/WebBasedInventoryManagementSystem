@@ -11,7 +11,7 @@
         <h2 class="h4 pd-20 text-gray-600"><i class="bi bi-plus"></i> Add {{ auth()->user()->college_name }} resources
         </h2>
 
-        <form wire:submit.prevent = "importCobeResources">
+        {{-- <form wire:submit.prevent = "importCobeResources">
 
             <div class="form-group display:block">
                 <label for="">Upload the csv, xlsx, xls file</label>
@@ -28,7 +28,7 @@
                 Import resources file
             </button>
 
-        </form>
+        </form> --}}
 
         <form wire:submit.prevent = "addCobeResources">
             <div class="mt-3">

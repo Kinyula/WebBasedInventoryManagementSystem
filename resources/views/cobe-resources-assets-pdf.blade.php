@@ -72,18 +72,20 @@
                 <th>QR Code</th>
                 <th>College name</th>
                 <th>Allocation status</th>
+                <th>Asset status</th>
                 <th>Allocation time</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($Resources as $resource)
                 <tr>
-                    <td>{{ $resource['item']->user->email }}</td>
-                    <td>{{ $resource['item']->resource_name }}</td>
-                    <td><img src="{{ $resource['qrcode'] }}" alt="QR code"></td>
-                    <td>{{ $resource['item']->college_name }}</td>
-                    <td>{{ $resource['item']->status }}</td>
-                    <td>{{ $resource['item']->updated_at->format('d, M Y- h:i:s a') }}</td>
+                    <td>{{ $resource['resource']->user->email }}</td>
+                    <td>{{ $resource['resource']->resource_name }}</td>
+                    <td><img src="{{$resource['qrcode']}}" alt="QR code"></td>
+                    <td>{{ $resource['resource']->college_name }}</td>
+                    <td>{{ $resource['resource']->status }}</td>
+                    <td>{{ $resource['resource']->asset_status }}</td>
+                    <td>{{ $resource['resource']->updated_at->format('d, M Y- h:i:s a') }}</td>
                 </tr>
             @endforeach
         </tbody>

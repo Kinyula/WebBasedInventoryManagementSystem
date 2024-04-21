@@ -11,7 +11,8 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class AddCiveResourcesLivewire extends Component
 {
-    public $category_type, $resource_name, $college_name,$university_store_resource_name, $civeResourceImport, $civeResource;
+    public $category_type, $resource_name, $college_name,
+    $university_store_resource_name, $civeResourceImport, $civeResource, $import_quantity;
 
     public function render()
     {
@@ -25,31 +26,36 @@ class AddCiveResourcesLivewire extends Component
 
             'category_type' => 'required',
 
-            'resource_name' => 'required|unique:cive_resources,resource_name',
+            'resource_name' => 'required',
 
             'college_name' => 'required',
 
             'university_store_resource_name' => 'required',
         ]);
 
-        $civeResource = new CiveResource();
+        for ($i=0; $i <$this->import_quantity ; $i++) {
 
-        $civeResource->user_id = auth()->user()->id;
+            $civeResource = new CiveResource();
 
-        $civeResource->category_id = $this->category_type;
+            $civeResource->user_id = auth()->user()->id;
 
-        $civeResource->asset_id = $this->university_store_resource_name;
+            $civeResource->category_id = $this->category_type;
 
-        $civeResource->resource_name = $this->resource_name;
+            $civeResource->asset_id = $this->university_store_resource_name;
+
+            $civeResource->resource_name = $this->resource_name;
 
 
-        $civeResource->college_name = $this->college_name;
+            $civeResource->college_name = auth()->user()->college_name;
 
-        $civeResource->save();
+            $civeResource->save();
+
+        }
+
 
         $this->reset(['category_type', 'resource_name', 'college_name', 'university_store_resource_name']);
 
-        session()->flash('addResources', 'A resource is added successfully.');
+        session()->flash('addResources', 'Resources added successfully.');
     }
 
     public function importCiveResources()

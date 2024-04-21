@@ -14,44 +14,42 @@ use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
 use Barryvdh\DomPDF\Facade\Pdf;
 
-class ExportChasResourcesPdfJob implements ShouldQueue
+class ExportCoedQrCodesJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    /**
-     * Create a new job instance.
-     */
+    private function generateQRCode($data): string
+    {
+        $renderer = new ImageRenderer(
+            new RendererStyle(100),
+            new SvgImageBackEnd()
+        );
+
+        $writer = new Writer($renderer);
+
+        return 'data:image/svg+xml;base64,' . base64_encode($writer->writeString($data));
+    }
 
 
     public function __construct(
 
-        public $resources,
-
-    ) {
-
-
+        public $resources
+    )
+    {
+        //
     }
 
-     private function generateQRCode($data): string
-     {
-         $renderer = new ImageRenderer(
-             new RendererStyle(100),
-             new SvgImageBackEnd()
-         );
-
-         $writer = new Writer($renderer);
-
-         return 'data:image/svg+xml;base64,' . base64_encode($writer->writeString($data));
-     }
-
-
-    public function handle()
+    /**
+     * Execute the job.
+     */
+    public function handle(): void
     {
         $resources = [];
 
         foreach ($this->resources as $resource) {
 
            $qrCode =  $this->generateQRCode($resource->id);
+
            $resources[] = [
                 'qrcode' => $qrCode,
                 'resource' => $resource,
@@ -59,14 +57,12 @@ class ExportChasResourcesPdfJob implements ShouldQueue
 
          }
 
-        $fileName = uniqid('UDOM-CHAS-RESOURCES-' . time(), true) . '.pdf';
+        $fileName = uniqid('UDOM-COED-QR-CODES-' . time(), true) . '.pdf';
 
-        $path = public_path('storage/resource_files/' . $fileName);
+        $path = public_path('storage/resource_coed_files/' . $fileName);
 
-        $pdf = Pdf::loadView('chas-resources-assets-pdf', ['Resources' =>  $resources]);
+        $pdf = Pdf::loadView('coed-resources-qrcodes-assets-pdf', ['Resources' =>  $resources]);
 
         $pdf->save($path);
-
-
     }
 }

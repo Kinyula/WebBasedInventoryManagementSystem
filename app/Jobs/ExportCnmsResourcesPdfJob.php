@@ -8,28 +8,26 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
+
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
 use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
 use Barryvdh\DomPDF\Facade\Pdf;
 
-class ExportChasResourcesPdfJob implements ShouldQueue
+class ExportCnmsResourcesPdfJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
      * Create a new job instance.
      */
-
-
     public function __construct(
 
         public $resources,
-
-    ) {
-
-
+    )
+    {
+        //
     }
 
      private function generateQRCode($data): string
@@ -44,29 +42,31 @@ class ExportChasResourcesPdfJob implements ShouldQueue
          return 'data:image/svg+xml;base64,' . base64_encode($writer->writeString($data));
      }
 
-
-    public function handle()
+     
+    public function handle(): void
     {
+
         $resources = [];
+
 
         foreach ($this->resources as $resource) {
 
-           $qrCode =  $this->generateQRCode($resource->id);
-           $resources[] = [
-                'qrcode' => $qrCode,
-                'resource' => $resource,
-           ];
+            $qrcode = $this->generateQRCode($resource->id);
 
-         }
+            $resources[] = [
+                'qrcode' => $qrcode,
+                'resource' => $resource
+            ];
 
-        $fileName = uniqid('UDOM-CHAS-RESOURCES-' . time(), true) . '.pdf';
+        }
 
-        $path = public_path('storage/resource_files/' . $fileName);
+            $fileName = uniqid('UDOM-CNMS-RESOURCES-'.time(), true).'.pdf';
 
-        $pdf = Pdf::loadView('chas-resources-assets-pdf', ['Resources' =>  $resources]);
+            $path = public_path('storage/resource_cnms_files/'.$fileName);
 
-        $pdf->save($path);
+            $pdf = Pdf::loadView('cnms-resources-assets-pdf', ['Resources' => $resources]);
 
+            $pdf->save($path);
 
     }
 }

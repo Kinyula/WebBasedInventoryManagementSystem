@@ -8,29 +8,31 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
+
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
 use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
 use Barryvdh\DomPDF\Facade\Pdf;
 
-class ExportChasResourcesPdfJob implements ShouldQueue
+class ExportChssResourcesPdfJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
      * Create a new job instance.
      */
-
-
     public function __construct(
 
-        public $resources,
-
-    ) {
-
-
+        public $resources
+    )
+    {
+        //
     }
+
+    /**
+     * Execute the job.
+     */
 
      private function generateQRCode($data): string
      {
@@ -43,9 +45,7 @@ class ExportChasResourcesPdfJob implements ShouldQueue
 
          return 'data:image/svg+xml;base64,' . base64_encode($writer->writeString($data));
      }
-
-
-    public function handle()
+    public function handle(): void
     {
         $resources = [];
 
@@ -59,14 +59,12 @@ class ExportChasResourcesPdfJob implements ShouldQueue
 
          }
 
-        $fileName = uniqid('UDOM-CHAS-RESOURCES-' . time(), true) . '.pdf';
+        $fileName = uniqid('UDOM-CHSS-RESOURCES-' . time(), true) . '.pdf';
 
-        $path = public_path('storage/resource_files/' . $fileName);
+        $path = public_path('storage/resource_chss_files/' . $fileName);
 
-        $pdf = Pdf::loadView('chas-resources-assets-pdf', ['Resources' =>  $resources]);
+        $pdf = Pdf::loadView('chss-resources-assets-pdf', ['Resources' =>  $resources]);
 
         $pdf->save($path);
-
-
     }
 }

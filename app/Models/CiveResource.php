@@ -16,6 +16,7 @@ class CiveResource extends Model
 
             ->where("college_name", "ILIKE", "%$search%")
             ->orWhere("status", "ILIKE", "%$search%")
+            ->orWhere("asset_status", "ILIKE", "%$search%")
             ->orWhere("resource_name", "ILIKE", "%$search%")
             ->orWhere("id", "ILIKE", "%$search%");
     }

@@ -2,15 +2,15 @@
 
 namespace App\Livewire;
 
-
+use App\Jobs\ExportCobeQrCodesJob;
+use App\Jobs\ExportCobeResourcesPdfJob;
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
 use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Support\Facades\Hash;
 use App\Models\CoBEResource;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\File;
 use Livewire\Component;
 
 class ViewCobeCreatedResourcesLivewire extends Component
@@ -21,44 +21,111 @@ class ViewCobeCreatedResourcesLivewire extends Component
 
     public $cobeResourceSearch = '';
 
+    public $resourceId = [];
+
+    public $pdfFiles = [];
+
     public function render()
     {
+
+        $path = public_path('storage/resource_cobe_files/');
+
+        $files = File::files($path);
+
+        foreach ($files as $file) {
+            $this->pdfFiles[] = $file->getPathname();
+        }
+
         return view('livewire.view-cobe-created-resources-livewire', ['Resources' => CoBEResource::search($this->cobeResourceSearch)->with(['user'])->paginate(15)]);
     }
 
-    public function exportCobeResourcesPdf()
+
+    public function deleteFiles($pdf)
     {
-        $Resources = [];
 
-        $data = CoBEResource::with(['user'])->get();
 
-        foreach ($data as $item) {
+        if (File::exists(storage_path('app/public/resource_cobe_files/'.$pdf))) {
 
-            $QRCode = $this->generateQRCode('UDOM-' . time() . '-' . 'CoBE' . Hash::make($item->id) . '-' . 'assets');
+            File::delete(storage_path('app/public/resource_cobe_files/'.$pdf));
 
-            $Resources[] = [
-                'item' => $item,
-                'qrcode' => $QRCode
-            ];
+            session()->flash('downloadSuccessMessage', 'The file is downloaded!');
         }
 
-        $pdf = Pdf::loadView("cobe-resources-assets-pdf", [
-            'Resources' => $Resources
-        ]);
+        else {
+
+            session()->flash('downloadErrorMessage', 'ERROR 404 | File not found please remember to refresh the page to view the remaining files!');
+        }
 
 
-        $pdfOutput = $pdf->output();
+    }
 
-        return response()->stream(
-            function () use ($pdfOutput) {
-                echo $pdfOutput;
-            },
-            200,
-            [
-                'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename=UDOM-CoBE-assets.pdf'
-            ]
-        );
+    public function deleteFilesManually($file){
+
+        if (File::exists(storage_path('app/public/resource_cobe_files/'.$file))) {
+
+            File::delete(storage_path('app/public/resource_cobe_files/'.$file));
+
+            session()->flash('deleteErrorMessage', 'The file is deleted!');
+        }
+
+        else {
+            session()->flash('deleteErrorMessage', ' ERROR 404 | File not found please remember to refresh the page to view the remaining files!');
+        }
+
+    }
+    public function exportCobeResourcesPdf()
+    {
+        $chunkSize = 200;
+
+        if (empty($this->resourceId)) {
+
+            CoBEResource::search($this->cobeResourceSearch)->with(['user'])->chunk($chunkSize, function ($data) {
+
+                ExportCobeResourcesPdfJob::dispatch($data)->delay(now()->addSeconds(2));
+            });
+
+            session()->flash('exportResource', 'Resource PDF is ready to be exported...!');
+
+        }
+
+
+        else {
+
+            CoBEResource::search($this->cobeResourceSearch)->with(['user'])->whereIn('id', $this->resourceId)->chunk($chunkSize, function ($data) {
+
+                ExportCobeResourcesPdfJob::dispatch($data)->delay(now()->addSeconds(2));
+            });
+
+            session()->flash('exportResource', 'Selected resource PDF is ready to be exported...!');
+
+        }
+    }
+
+    public function printCobeQrCodePdf()
+    {
+        $chunkSize = 200;
+
+        if (empty($this->resourceId)) {
+
+            CoBEResource::search($this->cobeResourceSearch)->with(['user'])->chunk($chunkSize, function ($data) {
+
+                ExportCobeQrCodesJob::dispatch($data)->delay(now()->addSeconds(2));
+            });
+
+            session()->flash('exportResource', 'Resource QR Codes are ready to be exported...!');
+
+        }
+
+        else {
+
+            CoBEResource::search($this->cobeResourceSearch)->with(['user'])->whereIn('id', $this->resourceId)->chunk($chunkSize, function ($data) {
+
+                ExportCobeQrCodesJob::dispatch($data)->delay(now()->addSeconds(2));
+            });
+
+            session()->flash('exportResource', 'Selected resource QR Codes are ready to be exported...!');
+
+        }
     }
 
     private function generateQRCode($data): string
@@ -78,6 +145,6 @@ class ViewCobeCreatedResourcesLivewire extends Component
         $cobeResource = CoBEResource::findOrFail($id) ? CoBEResource::findOrFail($id)->delete() : false;
 
         session()->flash('deleteResource', 'Resource is deleted successfully!');
-        
+
     }
 }
