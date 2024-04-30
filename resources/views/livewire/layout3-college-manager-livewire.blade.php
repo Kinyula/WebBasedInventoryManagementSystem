@@ -19,7 +19,10 @@
         <!-- Google Font -->
 
         <link rel="stylesheet" href="{{ asset('fontAwesome/css/all.css') }}">
+
         <!-- CSS -->
+        <link rel="stylesheet" href="{{ asset('css/chosen.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/core.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/icon-font.min.css') }}" />
         <link rel="stylesheet" type="text/css"
@@ -27,6 +30,12 @@
         <link rel="stylesheet" type="text/css"
             href="{{ asset('src/plugins/datatables/css/responsive.bootstrap4.min.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/style.css') }}" />
+
+        {{-- javascripts --}}
+        <script src="{{ asset('javascript/chosen.jquery.min.js') }}"></script>
+        <script src="{{ asset('javascript/jquery.min.js') }}"></script>
+        <script src="{{ asset('javascript/jquery-ui.min.js') }}"></script>
+
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-GBZ3SGGX85"></script>
@@ -929,7 +938,8 @@
         <script src="{{ asset('src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
         <script src="{{ asset('src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
         <script src="{{ asset('vendors/scripts/dashboard.js') }}"></script>
-        <script src="{{asset('javascript/select-records.js')}}"></script>
+
+        <script src="{{ asset('javascript/select-records.js') }}"></script>
 
 
         <!-- Google Tag Manager (noscript) -->

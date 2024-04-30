@@ -22,6 +22,8 @@
             <link rel="stylesheet" href="{{ asset('fontAwesome/css/all.css') }}">
 
         <!-- CSS -->
+        <link rel="stylesheet" href="{{ asset('css/chosen.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/core.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/icon-font.min.css') }}" />
         <link rel="stylesheet" type="text/css"
@@ -319,7 +321,7 @@
 
                             </ul>
                         </li>
-                        
+
                         <li class="dropdown">
                             <a href="javascript:;" class="dropdown-toggle">
                                 <span class="micon bi bi-people"></span><span class="mtext">Assistants</span>
@@ -389,6 +391,9 @@
         <script src="{{ asset('src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
         <script src="{{ asset('src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
         <script src="{{ asset('vendors/scripts/dashboard.js') }}"></script>
+        <script src="{{ asset('javascript/chosen.jquery.min.js') }}"></script>
+        <script src="{{ asset('javascript/jquery.min.js') }}"></script>
+        <script src="{{ asset('javascript/jquery-ui.min.js') }}"></script>
         <!-- Google Tag Manager (noscript) -->
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS" height="0" width="0"
                 style="display: none; visibility: hidden"></iframe></noscript>

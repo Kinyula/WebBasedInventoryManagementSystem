@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ChssResource extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'category_id', 'asset_id', 'resource_name', 'status', 'college_name','asset_status'];
+    protected $fillable = ['user_id', 'category_id', 'asset_id', 'resource_name', 'status', 'college_name', 'asset_status'];
 
     public static function search($search)
     {
@@ -22,6 +22,13 @@ class ChssResource extends Model
             ->orWhere("id", "ILIKE", "%$search%");
     }
 
+    public static function searchResource($search)
+    {
+        return empty($search) ? static::query() : static::query()
+            ->where("resource_name", "ILIKE", "%$search%")
+            ->orWhere("id", "ILIKE", "%$search%");
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -29,6 +36,6 @@ class ChssResource extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class,'category_id', 'id');
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 }
