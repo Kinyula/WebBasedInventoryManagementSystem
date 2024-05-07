@@ -22,15 +22,15 @@ class AddCiveResourcesLivewire extends Component
     public function addCiveResources()
     {
 
+
         $this->validate([
 
             'category_type' => 'required',
 
             'resource_name' => 'required',
 
-            'college_name' => 'required',
-
             'university_store_resource_name' => 'required',
+            'import_quantity' => 'required'
         ]);
 
         for ($i=0; $i <$this->import_quantity ; $i++) {

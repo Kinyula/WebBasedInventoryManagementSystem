@@ -14,9 +14,17 @@ class CoedReportLivewire extends Component
 
     public $resource_name, $resource_image, $description;
 
+    public $search = '';
+
     public function render()
     {
-        return view('livewire.coed-report-livewire', ['coedResources' => CoEDResource::with(['category', 'user'])->get()]);
+        if ($this->search) {
+            return view('livewire.coed-report-livewire', ['coedResources' => []]);
+        } else {
+            return view('livewire.coed-report-livewire', ['coedResources' => CoEDResource::searchResource($this->search)->with(['category', 'user'])->get()]);
+        }
+
+
     }
 
 

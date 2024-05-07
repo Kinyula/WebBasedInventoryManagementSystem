@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ChasReport extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id','chas_resource_id','description','resource_image','college_name'];
+    protected $fillable = ['user_id','chas_resource_id','description','college_name'];
 
     public static function search($search)
     {

@@ -90,9 +90,10 @@ class ViewChasCreatedResourcesLivewire extends Component
             ChasResource::search($this->chasResourceSearch)->with(['user'])->chunk($chunkSize, function ($data) {
 
                 ExportChasResourcesPdfJob::dispatch($data)->delay(now()->addSeconds(2));
+                
             });
 
-            session()->flash('exportResource', 'Resource PDF is ready to be exported...!');
+            session()->flash('exportResource', 'Resource PDF is ready to be exported make sure you refresh the page after this action please...');
 
         }
 
@@ -102,10 +103,10 @@ class ViewChasCreatedResourcesLivewire extends Component
             ChasResource::search($this->chasResourceSearch)->with(['user'])->whereIn('id', $this->resourceId)->chunk($chunkSize, function ($data, $dataID) {
 
                 ExportChasResourcesPdfJob::dispatch($data)->delay(now()->addSeconds(2));
-                
+
             });
 
-            session()->flash('exportResource', 'Selected resource PDF is ready to be exported...!');
+            session()->flash('exportResource', 'Selected resource PDF is ready to be exported make sure you refresh the page after this action please...');
 
         }
     }
@@ -122,19 +123,19 @@ class ViewChasCreatedResourcesLivewire extends Component
                 ExportChasQrCodesJob::dispatch($data)->delay(now()->addSeconds(2));
             });
 
-            session()->flash('exportResource', 'Resource QR Codes are ready to be exported...!');
+            session()->flash('exportResource', 'Resource QR Codes are ready to be exported make sure you refresh the page after this action please...');
 
         }
 
 
         else {
 
-            ChasResource::search($this->chasResourceSearch)->with(['user'])->whereIn('id', $this->resourceId)->chunk($chunkSize, function ($data, $dataID) {
+            ChasResource::search($this->chasResourceSearch)->with(['user'])->whereIn('id', $this->resourceId)->chunk($chunkSize, function ($data) {
 
-                ExportChasQrCodesJob::dispatch($data,$dataID)->delay(now()->addSeconds(2));
+                ExportChasQrCodesJob::dispatch($data)->delay(now()->addSeconds(2));
             });
 
-            session()->flash('exportResource', 'Selected resource QR Codes are ready to be exported...!');
+            session()->flash('exportResource', 'Selected resource QR Codes are ready to be exported make sure you refresh the page after this action please...');
 
         }
     }

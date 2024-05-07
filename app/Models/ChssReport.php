@@ -9,7 +9,7 @@ class ChssReport extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id','chss_resource_id','description','resource_image','college_name'];
+    protected $fillable = ['user_id','chss_resource_id','description','college_name'];
 
     public static function search($search)
     {
@@ -19,6 +19,7 @@ class ChssReport extends Model
             ->orWhere("college_name", "ILIKE", "%$search%")
             ->orWhere("id", "ILIKE", "%$search%");
     }
+
 
     public function user()
     {

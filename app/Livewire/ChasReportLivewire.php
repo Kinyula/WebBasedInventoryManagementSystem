@@ -14,7 +14,7 @@ class ChasReportLivewire extends Component
 
     public $chasReportSearch = '';
 
-    public $resource_name, $resource_image, $description;
+    public $resource_name, $description;
 
     public $search = '';
 
@@ -44,9 +44,6 @@ class ChasReportLivewire extends Component
 
             'resource_name' => 'required',
 
-            'resource_image' => 'required',
-
-
         ]);
 
         $chasReport = new ChasReport();
@@ -57,17 +54,17 @@ class ChasReportLivewire extends Component
 
         $chasReport->description = $this->description;
 
-        if (!is_null($this->resource_image)) {
-            $resource_image = $this->resource_image->store('public/resource_images');
+        // if (!is_null($this->resource_image)) {
+        //     $resource_image = $this->resource_image->store('public/resource_images');
 
-            $resource_image = explode('/', $resource_image);
-            $resource_image = $resource_image[2];
+        //     $resource_image = explode('/', $resource_image);
+        //     $resource_image = $resource_image[2];
 
 
-            $chasReport->resource_image = $resource_image;
-        } else {
-            session()->flash('errorMessage', 'Ooops! Resource image can not be empty!');
-        }
+        //     $chasReport->resource_image = $resource_image;
+        // } else {
+        //     session()->flash('errorMessage', 'Ooops! Resource image can not be empty!');
+        // }
 
         $chasReport->chas_resource_id = $this->resource_name;
 
@@ -75,7 +72,7 @@ class ChasReportLivewire extends Component
 
         $chasReport->save();
 
-        $this->reset(['description', 'resource_name', 'resource_image']);
+        $this->reset(['description', 'resource_name']);
 
         session()->flash('addResources', 'A report is submitted successfully!');
     }

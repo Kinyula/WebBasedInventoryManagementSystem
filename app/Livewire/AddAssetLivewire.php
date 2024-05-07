@@ -10,7 +10,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class AddAssetLivewire extends Component
 {
-    public $category_type, $asset_type;
+    public $category_type, $asset_type, $asset_status;
 
     public function render()
     {
@@ -26,6 +26,8 @@ class AddAssetLivewire extends Component
 
             'asset_type' => 'required|unique:assets,asset_type',
 
+            'asset_status' => 'required'
+
         ]);
 
         $category = new Asset();
@@ -34,9 +36,11 @@ class AddAssetLivewire extends Component
 
         $category->asset_type = $this->asset_type;
 
+        $category->asset_status = $this->asset_status;
+
         $category->save();
 
-        $this->reset(['category_type', 'asset_type']);
+        $this->reset(['category_type', 'asset_type', 'asset_status']);
 
         session()->flash('addItems', 'An item is added successfully.');
     }

@@ -9,7 +9,7 @@ class CoedReport extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id','co_e_d_resource_id','description','resource_image','college_name'];
+    protected $fillable = ['user_id','co_e_d_resource_id','description','college_name'];
 
     public static function search($search)
     {

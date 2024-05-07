@@ -18,14 +18,25 @@
             padding: 10px;
             width: 100%;
             border: none;
+
         }
 
         /* td:nth-child(odd) {
             background-color: lightgray
         } */
 
-        tr td {
-            text-align: center;
+        .qrcode-id {
+            position: relative;
+            bottom: 103px;
+            left: 100px;
+        }
+
+        .qrcode-logo {
+            position: relative;
+            left: 50px;
+            bottom: 15px;
+            width: 60px;
+            padding: 5px;
         }
 
         .logo img {
@@ -48,38 +59,37 @@
 
         .description-container {
 
-display: block;
-margin-top: 30px
+            display: block;
+            margin-top: 30px
+        }
 
-}
+        .resource-name-label {
+            font-weight: bold;
+        }
 
-.resource-name-label {
-font-weight: bold;
-}
+        .resource-name {
 
-.resource-name {
+            position: relative;
+            top: 10px;
+        }
 
-position: relative;
-top: 10px;
-}
+        .description-label {
 
-.description-label {
+            font-weight: bold;
+        }
 
-font-weight: bold;
-}
+        .description-message {
 
-.description-message {
+            position: relative;
+            top: 10px;
 
-position: relative;
-top: 10px;
+        }
 
-}
+        .resource-name-container {
 
-.resource-name-container {
+            display: block;
 
-display: block;
-
-}
+        }
     </style>
 
     <div class="header">
@@ -109,13 +119,24 @@ display: block;
         <thead>
             <tr>
 
-                <th>QR Code</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($Resources as $resource)
-                <tr >
-                    <td><img src="{{ $resource['qrcode'] }}" alt="QR code"></td>
+            <br>
+            <br>
+                <tr>
+
+                    <td>
+                        <div class="qrcode-info">
+                            <img class="qrcode-logo" src="vendors/images/udom.png" alt="" srcset="">
+
+                            <small class="qrcode-id">UDOM / CIVE / {{ $resource['qrCodeId'] }}
+                            </small>
+                            <img src="{{ $resource['qrcode'] }}" alt="QR code">
+                        </div>
+
+                    </td>
 
                 </tr>
             @endforeach

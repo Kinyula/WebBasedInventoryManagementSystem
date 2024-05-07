@@ -9,7 +9,7 @@ class Report extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id','cive_resource_id','description','resource_image','college_name'];
+    protected $fillable = ['user_id','cive_resource_id','description','college_name', 'message_status'];
 
     public static function search($search)
     {

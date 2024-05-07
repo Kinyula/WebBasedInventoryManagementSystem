@@ -21,6 +21,13 @@ class CoEDResource extends Model
             ->orWhere("id", "ILIKE", "%$search%");
     }
 
+    public static function searchResource($search)
+    {
+        return empty($search) ? static::query() : static::query()
+            ->where("resource_name", "ILIKE", "%$search%")
+            ->orWhere("id", "ILIKE", "%$search%");
+    }
+    
     public function user()
     {
         return $this->belongsTo(User::class);

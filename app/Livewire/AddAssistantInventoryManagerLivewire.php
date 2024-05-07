@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\AssistantInventoryManagerImport;
 
 
 class AddAssistantInventoryManagerLivewire extends Component
@@ -15,12 +17,19 @@ class AddAssistantInventoryManagerLivewire extends Component
     use WithFileUploads;
 
     public $role_id = 1, $username, $email, $password,
-        $password_confirmation, $profile_image, $assistantInventoryManager;
+         $profile_image, $assistantInventoryManager;
+
+         public function mount(){
+
+            $this->password = time();
+        }
 
     public function render()
     {
         return view('livewire.add-assistant-inventory-manager-livewire');
     }
+
+
 
     public function addAssistantInventoryManager()
     {
@@ -28,8 +37,8 @@ class AddAssistantInventoryManagerLivewire extends Component
         $this->validate([
             'username' => 'required',
             'email' => 'required|unique:users,email',
-            'password' => 'required|confirmed',
-            'password_confirmation' => 'required',
+            'password' => 'required',
+
 
         ]);
 
@@ -58,7 +67,7 @@ class AddAssistantInventoryManagerLivewire extends Component
 
         $assistantInventoryManager->save();
 
-        $this->reset(['email', 'profile_image', 'username', 'password', 'password_confirmation']);
+        $this->reset(['email', 'profile_image', 'username', 'password']);
 
         session()->flash('addAnAssistant', 'An assistant is added successfully.');
     }
@@ -68,9 +77,11 @@ class AddAssistantInventoryManagerLivewire extends Component
 
         $this->validate(['assistantInventoryManager' => 'required|mimes:xlsx,xls,csv']);
 
+
         dispatch(new AssistantImportProcess($this->assistantInventoryManager));
 
 
+        Excel::import(new AssistantInventoryManagerImport, $this->assistantInventoryManager);
 
         session()->flash('message', 'We will notify you shortly...');
     }

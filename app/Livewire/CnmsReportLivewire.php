@@ -12,9 +12,18 @@ class CnmsReportLivewire extends Component
     use WithFileUploads;
 
     public $resource_name, $resource_image, $description;
+
+    public $search = '';
+
     public function render()
     {
-        return view('livewire.cnms-report-livewire', ['cnmsResources' => CnmsResource::with(['category', 'user'])->get()]);
+        if ($this->search) {
+            return view('livewire.cnms-report-livewire', ['cnmsResources' => []]);
+        } else {
+            return view('livewire.cnms-report-livewire', ['cnmsResources' => CnmsResource::searchResource($this->search)->with(['category', 'user'])->get()]);
+        }
+
+
     }
 
     public function addCnmsReport()

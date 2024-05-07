@@ -9,9 +9,11 @@ use Livewire\Component;
 class AssetStatusLivewire extends Component
 {
     public $asset;
+    public  $searchAsset = '';
+
     public function render()
     {
-        return view('livewire.asset-status-livewire', ['assets' => Asset::with(['category'])->get()]);
+        return view('livewire.asset-status-livewire', ['assets' => Asset::search($this->searchAsset)->with(['category'])->get()]);
     }
 
     public function addStatus()

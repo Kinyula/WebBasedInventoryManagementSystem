@@ -2,15 +2,12 @@
 
 namespace App\Livewire;
 
+use App\Jobs\ExportCiveQrCodesJob;
+use App\Jobs\ExportCiveResourcesPdfJob;
 use App\Models\CiveResource;
-use BaconQrCode\Renderer\Image\SvgImageBackEnd;
-use BaconQrCode\Renderer\ImageRenderer;
-use BaconQrCode\Renderer\RendererStyle\RendererStyle;
-use BaconQrCode\Writer;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\File;
 
 class ViewCiveCreatedResourceLivewire extends Component
 {
@@ -20,62 +17,116 @@ class ViewCiveCreatedResourceLivewire extends Component
 
     protected $paginationTheme = 'tailwind';
 
+    protected $listeners = ['export' => '$refresh', 'saved' => '$refresh'];
+
+    public $pdfFiles = [];
+
+    public $resourceId = [];
+
+
     public function render()
     {
+
+        $path = public_path('storage/resource_cive_files/');
+
+        $files = File::files($path);
+
+        foreach ($files as $file) {
+            $this->pdfFiles[] = $file->getPathname();
+        }
+
+
         return view('livewire.view-cive-created-resource-livewire', ['Resources' => CiveResource::search($this->civeResourceSearch)->with(['user'])->paginate(15)]);
     }
 
-    public function exportCiveResourcesPdf()
+
+    public function deleteFiles($pdf)
     {
-        $Resources = [];
 
-        $data = CiveResource::with(['user'])->get();
 
-        foreach ($data as $item) {
+        if (File::exists(storage_path('app/public/resource_cive_files/'.$pdf))) {
 
-            $QRCode = $this->generateQRCode('UDOM-' . time() . '-' . 'CIVE' . Hash::make($item->id) . '-' . 'assets');
-            $Resources[] = [
-                'item' => $item,
-                'qrcode' => $QRCode
-            ];
+            File::delete(storage_path('app/public/resource_cive_files/'.$pdf));
+
+            session()->flash('downloadSuccessMessage', 'The file is downloaded!');
         }
 
-        $pdf = Pdf::loadView("cive-resources-assets-pdf", [
-            'Resources' => $Resources
-        ]);
+        else {
+
+            session()->flash('downloadErrorMessage', 'ERROR 404 | File not found please remember to refresh the page to view the remaining files!');
+        }
 
 
-        $pdfOutput = $pdf->output();
-
-        return response()->stream(
-            function () use ($pdfOutput) {
-                echo $pdfOutput;
-            },
-            200,
-            [
-                'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename=UDOM-CIVE-assets.pdf'
-            ]
-        );
     }
 
-    private function generateQRCode($data): string
+    public function deleteFilesManually($file){
+
+        if (File::exists(storage_path('app/public/resource_cive_files/'.$file))) {
+
+            File::delete(storage_path('app/public/resource_cive_files/'.$file));
+
+            session()->flash('deleteErrorMessage', 'The file is deleted!');
+        }
+
+        else {
+            session()->flash('deleteErrorMessage', ' ERROR 404 | File not found please remember to refresh the page to view the remaining files!');
+        }
+
+    }
+
+
+    public function exportCiveResourcesPdf()
     {
-        $renderer = new ImageRenderer(
-            new RendererStyle(100),
-            new SvgImageBackEnd()
-        );
+        $chunkSize = 200;
 
-        $writer = new Writer($renderer);
+        if (empty($this->resourceId)) {
 
-        return 'data:image/svg+xml;base64,' . base64_encode($writer->writeString($data));
+            CiveResource::search($this->civeResourceSearch)->with(['user'])->chunk($chunkSize, function ($data) {
+
+                ExportCiveResourcesPdfJob::dispatch($data)->delay(now()->addSeconds(2));
+            });
+
+            session()->flash('exportResource', 'Resource PDF is ready to be exported make sure you refresh the page after this action please...');
+        } else {
+
+            CiveResource::search($this->civeResourceSearch)->with(['user'])->whereIn('id', $this->resourceId)->chunk($chunkSize, function ($data) {
+
+                ExportCiveResourcesPdfJob::dispatch($data)->delay(now()->addSeconds(2));
+            });
+
+            session()->flash('exportResource', 'Selected resource PDF is ready to be exported make sure you refresh the page after this action please...');
+        }
     }
 
-    public function deleteCiveCreatedResource($id) {
+
+    public function printCiveQrCodePdf()
+    {
+        $chunkSize = 200;
+
+        if (empty($this->resourceId)) {
+
+            CiveResource::search($this->civeResourceSearch)->with(['user'])->chunk($chunkSize, function ($data) {
+
+                ExportCiveQrCodesJob::dispatch($data)->delay(now()->addSeconds(2));
+            });
+
+            session()->flash('exportResource', 'Resource QR Codes are ready to be exported make sure you refresh the page after this action please...');
+        } else {
+
+            CiveResource::search($this->civeResourceSearch)->with(['user'])->whereIn('id', $this->resourceId)->chunk($chunkSize, function ($data) {
+
+                ExportCiveQrCodesJob::dispatch($data)->delay(now()->addSeconds(2));
+            });
+
+            session()->flash('exportResource', 'Selected resource QR Codes are ready to be exported make sure you refresh the page after this action please...');
+        }
+    }
+
+    public function deleteCiveCreatedResource($id)
+    {
 
         $civeResource = CiveResource::findOrFail($id) ? CiveResource::findOrFail($id)->delete() : false;
 
         session()->flash('deleteResource', 'Resource is deleted successfully!');
-        
     }
 }

@@ -60,7 +60,7 @@ class ExportCiveResourcesPdfJob implements ShouldQueue
 
             $fileName = uniqid('UDOM-CIVE-RESOURCES-' . time(), true) . '.pdf';
 
-            $path = public_path('storage/resource_files/' . $fileName);
+            $path = public_path('storage/resource_cive_files/' . $fileName);
 
             $pdf = Pdf::loadView('cive-resources-assets-pdf', ['Resources' =>  $resources]);
 

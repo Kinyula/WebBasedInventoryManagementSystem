@@ -76,7 +76,7 @@
 
     <body class="font-sans antialiased">
 
-
+{{--
         <div class="pre-loader">
             <div class="pre-loader-box">
                 <div class="loader-logo">
@@ -88,7 +88,7 @@
                 <div class="percent" id="percent1">0%</div>
                 <div class="loading-text">Loading...</div>
             </div>
-        </div>
+        </div> --}}
 
 
         <div class="header">
@@ -573,6 +573,7 @@
                         @if (auth()->user()->college_name == 'College of Informatics and Virtual Education ( CIVE )')
                             <li class="dropdown">
                                 <a href="javascript:;" class="dropdown-toggle">
+                                    <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-0 -start-0 dark:border-gray-900">20</div>
                                     <span class="micon bi bi-folder"></span><span class="mtext">Reports</span>
                                 </a>
 
@@ -598,6 +599,7 @@
                                 </ul>
 
                                 <ul class="submenu">
+                                    <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-0 -start-0 dark:border-gray-900">2</div>
                                     <li><a href="{{ asset('UIMS/reply-reports') }}">
                                             View created report</a>
                                     </li>
@@ -796,7 +798,7 @@
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/messages') }}">
-                                            View messages </a>
+                                        View reply messages </a>
                                     </li>
 
                                 </ul>
@@ -815,7 +817,7 @@
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/messages') }}">
-                                            View messages </a>
+                                        View reply messages </a>
                                     </li>
 
                                 </ul>
@@ -834,7 +836,7 @@
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/messages') }}">
-                                            View messages </a>
+                                        View reply messages </a>
                                     </li>
 
                                 </ul>
@@ -852,7 +854,7 @@
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/messages') }}">
-                                            View messages </a>
+                                        View reply messages </a>
                                     </li>
 
                                 </ul>
@@ -870,7 +872,7 @@
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/messages') }}">
-                                            View messages </a>
+                                        View reply messages </a>
                                     </li>
 
                                 </ul>
@@ -888,7 +890,7 @@
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/messages') }}">
-                                            View messages </a>
+                                        View reply messages </a>
                                     </li>
 
                                 </ul>
@@ -899,14 +901,15 @@
                         @if (auth()->user()->college_name == 'College of Informatics and Virtual Education ( CIVE )')
                             <li class="dropdown">
                                 <a href="javascript:;" class="dropdown-toggle">
-
-                                    <span class="micon bi bi-envelope"></span><span class="mtext">Message
+                                    <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-0 -start-0 dark:border-gray-900">20</div>
+                                    <span class="micon bi bi-envelope "></span><span class="mtext">Message
                                         reports</span>
+
                                 </a>
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/messages') }}">
-                                            View messages </a>
+                                            View reply messages </a>
                                     </li>
 
                                 </ul>

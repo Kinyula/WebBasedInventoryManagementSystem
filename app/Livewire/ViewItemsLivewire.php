@@ -30,7 +30,7 @@ class ViewItemsLivewire extends Component
     {
 
         return view('livewire.view-items-livewire', [
-            'Assets' => Asset::search($this->assetSearch)->with(['category', 'assetStatus'])->paginate(15),
+            'Assets' => Asset::search($this->assetSearch)->with(['category'])->paginate(15),
         ]);
     }
 
@@ -67,7 +67,7 @@ class ViewItemsLivewire extends Component
     public function deleteItems($id)
     {
         $delete_item = Asset::where("id", $id)->exists() ? Asset::findOrFail($id)->delete() : false;
-        
+
         session()->flash('deleteAsset', 'Asset is deleted successfully.');
     }
 

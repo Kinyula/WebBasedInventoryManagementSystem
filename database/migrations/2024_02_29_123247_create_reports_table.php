@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('cive_resource_id')->constrained('cive_resources')->onDelete('cascade')->onUpdate('cascade');
             $table->string('college_name');
             $table->text('description');
-            $table->string('resource_image');
+            $table->string('message_status')->default('unread');
             $table->timestamps();
         });
     }

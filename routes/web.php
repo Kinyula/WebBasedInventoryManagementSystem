@@ -45,6 +45,7 @@ use App\Http\Controllers\ViewChasReportController;
 use App\Http\Controllers\ViewChssCreatedResourcesController;
 use App\Http\Controllers\ViewChssReportController;
 use App\Http\Controllers\ViewCiveCreatedResourcesController;
+use App\Http\Controllers\ViewCiveReportController;
 use App\Http\Controllers\ViewCnmsCreatedResourcesController;
 use App\Http\Controllers\ViewCnmsReportController;
 use App\Http\Controllers\ViewCoBECreatedResourcesController;
@@ -219,6 +220,8 @@ Route::middleware('auth')->group(function () {
     // ---------------------------------------- CIVE Report Routes ----------------------------------------------
 
     Route::get('UIMS/cive-report', [CiveReportController::class, 'index']);
+    Route::get('UIMS/view-cive-report', [ViewCiveReportController::class, 'index']);
+    
     // End of College of Informatics and Virtual Education ( CIVE )
 
     // -------------------------------------------------------------------------------------------------------------------------

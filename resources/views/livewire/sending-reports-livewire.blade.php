@@ -29,7 +29,7 @@
         <form wire:submit.prevent = "sendingReports">
 
             {{-- Attach a Report image file --}}
-
+{{-- 
             <div class="mt-4">
                 <label for="report_image_file" class='block font-medium text-sm text-gray-700 dark:text-gray-300'>Attach
                     a
@@ -40,7 +40,7 @@
                 @error('report_image_file')
                     <strong class= 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>{{ $message }}</strong>
                 @enderror
-            </div>
+            </div> --}}
 
 
             {{-- Attach a Report file --}}

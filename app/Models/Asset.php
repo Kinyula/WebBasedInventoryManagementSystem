@@ -9,15 +9,17 @@ class Asset extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['category', 'asset_type'];
+    protected $fillable = ['category', 'asset_type','asset_status'];
 
     public static function search($search)
     {
         return empty($search) ? static::query() : static::query()
 
             ->where("asset_type", "ILIKE", "%$search%")
+            ->orWhere("asset_status", "ILIKE", "%$search%")
             ->orWhere("id", "ILIKE", "%$search%");
     }
+
 
     public function category()
     {

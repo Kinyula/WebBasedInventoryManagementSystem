@@ -24,8 +24,7 @@ class ExportCiveQrCodesJob implements ShouldQueue
     public function __construct(
 
         public $qrcodes
-    )
-    {
+    ) {
         //
     }
 
@@ -33,42 +32,41 @@ class ExportCiveQrCodesJob implements ShouldQueue
      * Execute the job.
      */
 
-     private function generateQRCode($data): string
-     {
-         $renderer = new ImageRenderer(
-             new RendererStyle(100),
-             new SvgImageBackEnd()
-         );
+    private function generateQRCode($data): string
+    {
+        $renderer = new ImageRenderer(
+            new RendererStyle(100),
+            new SvgImageBackEnd()
+        );
 
-         $writer = new Writer($renderer);
+        $writer = new Writer($renderer);
 
-         return 'data:image/svg+xml;base64,' . base64_encode($writer->writeString($data));
-     }
+        return 'data:image/svg+xml;base64,' . base64_encode($writer->writeString($data));
+    }
 
     public function handle(): void
+
     {
+
         $resources = [];
 
         foreach ($this->qrcodes as $resource) {
 
             $qrcode = $this->generateQRCode($resource->id);
+            $qrCodeId = $resource->id;
 
             $resources[] = [
                 'qrcode' => $qrcode,
+                'qrCodeId' => $qrCodeId,
                 'resource' => $resource
             ];
-
-            $fileName = uniqid('UDOM-CIVE-QR-CODES-'.time().'-', true).'.pdf';
-
-            $path = public_path('storage/resource_files/'.$fileName);
-
-            $pdf = Pdf::loadView('cive-resources-qrcodes-assets-pdf', ['Resources' =>  $resources]);
-
-            $pdf->save($path);
-
-
-
-
         }
+        $fileName = uniqid('UDOM-CIVE-QR-CODES-' . time() . '-', true) . '.pdf';
+
+        $path = public_path('storage/resource_cive_files/' . $fileName);
+
+        $pdf = Pdf::loadView('cive-resources-qrcodes-assets-pdf', ['Resources' =>  $resources]);
+
+        $pdf->save($path);
     }
 }

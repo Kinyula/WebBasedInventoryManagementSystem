@@ -25,7 +25,7 @@ class SendingReportsLivewire extends Component
     public function sendingReports()
     {
 
-        $this->validate(['report_file' => 'required|file|mimes:pdf', 'report_image_file' => 'required|file|mimes:png,jpg,jpeg']);
+        $this->validate(['report_file' => 'required|file|mimes:pdf']);
 
         $send = new SendingReport();
 
@@ -45,23 +45,23 @@ class SendingReportsLivewire extends Component
 
         }
 
-        if (!is_null($this->report_image_file)) {
+        // if (!is_null($this->report_image_file)) {
 
-            $report_image_file = $this->report_image_file->store('public/report_image_files');
+        //     $report_image_file = $this->report_image_file->store('public/report_image_files');
 
-            $report_image_file  = explode('/', $report_image_file );
+        //     $report_image_file  = explode('/', $report_image_file );
 
-            $report_image_file  = $report_image_file[2];
+        //     $report_image_file  = $report_image_file[2];
 
-            $send->resource_image = $report_image_file;
+        //     $send->resource_image = $report_image_file;
 
 
-        }
+        // }
 
         $send->save();
 
         session()->flash('sendingReportMessage', 'Report sent successfully!');
 
-        $this->reset(['report_file', 'report_image_file']);
+        $this->reset(['report_file']);
     }
 }

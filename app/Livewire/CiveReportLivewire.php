@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Events\Messages;
 use App\Models\CiveResource;
 use App\Models\Report;
 use Livewire\Component;
@@ -13,9 +14,18 @@ class CiveReportLivewire extends Component
 
     public $resource_name, $resource_image, $description;
 
+    public $searchResource = '';
+
+
     public function render()
     {
-        return view('livewire.cive-report-livewire', ['civeResources' => CiveResource::with(['category', 'user'])->get()]);
+        if (empty($this->searchResource)) {
+            return view('livewire.cive-report-livewire', ['civeResources' => []]);
+        } else {
+            return view('livewire.cive-report-livewire', ['civeResources' => CiveResource::searchResource($this->searchResource)->with(['category', 'user'])->get()]);
+        }
+
+
     }
 
 
@@ -41,27 +51,29 @@ class CiveReportLivewire extends Component
 
         $civeReport->description = $this->description;
 
-        if (!is_null($this->resource_image)) {
+        // if (!is_null($this->resource_image)) {
 
-            $resource_image = $this->resource_image->store('public/resource_images');
+        //     $resource_image = $this->resource_image->store('public/resource_images');
 
-            $resource_image = explode('/', $resource_image);
+        //     $resource_image = explode('/', $resource_image);
 
-            $resource_image = $resource_image[2];
+        //     $resource_image = $resource_image[2];
 
 
-            $civeReport->resource_image = $resource_image;
-        }
+        //     $civeReport->resource_image = $resource_image;
+        // }
 
-        else {
-            session()->flash('errorMessage', 'Ooops! Resource image can not be empty!');
-        }
+        // else {
+        //     session()->flash('errorMessage', 'Ooops! Resource image can not be empty!');
+        // }
 
         $civeReport->cive_resource_id = $this->resource_name;
 
 
 
         $civeReport->save();
+
+        event(new Messages($civeReport));
 
         $this->reset(['description', 'resource_name', 'resource_image']);
 

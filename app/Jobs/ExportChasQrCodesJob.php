@@ -53,8 +53,11 @@ class ExportChasQrCodesJob implements ShouldQueue
         foreach ($this->resources as $resource) {
 
            $qrCode =  $this->generateQRCode($resource->id);
+           $qrCodeId = $resource->id;
            $resources[] = [
+            
                 'qrcode' => $qrCode,
+                'qrCodeId' => $qrCodeId,
                 'resource' => $resource,
            ];
 

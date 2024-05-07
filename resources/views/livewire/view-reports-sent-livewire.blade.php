@@ -9,11 +9,11 @@
     <div class="card-box mb-30 p-3">
 
         @if (session()->has('deleteReport'))
-        <div role="alert" class="alert alert-success alert-dismissible fade show">
-            <strong>{{ session('deleteReport') }}</strong>
-            <button class="btn btn-close"></button>
-        </div>
-    @endif
+            <div role="alert" class="alert alert-success alert-dismissible fade show">
+                <strong>{{ session('deleteReport') }}</strong>
+                <button class="btn btn-close"></button>
+            </div>
+        @endif
 
         <div class="header-search mb-5">
             <form class="d-flex">
@@ -33,7 +33,7 @@
 
                     <th class="font-weight-bold">College name</th>
 
-                    <th class="font-weight-bold">Report image</th>
+                    {{-- <th class="font-weight-bold">Report image</th> --}}
 
                     <th class="font-weight-bold">Download report file</th>
 
@@ -56,16 +56,18 @@
                             {{ $report->college_name }}
                         </td>
 
-                        <td style="text-decoration: normal">
+                        {{-- <td style="text-decoration: normal">
 
-                            <img src="{{asset('storage/report_image_files/'.$report->resource_image)}}" alt="" srcset="" width="200px;">
-                        </td>
+                            <img src="{{ asset('storage/report_image_files/' . $report->resource_image) }}" alt=""
+                                srcset="" width="200px;">
+                        </td> --}}
 
                         <td style="text-decoration:normal">
 
                             {{ $report->report_file }}
 
-                            <button wire:click = "download({{$report->id}})" class="bg-gray-500 hover:bg-gray-400 text-white font-bold p-2 rounded ms-2">
+                            <button wire:click = "download({{ $report->id }})"
+                                class="bg-gray-500 hover:bg-gray-400 text-white font-bold p-2 rounded ms-2">
 
                                 <i class="fas fa-download "></i>
 

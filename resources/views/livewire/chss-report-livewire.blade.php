@@ -30,8 +30,8 @@
                 <label for="resource_name" class='block font-medium text-sm text-gray-700 dark:text-gray-300'>Resource
                     name</label>
 
-                    <div class="search card-box mb-30 p-2"><input type="search" wire:model.live = 'search' class="w-full" placeholder="Write the ID of the resource or the RESOURCE NAME for the report"></div>
-                    
+                    <div class="search card-box mb-30 p-2"><input type="search" wire:model.live = 'search' class="w-full" placeholder="Search the ID of the resource or the RESOURCE NAME for the report"></div>
+
                 <select type="select" wire:model= "resource_name"
                     class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full'>
                     <option value="">-- Select resource --</option>

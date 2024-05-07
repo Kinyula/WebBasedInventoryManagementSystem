@@ -25,7 +25,7 @@ class ViewCnmsCreatedResourcesLivewire extends Component
 
     protected $paginationTheme = 'tailwind';
 
-    public $pdfFiles;
+    public $pdfFiles = [];
 
     public $resourceId = [];
 
@@ -34,11 +34,22 @@ class ViewCnmsCreatedResourcesLivewire extends Component
 
         $path = public_path('storage/resource_cnms_files/');
 
+
         $files = File::files($path);
 
-        foreach ($files as $file) {
-            $this->pdfFiles[] = $file->getPathname();
+        if (!empty($files)) {
+
+            dd($files);
+            foreach ($files as $file) {
+
+                $this->pdfFiles[] = $file->getPathname();
+            }
+        } else {
+            # code...
         }
+
+
+
 
         return view('livewire.view-cnms-created-resources-livewire', ['Resources' => CnmsResource::search($this->cnmsResourceSearch)->with(['user','category','assets'])->paginate(15)]);
     }

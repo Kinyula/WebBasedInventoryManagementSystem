@@ -18,7 +18,13 @@ class ChssReportLivewire extends Component
 
     public function render()
     {
-        return view('livewire.chss-report-livewire', ['chssResources' => ChssResource::searchResource($this->search)->with(['category', 'user'])->get()]);
+        if (empty($this->search)) {
+            return view('livewire.chss-report-livewire', ['chssResources' => []]);
+        } else {
+            return view('livewire.chss-report-livewire', ['chssResources' => ChssResource::searchResource($this->search)->with(['category', 'user'])->get()]);
+        }
+
+
     }
 
     public function addChssReport()

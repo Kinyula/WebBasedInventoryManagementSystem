@@ -14,10 +14,19 @@ class CobeReportLivewire extends Component
 
     public $resource_name, $resource_image, $description;
 
+    public $search = '';
+
     public function render()
     {
 
-        return view('livewire.cobe-report-livewire', ['cobeResources' => CoBEResource::with(['category', 'user'])->get()]);
+        if ($this->search) {
+            return view('livewire.cobe-report-livewire', ['cobeResources' => []]);
+        } else {
+            return view('livewire.cobe-report-livewire', ['cobeResources' => CoBEResource::searchResource($this->search)->with(['category', 'user'])->get()]);
+        }
+
+
+
     }
 
     public function addCobeReport()

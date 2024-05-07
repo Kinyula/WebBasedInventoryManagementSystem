@@ -10,6 +10,10 @@
         @endif
 
         <form wire:submit.prevent = "allocateResource">
+
+            <div class="mt-3">
+                <input type="search" wire:model.live = 'searchAsset' placeholder="Search an asset by ' Asset name ' Or by ' ID '" class="w-full">
+            </div>
             <div class="mt-3">
                 <label for="category_type" class='block font-medium text-sm text-gray-700 dark:text-gray-300'>Asset
                     name</label>

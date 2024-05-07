@@ -59,7 +59,7 @@
             <div class="mt-3">
                 <label for="password" class='block font-medium text-sm text-gray-700 dark:text-gray-300'>Password
                 </label>
-                <input type="password" wire:model= "password"
+                <input type="text" wire:model= "password" value="{{ $password }}"
                     class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full'
                     placeholder="Password">
                 @error('password')
@@ -67,14 +67,25 @@
                 @enderror
             </div>
 
+
             <div class="mt-3">
-                <label for="confirm_password" class='block font-medium text-sm text-gray-700 dark:text-gray-300'>Confirm
-                    password
-                </label>
-                <input type="password" wire:model= "password_confirmation"
-                    class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full'
-                    placeholder="Confirm password">
-                @error('password_confirmation')
+                <label for="college" class='block font-medium text-sm text-gray-700 dark:text-gray-300'>
+                    College</label>
+                <select type="select" wire:model= "college"
+
+                    class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full'>
+                    <option value="">-- Select college --</option>
+
+                        <option value="College of Informatics and Virtual Education ( CIVE )">"College of Informatics and Virtual Education ( CIVE )</option>
+                        <option value="College of Natural Mathematical Science ( CNMS ) ">College of Natural Mathematical Science ( CNMS )</option>
+                        <option value="College of Health and Allied Science ( CHAS )">College of Health and Allied Science ( CHAS )</option>
+                        <option value="College of Education ( CoED )">College of Education ( CoED )</option>
+                        <option value="College of Humanities and Social Science ( CHSS )">College of Humanities and Social Science ( CHSS )</option>
+                        <option value="College of Business and Economics ( CoBE )">College of Business and Economics ( CoBE )</option>
+                        <option value="College of Earth Sciences and Engineering ( CoESE )">College of Earth Sciences and Engineering ( CoESE )</option>
+
+                </select>
+                @error('college')
                     <strong class= 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>{{ $message }}</strong>
                 @enderror
             </div>

@@ -10,9 +10,12 @@ class ResourceAllocationsLivewire extends Component
 {
     public $asset, $asset_quantity, $resource_allocated_college, $status;
 
+    public $searchAsset = '';
+
+
     public function render()
     {
-        return view('livewire.resource-allocations-livewire', ['Assets' => Asset::get()]);
+        return view('livewire.resource-allocations-livewire', ['Assets' => Asset::search($this->searchAsset)->get()]);
     }
 
     public function allocateResource()

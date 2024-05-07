@@ -15,7 +15,12 @@ class AddCollegeManagerLivewire extends Component
     use WithFileUploads;
 
     public $role_id = 2, $username, $email, $password,
-     $password_confirmation, $profile_image, $collegeInventoryManager;
+     $college, $profile_image, $collegeInventoryManager;
+
+     public function mount(){
+        
+        $this->password = time();
+     }
     public function render()
     {
         return view('livewire.add-college-manager-livewire');
@@ -38,8 +43,9 @@ class AddCollegeManagerLivewire extends Component
         $this->validate([
             'username' => 'required',
             'email' => 'required',
-            'password' => 'required|confirmed',
-            'password_confirmation' => 'required',
+            'password' => 'required',
+            'college' => 'required'
+
 
         ]);
 
@@ -51,6 +57,8 @@ class AddCollegeManagerLivewire extends Component
         $collegeInventoryManager->email = $this->email;
 
         $collegeInventoryManager->password = Hash::make($this->password);
+
+        $collegeInventoryManager->college_name = $this->college;
 
         $collegeInventoryManager->role_id = $this->role_id;
 
@@ -70,7 +78,7 @@ class AddCollegeManagerLivewire extends Component
 
         $collegeInventoryManager->save();
 
-        $this->reset(['email', 'profile_image', 'username', 'password', 'password_confirmation']);
+        $this->reset(['email', 'profile_image', 'username', 'password','college']);
 
         session()->flash('addCollegeManager', 'A college manager is added successfully.');
     }

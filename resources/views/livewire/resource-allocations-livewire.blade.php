@@ -11,6 +11,9 @@
 
         <form wire:submit.prevent = "allocateResource">
             <div class="mt-3">
+                <input type="search" name="" id="" wire:model.live = 'searchAsset' class="w-full" placeholder="Search asset by asset name or ID">
+            </div>
+            <div class="mt-3">
                 <label for="category_type" class='block font-medium text-sm text-gray-700 dark:text-gray-300'>Asset
                     name</label>
                 <select type="select" wire:model= "asset"
@@ -28,7 +31,7 @@
             <div class="mt-4">
                 <label for="asset_type" class='block font-medium text-sm text-gray-700 dark:text-gray-300'>Asset
                     quantity</label>
-                <input type="text" wire:model= "asset_quantity"
+                <input type="number" wire:model= "asset_quantity"
                     class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full'
                     placeholder="Enter the asset quantity ">
                 @error('asset_quantity')

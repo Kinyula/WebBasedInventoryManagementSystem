@@ -15,10 +15,11 @@ class CollegeResourceAllocationLivewire extends Component
     use WithFileUploads;
 
     public $asset, $asset_quantity, $resource_allocated_college, $status, $resource_file;
+    public $searchAsset = '';
 
     public function render()
     {
-        return view('livewire.college-resource-allocation-livewire', ['Assets' => Asset::get()]);
+        return view('livewire.college-resource-allocation-livewire', ['Assets' => Asset::search($this->searchAsset)->get()]);
     }
 
     public function allocateResource()

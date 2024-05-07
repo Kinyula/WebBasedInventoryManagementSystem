@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignId('chas_resource_id')->constrained('chas_resources')->onDelete('cascade')->onUpdate('cascade');
             $table->string('college_name');
             $table->text('description');
-            $table->string('resource_image');
             $table->timestamps();
         });
     }

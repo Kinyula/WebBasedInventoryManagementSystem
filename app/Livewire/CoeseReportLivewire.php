@@ -13,9 +13,17 @@ class CoeseReportLivewire extends Component
 
     public $resource_name, $resource_image, $description;
 
+    public $search = '';
+
     public function render()
     {
-        return view('livewire.coese-report-livewire', ['coeseResources' => CoESEResource::with(['category', 'user'])->get()]);
+        if (empty($this->search)) {
+            return view('livewire.coese-report-livewire', ['coeseResources' => []]);
+        } else {
+            return view('livewire.coese-report-livewire', ['coeseResources' => CoESEResource::searchResource($this->search)->with(['category', 'user'])->get()]);
+        }
+
+
     }
 
 
