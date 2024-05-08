@@ -16,12 +16,12 @@ class CategoriesLivewire extends Component
     public function addItemCategory(){
 
         $this->validate([
-            'category' => 'required',
+            'category' => 'required|unique:categories,category_type',
 
         ]);
 
         $item_category = new Category();
-        
+
         $item_category->category_type = $this->category;
 
         $item_category->save();
