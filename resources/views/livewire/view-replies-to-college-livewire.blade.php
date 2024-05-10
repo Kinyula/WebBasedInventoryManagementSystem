@@ -111,8 +111,7 @@
                     @endforeach
                 @endif
 
-                @dd(auth()->user())
-                @if (auth()->user()->repliesReports->reply_to_specified_college == 'College of Health and Allied Science ( CHAS )')
+                @if (auth()->user()->college_name == 'College of Health and Allied Science ( CHAS )')
 
                     @foreach ($Replies as $reply)
                         <tr>

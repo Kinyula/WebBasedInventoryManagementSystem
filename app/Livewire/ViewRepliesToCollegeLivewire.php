@@ -13,7 +13,7 @@ class ViewRepliesToCollegeLivewire extends Component
 
         if (auth()->user()->college_name == 'College of Health and Allied Science ( CHAS )') {
 
-            return view('livewire.view-replies-to-college-livewire', ['Replies' => Replies::with(['user'])->orderByDesc('id')->where('college_name', 'College of Health and Allied Science ( CHAS )')->paginate(15)]);
+            return view('livewire.view-replies-to-college-livewire', ['Replies' => Replies::with(['user'])->orderByDesc('id')->where('reply_to_specified_college', 'College of Health and Allied Science ( CHAS )')->paginate(15)]);
 
         }
 
@@ -31,19 +31,19 @@ class ViewRepliesToCollegeLivewire extends Component
 
         if (auth()->user()->college_name == 'College of Business and Economics ( CoBE )') {
 
-            return view('livewire.view-replies-to-college-livewire', ['Replies' => Replies::with(['user'])->orderByDesc('id')->where('college_name', 'College of Business and Economics ( CoBE )')->paginate(15)]);
+            return view('livewire.view-replies-to-college-livewire', ['Replies' => Replies::with(['user'])->orderByDesc('id')->where('reply_to_specified_college', 'College of Business and Economics ( CoBE )')->paginate(15)]);
 
         }
 
         if (auth()->user()->college_name == 'College of Humanities and Social Science ( CHSS )') {
 
-            return view('livewire.view-replies-to-college-livewire', ['Replies' => Replies::with(['user'])->orderByDesc('id')->where('college_name', 'College of Humanities and Social Science ( CHSS )')->paginate(15)]);
+            return view('livewire.view-replies-to-college-livewire', ['Replies' => Replies::with(['user'])->orderByDesc('id')->where('reply_to_specified_college', 'College of Humanities and Social Science ( CHSS )')->paginate(15)]);
 
         }
 
         if (auth()->user()->college_name == 'College of Earth Sciences and Engineering ( CoESE )') {
 
-            return view('livewire.view-replies-to-college-livewire', ['Replies' => Replies::with(['user'])->orderByDesc('id')->where('college_name', 'College of Earth Sciences and Engineering ( CoESE )')->paginate(15)]);
+            return view('livewire.view-replies-to-college-livewire', ['Replies' => Replies::with(['user'])->orderByDesc('id')->where('reply_to_specified_college', 'College of Earth Sciences and Engineering ( CoESE )')->paginate(15)]);
 
         }
 
@@ -56,11 +56,11 @@ class ViewRepliesToCollegeLivewire extends Component
 
     }
 
-
     public function download(Replies $reply)
     {
         //update the report status
         $reply->reply_status = 'read';
+
         $reply->save();
 
         session()->flash('message', 'Done Downloaded!');
