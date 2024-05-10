@@ -24,7 +24,8 @@ class MessagingReportFilesLivewire extends Component
         return view('livewire.messaging-report-files-livewire');
     }
 
-    public function replyText(){
+    public function replyText()
+    {
 
         $this->validate(['reply_text' => 'required', 'college_name' => 'required']);
 
@@ -44,7 +45,7 @@ class MessagingReportFilesLivewire extends Component
     }
 
 
-    public function exportSendingReportPdf()
+    public function exportSendingReportPdf(MessagingReport $message)
     {
         if (empty($this->reportId)) {
 
@@ -79,38 +80,51 @@ class MessagingReportFilesLivewire extends Component
                     'Content-Disposition' => 'inline; filename=UDOM-Assistant-Inventory-Manager-reply-report.pdf'
                 ]
             );
+
+            $message->reply_status = 'read';
+            $message->update();
         } else {
-        $Reports = [];
 
-        $data = MessagingReport::with(['user'])->whereIn('id', $this->reportId)->get();
+            $message->reply_status = 'read';
+            $message->update();
 
-        foreach ($data as $item) {
+            dd($message);
 
-            // $QRCode = $this->generateQRCode('UDOM-' . time() . '-' . 'CNMS' . Hash::make($item->id) . '-' . 'report');
+            $Reports = [];
 
-            $Reports[] = [
-                'item' => $item,
-                // 'qrcode' => $QRCode
-            ];
-        }
-
-        $pdf = Pdf::loadView("Assistant-Inventory-Manager-Reply-Report-pdf", [
-            'Reports' => $Reports
-        ]);
+            $data = MessagingReport::with(['user'])->whereIn('id', $this->reportId)->get();
 
 
-        $pdfOutput = $pdf->output();
 
-        return response()->stream(
-            function () use ($pdfOutput) {
-                echo $pdfOutput;
-            },
-            200,
-            [
-                'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename=UDOM-CHSS-report.pdf'
-            ]
-        );
+            foreach ($data as $item) {
+
+                // $QRCode = $this->generateQRCode('UDOM-' . time() . '-' . 'CNMS' . Hash::make($item->id) . '-' . 'report');
+
+                $Reports[] = [
+                    'item' => $item,
+                    // 'qrcode' => $QRCode
+                ];
+            }
+
+            $pdf = Pdf::loadView("Assistant-Inventory-Manager-Reply-Report-pdf", [
+                'Reports' => $Reports
+            ]);
+
+
+            $pdfOutput = $pdf->output();
+
+            return response()->stream(
+                function () use ($pdfOutput) {
+                    echo $pdfOutput;
+                },
+                200,
+                [
+                    'Content-Type' => 'application/pdf',
+                    'Content-Disposition' => 'inline; filename=UDOM-CHSS-report.pdf'
+                ]
+            );
+
+
         }
 
 

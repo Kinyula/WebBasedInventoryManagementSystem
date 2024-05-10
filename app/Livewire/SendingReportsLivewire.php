@@ -3,9 +3,11 @@
 namespace App\Livewire;
 
 use App\Models\SendingReport;
+use App\Models\User;
+use App\Notifications\MessageSendingNotification;
+use Illuminate\Support\Facades\Notification;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-
 
 class SendingReportsLivewire extends Component
 {
@@ -14,18 +16,21 @@ class SendingReportsLivewire extends Component
 
     protected $paginationTheme = 'tailwind';
 
-    public $report_file, $report_image_file;
+    public $report_file, $report_image_file, $users;
+
 
     public function render()
     {
 
-        return view('livewire.sending-reports-livewire');
+        return view('livewire.sending-reports-livewire', ['users'=> $this->users]);
     }
 
     public function sendingReports()
     {
 
         $this->validate(['report_file' => 'required|file|mimes:pdf']);
+
+
 
         $send = new SendingReport();
 
@@ -45,6 +50,7 @@ class SendingReportsLivewire extends Component
 
         }
 
+
         // if (!is_null($this->report_image_file)) {
 
         //     $report_image_file = $this->report_image_file->store('public/report_image_files');
@@ -63,5 +69,7 @@ class SendingReportsLivewire extends Component
         session()->flash('sendingReportMessage', 'Report sent successfully!');
 
         $this->reset(['report_file']);
+
+
     }
 }

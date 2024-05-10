@@ -27,6 +27,7 @@
         </div>
 
         <table class="data-table table nowrap ">
+
             <thead>
                 <tr>
                     <th class="table-plus datatable-nosort font-weight-bold">College inventory manager</th>

@@ -13,17 +13,24 @@ class ReportInformationsLivewire extends Component
 
     public function render()
     {
-        return view('livewire.report-informations-livewire', ['Reports' => SendingReport::search($this->reportInformationSearch)->with(['user'])->whereNot('college_name', 'Not set')->paginate(15)]);
+        $reports = SendingReport::search($this->reportInformationSearch)
+                ->with(['user'])
+                ->whereNot('college_name', 'Not set')
+                ->orderByDesc('id')
+                ->paginate(15);
+        return view('livewire.report-informations-livewire', ['Reports' => $reports]);
     }
 
-    public function download($id)
+    public function download(SendingReport $report)
     {
-
-        $file_path = SendingReport::where('id', $id)->first();
-
-        return response()->download(public_path('storage/report_files/' . $file_path->report_file));
+        //update the report status
+        $report->report_status = 'downloaded';
+        $report->save();
 
         session()->flash('message', 'Done Downloaded!');
+
+        return response()->download(public_path('storage/report_files/' . $report->report_file));
+
     }
 
     public function deleteReport($id){

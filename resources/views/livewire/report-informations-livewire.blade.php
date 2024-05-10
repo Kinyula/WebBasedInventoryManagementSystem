@@ -3,11 +3,10 @@
     <div class="card-box mb-30 p-3">
 
         @if (auth()->user()->college_name == 'Not set')
-        <h2 class="h5 pd-20">View reports from the college managers</h2>
-        <img src="{{ asset('vendors/images/udom.png') }}" class="float-end  udom-logo" alt="" srcset=""
-            style="float:inline-end">
+            <h2 class="h5 pd-20">View reports from the college managers</h2>
+            <img src="{{ asset('vendors/images/udom.png') }}" class="float-end  udom-logo" alt="" srcset=""
+                style="float:inline-end">
         @else
-
         @endif
 
     </div>
@@ -15,20 +14,18 @@
     <div class="card-box mb-30 p-3">
 
         @if (session()->has('deleteReport'))
+            <div role="alert" class="alert alert-success alert-dismissible fade show">
+                <strong>{{ session('deleteReport') }}</strong>
+                <button class="btn btn-close"></button>
+            </div>
+        @endif
 
-        <div role="alert" class="alert alert-success alert-dismissible fade show">
-            <strong>{{ session('deleteReport') }}</strong>
-            <button class="btn btn-close"></button>
-        </div>
-    @endif
-
-    @if (session()->has('message'))
-
-    <div role="alert" class="alert alert-success alert-dismissible fade show">
-        <strong>{{ session('message') }}</strong>
-        <button class="btn btn-close"></button>
-    </div>
-@endif
+        @if (session()->has('message'))
+            <div role="alert" class="alert alert-success alert-dismissible fade show">
+                <strong>{{ session('message') }}</strong>
+                <button class="btn btn-close"></button>
+            </div>
+        @endif
 
         <div class="header-search mb-5">
             <form class="d-flex">
@@ -60,7 +57,7 @@
             <tbody>
                 {{-- @dd($Resources) --}}
                 @foreach ($Reports as $report)
-                    <tr>
+                    <tr class="font-weight-bold">
 
                         <td>
                             <h5 class="font-16">{{ $report->user->email }}</h5>
@@ -70,19 +67,21 @@
                         <td style="text-decoration:normal"><i class="bi bi-pencil p-2"></i>
                             {{ $report->college_name }}
                         </td>
-{{-- 
+                        {{--
                         <td style="text-decoration: normal">
                             <img src="{{asset('storage/report_image_files/'.$report->resource_image)}}" alt="" srcset="">
                         </td> --}}
 
-                        <td style="text-decoration:normal">
+                        <td class="flex px-4" style="text-decoration:normal">
 
-                            {{ $report->report_file }}
+                            @if ($report->report_status == 'unread')
+                                <p class="font-weight-bold text-red-500">NEW</p>
+                            @endif
 
-                            <button wire:click = "download({{$report->id}})" class="bg-gray-500 hover:bg-gray-400 text-white font-bold p-2 rounded ms-2">
+                            <button wire:click = "download({{ $report->id }})"
+                                class="bg-gray-500 hover:bg-gray-400 text-white font-bold p-2 rounded ms-2">
 
                                 <i class="fas fa-download "></i>
-
                             </button>
 
                         </td>

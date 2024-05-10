@@ -19,7 +19,7 @@
         <!-- Google Font -->
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
             rel="stylesheet" />
-            <link rel="stylesheet" href="{{ asset('fontAwesome/css/all.css') }}">
+        <link rel="stylesheet" href="{{ asset('fontAwesome/css/all.css') }}">
 
         <!-- CSS -->
         <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/core.css') }}" />
@@ -69,20 +69,19 @@
     <body class="font-sans antialiased">
 
         @if (!Auth::check())
-        <div class="pre-loader">
-            <div class="pre-loader-box">
-                <div class="loader-logo">
-                    <img src="{{ asset('vendors/images/udom.png') }}" alt="" />
+            <div class="pre-loader">
+                <div class="pre-loader-box">
+                    <div class="loader-logo">
+                        <img src="{{ asset('vendors/images/udom.png') }}" alt="" />
+                    </div>
+                    <div class="loader-progress" id="progress_div">
+                        <div class="bar" id="bar1"></div>
+                    </div>
+                    <div class="percent" id="percent1">0%</div>
+                    <div class="loading-text">Loading...</div>
                 </div>
-                <div class="loader-progress" id="progress_div">
-                    <div class="bar" id="bar1"></div>
-                </div>
-                <div class="percent" id="percent1">0%</div>
-                <div class="loading-text">Loading...</div>
             </div>
-        </div>
         @else
-
         @endif
 
 
@@ -298,22 +297,39 @@
 
 
                         </li>
-                        
+
                         <li class="dropdown">
+                            @php
+                                $unread = App\Models\SendingReport::whereReportStatus('unread')->count();
+                            @endphp
                             <a href="javascript:;" class="dropdown-toggle">
+                                @if ($unread > 0)
+                                    <div
+                                        class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-0 -start-0 dark:border-gray-900">
+                                        {{ $unread }}
+                                    </div>
+                                @endif
+
                                 <span class="micon bi bi-folder"></span><span class="mtext">Reports</span>
                             </a>
 
                             <ul class="submenu">
+                                @if ($unread > 0)
+                                    <div
+                                        class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-0 -start-0 dark:border-gray-900">
+                                        {{ $unread }}
+                                    </div>
+                                @endif
                                 <li><a href="{{ asset('UIMS/inbox-reports') }}">
-                                        Inbox</a>
+                                        Inbox
+                                    </a>
                                 </li>
 
                             </ul>
 
                             <ul class="submenu">
                                 <li><a href="{{ asset('UIMS/reply-reports') }}">
-                                        Reply  report</a>
+                                        Reply report</a>
                                 </li>
 
                             </ul>

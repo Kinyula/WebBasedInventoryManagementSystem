@@ -18,6 +18,8 @@
     <div class="card-box mb-30 p-3">
         <h2 class="h4 pd-20 text-gray-600">Send report.</h2>
 
+        <span>{{ $users }}</span>
+
         @if (session()->has('sendingReportMessage'))
             <div role="alert" class="alert alert-success alert-dismissible fade show">
                 <strong>{{ session('sendingReportMessage') }}</strong>
@@ -29,7 +31,7 @@
         <form wire:submit.prevent = "sendingReports">
 
             {{-- Attach a Report image file --}}
-{{-- 
+{{--
             <div class="mt-4">
                 <label for="report_image_file" class='block font-medium text-sm text-gray-700 dark:text-gray-300'>Attach
                     a

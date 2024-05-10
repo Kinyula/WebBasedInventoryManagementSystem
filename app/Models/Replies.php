@@ -10,7 +10,7 @@ class Replies extends Model
     use HasFactory;
 
 
-    protected $fillable = ['user_id', 'college_name', 'report_file', 'reply_to_specified_college'];
+    protected $fillable = ['user_id', 'college_name', 'report_file', 'reply_to_specified_college','reply_status'];
 
     public static function search($search){
 
@@ -18,7 +18,7 @@ class Replies extends Model
 
             return empty($search) ? static::query() : static::query()
             ->where('reply_to_specified_college', 'ILIKE', "%$search%");
-            
+
         }
 
     }

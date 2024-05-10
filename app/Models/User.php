@@ -22,7 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'profile_image',
-        
+
     ];
 
     /**
@@ -108,6 +108,6 @@ class User extends Authenticatable
 
     public function repliesReports()
     {
-        return $this->hasOne(Replies::class);
+        return $this->hasMany(Replies::class);
     }
 }
