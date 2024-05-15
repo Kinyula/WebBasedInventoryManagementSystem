@@ -82,8 +82,8 @@
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                                     <a class="dropdown-item" href="#"><i class="dw dw-eye"></i>
                                         View</a>
-                                    <a class="dropdown-item"
-                                        href="{{ asset('feruzi-shaving-machines/edit-admin-phone-supplier/' . $supplier->id) }}"><i
+                                    <a class="dropdown-item" wire:navigate
+                                        href="{{ asset('UIMS/update-supplier/' . $supplier->id) }}"><i
                                             class="dw dw-edit2"></i> Edit</a>
 
                                     <button type="submit" class="dropdown-item"

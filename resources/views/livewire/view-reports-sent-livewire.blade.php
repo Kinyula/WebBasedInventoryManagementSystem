@@ -1,10 +1,19 @@
 <div>
 
+    @if (auth()->user()->college_name == 'Not set')
+    <div class="card-box mb-30 p-3">
+        <h2 class="h5 pd-20">View sent report details</h2>
+        <img src="{{ asset('vendors/images/udom.png') }}" class="float-end  udom-logo" alt="" srcset=""
+            style="float:inline-end">
+    </div>
+    @else
     <div class="card-box mb-30 p-3">
         <h2 class="h5 pd-20">View sent report details from the {{ auth()->user()->college_name }}</h2>
         <img src="{{ asset('vendors/images/udom.png') }}" class="float-end  udom-logo" alt="" srcset=""
             style="float:inline-end">
     </div>
+    @endif
+
 
     <div class="card-box mb-30 p-3">
 

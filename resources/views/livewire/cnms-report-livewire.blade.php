@@ -49,6 +49,7 @@
                     image
                 </label>
                 <input type="file" wire:model= "resource_image"
+
                     class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full'>
                 @error('resource_image')
                     <strong class= 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>{{ $message }}</strong>
@@ -58,14 +59,15 @@
             <div class="mt-4">
                 <label for="description" class='block font-medium text-sm text-gray-700 dark:text-gray-300'>Resource
                     description</label>
+
                 <textarea type="text" wire:model= "description"
                     class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full'
                     placeholder="Enter the description of the incident caused for an asset status to be updated eg. by writting the cause of a resource to be non functional as the updated status."></textarea>
                 @error('description')
                     <strong class= 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>{{ $message }}</strong>
                 @enderror
-            </div>
 
+            </div>
 
             <div>
                 <br>
@@ -77,4 +79,20 @@
             </div>
         </form>
     </div>
+
+    <div class="card-box mb-30 p-3">
+
+        <h2 class="h4 pd-20 text-gray-600"><i class="bi bi-plus"></i>
+            View {{ auth()->user()->college_name }} more tasks here
+        </h2>
+        <div class="d-grid space-x-5">
+            
+            <a wire:navigate href="{{ asset('UIMS/view-cnms-report') }}"><i class="fas fa-pencil px-1"></i> Report details</a>
+            <a wire:navigate href="{{ asset('UIMS/inbox-reports') }}"><i class="fas fa-paper-plane px-1"></i> Send report</a>
+            <a wire:navigate href="{{ asset('UIMS/reply-reports') }}"><i class="fas fa-file px-1"></i> View created report</a>
+
+        </div>
+
+    </div>
+
 </div>

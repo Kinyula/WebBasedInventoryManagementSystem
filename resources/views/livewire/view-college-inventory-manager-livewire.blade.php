@@ -38,7 +38,7 @@
                 <tr>
                     <th class="table-plus datatable-nosort font-weight-bold">Username</th>
                     <th class="table-plus datatable-nosort font-weight-bold">Email</th>
-                    <th class="font-weight-bold">Phone number</th>
+                    <th class="font-weight-bold"><i class="bi bi-telephone p-2"></i> Phone number</th>
                     <th class="font-weight-bold">College name</th>
                     <th class="datatable-nosort font-weight-bold">Action</th>
                 </tr>
@@ -58,8 +58,15 @@
 
                         </td>
 
-                        <td style="text-decoration:normal"><i class="bi bi-telephone p-2"></i>
+                        <td style="text-decoration:normal">
+
+                            @php
+                                $srNo = 1;
+                            @endphp
                             @foreach ($college_manager->phone as $PhoneNumber)
+
+                            <br>
+                            <span class="text-danger px-1">{{ $srNo++ }} ) </span>
                                 {{ $PhoneNumber->phone_number }}
                             @endforeach
 

@@ -38,8 +38,10 @@ use App\Http\Controllers\ResourceAllocationController;
 use App\Http\Controllers\SendingReportsController;
 use App\Http\Controllers\UpdateAssetStatusController;
 use App\Http\Controllers\UpdateResourceAllocationStatusController;
+use App\Http\Controllers\UpdateSuppliersController;
 use App\Http\Controllers\ViewAllocatedResourcesController;
 use App\Http\Controllers\ViewAssistantInventoryManagersController;
+use App\Http\Controllers\ViewCategoriesController;
 use App\Http\Controllers\ViewChasCreatedResourcesController;
 use App\Http\Controllers\ViewChasReportController;
 use App\Http\Controllers\ViewChssCreatedResourcesController;
@@ -112,6 +114,7 @@ Route::middleware('auth')->group(function () {
     // Category routes
 
     Route::get('UIMS/add-category', [CategoryController::class, 'index']);
+    Route::get('UIMS/view-category', [ViewCategoriesController::class, 'index']);
 
     // End of category routes
 
@@ -221,7 +224,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('UIMS/cive-report', [CiveReportController::class, 'index']);
     Route::get('UIMS/view-cive-report', [ViewCiveReportController::class, 'index']);
-    
+
     // End of College of Informatics and Virtual Education ( CIVE )
 
     // -------------------------------------------------------------------------------------------------------------------------
@@ -287,6 +290,7 @@ Route::middleware('auth')->group(function () {
     Route::get('UIMS/register-supplier-phone-numbers', [AddSupplierPhoneNumbersController::class, 'index']);
     Route::get('UIMS/register-supplier-services', [AddSupplierServicesController::class, 'index']);
     Route::get('UIMS/view-suppliers', [ViewSuppliersController::class, 'index']);
+    Route::get('UIMS/update-supplier/{id}', [UpdateSuppliersController::class, 'index']);
 
     // End of Suppliers routes
 
@@ -312,6 +316,8 @@ Route::middleware('auth')->group(function () {
     // --------------------------------- Jobs Routes -------------------------------------------------------------------------
 
     Route::get('assistants', [Controller::class, 'export']);
+
+
 });
 
 

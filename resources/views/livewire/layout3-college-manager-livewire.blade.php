@@ -251,7 +251,7 @@
                 <div class="sidebar-menu">
                     <ul id="accordion-menu">
                         <li class="dropdown">
-                            <a href="{{ asset('/dashboard') }}" class="dropdown-toggle">
+                            <a wire:navigate href="{{ asset('/dashboard') }}" class="dropdown-toggle">
                                 <span class="micon bi bi-house"></span><span class="mtext">Home</span>
                             </a>
 
@@ -261,26 +261,21 @@
                                 <span class="micon bi bi-person"></span><span class="mtext">View profile</span>
                             </a>
                             <ul class="submenu">
-                                <li><a href="{{ asset('/profile/' . auth()->user()->id) }}">Profile</a></li>
+                                <li><a wire:navigate href="{{ asset('/profile/' . auth()->user()->id) }}">Profile</a>
+                                </li>
 
                             </ul>
 
 
                             <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/add-phone-number') }}">Add
-                                        phone
-                                        number</a>
+                                <li><a wire:navigate href="{{ asset('UIMS/add-phone-number') }}">
+                                        Phone
+                                        number management</a>
                                 </li>
 
                             </ul>
 
-                            <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/view-phone-numbers') }}">View
-                                        phone
-                                        numbers</a>
-                                </li>
 
-                            </ul>
                         </li>
 
                         @if (auth()->user()->college_name == 'College of Education ( CoED )')
@@ -309,7 +304,15 @@
                                 </ul>
 
                                 <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/qr-code-reader') }}">
+                                    <li><a href="{{ asset('UIMS/view-coed-created-resources') }}">
+                                            Resource allocation to areas
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a wire:navigate href="{{ asset('UIMS/qr-code-reader') }}">
                                             Scan Qr code
                                         </a>
                                     </li>
@@ -331,19 +334,12 @@
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/add-cive-resources') }}">
-                                            Add resource
+                                            Resource management
                                         </a>
                                     </li>
 
                                 </ul>
 
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/view-cive-created-resources') }}">
-                                            View created resources
-                                        </a>
-                                    </li>
-
-                                </ul>
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/qr-code-reader') }}">
@@ -362,19 +358,9 @@
                                         class="mtext">Activities</span>
                                 </a>
 
-
-
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/add-chas-resources') }}">
-                                            Add resource
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/view-chas-created-resources') }}">
-                                            View created resources
+                                            Resource management
                                         </a>
                                     </li>
 
@@ -413,6 +399,15 @@
                                             View created resources
                                         </a>
                                     </li>
+
+                                    <ul class="submenu">
+                                        <li><a href="{{ asset('UIMS/view-coese-created-resources') }}">
+                                                Resource allocation to areas
+                                            </a>
+                                        </li>
+
+                                    </ul>
+
 
                                 </ul>
                                 <ul class="submenu">
@@ -472,16 +467,8 @@
 
 
                                 <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/add-cnms-resources') }}">
-                                            Add resource
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/view-cnms-created-resources') }}">
-                                            View created resources
+                                    <li><a wire:navigate href="{{ asset('UIMS/add-cnms-resources') }}">
+                                            Resource management
                                         </a>
                                     </li>
 
@@ -579,33 +566,12 @@
                                 </a>
 
                                 <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/cive-report') }}">
-                                            Compose your report details</a>
+                                    <li><a wire:navigate href="{{ asset('UIMS/cive-report') }}">
+                                            Report management</a>
                                     </li>
 
                                 </ul>
 
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/view-cive-report') }}">
-                                            View your report details</a>
-                                    </li>
-
-                                </ul>
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/inbox-reports') }}">
-                                            Send report</a>
-                                    </li>
-
-                                </ul>
-
-                                <ul class="submenu">
-
-                                    <li><a href="{{ asset('UIMS/reply-reports') }}">
-                                            View created report</a>
-                                    </li>
-
-                                </ul>
                             </li>
                         @endif
 
@@ -616,29 +582,8 @@
                                 </a>
 
                                 <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/chas-report') }}">
-                                            Compose your report details</a>
-                                    </li>
-
-                                </ul>
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/view-chas-report') }}">
-                                            View your report details</a>
-                                    </li>
-
-                                </ul>
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/inbox-reports') }}">
-                                            Send report</a>
-                                    </li>
-
-                                </ul>
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/reply-reports') }}">
-                                            View created report</a>
+                                    <li><a wire:navigate href="{{ asset('UIMS/chas-report') }}">
+                                            Report management</a>
                                     </li>
 
                                 </ul>
@@ -725,31 +670,11 @@
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/cnms-report') }}">
-                                            Compose your report details</a>
+                                            Report management</a>
                                     </li>
 
                                 </ul>
 
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/view-cnms-report') }}">
-                                            View your report details</a>
-                                    </li>
-
-                                </ul>
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/inbox-reports') }}">
-                                            Send report</a>
-                                    </li>
-
-                                </ul>
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/reply-reports') }}">
-                                            View created report</a>
-                                    </li>
-
-                                </ul>
                             </li>
                         @endif
 
@@ -791,7 +716,9 @@
                         @if (auth()->user()->college_name == 'College of Health and Allied Science ( CHAS )')
 
                             @php
-                                $unread = App\Models\Replies::whereReplyStatus('unread')->count();
+                                $unread = App\Models\Replies::whereReplyStatus('unread')
+                                    ->whereReplyToSpecifiedCollege('College of Health and Allied Science ( CHAS )')
+                                    ->count();
                             @endphp
                             <li class="dropdown">
                                 <a href="javascript:;" class="dropdown-toggle">
@@ -817,8 +744,21 @@
                         @endif
 
                         @if (auth()->user()->college_name == 'College of Natural Mathematical Science ( CNMS ) ')
+                            @php
+                                $unread = App\Models\Replies::whereReplyStatus('unread')
+                                    ->whereReplyToSpecifiedCollege('College of Natural Mathematical Science ( CNMS ) ')
+                                    ->count();
+                            @endphp
+
                             <li class="dropdown">
                                 <a href="javascript:;" class="dropdown-toggle">
+
+                                    @if ($unread > 0)
+                                        <div
+                                            class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-0 -start-0 dark:border-gray-900">
+                                            {{ $unread }}
+                                        </div>
+                                    @endif
 
                                     <span class="micon bi bi-envelope"></span><span class="mtext">Message
                                         reports</span>
@@ -836,8 +776,23 @@
                         @endif
 
                         @if (auth()->user()->college_name == 'College of Education ( CoED )')
+
+                            @php
+                                $unread = App\Models\Replies::whereReplyStatus('unread')
+                                    ->whereReplyToSpecifiedCollege('College of Education ( CoED )')
+                                    ->count();
+                            @endphp
+
+
                             <li class="dropdown">
                                 <a href="javascript:;" class="dropdown-toggle">
+
+                                    @if ($unread > 0)
+                                        <div
+                                            class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-0 -start-0 dark:border-gray-900">
+                                            {{ $unread }}
+                                        </div>
+                                    @endif
 
                                     <span class="micon bi bi-envelope"></span><span class="mtext">Message
                                         reports</span>
@@ -855,8 +810,21 @@
                         @endif
 
                         @if (auth()->user()->college_name == 'College of Humanities and Social Science ( CHSS )')
+                            @php
+                                $unread = App\Models\Replies::whereReplyStatus('unread')
+                                    ->whereReplyToSpecifiedCollege('College of Humanities and Social Science ( CHSS )')
+                                    ->count();
+                            @endphp
+
                             <li class="dropdown">
                                 <a href="javascript:;" class="dropdown-toggle">
+
+                                    @if ($unread > 0)
+                                        <div
+                                            class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-0 -start-0 dark:border-gray-900">
+                                            {{ $unread }}
+                                        </div>
+                                    @endif
 
                                     <span class="micon bi bi-envelope"></span><span class="mtext">Message
                                         reports</span>
@@ -875,7 +843,9 @@
                         @if (auth()->user()->college_name == 'College of Business and Economics ( CoBE )')
 
                             @php
-                                $unread = App\Models\Replies::whereReplyStatus('unread')->count();
+                                $unread = App\Models\Replies::whereReplyStatus('unread')
+                                    ->whereReplyToSpecifiedCollege('College of Business and Economics ( CoBE )')
+                                    ->count();
                             @endphp
 
                             <li class="dropdown">
@@ -902,11 +872,16 @@
                         @endif
 
                         @if (auth()->user()->college_name == 'College of Earth Sciences and Engineering ( CoESE )')
+
+                            @php
+                                $unread = App\Models\Replies::whereReplyStatus('unread')
+                                    ->whereReplyToSpecifiedCollege(
+                                        'College of Earth Sciences and Engineering ( CoESE )',
+                                    )
+                                    ->count();
+                            @endphp
                             <li class="dropdown">
 
-                                @php
-                                    $unread = App\Models\Replies::whereReplyStatus('unread')->count();
-                                @endphp
 
                                 <a href="javascript:;" class="dropdown-toggle">
 
@@ -935,7 +910,11 @@
                             <li class="dropdown">
 
                                 @php
-                                    $unread = App\Models\Replies::whereReplyStatus('unread')->count();
+                                    $unread = App\Models\Replies::whereReplyStatus('unread')
+                                        ->whereReplyToSpecifiedCollege(
+                                            'College of Informatics and Virtual Education ( CIVE )',
+                                        )
+                                        ->count();
                                 @endphp
 
                                 <a href="javascript:;" class="dropdown-toggle">
@@ -951,7 +930,7 @@
                                 </a>
 
                                 <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/messages') }}">
+                                    <li><a wire:navigate href="{{ asset('UIMS/messages') }}">
                                             View reply messages </a>
                                     </li>
 

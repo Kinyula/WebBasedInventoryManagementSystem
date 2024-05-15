@@ -260,20 +260,14 @@
 
                             </ul>
 
-
                             <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/add-phone-number') }}">Add
-                                        phone
-                                        number</a></li>
+                                <li><a wire:navigate href="{{ asset('UIMS/add-phone-number') }}">
+                                        Phone
+                                        number management</a>
+                                </li>
 
                             </ul>
 
-                            <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/view-phone-numbers') }}">View
-                                        phone
-                                        numbers</a></li>
-
-                            </ul>
                         </li>
 
 
@@ -286,14 +280,7 @@
 
                             <ul class="submenu">
                                 <li><a href="{{ asset('UIMS/add-category') }}">
-                                        Add category
-                                    </a></li>
-
-                            </ul>
-
-                            <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/add-asset') }}">
-                                        Add an asset
+                                        Asset management
                                     </a></li>
 
                             </ul>
@@ -307,14 +294,7 @@
 
                             <ul class="submenu">
                                 <li><a href="{{ asset('UIMS/resource-allocation') }}">
-                                        Resources allocation
-                                    </a></li>
-
-                            </ul>
-
-                            <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/view-resource-allocation') }}">
-                                        View resources allocated
+                                        Resources allocation management
                                     </a></li>
 
                             </ul>
@@ -326,42 +306,22 @@
                             </a>
 
                             <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/register-assistant') }}">Add assistant inventory
-                                        manager</a></li>
+                                <li><a href="{{ asset('UIMS/register-assistant') }}">
+                                        Assistant inventory manager</a></li>
 
                             </ul>
 
 
-                            <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/view-assistants') }}">View assistant inventory
-                                        managers</a></li>
-
-                            </ul>
 
                         </li>
 
                         <li class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle">
+                            <a  href="javascript:;" class="dropdown-toggle">
                                 <span class="micon bi bi-people"></span><span class="mtext">Suppliers</span>
                             </a>
 
                             <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/register-suppliers') }}">Add supplier</a></li>
-
-                            </ul>
-
-                            <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/register-supplier-phone-numbers') }}">Add supplier 's contacts</a></li>
-
-                            </ul>
-
-                            <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/register-supplier-services') }}">Add supplier 's services</a></li>
-
-                            </ul>
-
-                            <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/view-suppliers') }}">View suppliers</a></li>
+                                <li><a wire:navigate href="{{ asset('UIMS/register-suppliers') }}">Supplier management</a></li>
 
                             </ul>
 

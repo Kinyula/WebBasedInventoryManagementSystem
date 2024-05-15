@@ -19,7 +19,7 @@
                     <strong class= 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>{{ $message }}</strong>
                 @enderror
             </div>
-            
+
             <div>
                 <br>
                 <button type="submit"
@@ -30,4 +30,18 @@
             </div>
         </form>
     </div>
+
+    <div class="card-box mb-30 p-3">
+
+        <h2 class="h4 pd-20 text-gray-600"><i class="bi bi-plus"></i>
+            View  more tasks here
+        </h2>
+        <div class="d-grid space-x-5">
+            <a wire:navigate href="{{ asset('UIMS/add-asset') }}"><i class="fas fa-pencil"></i> Add an asset</a>
+            <a wire:navigate href="{{ asset('UIMS/view-category') }}"><i class="fas fa-eye"></i> View categories</a>
+            {{-- <a wire:navigate href="{{ asset('UIMS/') }}">Resource allocation to areas</a> --}}
+        </div>
+
+    </div>
+
 </div>

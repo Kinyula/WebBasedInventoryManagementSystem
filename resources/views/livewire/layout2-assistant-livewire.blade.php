@@ -261,18 +261,13 @@
 
 
                             <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/add-phone-number') }}">Add
-                                        phone
-                                        number</a></li>
+                                <li><a wire:navigate href="{{ asset('UIMS/add-phone-number') }}">
+                                        Phone
+                                        number management</a>
+                                </li>
 
                             </ul>
 
-                            <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/view-phone-numbers') }}">View
-                                        phone
-                                        numbers</a></li>
-
-                            </ul>
                         </li>
 
                         <li class="dropdown">
@@ -282,19 +277,11 @@
 
 
                             <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/college-resource-allocation') }}">
-                                        Resource allocation to college
+                                <li><a wire:navigate href="{{ asset('UIMS/college-resource-allocation') }}">
+                                        Resource allocation management
                                     </a></li>
 
                             </ul>
-
-                            <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/view-resource-allocation') }}">
-                                        View allocated resources from university Inventory manager
-                                    </a></li>
-
-                            </ul>
-
 
                         </li>
 
@@ -341,7 +328,7 @@
 
                             <ul class="submenu">
                                 <li><a href="{{ asset('UIMS/add-college-managers') }}">
-                                        Add college managers
+                                        College inventory manager
                                     </a></li>
 
                             </ul>

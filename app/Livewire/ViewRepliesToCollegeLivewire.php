@@ -19,7 +19,7 @@ class ViewRepliesToCollegeLivewire extends Component
 
         if (auth()->user()->college_name == 'College of Natural Mathematical Science ( CNMS ) ') {
 
-            return view('livewire.view-replies-to-college-livewire', ['Replies' => Replies::with(['user'])->orderByDesc('id')->where('college_name', 'College of Natural Mathematical Science ( CNMS ) ')->paginate(15)]);
+            return view('livewire.view-replies-to-college-livewire', ['Replies' => Replies::with(['user'])->orderByDesc('id')->where('reply_to_specified_college', 'College of Natural Mathematical Science ( CNMS ) ')->paginate(15)]);
 
         }
 
