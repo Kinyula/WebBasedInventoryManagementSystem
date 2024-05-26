@@ -3,7 +3,7 @@
 
 
             <h2 class="h4 pd-20 text-gray-600"><i class="bi bi-plus"></i>
-                Replies to reports sent
+                Reply is sent here...
             </h2>
 
 

@@ -21,11 +21,11 @@
             <div class="mt-3">
                 <label for="machines" class='block font-medium text-sm text-gray-700 dark:text-gray-300'>Phone
                     number</label>
-                <input type="text" wire:model= "PhoneNumber"
+                <input type="number" wire:model= "PhoneNumber"
                     class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full'
-                    placeholder="Enter phone number">
+                    placeholder="Enter phone number eg. +255 XXX  XXX  XXX">
                 @error('PhoneNumber')
-                    <strong class= 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>{{ $message }}</strong>
+                    <strong class= 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2 '>{{ $message }}</strong>
                 @enderror
             </div>
 
@@ -42,8 +42,13 @@
 
     <div class="card-box mb-30 p-3">
 
-        <h2 class="h4 pd-20 text-gray-600"><i class="bi bi-plus"></i>
-            View {{ auth()->user()->email }} 's phone numbers
+        <h2 class="h4 pd-20 text-gray-600"><i class="bi bi-eye"></i>
+            @if (auth()->user()->email == auth()->user()->email)
+
+            @else
+
+            @endif
+            View your phone numbers
         </h2>
         <div class="d-grid space-x-5">
             <a wire:navigate href="{{ asset('UIMS/view-phone-numbers') }}"><i class="fas fa-phone px-1"></i>

@@ -44,7 +44,7 @@
                 <br>
                 <button type="submit"
                     class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ms-4">
-                    <i class="fa-solid fa-paper-plane px-1"></i>
+                    <i class="fa-solid fa-plus px-1"></i>
                     Add supplier
                 </button>
             </div>
@@ -54,7 +54,12 @@
     <div class="card-box mb-30 p-3">
 
         <h2 class="h4 pd-20 text-gray-600"><i class="bi bi-plus"></i>
-            View {{ auth()->user()->email }} ' s more tasks here
+            @if (auth()->user()->email == auth()->user()->email)
+            View your more tasks here
+            @else
+
+            @endif
+
         </h2>
         <div class="d-grid space-x-5">
             <a wire:navigate href="{{ asset('UIMS/register-supplier-phone-numbers') }}"><i class="fas fa-phone px-1"></i> Add supplier ' s contacts</a>

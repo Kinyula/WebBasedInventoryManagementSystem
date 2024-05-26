@@ -16,11 +16,11 @@ class AddPhoneNumbersLivewire extends Component
     }
 
     public function addNewPhoneNumber(){
-        $this->validate(['PhoneNumber' => 'required|digits:10']);
+        $this->validate(['PhoneNumber' => 'required|digits:12']);
         $phoneNumber = new PhoneNumber();
         $phoneNumber->user_id = auth()->user()->id;
         $phoneNumber->phone_number = $this->PhoneNumber;
-        
+
         $phoneNumber->save();
 
         session()->flash('phone', 'Phone number is added successfully.');

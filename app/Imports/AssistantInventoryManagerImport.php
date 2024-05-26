@@ -3,19 +3,26 @@
 namespace App\Imports;
 
 use App\Models\User;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class AssistantInventoryManagerImport implements ToCollection, WithChunkReading, WithHeadingRow
+
+class AssistantInventoryManagerImport implements
+ToCollection,
+WithChunkReading,
+WithHeadingRow,
+ShouldQueue
 {
 
     /**
      * @param Collection $collection
      */
     private $assistant;
-    
+
     public function __construct()
     {
         $this->assistant = User::with(['phone'])->get(['id', 'email'])->pluck('id', 'email');
@@ -27,7 +34,7 @@ class AssistantInventoryManagerImport implements ToCollection, WithChunkReading,
             $user = User::create([
                 'username' => $row['username'],
                 'email' => $row['email'],
-                'password' => $row['password']
+                'password' => Hash::make($row['password'])
 
             ]);
 
@@ -41,6 +48,6 @@ class AssistantInventoryManagerImport implements ToCollection, WithChunkReading,
     public function chunkSize(): int
     {
 
-        return 5000;
+        return 100;
     }
 }

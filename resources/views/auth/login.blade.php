@@ -40,7 +40,7 @@
             @endif
 
             <x-primary-button class="ms-3">
-                <i class="me-2 fa-solid fa-sign-in"></i>
+                <i class="me-2 fa-solid fa-sign-in px-1"></i>
                 {{ __('Log in') }}
             </x-primary-button>
         </div>

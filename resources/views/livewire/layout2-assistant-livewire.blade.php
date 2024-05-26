@@ -287,6 +287,45 @@
 
                         <li class="dropdown">
                             @php
+                                $unread = App\Models\ReportRequest::whereRequestStatus('unread')->count();
+                                $notReceived = App\Models\ReportRequest::whereConfirmStatus('Not received')->count();
+                            @endphp
+                            <a href="javascript:;" class="dropdown-toggle">
+
+                                @if ($unread > 0 && $notReceived)
+                                    <div
+                                        class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-0 -start-0 dark:border-gray-900">
+                                        {{ $unread }}
+                                    </div>
+                                @endif
+
+                                <span class="micon bi bi-folder"></span><span class="mtext">Requests</span>
+                            </a>
+
+                            <ul class="submenu">
+                                @if ($unread > 0 && $notReceived)
+                                    <div
+                                        class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-0 -start-0 dark:border-gray-900">
+                                        {{ $unread }}
+                                    </div>
+                                @endif
+                                <li><a href="{{ asset('UIMS/inbox-requests') }}">
+                                        Inbox
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                            <ul class="submenu">
+                                <li><a href="{{ asset('UIMS/reply-requests') }}">
+                                        Reply report</a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            @php
                                 $unread = App\Models\SendingReport::whereReportStatus('unread')->count();
                             @endphp
                             <a href="javascript:;" class="dropdown-toggle">
@@ -332,14 +371,6 @@
                                     </a></li>
 
                             </ul>
-
-                            <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/view-college-managers') }}">
-                                        View college managers
-                                    </a></li>
-
-                            </ul>
-
 
                         </li>
 

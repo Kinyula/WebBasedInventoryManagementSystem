@@ -29,13 +29,17 @@ use App\Http\Controllers\EditAssetController;
 use App\Http\Controllers\EditCiveResourceStatusController;
 use App\Http\Controllers\EditCollegeNameController;
 use App\Http\Controllers\EditResourcesAllocationController;
+use App\Http\Controllers\MakeReportRequestsController;
 use App\Http\Controllers\MessagingReportController;
 use App\Http\Controllers\PhoneNumberController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QrCodeDataController;
 use App\Http\Controllers\QrCodeReaderController;
 use App\Http\Controllers\ResourceAllocationController;
+use App\Http\Controllers\ResourceAllocationToAreasController;
 use App\Http\Controllers\SendingReportsController;
+use App\Http\Controllers\SendingRequestsController;
+use App\Http\Controllers\UpdateAreaOfAllocationController;
 use App\Http\Controllers\UpdateAssetStatusController;
 use App\Http\Controllers\UpdateResourceAllocationStatusController;
 use App\Http\Controllers\UpdateSuppliersController;
@@ -61,6 +65,8 @@ use App\Http\Controllers\ViewCollegeInventoryManagerController;
 use App\Http\Controllers\ViewItemPDFController;
 use App\Http\Controllers\ViewPhoneNumbersController;
 use App\Http\Controllers\ViewReportsSentController;
+use App\Http\Controllers\ViewRequestsController;
+use App\Http\Controllers\ViewResourceAllocationToAreasController;
 use App\Http\Controllers\ViewSuppliersController;
 use App\Models\Asset;
 use Illuminate\Support\Facades\Route;
@@ -158,6 +164,9 @@ Route::middleware('auth')->group(function () {
     Route::get('UIMS/update-resource-allocation/{id}', [UpdateResourceAllocationStatusController::class, 'index']);
     Route::get('UIMS/college-resource-allocation', [CollegeResourceAllocationController::class, 'index']);
     Route::get('UIMS/view-college-resource-allocation', [ViewCollegeAllocationsController::class, 'index']);
+    Route::get('UIMS/resource-allocation-to-areas', [ResourceAllocationToAreasController::class, 'index']);
+    Route::get('UIMS/view-resource-allocation-to-areas', [ViewResourceAllocationToAreasController::class, 'index']);
+    Route::get('UIMS/update-areas/{id}', [UpdateAreaOfAllocationController::class, 'index']);
 
 
     // End of Resource Allocations routes
@@ -179,6 +188,7 @@ Route::middleware('auth')->group(function () {
     Route::get('UIMS/view-college-managers', [ViewCollegeInventoryManagerController::class, 'index']);
     Route::get('UIMS/edit-college-name/{id}', [EditCollegeNameController::class, 'index']);
     Route::get('UIMS/report', [CollegeInventoryManagerReportController::class, 'index']);
+    Route::get('UIMS/make-report-request', [MakeReportRequestsController::class, 'index']);
 
     // End of College Manager routes
 
@@ -308,6 +318,14 @@ Route::middleware('auth')->group(function () {
     Route::get('UIMS/reply-reports', [ViewReportsSentController::class, 'index']);
 
     // End of Sending Reports Routes -----------------------------------------------------------------------------
+
+    //------------------------------------------- Sending Requests Routes ------------------------------------------------------------------
+
+    Route::get('UIMS/inbox-requests', [SendingRequestsController::class, 'index']);
+    Route::get('UIMS/reply-requests', [ViewRequestsController::class, 'index']);
+
+    // ------------------------------------------ End of Sending Requests Routes ---------------------------------------
+
 
     //------------------------------------------- Messaging Reports Routes -------------------------------------------------
 

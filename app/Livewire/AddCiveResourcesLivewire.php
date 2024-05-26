@@ -14,9 +14,11 @@ class AddCiveResourcesLivewire extends Component
     public $category_type, $resource_name, $college_name,
     $university_store_resource_name, $civeResourceImport, $civeResource, $import_quantity;
 
+    public $searchUniversityResourceName = '';
+
     public function render()
     {
-        return view('livewire.add-cive-resources-livewire', ['categories' => Category::get(), 'Assets' =>Asset::get()]);
+        return view('livewire.add-cive-resources-livewire', ['categories' => Category::get(), 'Assets' =>Asset::search($this->searchUniversityResourceName)->get()]);
     }
 
     public function addCiveResources()

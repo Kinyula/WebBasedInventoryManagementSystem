@@ -59,9 +59,16 @@
 
                         </td>
 
-                        <td style="text-decoration:normal"><i class="bi bi-telephone p-2"></i>
+                        <td style="text-decoration:normal">
+                            @php
+                                $srNo = 1;
+                            @endphp
                             @foreach ($supplier->phone as $supplier_phone_number)
+                            <br>
+                            <span class="text-danger">{{ $srNo++ }})</span>
+                            <i class="bi bi-telephone p-2 text-danger"></i>
                                 {{ $supplier_phone_number->phone_number }}
+
                             @endforeach
 
                         </td>

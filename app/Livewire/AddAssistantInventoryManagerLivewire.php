@@ -1,20 +1,27 @@
 <?php
 
 namespace App\Livewire;
-
-
-use App\Jobs\AssistantImportProcess;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\AssistantInventoryManagerImport;
+use Illuminate\Support\Facades\File;
+use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\AssistantInventoryManagerExport;
+use App\Jobs\AssistantImportProcess;
 
 
 class AddAssistantInventoryManagerLivewire extends Component
 {
     use WithFileUploads;
+
+    use WithPagination;
+
+    public $assistantSearch = '';
+
+    protected $paginationTheme = 'tailwind';
 
     public $role_id = 1, $username, $email, $password,
          $profile_image, $assistantInventoryManager;
@@ -26,7 +33,11 @@ class AddAssistantInventoryManagerLivewire extends Component
 
     public function render()
     {
-        return view('livewire.add-assistant-inventory-manager-livewire');
+        return view('livewire.add-assistant-inventory-manager-livewire',[
+
+            'Assistants' => User::search($this->assistantSearch)->with(['phone'])->where('role_id', '=', '1')->paginate(15)
+
+        ]);
     }
 
 
@@ -77,12 +88,50 @@ class AddAssistantInventoryManagerLivewire extends Component
 
         $this->validate(['assistantInventoryManager' => 'required|mimes:xlsx,xls,csv']);
 
+        // dd($this->assistantInventoryManager);
 
-        dispatch(new AssistantImportProcess($this->assistantInventoryManager));
+        $filePath = $this->assistantInventoryManager->store('public/assistants');
 
 
-        Excel::import(new AssistantInventoryManagerImport, $this->assistantInventoryManager);
+        // dispatch(new AssistantImportProcess($filePath))->delay(now()->addSeconds(5));
 
-        session()->flash('message', 'We will notify you shortly...');
+
+
+        // if (File::exists($filePath)) {
+        //     File::delete()
+        // }
+
+        Excel::queueImport(new AssistantInventoryManagerImport, $filePath);
+
+
+        $this->reset(['assistantInventoryManager']);
+
+        session()->flash('message', 'Done...');
+
+    }
+
+
+    public function exportAssistantInventoryManagers()
+    {
+
+        return Excel::download(new AssistantInventoryManagerExport, 'UDOM-assistant-inventory-managers.csv');
+
+        session()->flash('exportMessage', 'UDOM Assistant Inventory Managers are exported successfully.');
+    }
+
+    public function deleteAssistant($id)
+    {
+        $assistant = User::findOrFail($id);
+
+        $assistant_profile = $assistant->profile_image;
+
+        if (File::exists(public_path('storage/profile_images/'.$assistant_profile))) {
+
+            File::delete(public_path('storage/profile_images/'.$assistant_profile));
+
+            $assistant->delete();
+        }
+
+        session()->flash('deleteAssistant', 'Assistant is deleted successfully.');
     }
 }

@@ -54,6 +54,7 @@
             </a>
 
             <x-primary-button class="ms-4">
+                <i class="fas fa-user-plus px-1"></i>
                 {{ __('Register') }}
             </x-primary-button>
         </div>

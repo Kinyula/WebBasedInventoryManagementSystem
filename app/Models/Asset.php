@@ -36,4 +36,11 @@ class Asset extends Model
     {
         return $this->hasMany(ResourceAllocation::class);
     }
+
+    public function cost(){
+
+        
+        return $this->hasOne(AssetCost::class);
+
+    }
 }

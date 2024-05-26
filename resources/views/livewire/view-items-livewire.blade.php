@@ -49,7 +49,7 @@
                     <tr>
 
                         <td>
-                            <h5 class="font-16">{{ $asset->category->category_type }}</h5>
+                            <h5 class="font-16">{{ $asset->category->category_type??NULL }}</h5>
 
                         </td>
                         <td style="text-decoration:normal"><i class="bi bi-pencil p-2"></i>

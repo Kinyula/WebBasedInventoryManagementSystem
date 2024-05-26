@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ResourceAllocationToCollege extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'asset_id', 'asset_quantity', 'resource_allocated_college', 'status', 'asset_status'];
+    
+    protected $fillable = ['user_id', 'asset_id', 'asset_quantity', 'resource_allocated_college', 'status', 'asset_status', 'confirm_status'];
 
     public static function search($search)
     {

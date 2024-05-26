@@ -7,6 +7,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use App\Imports\AssistantInventoryManagerImport;
+use App\Models\User;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class AssistantImportProcess implements ShouldQueue
@@ -18,7 +21,7 @@ class AssistantImportProcess implements ShouldQueue
      */
     public function __construct(
 
-
+        public $file_path
     )
     {
 
@@ -30,6 +33,7 @@ class AssistantImportProcess implements ShouldQueue
     public function handle(): void
     {
 
+            Excel::queueImport(new AssistantInventoryManagerImport, $this->file_path);
 
     }
 }

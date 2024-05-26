@@ -110,4 +110,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Replies::class);
     }
+
+    public function areas(){
+
+        return $this->hasMany(AreaOfAllocation::class);
+        
+    }
 }

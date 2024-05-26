@@ -19,7 +19,7 @@
         <!-- Google Font -->
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
             rel="stylesheet" />
-            <link rel="stylesheet" href="{{ asset('fontAwesome/css/all.css') }}">
+        <link rel="stylesheet" href="{{ asset('fontAwesome/css/all.css') }}">
 
         <!-- CSS -->
         <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/core.css') }}" />
@@ -69,20 +69,19 @@
     <body class="font-sans antialiased">
 
         @if (!Auth::check())
-        <div class="pre-loader">
-            <div class="pre-loader-box">
-                <div class="loader-logo">
-                    <img src="{{ asset('vendors/images/udom.png') }}" alt="" />
+            <div class="pre-loader">
+                <div class="pre-loader-box">
+                    <div class="loader-logo">
+                        <img src="{{ asset('vendors/images/udom.png') }}" alt="" />
+                    </div>
+                    <div class="loader-progress" id="progress_div">
+                        <div class="bar" id="bar1"></div>
+                    </div>
+                    <div class="percent" id="percent1">0%</div>
+                    <div class="loading-text">Loading...</div>
                 </div>
-                <div class="loader-progress" id="progress_div">
-                    <div class="bar" id="bar1"></div>
-                </div>
-                <div class="percent" id="percent1">0%</div>
-                <div class="loading-text">Loading...</div>
             </div>
-        </div>
         @else
-
         @endif
 
 
@@ -316,12 +315,13 @@
                         </li>
 
                         <li class="dropdown">
-                            <a  href="javascript:;" class="dropdown-toggle">
+                            <a href="javascript:;" class="dropdown-toggle">
                                 <span class="micon bi bi-people"></span><span class="mtext">Suppliers</span>
                             </a>
 
                             <ul class="submenu">
-                                <li><a wire:navigate href="{{ asset('UIMS/register-suppliers') }}">Supplier management</a></li>
+                                <li><a wire:navigate href="{{ asset('UIMS/register-suppliers') }}">Supplier
+                                        management</a></li>
 
                             </ul>
 

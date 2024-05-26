@@ -46,16 +46,18 @@
                 @enderror
             </div>
 
+
             <div class="mt-3">
                 <label for="category_type" class='block font-medium text-sm text-gray-700 dark:text-gray-300'>University
                     store resource
                     name</label>
+                    <div class="search mt-50"><input type="search" wire:model.live = 'searchUniversityResourceName' class="w-100" placeholder="Search the ID of the resource or the RESOURCE NAME for the report"></div>
                 <select type="select" wire:model= "university_store_resource_name"
                     class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full'>
                     <option value="">-- Select university store resource name ( It has to be the same as that of a
                         resource name. ) --</option>
                     @foreach ($Assets as $asset)
-                        <option value="{{ $asset->id }}">{{ $asset->asset_type }}</option>
+                        <option value="{{ $asset->id }}">ID : {{ $asset->id }} -- Resource name :  {{ $asset->asset_type }}</option>
                     @endforeach
                 </select>
                 @error('university_store_resource_name')
@@ -99,11 +101,12 @@
     <div class="card-box mb-30 p-3">
 
         <h2 class="h4 pd-20 text-gray-600"><i class="bi bi-plus"></i>
-            View {{ auth()->user()->college_name }} more tasks here
+            View more tasks here
         </h2>
         <div class="d-grid space-x-5">
-            <a wire:navigate href="{{ asset('UIMS/view-cive-created-resources') }}">Created resources</a>
-            <a wire:navigate href="{{ asset('UIMS/') }}">Resource allocation to areas</a>
+            <a wire:navigate href="{{ asset('UIMS/view-cive-created-resources') }}"><i class="fas fa-book-open px-1"></i> View created resources</a>
+            <a wire:navigate href="{{ asset('UIMS/resource-allocation-to-areas') }}"><i class="fas fa-pencil px-1"></i> Allocate resources to areas</a>
+            <a wire:navigate href="{{ asset('UIMS/view-resource-allocation-to-areas') }}"><i class="fas fa-eye px-1"></i> View allocated resources to areas</a>
         </div>
 
     </div>

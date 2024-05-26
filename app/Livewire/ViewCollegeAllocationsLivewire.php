@@ -400,4 +400,32 @@ class ViewCollegeAllocationsLivewire extends Component
         session()->flash('deleteResource', 'Resource is deleted successfully.');
 
     }
+
+    public function updateSuccessConfirmStatus($id) {
+
+
+
+        $requestUpdate = ResourceAllocationToCollege::findOrFail($id);
+
+        $requestUpdate->confirm_status = 'Received';
+
+        $requestUpdate->update();
+
+        session()->flash('success','Successfully updated');
+    }
+
+    public function updateErrorConfirmStatus($id) {
+
+
+
+        $requestUpdate = ResourceAllocationToCollege::findOrFail($id);
+
+        $requestUpdate->confirm_status = 'Not received';
+
+        $requestUpdate->update();
+
+
+
+        session()->flash('error','Successfully updated');
+    }
 }
