@@ -53,4 +53,6 @@ class ResourceAllocationsLivewire extends Component
 
         session()->flash('allocateResourceMessage', 'Resource is allocated successfully.');
     }
+
+
 }

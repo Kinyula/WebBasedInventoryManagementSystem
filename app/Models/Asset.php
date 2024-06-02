@@ -9,7 +9,9 @@ class Asset extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['category', 'asset_type','asset_status'];
+    protected $fillable = ['category', 'asset_type','asset_status','asset_cost', 'supplier_id', 'user_id'];
+
+    protected $casts = ['asset_cost' => 'float'];
 
     public static function search($search)
     {
@@ -39,8 +41,20 @@ class Asset extends Model
 
     public function cost(){
 
-        
+
         return $this->hasOne(AssetCost::class);
 
+    }
+
+    public function supplier(){
+
+        return $this->belongsTo(Supplier::class, 'supplier_id', 'id');
+
+    }
+
+    public function user(){
+
+        return $this->belongsTo(User::class, 'user_id', 'id');
+        
     }
 }

@@ -17,7 +17,8 @@ class Supplier extends Model
         return empty($search) ? static::query() : static::query()
 
             ->where("company_name", "ILIKE", "%$search%")
-            ->orWhere("company_location", "ILIKE", "%$search%");
+            ->orWhere("company_location", "ILIKE", "%$search%")
+            ->orWhere("id", "ILIKE", "%$search%");
     }
 
     public function phone()
@@ -29,4 +30,12 @@ class Supplier extends Model
     {
         return $this->hasMany(SupplierOfferedService::class);
     }
+
+    public function assets()
+    {
+
+        return $this->hasMany(Asset::class);
+
+    }
+
 }

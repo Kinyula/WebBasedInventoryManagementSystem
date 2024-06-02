@@ -84,7 +84,6 @@
         @else
         @endif
 
-
         <div class="header">
             <div class="header-left">
                 <div class="menu-icon bi bi-list"></div>
@@ -255,7 +254,7 @@
                                 <span class="micon bi bi-person"></span><span class="mtext">View profile</span>
                             </a>
                             <ul class="submenu">
-                                <li><a href="{{ asset('/profile/' . auth()->user()->id) }}">Profile</a></li>
+                                <li><a wire:navigate href="{{ asset('/profile/' . auth()->user()->id) }}">Profile</a></li>
 
                             </ul>
 
@@ -271,14 +270,14 @@
 
 
                         <li class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle">
+                            <a href="javascript:;" class="dropdown-toggle ">
                                 <span class="micon bi bi-pencil-square"></span><span class="mtext">Activities</span>
                             </a>
 
 
 
                             <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/add-category') }}">
+                                <li><a class="active:bg-red-800" wire:navigate href="{{ asset('UIMS/add-category') }}">
                                         Asset management
                                     </a></li>
 
@@ -292,7 +291,7 @@
                             </ul> --}}
 
                             <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/resource-allocation') }}">
+                                <li><a wire:navigate href="{{ asset('UIMS/resource-allocation') }}">
                                         Resources allocation management
                                     </a></li>
 
@@ -305,7 +304,7 @@
                             </a>
 
                             <ul class="submenu">
-                                <li><a href="{{ asset('UIMS/register-assistant') }}">
+                                <li><a wire:navigate href="{{ asset('UIMS/register-assistant') }}">
                                         Assistant inventory manager</a></li>
 
                             </ul>

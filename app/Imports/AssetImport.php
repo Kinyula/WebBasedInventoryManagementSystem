@@ -21,7 +21,9 @@ class AssetImport implements ToCollection , WithChunkReading, WithHeadingRow, Sh
             $asset = Asset::create([
                 'category_id' => $row['category_id'],
                 'asset_type' => $row['asset_type'],
-                'asset_status' => $row['asset_status']
+                'asset_status' => $row['asset_status'],
+                'asset_cost' => $row['asset_cost'],
+                'supplier_id' => $row['supplier_id']
 
             ]);
 

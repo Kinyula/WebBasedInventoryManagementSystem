@@ -1,5 +1,6 @@
 <div>
 
+
     <div class="card-box mb-30 p-3">
 
         @if (auth()->user()->college_name == 'Not set')
@@ -9,6 +10,10 @@
         @else
         @endif
 
+    </div>
+
+    <div class="card-box mb-30 p-3">
+        <a wire:navigate href="{{ asset('UIMS/view-cive-created-resources') }}">v</a>
     </div>
 
     <div class="card-box mb-30 p-3">

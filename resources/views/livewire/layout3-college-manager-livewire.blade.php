@@ -632,6 +632,7 @@
                                 </a>
 
                                 <ul class="submenu">
+                                    
                                     <li><a href="{{ asset('UIMS/chss-report') }}">
                                             Report management</a>
                                     </li>
@@ -805,7 +806,7 @@
                                     ->whereReplyToSpecifiedCollege(
                                         'College of Earth Sciences and Engineering ( CoESE )',
                                     )
-                                    ->count(); 
+                                    ->count();
                             @endphp
                             <li class="dropdown">
 

@@ -8,14 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class ChasResource extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'category_id', 'asset_id' ,'resource_name', 'status', 'college_name','asset_status'];
+    protected $fillable = ['user_id', 'category_id', 'asset_id', 'resource_name', 'status', 'college_name', 'asset_status', 'allocation_status'];
 
 
     public static function search($search)
     {
         return empty($search) ? static::query() : static::query()
 
-            ->where("college_name", "ILIKE", "%$search%")
+            ->where("allocation_status", "ILIKE", "%$search%")
+            ->OrWhere("college_name", "ILIKE", "%$search%")
             ->orWhere("asset_status", "ILIKE", "%$search%")
             ->orWhere("resource_name", "ILIKE", "%$search%")
             ->orWhere("id", "ILIKE", "%$search%");
@@ -49,6 +50,12 @@ class ChasResource extends Model
 
     public function chssResources()
     {
-        return $this->belongsTo(ChssResource::class,'chss_resource_id','id');
+        return $this->belongsTo(ChssResource::class, 'chss_resource_id', 'id');
+    }
+
+    public function areaOfAllocation()
+    {
+
+        return $this->hasMany(AreaOfAllocation::class);
     }
 }

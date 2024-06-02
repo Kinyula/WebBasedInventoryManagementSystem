@@ -261,7 +261,8 @@
 
 
                             <ul class="submenu">
-                                <li><a wire:navigate href="{{ asset('UIMS/add-phone-number') }}">
+
+                                <li><a wire:navigate href = "{{ asset('UIMS/add-phone-number') }}">
                                         Phone
                                         number management</a>
                                 </li>

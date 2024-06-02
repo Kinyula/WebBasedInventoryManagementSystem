@@ -56,7 +56,7 @@
 
                     <th class="font-weight-bold">College name</th>
 
-                    {{-- <th class="font-weight-bold">Report image</th> --}}
+                    <th class="font-weight-bold">Request submitted</th>
 
                     <th class="font-weight-bold">Submission time</th>
 
@@ -86,6 +86,10 @@
                         </td> --}}
 
                         <td>
+                            {{ $request->request }}
+                        </td>
+
+                        <td>
                             <span>{{ $request->updated_at->format('d M Y h:i:s') }}</span>
                         </td>
 
@@ -101,7 +105,7 @@
                             @endif
 
                         </td>
-                        
+
                         <td>
 
                             <div class="dropdown">

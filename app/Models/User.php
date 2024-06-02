@@ -114,6 +114,13 @@ class User extends Authenticatable
     public function areas(){
 
         return $this->hasMany(AreaOfAllocation::class);
-        
+
+    }
+
+    public function assets()
+    {
+
+        return $this->hasMany(Asset::class);
+
     }
 }

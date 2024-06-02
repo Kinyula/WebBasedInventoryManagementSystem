@@ -129,9 +129,14 @@ class AddAssistantInventoryManagerLivewire extends Component
 
             File::delete(public_path('storage/profile_images/'.$assistant_profile));
 
-            $assistant->delete();
+
         }
 
+        $assistant->delete();
+
         session()->flash('deleteAssistant', 'Assistant is deleted successfully.');
+
+
+
     }
 }

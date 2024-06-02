@@ -9,10 +9,10 @@ class AreaOfAllocation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'resource', 'quantity', 'college_name', 'area_of_allocation'];
+    protected $fillable = ['user_id', 'quantity', 'college_name', 'area_of_allocation', 'chas_resource_id'];
 
     public static function search($search)
-    
+
     {
         return empty($search) ? static::query() : static::query()
 
@@ -28,5 +28,12 @@ class AreaOfAllocation extends Model
     {
 
         return $this->belongsTo(User::class, 'user_id', 'id');
+
+    }
+
+    public function chasAreas(){
+
+        return $this->belongsTo(ChasResource::class , 'chas_resource_id', 'id');
+        
     }
 }

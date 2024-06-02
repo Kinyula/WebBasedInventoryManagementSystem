@@ -39,6 +39,12 @@
                 <i class="bi bi-download font-weight-bold p-1"></i>
                 Export resources PDF
             </button>
+
+            <a wire:navigate href="{{ asset('UIMS/add-chas-resources') }}"
+            class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ms-4 float-end">
+            <i class="fa-solid fa-arrow-left px-1"></i>
+            Back
+    </a>
         </div>
 
         <div class="header-search mb-5">
@@ -46,7 +52,7 @@
                 <div class="form-group mb-0">
 
                     <input type="search" class="form-control search-input" placeholder="Search Here..."
-                        wire:model.live = 'cobeResourceSearch' />
+                        wire:model.live = 'chasResourceSearch' />
 
                 </div>
             </form>
@@ -61,8 +67,9 @@
                     <th class="font-weight-bold">Asset name</th>
                     <th class="font-weight-bold">Qr code</th>
                     <th class="font-weight-bold">College name</th>
-                    <th class="font-weight-bold">Alocation status</th>
+                    <th class="font-weight-bold">Status</th>
                     <th class="font-weight-bold">Asset status</th>
+                    <th class="font-weight-bold">Allocation status</th>
                     <th class="font-weight-bold">Select resource to print</th>
                     <th class="font-weight-bold">Alocation time</th>
                     <th class="datatable-nosort font-weight-bold">Action</th>
@@ -106,6 +113,13 @@
                             </a>
                         </td>
 
+                        <td style="text-decoration:normal">
+                            <a href="{{ asset('UIMS/view-cive-resource-status/' . $resource->id) }}">
+                                <button type="button"
+                                    class="bg-gray-500 hover:bg-gray-400 text-white font-bold p-2 rounded">{{ $resource->allocation_status }}</button>
+                            </a>
+                        </td>
+
                         <td style="text-decoration: normal">
 
                             <input type="checkbox" wire:model = "resourceId" value="{{ $resource->id }}"
@@ -119,7 +133,7 @@
                         </td>
 
                         <td>
-                            
+
                             <div class="dropdown">
                                 <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
                                     href="#" role="button" data-toggle="dropdown">

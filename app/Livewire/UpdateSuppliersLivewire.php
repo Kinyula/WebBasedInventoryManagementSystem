@@ -21,15 +21,15 @@ class UpdateSuppliersLivewire extends Component
 
     public function updateSupplier($id){
 
+        $this->validate(['company_name' => 'required', 'company_location' => 'required', 'contact' => 'required', 'service' => 'required', 'supplier' => 'required']);
+
         $supplier = Supplier::findOrFail($id);
 
-        $this->company_name = $supplier->company_name;
-        $this->company_location = $supplier->company_location;
-        $this->contact = $supplier->phone_number;
-        $this->service = $supplier->services_offered;
+        $supplier->company_name = $this->company_name;
+        $supplier->company_location = $this->company_location;
+        $supplier->phone_number = $this->contact;
+        $supplier->services_offered = $this->service;
 
-        $supplier->update();
-
-
+        $supplier->services->phone->update();
     }
 }

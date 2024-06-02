@@ -10,13 +10,16 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Supplier;
 use Livewire\Component;
+use Illuminate\Support\Number;
 
 class ViewSuppliersLivewire extends Component
 {
+
     public $supplierSearch = '';
 
     public function render()
     {
+
 
         return view('livewire.view-suppliers-livewire',  ['Suppliers' => Supplier::search($this->supplierSearch)->with(['phone', 'services'])->get()]);
     }

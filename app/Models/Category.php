@@ -15,6 +15,7 @@ class Category extends Model
     {
 
         return $this->hasMany(Asset::class);
+        
     }
 
     public function cnmsResources()
