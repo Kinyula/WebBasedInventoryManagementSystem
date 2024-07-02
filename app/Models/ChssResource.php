@@ -8,13 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class ChssResource extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'category_id', 'asset_id', 'resource_name', 'status', 'college_name', 'asset_status'];
+    protected $fillable = ['user_id', 'category_id', 'asset_id', 'resource_name', 'status', 'college_name', 'asset_status', 'allocation_status', 'resource_cost', 'repair_status', 'region'];
+
+    protected $casts = ['resource_cost' => 'float'];
 
     public static function search($search)
     {
         return empty($search) ? static::query() : static::query()
 
             ->where("college_name", "ILIKE", "%$search%")
+            ->orWhere("allocation_status", "ILIKE", "%$search%")
             ->orWhere("status", "ILIKE", "%$search%")
             ->orWhere("asset_status", "ILIKE", "%$search%")
             ->orWhere("asset_status", "ILIKE", "%$search%")

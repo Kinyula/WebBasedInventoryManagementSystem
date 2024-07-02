@@ -251,7 +251,7 @@
                 <div class="sidebar-menu">
                     <ul id="accordion-menu">
                         <li class="dropdown">
-                            <a wire:navigate href="{{ asset('/dashboard') }}" class="dropdown-toggle">
+                            <a wire:navigate href="{{ asset('/UIMS/dashboard') }}" class="dropdown-toggle">
                                 <span class="micon bi bi-house"></span><span class="mtext">Home</span>
                             </a>
 
@@ -278,17 +278,18 @@
 
                         </li>
 
+
                         @if (auth()->user()->college_name == 'College of Education ( CoED )')
                             <li class="dropdown">
                                 <a href="javascript:;" class="dropdown-toggle">
-                                    <span class="micon bi bi-pencil-square"></span><span
-                                        class="mtext">Activities</span>
+                                    <span class="micon bi bi-pencil-square"></span><span class="mtext">Asset
+                                        management</span>
                                 </a>
 
 
 
                                 <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/add-coed-resources') }}">
+                                    <li><a href="{{ asset('UIMS/add-coed-resources') }}" @active('{{ asset('UIMS/add-coed-resources') }}')>
                                             Add resource
                                         </a>
                                     </li>
@@ -326,8 +327,8 @@
                         @if (auth()->user()->college_name == 'College of Informatics and Virtual Education ( CIVE )')
                             <li class="dropdown">
                                 <a href="javascript:;" class="dropdown-toggle">
-                                    <span class="micon bi bi-pencil-square"></span><span
-                                        class="mtext">Activities</span>
+                                    <span class="micon bi bi-pencil-square"></span><span class="mtext">Asset
+                                        management</span>
                                 </a>
 
 
@@ -354,8 +355,8 @@
                         @if (auth()->user()->college_name == 'College of Health and Allied Science ( CHAS )')
                             <li class="dropdown">
                                 <a href="javascript:;" class="dropdown-toggle">
-                                    <span class="micon bi bi-pencil-square"></span><span
-                                        class="mtext">Activities</span>
+                                    <span class="micon bi bi-pencil-square"></span><span class="mtext">Asset
+                                        management</span>
                                 </a>
 
                                 <ul class="submenu">
@@ -366,6 +367,37 @@
 
                                 </ul>
 
+
+                            </li>
+                        @endif
+
+
+                        @if (auth()->user()->college_name == 'College of Health and Allied Science ( CHAS )')
+                            <li class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle">
+                                    <span class="micon bi bi-cart"></span><span class="mtext">Asset
+                                        movement</span>
+                                </a>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/asset-transfer') }}">
+                                            Transfer asset
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+
+                            </li>
+                        @endif
+
+                        @if (auth()->user()->college_name == 'College of Health and Allied Science ( CHAS )')
+                            <li class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle">
+                                    <span class="micon bi bi-wrench"></span><span class="mtext">Maintanance
+                                    </span>
+                                </a>
+
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/qr-code-reader') }}">
                                             Scan Qr code
@@ -374,14 +406,35 @@
 
                                 </ul>
 
+
+
                             </li>
                         @endif
 
+                        @if (auth()->user()->college_name == 'College of Health and Allied Science ( CHAS )')
+                            <li class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle">
+                                    <span class="micon bi bi-gear"></span><span class="mtext">Consumable items
+                                    </span>
+                                </a>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/consumable-items') }}">
+                                            Consumable items
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+
+
+                            </li>
+                        @endif
                         @if (auth()->user()->college_name == 'College of Earth Sciences and Engineering ( CoESE )')
                             <li class="dropdown">
                                 <a href="javascript:;" class="dropdown-toggle">
-                                    <span class="micon bi bi-pencil-square"></span><span
-                                        class="mtext">Activities</span>
+                                    <span class="micon bi bi-pencil-square"></span><span class="mtext">Asset
+                                        management</span>
                                 </a>
 
 
@@ -424,8 +477,8 @@
                         @if (auth()->user()->college_name == 'College of Business and Economics ( CoBE )')
                             <li class="dropdown">
                                 <a href="javascript:;" class="dropdown-toggle">
-                                    <span class="micon bi bi-pencil-square"></span><span
-                                        class="mtext">Activities</span>
+                                    <span class="micon bi bi-pencil-square"></span><span class="mtext">Asset
+                                        management</span>
                                 </a>
 
 
@@ -460,8 +513,8 @@
                         @if (auth()->user()->college_name == 'College of Natural Mathematical Science ( CNMS ) ')
                             <li class="dropdown">
                                 <a href="javascript:;" class="dropdown-toggle">
-                                    <span class="micon bi bi-pencil-square"></span><span
-                                        class="mtext">Activities</span>
+                                    <span class="micon bi bi-pencil-square"></span><span class="mtext">Asset
+                                        management</span>
                                 </a>
 
 
@@ -488,8 +541,8 @@
                         @if (auth()->user()->college_name == 'College of Humanities and Social Science ( CHSS )')
                             <li class="dropdown">
                                 <a href="javascript:;" class="dropdown-toggle">
-                                    <span class="micon bi bi-pencil-square"></span><span
-                                        class="mtext">Activities</span>
+                                    <span class="micon bi bi-pencil-square"></span><span class="mtext">Asset
+                                        management</span>
                                 </a>
 
 
@@ -569,8 +622,24 @@
 
                                 <ul class="submenu">
 
-                                    <li><a wire:navigate href="{{ asset('UIMS/chas-report') }}">
-                                            Report management</a>
+                                    <li><a wire:navigate href="{{ asset('UIMS/chas-details-report') }}">
+                                            Details report</a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+
+                                    <li><a wire:navigate href="{{ asset('UIMS/chas-summary-report') }}">
+                                            Summary report</a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+
+                                    <li><a wire:navigate href="{{ asset('UIMS/chas-inventory-sheet') }}">
+                                            Inventory sheet</a>
                                     </li>
 
                                 </ul>
@@ -584,8 +653,25 @@
                                 </a>
 
                                 <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/coese-report') }}">
-                                            Report management</a>
+
+                                    <li><a wire:navigate href="{{ asset('UIMS/coese-detail-report') }}">
+                                            Details report</a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+
+                                    <li><a wire:navigate href="{{ asset('UIMS/coese-summary-report') }}">
+                                            Summary report</a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+
+                                    <li><a wire:navigate href="{{ asset('UIMS/coese-inventory-sheet') }}">
+                                            Inventory sheet</a>
                                     </li>
 
                                 </ul>
@@ -600,8 +686,25 @@
                                 </a>
 
                                 <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/cobe-report') }}">
-                                            Report management</a>
+
+                                    <li><a wire:navigate href="{{ asset('UIMS/cobe-detail-report') }}">
+                                            Details report</a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+
+                                    <li><a wire:navigate href="{{ asset('UIMS/cobe-summary-report') }}">
+                                            Summary report</a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+
+                                    <li><a wire:navigate href="{{ asset('UIMS/cobe-inventory-sheet') }}">
+                                            Inventory sheet</a>
                                     </li>
 
                                 </ul>
@@ -616,8 +719,25 @@
                                 </a>
 
                                 <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/cnms-report') }}">
-                                            Report management</a>
+
+                                    <li><a wire:navigate href="{{ asset('UIMS/cnms-detail-report') }}">
+                                            Details report</a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+
+                                    <li><a wire:navigate href="{{ asset('UIMS/cnms-summary-report') }}">
+                                            Summary report</a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+
+                                    <li><a wire:navigate href="{{ asset('UIMS/cnms-inventory-sheet') }}">
+                                            Inventory sheet</a>
                                     </li>
 
                                 </ul>
@@ -632,44 +752,34 @@
                                 </a>
 
                                 <ul class="submenu">
-                                    
-                                    <li><a href="{{ asset('UIMS/chss-report') }}">
-                                            Report management</a>
+
+                                    <li><a wire:navigate href="{{ asset('UIMS/chss-detail-report') }}">
+                                            Details report</a>
                                     </li>
 
                                 </ul>
-
-                            </li>
-                        @endif
-                        @if (auth()->user()->college_name == 'College of Health and Allied Science ( CHAS )')
-
-                            @php
-                                $unread = App\Models\Replies::whereReplyStatus('unread')
-                                    ->whereReplyToSpecifiedCollege('College of Health and Allied Science ( CHAS )')
-                                    ->count();
-                            @endphp
-                            <li class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle">
-                                    @if ($unread > 0)
-                                        <div
-                                            class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-0 -start-0 dark:border-gray-900">
-                                            {{ $unread }}
-                                        </div>
-                                    @endif
-                                    <span class="micon bi bi-envelope"></span><span class="mtext">Message
-                                        reports</span>
-                                </a>
-
 
                                 <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/messages') }}">
-                                            View reply messages </a>
+
+                                    <li><a wire:navigate href="{{ asset('UIMS/chss-summary-report') }}">
+                                            Summary report</a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+
+                                    <li><a wire:navigate href="{{ asset('UIMS/chss-inventory-sheet') }}">
+                                            Inventory sheet</a>
                                     </li>
 
                                 </ul>
 
                             </li>
                         @endif
+
+
+
 
                         @if (auth()->user()->college_name == 'College of Natural Mathematical Science ( CNMS ) ')
                             @php
@@ -678,64 +788,10 @@
                                     ->count();
                             @endphp
 
-                            <li class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle">
 
-                                    @if ($unread > 0)
-                                        <div
-                                            class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-0 -start-0 dark:border-gray-900">
-                                            {{ $unread }}
-                                        </div>
-                                    @endif
-
-                                    <span class="micon bi bi-envelope"></span><span class="mtext">Message
-                                        reports</span>
-                                </a>
-
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/messages') }}">
-                                            View reply messages </a>
-                                    </li>
-
-                                </ul>
-
-                            </li>
                         @endif
 
-                        @if (auth()->user()->college_name == 'College of Education ( CoED )')
 
-                            @php
-                                $unread = App\Models\Replies::whereReplyStatus('unread')
-                                    ->whereReplyToSpecifiedCollege('College of Education ( CoED )')
-                                    ->count();
-                            @endphp
-
-
-                            <li class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle">
-
-                                    @if ($unread > 0)
-                                        <div
-                                            class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-0 -start-0 dark:border-gray-900">
-                                            {{ $unread }}
-                                        </div>
-                                    @endif
-
-                                    <span class="micon bi bi-envelope"></span><span class="mtext">Message
-                                        reports</span>
-                                </a>
-
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/messages') }}">
-                                            View reply messages </a>
-                                    </li>
-
-                                </ul>
-
-                            </li>
-                        @endif
 
                         @if (auth()->user()->college_name == 'College of Humanities and Social Science ( CHSS )')
                             @php
@@ -744,63 +800,20 @@
                                     ->count();
                             @endphp
 
-                            <li class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle">
 
-                                    @if ($unread > 0)
-                                        <div
-                                            class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-0 -start-0 dark:border-gray-900">
-                                            {{ $unread }}
-                                        </div>
-                                    @endif
-
-                                    <span class="micon bi bi-envelope"></span><span class="mtext">Message
-                                        reports</span>
-                                </a>
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/messages') }}">
-                                            View reply messages </a>
-                                    </li>
-
-                                </ul>
-
-                            </li>
                         @endif
 
                         @if (auth()->user()->college_name == 'College of Business and Economics ( CoBE )')
-
                             @php
                                 $unread = App\Models\Replies::whereReplyStatus('unread')
                                     ->whereReplyToSpecifiedCollege('College of Business and Economics ( CoBE )')
                                     ->count();
                             @endphp
 
-                            <li class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle">
 
-                                    @if ($unread > 0)
-                                        <div
-                                            class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-0 -start-0 dark:border-gray-900">
-                                            {{ $unread }}
-                                        </div>
-                                    @endif
-                                    <span class="micon bi bi-envelope"></span><span class="mtext">Message
-                                        reports</span>
-                                </a>
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/messages') }}">
-                                            View reply messages </a>
-                                    </li>
-
-                                </ul>
-
-                            </li>
                         @endif
 
                         @if (auth()->user()->college_name == 'College of Earth Sciences and Engineering ( CoESE )')
-
                             @php
                                 $unread = App\Models\Replies::whereReplyStatus('unread')
                                     ->whereReplyToSpecifiedCollege(
@@ -808,30 +821,7 @@
                                     )
                                     ->count();
                             @endphp
-                            <li class="dropdown">
 
-
-                                <a href="javascript:;" class="dropdown-toggle">
-
-                                    @if ($unread > 0)
-                                        <div
-                                            class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-0 -start-0 dark:border-gray-900">
-                                            {{ $unread }}
-                                        </div>
-                                    @endif
-
-                                    <span class="micon bi bi-envelope"></span><span class="mtext">Message
-                                        reports</span>
-                                </a>
-
-                                <ul class="submenu">
-                                    <li><a href="{{ asset('UIMS/messages') }}">
-                                            View reply messages </a>
-                                    </li>
-
-                                </ul>
-
-                            </li>
                         @endif
 
                         @if (auth()->user()->college_name == 'College of Informatics and Virtual Education ( CIVE )')
@@ -845,31 +835,9 @@
                                         ->count();
                                 @endphp
 
-                                <a href="javascript:;" class="dropdown-toggle">
-                                    @if ($unread > 0)
-                                        <div
-                                            class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-0 -start-0 dark:border-gray-900">
-                                            {{ $unread }}
-                                        </div>
-                                    @endif
-                                    <span class="micon bi bi-envelope "></span><span class="mtext">Message
-                                        reports</span>
-
-                                </a>
-
-                                <ul class="submenu">
-                                    <li>
-
-                                        <a wire:navigate href="{{ asset('UIMS/messages') }}">
-                                            View reply messages
-                                        </a>
-
-                                    </li>
-
                                 </ul>
 
                             </li>
-
                         @endif
 
                     </ul>

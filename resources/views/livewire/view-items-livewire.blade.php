@@ -1,10 +1,200 @@
 <div>
 
     <div class="card-box mb-30 p-3">
-        <h2 class="h5 pd-20">View items ordered from manufacturers</h2>
+        <h2 class="h5 pd-20">Welcome again : <span class="text-danger">{{ auth()->user()->username }}</span></h2>
+        <img src="{{ asset('vendors/images/udom.png') }}" class="float-end  udom-logo" alt="" srcset=""
+            style="float:inline-end">
+        <div class="role relative left-5">
+
+            @if (!auth()->user()->post === 'Head of department ( HOD )')
+            <span class="font-weight-bold">Position : </span>
+            <span class="font-weight-bold text-danger uppercase">{{ auth()->user()->post }}</span>
+            @else
+
+            <span class="font-weight-bold">Position : </span>
+            <span class="font-weight-bold text-danger uppercase">{{ auth()->user()->post }}</span>
+            <br>
+            <span class="font-weight-bold">College name : </span>
+            <span class="font-weight-bold text-danger uppercase">{{ auth()->user()->college_name }}</span>
+            @endif
+        </div>
+    </div>
+
+    @if (!auth()->user()->post === 'Head of department ( HOD )')
+    <div class="grid grid-cols-4">
+        <div class="card-box mb-30 p-3 w-50">
+            <span>Assets</span>
+            <h4 class="font-weight-bold uppercase">College of Informatics and Virtual Education ( CIVE ) <br></h4>
+            <span class="font-weight-bold text-danger">Total : </span>
+            <span
+                class="font-weight-bold text-success">{{ Illuminate\Support\Number::abbreviate($cive ?? 0, precision: 2) }}</span>
+        </div>
+
+        <div class="card-box mb-30 p-3 w-50">
+            <span>Assets</span>
+            <h4 class="font-weight-bold uppercase">College of Health and Allied Science ( CHAS ) <br></h4>
+            <span class="font-weight-bold text-danger">Total : </span>
+            <span
+                class="font-weight-bold text-success">{{ Illuminate\Support\Number::abbreviate($chas ?? 0, precision: 2) }}</span>
+        </div>
+
+        <div class="card-box mb-30 p-3 w-50">
+            <span>Assets</span>
+            <h4 class="font-weight-bold uppercase">College of Humanities and Social Sciences ( CHSS )</h4>
+            <span class="font-weight-bold text-danger">Total : </span>
+            <span
+                class="font-weight-bold text-success">{{ Illuminate\Support\Number::abbreviate($chss ?? 0, precision: 2) }}</span>
+        </div>
+
+        <div class="card-box mb-30 p-3 w-50">
+            <span>Assets</span>
+            <h4 class="font-weight-bold uppercase">College of Education ( CoEd)</h4>
+            <span class="font-weight-bold text-danger">Total : </span>
+            <span
+                class="font-weight-bold text-success">{{ Illuminate\Support\Number::abbreviate($coed ?? 0, precision: 2) }}</span>
+        </div>
+        <div class="card-box mb-30 p-3 w-50">
+            <span>Assets</span>
+            <h4 class="font-weight-bold uppercase">College of Natural and Mathematical Science ( CNMS )</h4>
+            <span class="font-weight-bold text-danger">Total : </span>
+            <span
+                class="font-weight-bold text-success">{{ Illuminate\Support\Number::abbreviate($cnms, precision: 2) ?? 0 }}</span>
+        </div>
+
+        <div class="card-box mb-30 p-3 w-50">
+            <span>Assets</span>
+            <h4 class="font-weight-bold uppercase">College of Business Education ( CoBE )</h4>
+            <span class="font-weight-bold text-danger">Total : </span>
+            <span
+                class="font-weight-bold text-success">{{ Illuminate\Support\Number::abbreviate($cobe ?? 0, precision: 2) }}</span>
+        </div>
+
+        <div class="card-box mb-30 p-3 w-50">
+
+            <span>Assets</span>
+            <h4 class="font-weight-bold uppercase">College of Earth Science and Engineering ( CoESE )</h4>
+
+
+            <span class="font-weight-bold text-danger">Total : </span>
+            <span
+                class="font-weight-bold text-success">{{ Illuminate\Support\Number::abbreviate($coese ?? 0, precision: 2) }}</span>
+        </div>
+
+
+    </div>
+
+<div class="card-box p-3 mb-30">
+    <span class=" font-weight-bold">Summary of total pending maintanance from the </span>
+    <span class="text-danger font-weight-bold  uppercase">university of dodoma</span>
+</div>
+
+<div class="grid grid-cols-4">
+    <div class="card-box mb-30 p-3 w-50">
+        <span>Assets</span>
+        <h4 class="font-weight-bold uppercase">College of Informatics and Virtual Education <br> ( CIVE ) <br></h4>
+        <span class="font-weight-bold text-danger">Total : </span>
+        <span
+            class="font-weight-bold text-success">{{ Illuminate\Support\Number::abbreviate($civedefective ?? 0, precision: 2) }}</span>
+    </div>
+
+    <div class="card-box mb-30 p-3 w-50">
+        <span>Assets</span>
+        <h4 class="font-weight-bold uppercase">College of Health and Allied Science <br> ( CHAS ) <br></h4>
+        <span class="font-weight-bold text-danger">Total : </span>
+        <span
+            class="font-weight-bold text-success">{{ Illuminate\Support\Number::abbreviate($chasdefective ?? 0, precision: 2) }}</span>
+    </div>
+
+    <div class="card-box mb-30 p-3 w-50">
+        <span>Assets</span>
+        <h4 class="font-weight-bold uppercase">College of Humanities and Social Sciences <br> ( CHSS )</h4>
+        <span class="font-weight-bold text-danger">Total : </span>
+        <span
+            class="font-weight-bold text-success">{{ Illuminate\Support\Number::abbreviate($chssdefective ?? 0, precision: 2) }}</span>
+    </div>
+
+    <div class="card-box mb-30 p-3 w-50">
+        <span>Assets</span>
+        <h4 class="font-weight-bold uppercase">College of Education <br> ( CoEd )</h4>
+        <span class="font-weight-bold text-danger">Total : </span>
+        <span
+            class="font-weight-bold text-success">{{ Illuminate\Support\Number::abbreviate($coeddefective ?? 0, precision: 2) }}</span>
+    </div>
+    <div class="card-box mb-30 p-3 w-50">
+        <span>Assets</span>
+        <h4 class="font-weight-bold uppercase">College of Natural and Mathematical Science <br> ( CNMS )</h4>
+        <span class="font-weight-bold text-danger">Total : </span>
+        <span
+            class="font-weight-bold text-success">{{ Illuminate\Support\Number::abbreviate($cnmsdefective, precision: 2) ?? 0 }}</span>
+    </div>
+
+    <div class="card-box mb-30 p-3 w-50">
+        <span>Assets</span>
+        <h4 class="font-weight-bold uppercase">College of Business Education <br> ( CoBE )</h4>
+        <span class="font-weight-bold text-danger">Total : </span>
+        <span
+            class="font-weight-bold text-success">{{ Illuminate\Support\Number::abbreviate($cobedefective ?? 0, precision: 2) }}</span>
+    </div>
+
+    <div class="card-box mb-30 p-3 w-50">
+
+        <span>Assets</span>
+        <h4 class="font-weight-bold uppercase">College of Earth Science and Engineering <br> ( CoESE )</h4>
+
+
+        <span class="font-weight-bold text-danger">Total : </span>
+        <span
+            class="font-weight-bold text-success">{{ Illuminate\Support\Number::abbreviate($coesedefective ?? 0, precision: 2) }}</span>
+    </div>
+
+
+</div>
+    @else
+
+
+    <div class="grid grid-cols-4">
+
+
+        <div class="card-box mb-30 p-3 w-50">
+            <span>Assets</span>
+            <h4 class="font-weight-bold uppercase">College of Health and Allied Science ( CHAS ) <br></h4>
+            <span class="font-weight-bold text-danger">Total : </span>
+            <span
+                class="font-weight-bold text-success">{{ Illuminate\Support\Number::abbreviate($chas ?? 0, precision: 2) }}</span>
+        </div>
+
+    </div>
+
+<div class="card-box p-3 mb-30">
+    <span class=" font-weight-bold">Summary of total pending maintanance from the </span>
+    <span class="text-danger font-weight-bold  uppercase">{{ auth()->user()->college_name }}</span>
+</div>
+
+<div class="grid grid-cols-4">
+
+
+    <div class="card-box mb-30 p-3 w-50">
+        <span>Assets</span>
+        <h4 class="font-weight-bold uppercase">College of Health and Allied Science <br> ( CHAS ) <br></h4>
+        <span class="font-weight-bold text-danger">Total : </span>
+        <span
+            class="font-weight-bold text-success">{{ Illuminate\Support\Number::abbreviate($chasdefective ?? 0, precision: 2) }}</span>
+    </div>
+
+
+
+
+
+</div>
+    @endif
+
+
+    {{-- <div class="card-box mb-30 p-3">
+        <h2 class="h5 pd-20"><i class="bi bi-eye px-1"></i> View all reports across all colleges</h2>
         <img src="{{ asset('vendors/images/udom.png') }}" class="float-end  udom-logo" alt="" srcset=""
             style="float:inline-end">
     </div>
+
 
     <div class="card-box mb-30 p-3">
 
@@ -101,5 +291,13 @@
 
         </table>
         <span>{{ $Assets->links() }}</span>
-    </div>
+    </div> --}}
+@if (auth()->user()->post === 'Chief Supplier Officer ( CSO )')
+
+@livewire('report-informations-livewire')
+
+@else
+
+@endif
+
 </div>

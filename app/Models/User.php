@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'profile_image',
+        'post'
 
     ];
 
@@ -63,7 +64,28 @@ class User extends Authenticatable
 
                 ->orWhere("username", "ILIKE", "%$search%");
         }
+
+        elseif (auth()->user()->role_id === '2' ) {
+            return empty($search) ? static::query() : static::query()
+
+                ->where("email", "ILIKE", "%$search%")
+                ->where('role_id', '=', '2')
+                ->where('post', '=', 'accountant')
+                ->where('college_name', '=', auth()->user()->college_name)
+
+                ->orWhere("username", "ILIKE", "%$search%");
+        }
+
+        elseif (auth()->user()->role_id === '3' ) {
+            return empty($search) ? static::query() : static::query()
+
+                ->where("email", "ILIKE", "%$search%")
+                ->where('post',  "ILIKE", "%$search%")
+                ->where('college_name', '=', auth()->user()->college_name)
+                ->orWhere("username", "ILIKE", "%$search%");
+        }
     }
+
 
 
     public function phone()

@@ -244,7 +244,7 @@
                 <div class="sidebar-menu">
                     <ul id="accordion-menu">
                         <li class="">
-                            <a href="{{ asset('/dashboard') }}" class="dropdown-toggle">
+                            <a href="{{ asset('/UIMS/dashboard') }}" class="dropdown-toggle">
                                 <span class="micon bi bi-house"></span><span class="mtext">Home</span>
                             </a>
 
@@ -271,14 +271,14 @@
 
                         <li class="dropdown">
                             <a href="javascript:;" class="dropdown-toggle ">
-                                <span class="micon bi bi-pencil-square"></span><span class="mtext">Activities</span>
+                                <span class="micon bi bi-pencil-square"></span><span class="mtext">Asset management</span>
                             </a>
 
 
 
                             <ul class="submenu">
                                 <li><a class="active:bg-red-800" wire:navigate href="{{ asset('UIMS/add-category') }}">
-                                        Asset management
+                                    Add category
                                     </a></li>
 
                             </ul>
@@ -289,30 +289,9 @@
                                     </a></li>
 
                             </ul> --}}
-
-                            <ul class="submenu">
-                                <li><a wire:navigate href="{{ asset('UIMS/resource-allocation') }}">
-                                        Resources allocation management
-                                    </a></li>
-
-                            </ul>
                         </li>
 
-                        <li class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle">
-                                <span class="micon bi bi-people"></span><span class="mtext">Assistants</span>
-                            </a>
-
-                            <ul class="submenu">
-                                <li><a wire:navigate href="{{ asset('UIMS/register-assistant') }}">
-                                        Assistant inventory manager</a></li>
-
-                            </ul>
-
-
-
-                        </li>
-
+{{--
                         <li class="dropdown">
                             <a href="javascript:;" class="dropdown-toggle">
                                 <span class="micon bi bi-people"></span><span class="mtext">Suppliers</span>
@@ -321,6 +300,50 @@
                             <ul class="submenu">
                                 <li><a wire:navigate href="{{ asset('UIMS/register-suppliers') }}">Supplier
                                         management</a></li>
+
+                            </ul>
+
+                        </li> --}}
+
+
+                        {{-- <li class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle">
+                                <span class="micon fas fa-message"></span><span class="mtext">Reports</span>
+                            </a>
+
+                            <ul class="submenu">
+                                <li><a wire:navigate href="{{ asset('UIMS/view-reports') }}">View university
+                                        reports</a></li>
+
+                            </ul>
+
+                        </li> --}}
+
+                        <li class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle">
+                                <span class="micon bi bi-wrench"></span><span class="mtext">Maintanance</span>
+                            </a>
+
+                            <ul class="submenu">
+                                <li><a wire:navigate href="{{ asset('UIMS/register-suppliers') }}">Scan qr code
+                                        </a></li>
+
+                            </ul>
+
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle">
+                                <span class="micon bi bi-folder"></span><span class="mtext">Reports</span>
+                            </a>
+
+
+
+                            <ul class="submenu">
+
+                                <li><a wire:navigate href="{{ asset('UIMS/chas-summary-report') }}">
+                                        View summary report</a>
+                                </li>
 
                             </ul>
 

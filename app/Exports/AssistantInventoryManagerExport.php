@@ -31,7 +31,7 @@ class AssistantInventoryManagerExport implements FromCollection, WithHeadings, W
     public function map($assistant): array
     {
 
-        foreach ( $assistant->phone as $key ) {
+        foreach ($assistant->phone as $key) {
             $phone[] = $key->phone_number;
         }
         return [

@@ -245,7 +245,7 @@
                 <div class="sidebar-menu">
                     <ul id="accordion-menu">
                         <li class="dropdown">
-                            <a href="{{ asset('/dashboard') }}" class="dropdown-toggle">
+                            <a href="{{ asset('/UIMS/dashboard') }}" class="dropdown-toggle">
                                 <span class="micon bi bi-house"></span><span class="mtext">Home</span>
                             </a>
 
@@ -260,11 +260,27 @@
                             </ul>
 
 
+
+
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle">
+                                <span class="micon bi bi-wrench"></span><span class="mtext">Maintanance</span>
+                            </a>
+
+
+                            <ul class="submenu">
+                                <li><a wire:navigate href="{{ asset('UIMS/qr-code-reader') }}">
+                                        Scan qr code
+                                    </a></li>
+
+                            </ul>
+
                             <ul class="submenu">
 
-                                <li><a wire:navigate href = "{{ asset('UIMS/add-phone-number') }}">
-                                        Phone
-                                        number management</a>
+                                <li><a wire:navigate href="{{ asset('UIMS/chas-summary-report') }}">
+                                        View summary report</a>
                                 </li>
 
                             </ul>
@@ -273,20 +289,22 @@
 
                         <li class="dropdown">
                             <a href="javascript:;" class="dropdown-toggle">
-                                <span class="micon bi bi-pencil-square"></span><span class="mtext">Activities</span>
+                                <span class="micon bi bi-folder"></span><span class="mtext">Reports</span>
                             </a>
 
 
+
                             <ul class="submenu">
-                                <li><a wire:navigate href="{{ asset('UIMS/college-resource-allocation') }}">
-                                        Resource allocation management
-                                    </a></li>
+
+                                <li><a wire:navigate href="{{ asset('UIMS/chas-summary-report') }}">
+                                        View summary report</a>
+                                </li>
 
                             </ul>
 
                         </li>
 
-                        <li class="dropdown">
+                        {{-- <li class="dropdown">
                             @php
                                 $unread = App\Models\ReportRequest::whereRequestStatus('unread')->count();
                                 $notReceived = App\Models\ReportRequest::whereConfirmStatus('Not received')->count();
@@ -373,7 +391,7 @@
 
                             </ul>
 
-                        </li>
+                        </li> --}}
 
                     </ul>
                 </div>

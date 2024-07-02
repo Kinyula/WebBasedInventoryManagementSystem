@@ -38,9 +38,10 @@
                 <tr>
                     <th class="table-plus datatable-nosort font-weight-bold">Username</th>
                     <th class="table-plus datatable-nosort font-weight-bold">Email</th>
-                    <th class="font-weight-bold"><i class="bi bi-telephone p-2"></i> Phone number</th>
-                    <th class="font-weight-bold">College name</th>
-                    <th class="datatable-nosort font-weight-bold">Action</th>
+                    <th class="table-plus datatable-nosort font-weight-bold"><i class="bi bi-telephone p-2"></i> Phone number</th>
+                    <th class="table-plus datatable-nosort font-weight-bold">College name</th>
+                    <th class="table-plus datatable-nosort font-weight-bold">Post</th>
+                    <th class="table-plus datatable-nosort font-weight-bold">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,12 +50,12 @@
                     <tr>
 
                         <td>
-                            <h5 class="font-16">{{ $college_manager->username }}</h5>
+                            <h5 class="font-16 font-weight-bold">{{ $college_manager->username }}</h5>
 
                         </td>
 
                         <td>
-                            <h5 class="font-16">{{ $college_manager->email }}</h5>
+                            <h5 class="font-16 font-weight-bold">{{ $college_manager->email }}</h5>
 
                         </td>
 
@@ -63,16 +64,23 @@
                             @php
                                 $srNo = 1;
                             @endphp
+
                             @foreach ($college_manager->phone as $PhoneNumber)
 
                             <br>
-                            <span class="text-danger px-1">{{ $srNo++ }} ) </span>
-                                {{ $PhoneNumber->phone_number }}
+                            <span class="text-danger font-weight-bold px-1">{{ $srNo++ }} ) </span>
+                                <span class="font-weight-bold">{{ $PhoneNumber->phone_number }}</span>
                             @endforeach
 
                         </td>
                         <td>
-                            <h5 class="font-16">{{ $college_manager->college_name }}</h5>
+                            <h5 class="font-16 font-weight-bold">{{ $college_manager->college_name }}</h5>
+
+                        </td>
+
+                        <td>
+
+                            <h5 class="font-16 font-weight-bold text-danger">{{ $college_manager->post }} manager</h5>
 
                         </td>
                         <td>

@@ -37,7 +37,6 @@
             View  more tasks here
         </h2>
         <div class="d-grid space-x-5">
-            <a wire:navigate href="{{ asset('UIMS/add-asset') }}"><i class="fas fa-pencil"></i> Add an asset</a>
             <a wire:navigate href="{{ asset('UIMS/view-category') }}"><i class="fas fa-eye"></i> View categories</a>
             {{-- <a wire:navigate href="{{ asset('UIMS/') }}">Resource allocation to areas</a> --}}
         </div>

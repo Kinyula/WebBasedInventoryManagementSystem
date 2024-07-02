@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddAccountantController;
 use App\Http\Controllers\AddAssetController;
 use App\Http\Controllers\AddAssistantManagersController;
 use App\Http\Controllers\AddChasResourceController;
@@ -13,8 +14,10 @@ use App\Http\Controllers\AddCollegeManagerController;
 use App\Http\Controllers\AddSupplierPhoneNumbersController;
 use App\Http\Controllers\AddSuppliersController;
 use App\Http\Controllers\AddSupplierServicesController;
+use App\Http\Controllers\AssetMovementController;
 use App\Http\Controllers\AssetStatusController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ChasDetailsReportController;
 use App\Http\Controllers\ChasReportController;
 use App\Http\Controllers\ChssReportController;
 use App\Http\Controllers\CiveReportController;
@@ -24,11 +27,18 @@ use App\Http\Controllers\CoedReportController;
 use App\Http\Controllers\CoeseReportController;
 use App\Http\Controllers\CollegeInventoryManagerReportController;
 use App\Http\Controllers\CollegeResourceAllocationController;
+use App\Http\Controllers\ConsumableItemsController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\EditAssetController;
+use App\Http\Controllers\EditChasAreaOfAllocationController;
+use App\Http\Controllers\EditChasResourceStatusController;
 use App\Http\Controllers\EditCiveResourceStatusController;
 use App\Http\Controllers\EditCollegeNameController;
+use App\Http\Controllers\EditConsumableItemsController;
+use App\Http\Controllers\EditDetailsReportController;
 use App\Http\Controllers\EditResourcesAllocationController;
+use App\Http\Controllers\EditStaffsController;
+use App\Http\Controllers\InventorySheetController;
 use App\Http\Controllers\MakeReportRequestsController;
 use App\Http\Controllers\MessagingReportController;
 use App\Http\Controllers\PhoneNumberController;
@@ -39,10 +49,18 @@ use App\Http\Controllers\ResourceAllocationController;
 use App\Http\Controllers\ResourceAllocationToAreasController;
 use App\Http\Controllers\SendingReportsController;
 use App\Http\Controllers\SendingRequestsController;
+use App\Http\Controllers\StaffManagementController;
+use App\Http\Controllers\SummaryReportController;
 use App\Http\Controllers\UpdateAreaOfAllocationController;
 use App\Http\Controllers\UpdateAssetStatusController;
 use App\Http\Controllers\UpdateResourceAllocationStatusController;
 use App\Http\Controllers\UpdateSuppliersController;
+use App\Http\Controllers\ViewAccountantController;
+use App\Http\Controllers\ViewAllChasAssetsController;
+use App\Http\Controllers\ViewAllCiveAssetsController;
+use App\Http\Controllers\ViewAllCnmsAssetsController;
+use App\Http\Controllers\ViewAllCobeAssetsController;
+use App\Http\Controllers\ViewAllCoedAssetsController;
 use App\Http\Controllers\ViewAllocatedResourcesController;
 use App\Http\Controllers\ViewAssistantInventoryManagersController;
 use App\Http\Controllers\ViewCategoriesController;
@@ -85,7 +103,7 @@ use Illuminate\Support\Facades\Route;
 // ------------------------------------------------------------------------------------------------------
 
 // Home page
-Route::get('/', function () {
+Route::get('/UIMS', function () {
     return view('welcome');
 });
 
@@ -95,7 +113,7 @@ Route::get('/', function () {
 
 // Dashboard routes
 
-Route::get('/dashboard', function () {
+Route::get('/UIMS/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -167,6 +185,7 @@ Route::middleware('auth')->group(function () {
     Route::get('UIMS/resource-allocation-to-areas', [ResourceAllocationToAreasController::class, 'index']);
     Route::get('UIMS/view-resource-allocation-to-areas', [ViewResourceAllocationToAreasController::class, 'index']);
     Route::get('UIMS/update-areas/{id}', [UpdateAreaOfAllocationController::class, 'index']);
+    Route::get('UIMS/edit-chas-area-of-allocation/{id}', [EditChasAreaOfAllocationController::class, 'index']);
 
 
     // End of Resource Allocations routes
@@ -182,6 +201,15 @@ Route::middleware('auth')->group(function () {
 
     // --------------------------------------------------------------------------------------------
 
+        // Assistant routes
+
+        Route::get('UIMS/add-accountant', [AddAccountantController::class, 'index']);
+
+
+        // End of Assistant routes
+
+        //
+        // --------------------------------------------------------------------------------------------
     // College Manager routes
 
     Route::get('UIMS/add-college-managers', [AddCollegeManagerController::class, 'index']);
@@ -193,6 +221,7 @@ Route::middleware('auth')->group(function () {
     // End of College Manager routes
 
     // -----------------------------------------------------------------------------------------------------
+
 
     // College of Health and Allied Science ( CHAS ) Routes
 
@@ -335,7 +364,45 @@ Route::middleware('auth')->group(function () {
 
     Route::get('assistants', [Controller::class, 'export']);
 
+    //----------------------------------- Edit college resource routes ---------------------------------------------------------------
 
+    Route::get('UIMS/edit-chas-resource/{id}', [EditChasResourceStatusController::class, 'index']);
+
+    // -------------------------------------------- End of edit resource routes ------------------------------------------------------------
+
+    // ---------------------------------------------------------- Staff management routes ------------------------------------------------------
+
+    Route::get('UIMS/staff-management', [StaffManagementController::class, 'index']);
+    Route::get('UIMS/edit-staff/{id}', [EditStaffsController::class, 'index']);
+
+    // ----------------------------------------------------------- End of staff management routes -------------------------------------------------
+
+    //----------------------------------------------- Asset movement routes ----------------------------------------------------
+    Route::get('UIMS/asset-transfer', [AssetMovementController::class, 'index']);
+
+    // --------------------------------- Routes for viewing all assets ---------------------------------------
+
+    Route::get('UIMS/view-all-chas-resources', [ViewAllChasAssetsController::class, 'index']);
+    Route::get('UIMS/view-all-cive-resources', [ViewAllCiveAssetsController::class, 'index']);
+    Route::get('UIMS/view-all-cnms-resources', [ViewAllCnmsAssetsController::class, 'index']);
+    Route::get('UIMS/view-all-coed-resources', [ViewAllCoedAssetsController::class, 'index']);
+    Route::get('UIMS/view-all-cobe-resources', [ViewAllCobeAssetsController::class, 'index']);
+
+    // ------------------------------------------------ End of viewing all routes --------------------------------------------------------------
+
+    // ------------------------------------------------- Details report routes ----------------------------------------------------------
+
+    Route::get('UIMS/chas-details-report', [ChasDetailsReportController::class, 'index']);
+    Route::get('UIMS/edit-chas-details-report/{id}', [EditDetailsReportController::class, 'index']);
+    Route::get('UIMS/chas-summary-report', [SummaryReportController::class, 'index']);
+    Route::get('UIMS/chas-inventory-sheet', [InventorySheetController::class, 'index']);
+
+    //------------------------------------------------------------ End of details report routes ----------------------------------------------------
+
+    // -------------------------------------------------- Consumable items routes ----------------------------------------------------------------
+    Route::get('UIMS/edit-chas-consumable-items/{id}', [EditConsumableItemsController::class, 'index']);
+
+    Route::get('UIMS/consumable-items', [ConsumableItemsController::class, 'index']);
 });
 
 

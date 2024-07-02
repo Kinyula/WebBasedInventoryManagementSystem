@@ -27,9 +27,6 @@ class EditCollegeNameLivewire extends Component
 
         $college_manager->college_name = $this->collegeName;
 
-
-
-
         $college_manager->update();
 
         $this->reset(['collegeName']);

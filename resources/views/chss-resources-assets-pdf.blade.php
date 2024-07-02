@@ -105,7 +105,6 @@ display: block;
             <tr>
                 <th>College inventory manager</th>
                 <th>Asset name</th>
-                <th>QR Code</th>
                 <th>College name</th>
                 <th>Allocation status</th>
                 <th>Asset status</th>
@@ -117,7 +116,6 @@ display: block;
                 <tr>
                     <td>{{ $resource['resource']->user->email }}</td>
                     <td>{{ $resource['resource']->resource_name }}</td>
-                    <td><img src="{{$resource['qrcode']}}" alt="QR code"></td>
                     <td>{{ $resource['resource']->college_name }}</td>
                     <td>{{ $resource['resource']->status }}</td>
                     <td>{{ $resource['resource']->asset_status }}</td>

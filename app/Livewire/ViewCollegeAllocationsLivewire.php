@@ -35,7 +35,10 @@ class ViewCollegeAllocationsLivewire extends Component
 
         } elseif ( auth()->user()->college_name == 'College of Health and Allied Science ( CHAS )') {
 
-            return view('livewire.view-college-allocations-livewire', ['Resources' => ResourceAllocationToCollege::search($this->resourceSearch)->with(['assets', 'user'])->where('resource_allocated_college', '=', 'College of Health and Allied Science ( CHAS )')->paginate(15)]);
+            return view('livewire.view-college-allocations-livewire', ['Resources' => ResourceAllocationToCollege::search($this->resourceSearch)->with(['assets', 'user'])->where('resource_allocated_college', '=', 'College of Health and Allied Science ( CHAS )')->paginate(15),
+
+            
+        ]);
 
         } elseif ( auth()->user()->college_name == 'College of Education ( CoED )') {
 

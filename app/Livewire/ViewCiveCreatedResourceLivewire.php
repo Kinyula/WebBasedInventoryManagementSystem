@@ -36,7 +36,7 @@ class ViewCiveCreatedResourceLivewire extends Component
         }
 
 
-        return view('livewire.view-cive-created-resource-livewire', ['Resources' => CiveResource::search($this->civeResourceSearch)->with(['user'])->paginate(15)]);
+        return view('livewire.view-cive-created-resource-livewire', ['Resources' => CiveResource::search($this->civeResourceSearch)->with(['user'])->distinct('resource_name')->paginate(15)]);
     }
 
 

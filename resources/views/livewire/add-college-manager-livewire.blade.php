@@ -90,6 +90,22 @@
                 @enderror
             </div>
 
+            <div class="mt-3">
+                <label for="post" class='block font-medium text-sm text-gray-700 dark:text-gray-300'>
+                    Post</label>
+                <select type="select" wire:model= "post"
+
+                    class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full'>
+                    <option value="">-- Select post --</option>
+
+                        <option value="Store">Store</option>
+                        <option value="Accountant">Accountant</option>
+
+                </select>
+                @error('college')
+                    <strong class= 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>{{ $message }}</strong>
+                @enderror
+            </div>
             {{-- Profile picture --}}
             <div class="mt-4">
                 <label for="profile_image" class='block font-medium text-sm text-gray-700 dark:text-gray-300'>Profile

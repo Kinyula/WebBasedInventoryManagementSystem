@@ -13,6 +13,14 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Models\Category;
+use App\Models\ChasResource;
+use App\Models\ChssResource;
+use App\Models\CiveResource;
+use App\Models\CnmsResource;
+use App\Models\CoBEResource;
+use App\Models\CoEDResource;
+use App\Models\CoESEResource;
 use Maatwebsite\Excel\Facades\Excel;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -30,7 +38,26 @@ class ViewItemsLivewire extends Component
     {
 
         return view('livewire.view-items-livewire', [
+
             'Assets' => Asset::search($this->assetSearch)->with(['category'])->paginate(15),
+            'assetCount' => Category::with(['assets'])->get(),
+            'assets' => Asset::search($this->assetSearch)->with(['category'])->count(),
+
+            'cive' => CiveResource::count(),
+            'cnms' =>CnmsResource::count(),
+            'cobe' => CoBEResource::count(),
+            'coed' => CoEDResource::count(),
+            'chas' => ChasResource::count(),
+            'chss' => ChssResource::count(),
+            'coese' => CoESEResource::count(),
+
+            'civedefective' => CiveResource::where('asset_status', '=', 'Poor')->count(),
+            'cnmsdefective' =>CnmsResource::where('asset_status', '=', 'Poor')->count(),
+            'cobedefective' => CoBEResource::where('asset_status', '=', 'Poor')->count(),
+            'coeddefective' => CoEDResource::where('asset_status', '=', 'Poor')->count(),
+            'chasdefective' => ChasResource::where('asset_status', '=', 'Poor')->count(),
+            'chssdefective' => ChssResource::where('asset_status', '=', 'Poor')->count(),
+            'coesedefective' => CoESEResource::where('asset_status', '=', 'Poor')->count()
         ]);
     }
 

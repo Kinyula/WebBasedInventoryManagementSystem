@@ -85,17 +85,11 @@ class AddAssistantInventoryManagerLivewire extends Component
 
     public function importAssistantInventoryManagers()
     {
-
         $this->validate(['assistantInventoryManager' => 'required|mimes:xlsx,xls,csv']);
-
-        // dd($this->assistantInventoryManager);
 
         $filePath = $this->assistantInventoryManager->store('public/assistants');
 
-
         // dispatch(new AssistantImportProcess($filePath))->delay(now()->addSeconds(5));
-
-
 
         // if (File::exists($filePath)) {
         //     File::delete()

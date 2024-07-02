@@ -44,41 +44,41 @@ class ViewChasCreatedResourcesLivewire extends Component
             $this->pdfFiles[] = $file->getPathname();
         }
 
-        return view('livewire.view-chas-created-resources-livewire', ['Resources' => ChasResource::search($this->chasResourceSearch)->with(['user', 'category'])->paginate(15)]);
+        return view('livewire.view-chas-created-resources-livewire', [
+            'Resources' => ChasResource::search($this->chasResourceSearch)->with(
+                ['user', 'category']
+            )->distinct('resource_name')->paginate(15),
+
+
+        ]);
     }
 
     public function deleteFiles($pdf)
     {
 
 
-        if (File::exists(storage_path('app/public/resource_files/'.$pdf))) {
+        if (File::exists(storage_path('app/public/resource_files/' . $pdf))) {
 
-            File::delete(storage_path('app/public/resource_files/'.$pdf));
+            File::delete(storage_path('app/public/resource_files/' . $pdf));
 
             session()->flash('downloadSuccessMessage', 'The file is downloaded!');
-        }
-
-        else {
+        } else {
 
             session()->flash('downloadErrorMessage', 'ERROR 404 File not found please remember to refresh the page to view the remaining files!');
         }
-
-
     }
 
-    public function deleteFilesManually($file){
+    public function deleteFilesManually($file)
+    {
 
-        if (File::exists(storage_path('app/public/resource_files/'.$file))) {
+        if (File::exists(storage_path('app/public/resource_files/' . $file))) {
 
-            File::delete(storage_path('app/public/resource_files/'.$file));
+            File::delete(storage_path('app/public/resource_files/' . $file));
 
             session()->flash('deleteErrorMessage', 'The file is deleted!');
-        }
-
-        else {
+        } else {
             session()->flash('deleteErrorMessage', ' ERROR 404 File not found please remember to refresh the page to view the remaining files!');
         }
-
     }
 
     public function exportChasResourcesPdf()
@@ -90,24 +90,17 @@ class ViewChasCreatedResourcesLivewire extends Component
             ChasResource::search($this->chasResourceSearch)->with(['user'])->chunk($chunkSize, function ($data) {
 
                 ExportChasResourcesPdfJob::dispatch($data)->delay(now()->addSeconds(2));
-                
             });
 
             session()->flash('exportResource', 'Resource PDF is ready to be exported make sure you refresh the page after this action please...');
-
-        }
-
-
-        else {
+        } else {
 
             ChasResource::search($this->chasResourceSearch)->with(['user'])->whereIn('id', $this->resourceId)->chunk($chunkSize, function ($data, $dataID) {
 
                 ExportChasResourcesPdfJob::dispatch($data)->delay(now()->addSeconds(2));
-
             });
 
             session()->flash('exportResource', 'Selected resource PDF is ready to be exported make sure you refresh the page after this action please...');
-
         }
     }
 
@@ -124,11 +117,7 @@ class ViewChasCreatedResourcesLivewire extends Component
             });
 
             session()->flash('exportResource', 'Resource QR Codes are ready to be exported make sure you refresh the page after this action please...');
-
-        }
-
-
-        else {
+        } else {
 
             ChasResource::search($this->chasResourceSearch)->with(['user'])->whereIn('id', $this->resourceId)->chunk($chunkSize, function ($data) {
 
@@ -136,7 +125,6 @@ class ViewChasCreatedResourcesLivewire extends Component
             });
 
             session()->flash('exportResource', 'Selected resource QR Codes are ready to be exported make sure you refresh the page after this action please...');
-
         }
     }
 
@@ -150,11 +138,4 @@ class ViewChasCreatedResourcesLivewire extends Component
 
         session()->flash('deleteResource', 'Resource is deleted successfully!');
     }
-
-
-
-    // public function a(){
-    //     dd('here');
-    // }
-
 }

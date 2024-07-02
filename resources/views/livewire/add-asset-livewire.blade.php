@@ -93,9 +93,10 @@
                 <select type="select" wire:model= "asset_status"
                     class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full'>
                     <option value="">-- Select status of an asset --</option>
-                    <option value="Functional">Functional</option>
-                    <option value="Non Functional">Non Functional</option>
-
+                    <option value="Very good">Very good</option>
+                    <option value="Good">Good</option>
+                    <option value="Good">Fair</option>
+                    <option value="Poor">Poor</option>
                 </select>
                 @error('asset_status')
                     <strong class= 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>{{ $message }}</strong>
@@ -227,6 +228,8 @@
                             <th class="table-plus datatable-nosort font-weight-bold">Asset's price</th>
                             <th class="table-plus datatable-nosort font-weight-bold">Asset's total price</th>
                             <th class="table-plus datatable-nosort font-weight-bold">Select data to print</th>
+                            <th class="table-plus datatable-nosort font-weight-bold">Created time</th>
+                            <th class="table-plus datatable-nosort font-weight-bold">Updated time</th>
 
                             <th class="datatable-nosort font-weight-bold">Action</th>
                         </tr>
@@ -286,6 +289,16 @@
 
                                     <input type="checkbox" wire:model = "resourceId" value="{{ $asset->id }}"
                                         class="checked" onclick="checkAll()">
+
+                                </td>
+
+                                <td style="text-decoration: normal">
+                                    {{ $asset->created_at->format('d M Y h:i:s') }}
+                                </td>
+
+
+                                <td style="text-decoration: normal">
+                                    {{ $asset->updated_at->format('d M Y h:i:s') }}
 
                                 </td>
 
@@ -400,7 +413,7 @@
                                     href="{{ asset('storage/asset_cost_files/' . basename($file)) }}"
                                     class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
                                     onclick="confirm(`Please don't forget to refresh the page once you are done downloading`) || event.stopImmediatePropagation()"
-                                    download="{{ basename($file) }}"><i class="fas fa-link px-1"></i>
+                                    download="{{ basename($file) }}"><i class="fas fa-download px-1"></i>
                                     {{ basename($file) }}</a>
                             </div>
 

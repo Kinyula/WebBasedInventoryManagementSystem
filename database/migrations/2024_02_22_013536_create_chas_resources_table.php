@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('asset_id')->constrained('assets')->onDelete('cascade')->onUpdate('cascade');
             $table->string('resource_name');
             $table->string('status')->default('Approved');
-            $table->string('asset_status')->default('Functional');
+            $table->string('asset_status')->default('Very good');
             $table->string('college_name');
             $table->timestamps();
         });

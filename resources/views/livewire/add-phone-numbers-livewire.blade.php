@@ -23,7 +23,7 @@
                     number</label>
                 <input type="number" wire:model= "PhoneNumber"
                     class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full'
-                    placeholder="Enter phone number eg. +255 XXX  XXX  XXX">
+                    placeholder="Enter phone number eg. (0) XXX  XXX  XXX">
                 @error('PhoneNumber')
                     <strong class= 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2 '>{{ $message }}</strong>
                 @enderror

@@ -15,10 +15,10 @@ class AddCollegeManagerLivewire extends Component
     use WithFileUploads;
 
     public $role_id = 2, $username, $email, $password,
-     $college, $profile_image, $collegeInventoryManager;
+     $college, $profile_image, $collegeInventoryManager, $post;
 
      public function mount(){
-        
+
         $this->password = time();
      }
     public function render()
@@ -44,7 +44,8 @@ class AddCollegeManagerLivewire extends Component
             'username' => 'required',
             'email' => 'required',
             'password' => 'required',
-            'college' => 'required'
+            'college' => 'required',
+            'post' => 'required',
 
 
         ]);
@@ -78,7 +79,7 @@ class AddCollegeManagerLivewire extends Component
 
         $collegeInventoryManager->save();
 
-        $this->reset(['email', 'profile_image', 'username', 'password','college']);
+        $this->reset(['email', 'profile_image', 'username', 'password','college','post']);
 
         session()->flash('addCollegeManager', 'A college manager is added successfully.');
     }

@@ -47,7 +47,7 @@ class AddAssetLivewire extends Component
 
             'categories' => Category::get(),
 
-            'Assets' => Asset::search($this->searchAsset)->paginate(15),
+            'Assets' => Asset::search($this->searchAsset)->latest()->paginate(15),
 
             'Suppliers' => Supplier::search($this->searchSupplier)->get()
 

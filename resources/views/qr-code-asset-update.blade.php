@@ -55,10 +55,10 @@
                     class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full'>
                     <option value="">-- Select status --</option>
 
-                    <option value="Functional">Functional</option>
-                    <option value="Non functional">Non functional</option>
-                    <option value="Repaired">Repaired</option>
-
+                    <option value="Very good">Very good</option>
+                    <option value="Good">Good</option>
+                    <option value="Fair">Fair</option>
+                    <option value="Poor">Poor</option>
                 </select>
 
                 @error('resource_status')
@@ -68,7 +68,7 @@
 
             <div class="flex items-center gap-4">
                 <x-primary-button>{{ __('Save') }}</x-primary-button>
-
+                <a href="{{ asset('UIMS/dashboard') }}" class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 float-end"><i class="fas fa-arrow-left px-1"></i> Back</a>
                 @if (session('status') === 'profile-updated')
                     <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
                         class="text-sm text-gray-600 dark:text-gray-400">{{ __('Saved.') }}</p>

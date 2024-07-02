@@ -8,15 +8,40 @@ use App\Models\ChasResource;
 use App\Models\Category;
 use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
+use Livewire\WithFileUploads;
 
 class AddChasResourcesLivewire extends Component
 {
+    use WithFileUploads;
+
     public $resource_name, $category_type, $chasResourceImport,
-     $university_store_resource_name, $import_quantity;
+      $import_quantity;
 
     public function render()
     {
         return view('livewire.add-chas-resources-livewire', ['categories' => Category::get(), 'Assets' =>Asset::get()]);
+    }
+
+
+    public function importChasResources()
+    {
+        $this->validate(['chasResourceImport' => 'required|mimes:xlsx,xls,csv']);
+
+        $filePath = $this->chasResourceImport->store('public/resource_files');
+
+        // dispatch(new AssistantImportProcess($filePath))->delay(now()->addSeconds(5));
+
+        // if (File::exists($filePath)) {
+        //     File::delete()
+        // }
+
+        Excel::queueImport(new ChasResourceImport, $filePath);
+
+
+        $this->reset(['chasResourceImport']);
+
+        session()->flash('message', 'Done...');
+
     }
 
     public function addChasResources()
@@ -28,7 +53,6 @@ class AddChasResourcesLivewire extends Component
 
             'resource_name' => 'required',
 
-            'university_store_resource_name' =>'required',
 
             'import_quantity' => 'required'
 
@@ -42,7 +66,6 @@ class AddChasResourcesLivewire extends Component
 
             $chasResource->category_id = $this->category_type;
 
-            $chasResource->asset_id = $this->university_store_resource_name;
 
             $chasResource->resource_name = $this->resource_name;
 
@@ -53,18 +76,10 @@ class AddChasResourcesLivewire extends Component
         }
 
 
-        $this->reset(['category_type','import_quantity', 'resource_name', 'university_store_resource_name']);
+        $this->reset(['category_type','import_quantity', 'resource_name']);
 
         session()->flash('addResources', 'A resource is added successfully.');
     }
 
-    public function importChasResources()
-    {
 
-        $this->validate(['chasResource' => 'required|mimes:xlsx,xls,csv']);
-
-        Excel::import(new ChasResourceImport, $this->chasResourceImport);
-
-        session()->flash('message', 'CHAS resources are imported successfully');
-    }
 }
