@@ -8,23 +8,61 @@ use Illuminate\Database\Eloquent\Model;
 class ChasResource extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'category_id', 'asset_id', 'resource_name', 'status', 'college_name', 'asset_status', 'allocation_status','resource_cost', 'repair_status', 'region'];
+    protected $fillable = ['user_id', 'category_id', 'asset_id', 'resource_name', 'status', 'college_name', 'asset_status', 'allocation_status','resource_cost', 'repair_status', 'region','room'];
 
     protected $casts = ['resource_cost' => 'float'];
 
     public static function search($search)
     {
 
-        return empty($search) ? static::query() : static::query()
 
-            ->where("allocation_status", "ILIKE", "%$search%")
-            ->OrWhere("college_name", "ILIKE", "%$search%")
-            ->orWhere("asset_status", "ILIKE", "%$search%")
+            if (auth()->user()->post == 'store') {
+                return empty($search) ? static::query() : static::query()
+                ->where("resource_name", "ILIKE", "%$search%")
+                ->orWhere("status", "ILIKE", "%$search%")
+                ->orWhere("id", "ILIKE", "%$search%");
+            } else {
+                return empty($search) ? static::query() : static::query()
+                ->join('categories', 'categories.id', '=', 'chas_resources.category_id')
+                ->where("allocation_status", "ILIKE", "%$search%")
+                ->orWhere("categories.category_type", "ILIKE", "%$search%") // Search by category name
+                ->orWhere("college_name", "ILIKE", "%$search%")
+                ->orWhere("asset_status", "ILIKE", "%$search%")
+                ->orWhere("status", "ILIKE", "%$search%")
+                ->orWhere("resource_name", "ILIKE", "%$search%")
+                ->orWhere("chas_resources.id", "ILIKE", "%$search%")
+                ->orWhere("building", "ILIKE", "%$search%")
+                ->orWhere("room", "ILIKE", "%$search%");
+            }
+
+    }
+
+    public static function searchRepair($search)
+    {
+        return empty($search) ? static::query() : static::query()
+        ->where("room", "ILIKE", "%$search%")
+        ->orWhere("repair_status", "ILIKE", "%$search%")
+        ->orWhere("department", "ILIKE", "%$search%")
+        ->orWhere("id", "ILIKE", "%$search%");
+
+    }
+
+
+    public static function searchApproved($search)
+    {
+        return empty($search) ? static::query() : static::query()
+            ->where("resource_name", "ILIKE", "%$search%")
             ->orWhere("status", "ILIKE", "%$search%")
-            ->orWhere("resource_name", "ILIKE", "%$search%")
             ->orWhere("id", "ILIKE", "%$search%");
     }
 
+    public static function searchUnApproved($search)
+    {
+        return empty($search) ? static::query() : static::query()
+            ->where("resource_name", "ILIKE", "%$search%")
+            ->orWhere("status", "ILIKE", "%$search%")
+            ->orWhere("id", "ILIKE", "%$search%");
+    }
     public static function searchResource($search)
     {
         return empty($search) ? static::query() : static::query()
@@ -61,7 +99,11 @@ class ChasResource extends Model
             ->orWhere("id", "ILIKE", "%$search%");
     }
 
+    public function allocation()
+    {
 
+        return $this->hasMany(AreaOfAllocation::class);
+    }
 
     public function user()
     {
@@ -86,9 +128,5 @@ class ChasResource extends Model
         return $this->belongsTo(ChssResource::class, 'chss_resource_id', 'id');
     }
 
-    public function areaOfAllocation()
-    {
 
-        return $this->hasMany(AreaOfAllocation::class);
-    }
 }

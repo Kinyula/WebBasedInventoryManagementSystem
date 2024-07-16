@@ -6,7 +6,7 @@
         <img src="{{ asset('vendors/images/udom.png') }}" class="float-end  udom-logo" alt="" srcset="" style="float: inline-end">
     </div>
 
-    <div class="card-box qr-code-scanner mb-30 p-3 float-end" style="display: flex;justify-content:space-around ">
+    <div class="card-box qr-code-scanner mb-30 p-3 float-start" style="display: flex;justify-content:space-around ">
 
 
         <div id="reader" style="width: 400px;" class="nowrap">

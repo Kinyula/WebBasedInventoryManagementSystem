@@ -30,6 +30,15 @@ class CoBEResource extends Model
             ->orWhere("id", "ILIKE", "%$search%");
     }
 
+    public static function searchRepair($search)
+    {
+        return empty($search) ? static::query() : static::query()
+        ->where("room", "ILIKE", "%$search%")
+        ->orWhere("repair_status", "ILIKE", "%$search%")
+        ->orWhere("department", "ILIKE", "%$search%")
+        ->orWhere("id", "ILIKE", "%$search%");
+
+    }
 
     public function user()
     {

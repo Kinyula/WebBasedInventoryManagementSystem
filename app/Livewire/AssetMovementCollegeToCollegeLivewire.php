@@ -4,6 +4,8 @@ namespace App\Livewire;
 
 use App\Models\AreaOfAllocation;
 use App\Models\AssetMovement;
+use Illuminate\Support\Facades\File;
+use App\Models\ChasResource;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -11,13 +13,21 @@ class AssetMovementCollegeToCollegeLivewire extends Component
 {
 
     use WithPagination;
-    public $search = '', $searchAsset = '', $quantity, $resource_name, $receiver;
+    public $search = '', $searchAsset = '', $quantity, $resource_name, $receiver, $pdfFiles = [];
 
     public function render()
     {
+        $path = public_path('storage/resource_files/');
+
+        $files = File::files($path);
+
+        foreach ($files as $file) {
+            $this->pdfFiles[] = $file->getPathname();
+        }
+
         return view('livewire.asset-movement-college-to-college-livewire', [
             'Assets' => AreaOfAllocation::searchAsset($this->searchAsset)->where('status_movement', '=' , 'Not moved')->distinct('chas_resource_id')->get(),
-            'Areas' => AssetMovement::search($this->search)->with(['chasAreas'])->paginate()
+            'Resources' => ChasResource::search($this->searchAsset)->where('allocation_status', 'Not Allocated')->where('status', '=', 'Approved')->paginate(),
         ]);
     }
 

@@ -20,24 +20,23 @@
         <form wire:submit = 'allocateResourceToAreas'>
             <div class="mt-3">
                 <input type="search" wire:model.live = 'searchAsset'
-                    placeholder="Search an asset by ' Asset name ' Or by ' ID ' from the stock" class="w-full">
+                    placeholder="Search an asset by 'Category Or Asset name ' Or by ' ID ' Or Room number from the stock" class="w-full">
             </div>
             <div class="mt-3">
                 <label for="resource_name" class='block font-medium text-sm text-gray-700 dark:text-gray-300'>Asset
                     name <span class="text-danger text-xl">*</span></label>
                 <select type="select" wire:model= "resource_name"
-                    class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full'>
+                    class='border-gray-300  dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full'>
                     <option value="">-- Choose an asset --</option>
                     @foreach ($Assets as $asset)
-                        <option value="{{ $asset->id }}">ID : {{ $asset->id }} -- Resource name :
-                            {{ $asset->resource_name }}</option>
+                        <option value="{{ $asset->id }}" class="font-weight-bold">ID : <span class="font-weight-bold text-green-700">{{ $asset->id }}</span> <span class="font-weight-bold">-- Resource name :</span>
+                            <span class="font-weight-bold text-green-700">{{ $asset->resource_name }}</span><span class="font-weight-bold"> -- Building </span>: <span class="font-weight-bold text-green-700">{{ $asset->building??'Not yet allocated' }}</span> <span class="font-weight-bold"> -- Floor </span>: <span class="font-weight-bold text-green-700">{{ $asset->specific_area_of_allocation??'Not yet allocated' }}</span><span class="font-weight-bold">-- Room number </span>: <span class="font-weight-bold text-green-700">{{ $asset->room??'Not yet allocated' }}</span></option>
                     @endforeach
                 </select>
                 @error('resource_name')
                     <strong class= 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>{{ $message }}</strong>
                 @enderror
             </div>
-
 
             <div class="mt-4">
                 <label for="quantity" class='block font-medium text-sm text-gray-700 dark:text-gray-300'>Asset
@@ -72,11 +71,11 @@
 
             <div class="mt-3">
                 <label for="area_of_allocation"
-                    class='block font-medium text-sm text-gray-700 dark:text-gray-300'>Allocate
-                    area <span class="text-danger text-xl">*</span></label>
-                <select type="select" wire:model= "area_of_allocation"
+                    class='block font-medium text-sm text-gray-700 dark:text-gray-300'>Building
+                    <span class="text-danger text-xl">*</span></label>
+                <select type="select" wire:model= "building"
                     class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full'>
-                    <option value="">-- Select area of allocation --</option>
+                    <option value="">-- Select building --</option>
 
                     <option value="Administration block">Administration block</option>
                     <option value="Library">Library</option>
@@ -85,26 +84,37 @@
 
 
                 </select>
-                @error('area_of_allocation')
+                @error('building')
                     <strong class= 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>{{ $message }}</strong>
                 @enderror
             </div>
 
             <div class="mt-3">
-                <label for="specific_area"
-                    class='block font-medium text-sm text-gray-700 dark:text-gray-300'>Allocate
-                    specific area <span class="text-danger text-xl">*</span></label>
-                <select type="select" wire:model= "specific_area"
+                <label for=""
+                    class='block font-medium text-sm text-gray-700 dark:text-gray-300'>
+                    floor <span class="text-danger text-xl">*</span></label>
+                <select type="select" wire:model= "floor"
                     class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full'>
-                    <option value="">-- Select specific area of allocation --</option>
+                    <option value="">-- Select floor --</option>
 
-                    <option value="Administration block">Administration block</option>
-                    <option value="Block A">Block A</option>
-                    <option value="Block B">Block B</option>
-                    <option value="Laboratory">Laboratory</option>
-                    <option value="Library">Library</option>
+                    <option value="Ground floor">Ground floor</option>
+                    <option value="First floor">First floor</option>
+                    <option value="Second floor">Second floor</option>
+                    <option value="Third floor">Third floor</option>
+                    <option value="Higher floors">Higher floors</option>
+
+
                 </select>
-                @error('specific_area')
+                @error('floor')
+                    <strong class= 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>{{ $message }}</strong>
+                @enderror
+            </div>
+            <div class="mt-3">
+                <label for="room"
+                    class='block font-medium text-sm text-gray-700 dark:text-gray-300'>Allocate to
+                    rooms<span class="text-danger text-xl">*</span></label>
+                    <input type="text" wire:model= "room" placeholder="Allocate to specific areas eg.room, library" class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full'>
+                @error('room')
                     <strong class= 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>{{ $message }}</strong>
                 @enderror
             </div>
@@ -136,20 +146,21 @@
 
         <div class="card-box mb-30 p-3">
 
-            @if (session()->has('area'))
+            @if (session()->has('report'))
                 <div role="alert" class="alert alert-success alert-dismissible fade show">
-                    <strong>{{ session('area') }}</strong>
+                    <strong>{{ session('report') }}</strong>
                     <button class="btn btn-close"></button>
                 </div>
             @endif
 
-            <form wire:submit.prevent = 'exportChasReportPdf'>
+
+            <form wire:submit.prevent = 'exportChasReportExcel'>
 
 
                 <button type="submit"
                     class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ms-4 float-end">
                     <i class="bi bi-download font-weight-bold p-1"></i>
-                    Print report PDF
+                    Print report excel
                 </button>
 
             </form>
@@ -178,13 +189,13 @@
 
                         <th class="table-plus datatable-nosort font-weight-bold">Asset's cost</th>
 
-                        <th class="table-plus datatable-nosort font-weight-bold">College name</th>
+                        <th class="table-plus datatable-nosort font-weight-bold">Building</th>
+
+                        <th class="table-plus datatable-nosort font-weight-bold">Floor</th>
+
+                        <th class="table-plus datatable-nosort font-weight-bold">Room</th>
 
                         <th class="table-plus datatable-nosort font-weight-bold">Department</th>
-
-                        <th class="table-plus datatable-nosort font-weight-bold">Area allocated</th>
-
-                        <th class="table-plus datatable-nosort font-weight-bold">Specific area allocated</th>
 
                         <th class="table-plus datatable-nosort font-weight-bold">Action</th>
                     </tr>
@@ -218,27 +229,27 @@
 
                             <td style="text-decoration:normal"><i class="bi bi-pencil p-2"></i>
                                 <span class="font-weight-bold">Tsh</span>
-                                <span class="font-weight-bold text-danger">{{ Illuminate\Support\Number::format($area->chasAreas->assets->asset_cost??0, precision:2) }}/=</span>
+                                <span class="font-weight-bold text-danger">{{ Illuminate\Support\Number::format($area->chasAreas->resource_cost??0, precision:2) }}/=</span>
                                 <span class="font-weight-bold">for 1 {{ $area->chasAreas->resource_name }}</span>
                             </td>
 
 
                             <td style="text-decoration:normal" ><i class="bi bi-pencil p-2"></i>
-                                <span class="font-weight-bold">{{ $area->college_name }}</span>
-                            </td>
-
-
-                            <td style="text-decoration:normal">
-                                <span class="font-weight-bold">{{ $area->department??'Not yet specified' }}</span>
+                                <span class="font-weight-bold">{{ $area->chasAreas->building }}</span>
                             </td>
 
                             <td style="text-decoration:normal">
-                                <span class="font-weight-bold text-danger">{{ $area->area_of_allocation }}</span>
+                                <span class="font-weight-bold text-danger">{{ $area->floor }}</span>
                             </td>
 
                             <td style="text-decoration:normal">
                                 <span class="font-weight-bold text-danger">{{ $area->specific_area_of_allocations??'Not yet allocated' }}</span>
                             </td>
+                            <td style="text-decoration:normal">
+                                <span class="font-weight-bold">{{ $area->department??'Not yet specified' }}</span>
+                            </td>
+
+
                             <td>
 
                                 <div class="dropdown">

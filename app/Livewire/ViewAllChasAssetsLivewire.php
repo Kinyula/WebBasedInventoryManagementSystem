@@ -34,7 +34,7 @@ class ViewAllChasAssetsLivewire extends Component
 
         return view('livewire.view-all-chas-assets-livewire', [
             'Resources' => ChasResource::search($this->chasResourceSearch)->with(
-                ['user', 'category']
+                ['user', 'category', 'allocation']
             )->paginate(15),
 
 

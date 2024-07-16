@@ -2,7 +2,7 @@
 
 @section('content')
 
-@if (auth()->user()->role_id === '2' || auth()->user()->role_id === '1')
+@if (auth()->user()->role_id === '2' || auth()->user()->role_id === '1' || auth()->user()->role_id === '0')
 
 @livewire('qr-code-reader-livewire')
 

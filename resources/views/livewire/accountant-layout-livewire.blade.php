@@ -362,7 +362,15 @@
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/view-chas-created-resources') }}">
-                                            Resource management
+                                            Track asset
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/CHAS/verification-and-approval') }}">
+                                            Verification & approval
                                         </a>
                                     </li>
 
@@ -387,7 +395,13 @@
 
                                 </ul>
 
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/maintainance/chas') }}">
+                                            Maintanance status
+                                        </a>
+                                    </li>
 
+                                </ul>
 
                             </li>
                         @endif
@@ -642,16 +656,29 @@
 
                             </li>
                         @endif
-                        @if (auth()->user()->college_name == 'College of Health and Allied Science ( CHAS )')
 
-                            @php
-                                $unread = App\Models\Replies::whereReplyStatus('unread')
-                                    ->whereReplyToSpecifiedCollege('College of Health and Allied Science ( CHAS )')
-                                    ->count();
-                            @endphp
+                        <li class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle">
+                                <span class="micon bi bi-folder"></span><span class="mtext">Reports</span>
+                            </a>
+                        @if(auth()->user()->college_name == 'College of Health and Allied Science ( CHAS )')
+                        <ul class="submenu">
 
+                            <li><a wire:navigate href="{{ asset('UIMS/detail-reports/chas') }}">
+                                    View detail report</a>
+                            </li>
+
+                        </ul>
+
+                        <ul class="submenu">
+
+                            <li><a wire:navigate href="{{ asset('UIMS/chas-summary-report') }}">
+                                    View summary report</a>
+                            </li>
+
+                        </ul>
                         @endif
-
+                        </li>
                         @if (auth()->user()->college_name == 'College of Natural Mathematical Science ( CNMS ) ')
                             @php
                                 $unread = App\Models\Replies::whereReplyStatus('unread')

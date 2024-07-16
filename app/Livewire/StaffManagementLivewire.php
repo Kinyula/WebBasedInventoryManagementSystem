@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class StaffManagementLivewire extends Component
 {
-    public $role_id, $username, $email, $password, $post, $college, $profile_image;
+    public $role_id, $username, $email, $password, $post, $college, $profile_image,$department;
 
     public function mount(){
 
@@ -39,6 +39,8 @@ class StaffManagementLivewire extends Component
         $staff->username = $this->username;
 
         $staff->email = $this->email;
+
+        $staff->department = $this->department;
 
 
         if (!is_null($this->college)) {

@@ -19,16 +19,24 @@ use App\Http\Controllers\AssetStatusController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChasDetailsReportController;
 use App\Http\Controllers\ChasReportController;
+use App\Http\Controllers\ChasVerificationAndApprovalController;
+use App\Http\Controllers\ChssDetailsReportController;
 use App\Http\Controllers\ChssReportController;
+use App\Http\Controllers\CiveDetailsReportController;
 use App\Http\Controllers\CiveReportController;
+use App\Http\Controllers\CnmsDetailsReportController;
 use App\Http\Controllers\CnmsReportController;
+use App\Http\Controllers\CobeDetailsReportController;
 use App\Http\Controllers\CobeReportController;
+use App\Http\Controllers\CoedDetailsReportController;
 use App\Http\Controllers\CoedReportController;
+use App\Http\Controllers\CoeseDetailsReportController;
 use App\Http\Controllers\CoeseReportController;
 use App\Http\Controllers\CollegeInventoryManagerReportController;
 use App\Http\Controllers\CollegeResourceAllocationController;
 use App\Http\Controllers\ConsumableItemsController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\DetailReportPageLinksController;
 use App\Http\Controllers\EditAssetController;
 use App\Http\Controllers\EditChasAreaOfAllocationController;
 use App\Http\Controllers\EditChasResourceStatusController;
@@ -39,6 +47,14 @@ use App\Http\Controllers\EditDetailsReportController;
 use App\Http\Controllers\EditResourcesAllocationController;
 use App\Http\Controllers\EditStaffsController;
 use App\Http\Controllers\InventorySheetController;
+use App\Http\Controllers\MaintanancePageLinksController;
+use App\Http\Controllers\MaintananceStatusChssController;
+use App\Http\Controllers\MaintananceStatusCiveController;
+use App\Http\Controllers\MaintananceStatusCnmsController;
+use App\Http\Controllers\MaintananceStatusCobeController;
+use App\Http\Controllers\MaintananceStatusCoedController;
+use App\Http\Controllers\MaintananceStatusCoeseController;
+use App\Http\Controllers\MaintananceStatusController;
 use App\Http\Controllers\MakeReportRequestsController;
 use App\Http\Controllers\MessagingReportController;
 use App\Http\Controllers\PhoneNumberController;
@@ -392,17 +408,69 @@ Route::middleware('auth')->group(function () {
 
     // ------------------------------------------------- Details report routes ----------------------------------------------------------
 
-    Route::get('UIMS/chas-details-report', [ChasDetailsReportController::class, 'index']);
+    Route::get('UIMS/detail-reports/chas', [ChasDetailsReportController::class, 'index']);
     Route::get('UIMS/edit-chas-details-report/{id}', [EditDetailsReportController::class, 'index']);
     Route::get('UIMS/chas-summary-report', [SummaryReportController::class, 'index']);
     Route::get('UIMS/chas-inventory-sheet', [InventorySheetController::class, 'index']);
 
+    // ****************************** details report for CNMS routes *************************************************
+
+    Route::get('UIMS/detail-reports/cnms', [CnmsDetailsReportController::class, 'index']);
+
+    // ***************************** details report for CIVE routes **********************************
+    Route::get('UIMS/detail-reports/cive', [CiveDetailsReportController::class, 'index']);
+    Route::get('UIMS/edit-cive-details-report/{id}', [EditDetailsReportController::class, 'index']);
+
+    // ****************************** End of report for CIVE routes *********************************
+
+    // ****************************** details report for CHSS routes *************************************************
+    Route::get('UIMS/detail-reports/chss', [ChssDetailsReportController::class, 'index']);
+    // ******************************** End of CHSS details report routes *************************************
+
+    // ******************************* details report for CoED routes *****************************************
+    Route::get('UIMS/detail-reports/coed', [CoedDetailsReportController::class, 'index']);
+    // ******************************** End of CoED details report routes *************************************
+
+        // ******************************* details report for CoBE routes *****************************************
+        Route::get('UIMS/detail-reports/cobe', [CobeDetailsReportController::class, 'index']);
+            // ******************************** End of CoBE details report routes *************************************
+
+                // ********************************  CoESE details report routes ********************************************
+                Route::get('UIMS/detail-reports/coese', [CoeseDetailsReportController::class, 'index']);
+                // ******************************** End of CoESE details report routes *************************************
     //------------------------------------------------------------ End of details report routes ----------------------------------------------------
 
     // -------------------------------------------------- Consumable items routes ----------------------------------------------------------------
     Route::get('UIMS/edit-chas-consumable-items/{id}', [EditConsumableItemsController::class, 'index']);
 
     Route::get('UIMS/consumable-items', [ConsumableItemsController::class, 'index']);
+
+    // ------------------------------------------------ End of Consumable items routes ----------------------------------------------------------------
+
+    // -------------------------------------------------- Maintainance routes ----------------------------------------------------------------
+
+    Route::get('UIMS/maintainance/chas',[MaintananceStatusController::class, 'index']);
+    Route::get('UIMS/maintainance/', [MaintanancePageLinksController::class, 'index']);
+    Route::get('UIMS/maintainance/cnms', [MaintananceStatusCnmsController::class, 'index']);
+    Route::get('UIMS/maintainance/cive', [MaintananceStatusCiveController::class, 'index']);
+    Route::get('UIMS/maintainance/chss', [MaintananceStatusChssController::class, 'index']);
+    Route::get('UIMS/maintainance/coed', [MaintananceStatusCoedController::class, 'index']);
+    Route::get('UIMS/maintainance/cobe', [MaintananceStatusCobeController::class, 'index']);
+    Route::get('UIMS/maintainance/coese', [MaintananceStatusCoeseController::class, 'index']);
+
+    // ------------------------------------------------ End of Maintanance routes ----------------------------------------------------------------------
+
+    // ----------------------------------------------------------- Details report routes ----------------------------------------------------------------------------
+
+    Route::get('UIMS/detail-reports/', [DetailReportPageLinksController::class, 'index']);
+
+        // ----------------------------------------------------------- End Details report routes ----------------------------------------------------------------------------
+
+        // -------------------------------------------------- Verification and Approval routes ----------------------------------------------------------
+
+        Route::get('UIMS/CHAS/verification-and-approval', [ChasVerificationAndApprovalController::class, 'index']);
+        
+                // -------------------------------------------------- End Verification and Approval routes ----------------------------------------------------------
 });
 
 

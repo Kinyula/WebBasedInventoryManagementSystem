@@ -16,9 +16,9 @@ class ChasHomeLivewire extends Component
 
     public function render()
     {
-        
+
         return view('livewire.chas-home-livewire', [
-            'Resources' => ChasResource::searchDefected($this->resourceSearch)->groupBy('id')->where('asset_status', '=', 'Poor')->orWhere('asset_status', '=', 'Fair')->orWhere('asset_status', '=', 'Good')->paginate(15),
+            'Resources' => ChasResource::searchDefected($this->resourceSearch)->groupBy('id')->where('asset_status', '=', 'Poor')->orWhere('repair_status', '=', 'Repair')->paginate(15),
             'UnAllocatedResources' => ChasResource::searchDefected($this->resourceSearch)->groupBy('id')->where('asset_status', '=', 'Poor')->orWhere('asset_status', '=', 'Fair')->orWhere('asset_status', '=', 'Good')->paginate(15),
             'maintanance' => ChasResource::where('asset_status', '=', 'Poor')->orWhere('asset_status', '=', 'Fair')->orWhere('asset_status', '=', 'Good')->count(),
             'unallocated' => ChasResource::where('allocation_status', 'Not Allocated')->count(),

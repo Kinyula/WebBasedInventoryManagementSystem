@@ -254,7 +254,8 @@
                                 <span class="micon bi bi-person"></span><span class="mtext">View profile</span>
                             </a>
                             <ul class="submenu">
-                                <li><a wire:navigate href="{{ asset('/profile/' . auth()->user()->id) }}">Profile</a></li>
+                                <li><a wire:navigate href="{{ asset('/profile/' . auth()->user()->id) }}">Profile</a>
+                                </li>
 
                             </ul>
 
@@ -271,17 +272,58 @@
 
                         <li class="dropdown">
                             <a href="javascript:;" class="dropdown-toggle ">
-                                <span class="micon bi bi-pencil-square"></span><span class="mtext">Asset management</span>
+                                <span class="micon bi bi-pencil-square"></span><span class="mtext">Asset
+                                    management</span>
                             </a>
 
-
+                            {{--
 
                             <ul class="submenu">
                                 <li><a class="active:bg-red-800" wire:navigate href="{{ asset('UIMS/add-category') }}">
                                     Add category
                                     </a></li>
 
+                            </ul> --}}
+
+                            @if (auth()->user()->post == 'Head of department ( HOD )')
+                            <ul class="submenu">
+                                <li><a class="active:bg-red-800" wire:navigate
+                                        href="{{ asset('UIMS/view-chas-created-resources') }}">
+                                        Track asset
+                                    </a></li>
+
                             </ul>
+                            @else
+                            <ul class="submenu">
+                                <li><a class="active:bg-red-800" wire:navigate
+                                        href="{{ asset('UIMS/add-chas-resources') }}">
+                                        Asset Registration
+                                    </a></li>
+
+                            </ul>
+
+
+                            <ul class="submenu">
+
+                                <li><a class="active:bg-red-800" wire:navigate
+                                        href="{{ asset('UIMS/view-chas-created-resources') }}">
+                                        Asset Allocation
+                                    </a></li>
+
+                            </ul>
+
+
+                            <ul class="submenu">
+                                <li><a class="active:bg-red-800" wire:navigate
+                                        href="{{ asset('UIMS/asset-transfer') }}">
+                                        Asset movement
+                                    </a></li>
+
+                            </ul>
+
+                            @endif
+
+
 
                             {{-- <ul class="submenu">
                                 <li><a href="{{ asset('UIMS/add-asset-status') }}">
@@ -291,7 +333,7 @@
                             </ul> --}}
                         </li>
 
-{{--
+                        {{--
                         <li class="dropdown">
                             <a href="javascript:;" class="dropdown-toggle">
                                 <span class="micon bi bi-people"></span><span class="mtext">Suppliers</span>
@@ -325,11 +367,16 @@
                             </a>
 
                             <ul class="submenu">
-                                <li><a wire:navigate href="{{ asset('UIMS/register-suppliers') }}">Scan qr code
-                                        </a></li>
+                                <li><a wire:navigate href="{{ asset('UIMS/qr-code-reader') }}">Scan qr code
+                                    </a></li>
 
                             </ul>
 
+                            <ul class="submenu">
+                                <li><a wire:navigate href="{{ asset('UIMS/maintainance/') }}">Maintanance status
+                                    </a></li>
+
+                            </ul>
                         </li>
 
                         <li class="dropdown">
@@ -337,15 +384,42 @@
                                 <span class="micon bi bi-folder"></span><span class="mtext">Reports</span>
                             </a>
 
-
-
+                            @if (auth()->user()->college_name == 'Not set')
                             <ul class="submenu">
 
-                                <li><a wire:navigate href="{{ asset('UIMS/chas-summary-report') }}">
-                                        View summary report</a>
+                                <li><a wire:navigate href="{{ asset('UIMS/detail-reports/') }}">
+                                        View detail report</a>
                                 </li>
 
                             </ul>
+                            @elseif(auth()->user()->college_name == 'College of Health and Allied Science ( CHAS )')
+                            <ul class="submenu">
+
+                                <li><a wire:navigate href="{{ asset('UIMS/detail-reports/chas') }}">
+                                        View detail report</a>
+                                </li>
+
+                            </ul>
+
+                            @elseif(auth()->user()->college_name == 'College of Natural Mathematical Science ( CNMS )')
+                            <ul class="submenu">
+
+                                <li><a wire:navigate href="{{ asset('UIMS/detail-reports/cnms') }}">
+                                        View detail report</a>
+                                </li>
+
+                            </ul>
+
+                            @elseif(auth()->user()->college_name == 'College of Informatics and Virtual Education ( CIVE )')
+                            <ul class="submenu">
+
+                                <li><a wire:navigate href="{{ asset('UIMS/detail-reports/cive') }}">
+                                        View detail report</a>
+                                </li>
+
+                            </ul>
+                            @endif
+
 
                         </li>
 

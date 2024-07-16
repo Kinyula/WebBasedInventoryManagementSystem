@@ -3,26 +3,25 @@
     <div class="card-box mb-30 p-3">
 
         @if (auth()->user()->college_name === 'Not set' && auth()->user()->post === 'store')
+            <h2 class="h5 pd-20">View created items</h2>
+            <img src="{{ asset('vendors/images/udom.png') }}" class="float-end  udom-logo" alt="" srcset=""
+                style="float:inline-end">
+            <div class="role relative left-5">
+                <span class="font-weight-bold">Role : </span>
+                <span class="font-weight-bold text-danger uppercase">Dean of Finance ( DOF )</span>
+            </div>
 
-        <h2 class="h5 pd-20">View created items</h2>
-        <img src="{{ asset('vendors/images/udom.png') }}" class="float-end  udom-logo" alt="" srcset=""
-            style="float:inline-end">
-        <div class="role relative left-5">
-            <span class="font-weight-bold">Role : </span>
-            <span class="font-weight-bold text-danger uppercase">Dean of Finance ( DOF )</span>
-        </div>
         @else
-        <h2 class="h5 pd-20">View created items from the {{ auth()->user()->college_name }}</h2>
-        <img src="{{ asset('vendors/images/udom.png') }}" class="float-end  udom-logo" alt="" srcset=""
-            style="float:inline-end">
-        <div class="role relative left-5">
-            <span class="font-weight-bold">Role : </span>
-            <span class="font-weight-bold text-danger uppercase">{{ auth()->user()->post }}</span>
-        </div>
+            <h2 class="h5 pd-20">View summary of created items from the {{ auth()->user()->college_name }}</h2>
+            <img src="{{ asset('vendors/images/udom.png') }}" class="float-end  udom-logo" alt="" srcset=""
+                style="float:inline-end">
+            <div class="role relative left-5">
+                <span class="font-weight-bold">Role : </span>
+                <span class="font-weight-bold text-danger uppercase">{{ auth()->user()->post }}</span>
+            </div>
         @endif
 
     </div>
-
     <div class="card-box mb-30 p-3">
 
         @if (session()->has('deleteResource'))
@@ -66,7 +65,13 @@
 
         </div> --}}
 
+        <x-primary-button class="ms-4 float-end">
+            <a href="{{ asset('UIMS/view-all-chas-resources') }}">
+                <i class="fas fa-eye px-1"></i>
+                {{ __('View all assets') }}
+            </a>
 
+        </x-primary-button>
 
         <div class="header-search mb-5">
             <form class="d-flex">
@@ -78,6 +83,7 @@
                 </div>
             </form>
         </div>
+
 
 
 
@@ -116,7 +122,8 @@
 
                         <td>
                             <span class="font-weight-bold">Tsh</span>
-                            <span class="font-weight-bold text-danger">{{Illuminate\Support\Number::format($resource->groupBy('resource_name')->where('resource_name' , $resource->resource_name)->count() * $resource->resource_cost)  }}/=</span>
+                            <span
+                                class="font-weight-bold text-danger">{{ Illuminate\Support\Number::format($resource->groupBy('resource_name')->where('resource_name', $resource->resource_name)->count() * $resource->resource_cost) }}/=</span>
 
                         </td>
                         {{-- <td style="text-decoration:normal">
@@ -128,7 +135,8 @@
                         </td>
 
                         <td style="text-decoration:normal">
-                           <span class="font-weight-bold text-danger"> {{ $resource->groupBy('resource_name')->where('resource_name' , $resource->resource_name)->count() }}</span>
+                            <span class="font-weight-bold text-danger">
+                                {{ $resource->groupBy('resource_name')->where('resource_name', $resource->resource_name)->count() }}</span>
                         </td>
 
                         <td style="text-decoration:normal">
@@ -217,22 +225,16 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 
-
                                     <a class="dropdown-item"
-                                    href="{{ asset('UIMS/view-all-chas-resources') }}"><i
-                                        class="dw dw-eye"></i>View all assets</a>
-
-
-                                        <a class="dropdown-item"
-                                            href="{{ asset('UIMS/edit-chas-resource/' . $resource->id) }}"><i
-                                                class="dw dw-edit2"></i> Edit</a>
+                                        href="{{ asset('UIMS/edit-chas-resource/' . $resource->id) }}"><i
+                                            class="dw dw-edit2"></i> Edit</a>
 
 
 
-                                        <button type="submit" class="dropdown-item"
-                                            wire:click = "deleteChasCreatedResource({{ $resource->id }})"
-                                            onclick="confirm(`Are you sure you want to delete this {{ $resource->resource_name }} asset  from the list ? `) || event.stopImmediatePropagation()"><i
-                                                class="dw dw-delete-3"></i>Delete</button>
+                                    <button type="submit" class="dropdown-item"
+                                        wire:click = "deleteChasCreatedResource({{ $resource->id }})"
+                                        onclick="confirm(`Are you sure you want to delete this {{ $resource->resource_name }} asset  from the list ? `) || event.stopImmediatePropagation()"><i
+                                            class="dw dw-delete-3"></i>Delete</button>
 
 
 

@@ -47,11 +47,10 @@ class DetailsReportExport implements FromCollection, WithHeadings, WithMapping
             $resource->category->category_type,
             $resource->college_name,
             $resource->department,
-            $resource->created_at->format('d M Y h:i:s'),
-            $resource->updated_at->format('d M Y h:i:s'),
             $resource->resource_cost,
             $resource->asset_status,
             $resource->building,
+            $resource->floor,
             $resource->specific_area,
 
 

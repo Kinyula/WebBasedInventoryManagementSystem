@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class EditChasResourceStatusLivewire extends Component
 {
-    public $resourceStatus, $allocationStatus, $approvalStatus, $id, $resource_cost, $repair_status;
+    public $resourceStatus, $allocationStatus, $approvalStatus, $id, $resource_cost, $repair_status, $room;
 
     public function render()
     {
@@ -27,7 +27,8 @@ class EditChasResourceStatusLivewire extends Component
                 'approvalStatus' => 'required|string',
                 'allocationStatus' => 'required|string',
                 'resource_cost' => 'required',
-                'repair_status' => 'required'
+                'repair_status' => 'required',
+
 
             ]);
         } else {
@@ -36,7 +37,8 @@ class EditChasResourceStatusLivewire extends Component
                 'resourceStatus' => 'required|string',
                 'allocationStatus' => 'required|string',
                 'resource_cost' => 'required',
-                'repair_status' => 'required'
+                'repair_status' => 'required',
+                'room' => 'required|string',
             ]);
         }
 
@@ -54,11 +56,13 @@ class EditChasResourceStatusLivewire extends Component
             $chasResource->asset_status = $this->resourceStatus;
             $chasResource->allocation_status = $this->allocationStatus;
             $chasResource->resource_cost = $this->resource_cost;
+            $chasResource->room = $this->room;
+            $chasResource->repair_status = $this->repair_status;
         }
 
         $chasResource->update();
 
-        $this->reset(['resourceStatus', 'approvalStatus', 'allocationStatus', 'resource_cost']);
+        $this->reset(['resourceStatus', 'approvalStatus', 'allocationStatus', 'resource_cost', 'room','repair_status']);
 
         session()->flash('resourceStatusMessage', 'CHAS resource status is updated successfully.');
     }

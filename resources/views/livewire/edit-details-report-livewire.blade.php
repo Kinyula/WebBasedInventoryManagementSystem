@@ -59,8 +59,6 @@
 
         <form wire:submit.prevent = "editDetailStatus({{ $id }})">
 
-
-            @if (auth()->user()->post === 'store')
                 <div class="mt-3">
                     <label for="region" class='block font-medium text-sm text-gray-700 dark:text-gray-300'>
                         Region</label>
@@ -246,8 +244,7 @@
                     <strong class= 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>{{ $message }}</strong>
                 @enderror
             </div> --}}
-            @else
-            @endif
+
 
 
 

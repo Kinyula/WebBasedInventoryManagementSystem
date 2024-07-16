@@ -1,7 +1,7 @@
 <div>
     <div class="card-box mb-30 p-3">
 
-        <h2 class="h5 pd-20"><i class="bi bi-cart px-1"></i> Move resources within the college</h2>
+        <h2 class="h5 pd-20"><i class="bi bi-cart px-1"></i> Move resources </h2>
         <img src="{{ asset('vendors/images/udom.png') }}" class="float-end  udom-logo" alt="" srcset=""
             style="float:inline-end">
     </div>
@@ -34,6 +34,17 @@
                     @endforeach
                 </select>
                 @error('resource_name')
+                    <strong class= 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>{{ $message }}</strong>
+                @enderror
+            </div>
+
+            <div class="mt-4">
+                <label for="" class='block font-medium text-sm text-gray-700 dark:text-gray-300'>
+                    Confirm selected asset name above <span class="text-danger text-xl">*</span></label>
+                <input type="text" wire:model= "confirm_asset"
+                    class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full'
+                    placeholder="Confirm the asset name selected above ">
+                @error('confirm_asset')
                     <strong class= 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>{{ $message }}</strong>
                 @enderror
             </div>
@@ -94,16 +105,7 @@
             <div class="mt-3">
                 <label for="specific_area" class='block font-medium text-sm text-gray-700 dark:text-gray-300'>Allocate
                     specific area <span class="text-danger text-xl">*</span></label>
-                <select type="select" wire:model= "specific_area"
-                    class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full'>
-                    <option value="">-- Select specific area of allocation --</option>
-
-                    <option value="Administration block">Administration block</option>
-                    <option value="Block A">Block A</option>
-                    <option value="Block B">Block B</option>
-                    <option value="Laboratory">Laboratory</option>
-                    <option value="Library">Library</option>
-                </select>
+                    <input type="text" wire:model = "specific_area" placeholder="Enter the specific area eg.Rooms , library" class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full'>
                 @error('specific_area')
                     <strong class= 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>{{ $message }}</strong>
                 @enderror
@@ -218,7 +220,7 @@
 
                             <td style="text-decoration:normal"><i class="bi bi-pencil p-2"></i>
                                 <span class="font-weight-bold">Tsh</span>
-                                <span class="font-weight-bold text-danger">{{ Illuminate\Support\Number::format($area->chasAreas->assets->asset_cost??0, precision:2) }}/=</span>
+                                <span class="font-weight-bold text-danger">{{ Illuminate\Support\Number::format($area->chasAreas->resource_cost??0, precision:2) }}/=</span>
                                 <span class="font-weight-bold">for 1 {{ $area->chasAreas->resource_name }}</span>
                             </td>
 

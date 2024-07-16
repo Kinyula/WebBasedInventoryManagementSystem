@@ -14,8 +14,20 @@
             <span class="font-weight-bold">Position : </span>
             <span class="font-weight-bold text-danger uppercase">{{ auth()->user()->post }}</span>
             <br>
+            @if (auth()->user()->college_name == 'Not set')
+            <span class="font-weight-bold">Role: </span>
+            <span class="font-weight-bold text-danger uppercase">Higher member of staff</span>
+            @else
             <span class="font-weight-bold">College name : </span>
             <span class="font-weight-bold text-danger uppercase">{{ auth()->user()->college_name }}</span>
+            <br>
+
+            <span class="font-weight-bold">Department : </span>
+            <span class="font-weight-bold text-danger uppercase">{{ auth()->user()->department }}</span>
+            @endif
+
+
+
             @endif
         </div>
     </div>

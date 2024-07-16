@@ -186,7 +186,7 @@
                         <td style="text-decoration:normal">
                             <button type="button"
                             onclick="confirm(`Ooops!! this action can't be done here `) || event.stopImmediatePropagation()"
-                            class="bg-red-800 text-white font-bold p-2 rounded">{{ $resource->repair_status }}</button>
+                            class="bg-red-600 text-white font-bold p-2 rounded">{{ $resource->repair_status }}</button>
                         </td>
                         <td style="text-decoration:normal">
                             {{ $resource->college_name }}

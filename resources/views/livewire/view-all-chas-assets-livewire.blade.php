@@ -82,17 +82,17 @@
         <table class="data-table table nowrap ">
             <thead>
                 <tr>
-                    <th class="table-plus datatable-nosort font-weight-bold">Store manager</th>
-                    <th class="font-weight-bold">Asset name</th>
+                    <th class="table-plus datatable-nosort font-weight-bold">Asset id</th>
+                    <th class="font-weight-bold">Description</th>
                     <th class="font-weight-bold">Asset cost</th>
                     {{-- <th class="font-weight-bold">Qr code</th> --}}
-                    <th class="font-weight-bold">College name</th>
-                    <th class="font-weight-bold">Status</th>
-                    <th class="font-weight-bold">Asset status</th>
-                    <th class="font-weight-bold">Allocation status</th>
-                    <th class="font-weight-bold">Select resource to print</th>
+                    <th class="font-weight-bold">Class/Category</th>
+                    <th class="font-weight-bold">Building</th>
+                    <th class="font-weight-bold">Floor</th>
+                    <th class="font-weight-bold">Room</th>
                     <th class="font-weight-bold">Alocation time created at</th>
                     <th class="font-weight-bold">Alocation time updated at</th>
+                    <th class="font-weight-bold">Select resource to print</th>
                     <th class="datatable-nosort font-weight-bold">Action</th>
                 </tr>
             </thead>
@@ -103,7 +103,7 @@
 
                         <td style="text-decoration:normal">
 
-                            <h5 class="font-16">{{ $resource->user->email }}</h5>
+                            <h5 class="font-16">{{ $resource->id }}</h5>
 
                         </td>
 
@@ -122,10 +122,10 @@
                         </td> --}}
 
                         <td style="text-decoration:normal">
-                            <span class="font-weight-bold">{{ $resource->college_name }}</span>
+                            <span class="font-weight-bold">{{ $resource->category->category_type }}</span>
                         </td>
 
-
+{{--
                         <td style="text-decoration:normal">
                             @if (auth()->user()->post === 'store')
                                 @if ($resource->status == 'Approved')
@@ -149,9 +149,9 @@
                                 @endif
                             @endif
 
-                        </td>
+                        </td> --}}
 
-                        <td style="text-decoration:normal">
+                        {{-- <td style="text-decoration:normal">
 
                             @if ($resource->asset_status == 'Very good')
                                 <button type="button"
@@ -174,9 +174,9 @@
                                     onclick="confirm(`Ooops!! this action can't be done here `) || event.stopImmediatePropagation()"
                                     class="bg-red-600 text-white font-bold p-2 rounded">{{ $resource->asset_status }}</button>
                             @endif
-                        </td>
+                        </td> --}}
 
-                        <td style="text-decoration:normal">
+                        {{-- <td style="text-decoration:normal">
 
                             @if ($resource->allocation_status == 'Not Allocated')
                                 <button type="button"
@@ -189,13 +189,18 @@
                             @endif
 
 
+                        </td> --}}
+
+                        <td style="text-decoration:normal">
+                            <span class="font-weight-bold">{{ $resource->building }}</span>
                         </td>
 
-                        <td style="text-decoration: normal">
+                        <td style="text-decoration:normal">
+                            <span class="font-weight-bold">{{ $resource->specific_area }}</span>
+                        </td>
 
-                            <input type="checkbox" wire:model = "resourceId" value="{{ $resource->id }}"
-                                class="checked" onclick="checkAll()">
-
+                        <td style="text-decoration:normal">
+                            <span class="font-weight-bold">{{ $resource->room }}</span>
                         </td>
 
                         <td style="text-decoration:normal">
@@ -209,6 +214,12 @@
                             <span>{{ $resource->updated_at->format('d M Y h:i:s') }}</span>
                         </td>
 
+                        <td style="text-decoration: normal">
+
+                            <input type="checkbox" wire:model = "resourceId" value="{{ $resource->id }}"
+                                class="checked" onclick="checkAll()">
+
+                        </td>
                         <td>
 
                             <div class="dropdown">
@@ -351,6 +362,17 @@
 
         </table>
 
-
     </div>
+
+    @if (auth()->user()->post == 'accountant')
+
+    @else
+
+    @livewire('resource-allocation-to-areas-livewire')
+
+    @endif
+
+
 </div>
+
+

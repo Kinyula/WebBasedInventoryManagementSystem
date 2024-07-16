@@ -9,39 +9,46 @@ use App\Models\Category;
 use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Log;
 
 class AddChasResourcesLivewire extends Component
 {
     use WithFileUploads;
 
     public $resource_name, $category_type, $chasResourceImport,
-      $import_quantity;
+      $import_quantity, $resource_cost, $region;
 
     public function render()
     {
+
         return view('livewire.add-chas-resources-livewire', ['categories' => Category::get(), 'Assets' =>Asset::get()]);
+
     }
 
 
     public function importChasResources()
     {
-        $this->validate(['chasResourceImport' => 'required|mimes:xlsx,xls,csv']);
+        $this->validate([
+            'chasResourceImport' => 'required|mimes:xlsx,xls,csv',
+        ]);
 
         $filePath = $this->chasResourceImport->store('public/resource_files');
 
-        // dispatch(new AssistantImportProcess($filePath))->delay(now()->addSeconds(5));
+        if (!$filePath) {
+            session()->flash('error', 'File could not be stored.');
+            return;
+        }
 
-        // if (File::exists($filePath)) {
-        //     File::delete()
-        // }
+        try {
+            Excel::queueImport(new ChasResourceImport, $filePath);
 
-        Excel::queueImport(new ChasResourceImport, $filePath);
-
-
-        $this->reset(['chasResourceImport']);
-
-        session()->flash('message', 'Done...');
-
+            $this->reset(['chasResourceImport']);
+            
+            session()->flash('message', 'Import started. You will be notified once it is completed.');
+        } catch (\Exception $e) {
+            Log::error('Import Error: ' . $e->getMessage());
+            session()->flash('error', 'An error occurred while importing. Please try again.');
+        }
     }
 
     public function addChasResources()
@@ -54,7 +61,11 @@ class AddChasResourcesLivewire extends Component
             'resource_name' => 'required',
 
 
-            'import_quantity' => 'required'
+            'import_quantity' => 'required',
+
+            'resource_cost' => 'required',
+
+            'region' => 'required',
 
         ]);
 
@@ -71,12 +82,16 @@ class AddChasResourcesLivewire extends Component
 
             $chasResource->college_name = auth()->user()->college_name;
 
+            $chasResource->department = auth()->user()->department;
+
+            $chasResource->resource_cost = $this->resource_cost;
+
             $chasResource->save();
 
         }
 
 
-        $this->reset(['category_type','import_quantity', 'resource_name']);
+        $this->reset(['category_type','import_quantity', 'resource_name','resource_cost', 'region']);
 
         session()->flash('addResources', 'A resource is added successfully.');
     }

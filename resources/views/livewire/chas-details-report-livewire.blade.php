@@ -2,14 +2,14 @@
 
     <div class="card-box mb-30 p-3">
 
-        @if (auth()->user()->college_name === 'Not set' && auth()->user()->post === 'store')
+        @if (auth()->user()->college_name === 'Not set')
 
         <h2 class="h5 pd-20">View created items</h2>
         <img src="{{ asset('vendors/images/udom.png') }}" class="float-end  udom-logo" alt="" srcset=""
             style="float:inline-end">
         <div class="role relative left-5">
             <span class="font-weight-bold">Role : </span>
-            <span class="font-weight-bold text-danger uppercase">Dean of Finance ( DOF )</span>
+            <span class="font-weight-bold text-danger uppercase">{{ auth()->user()->post }}</span>
         </div>
         @else
         <h2 class="h5 pd-20">View report details of the {{ auth()->user()->college_name }}</h2>

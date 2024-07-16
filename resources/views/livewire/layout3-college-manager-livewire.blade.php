@@ -335,7 +335,15 @@
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/add-cive-resources') }}">
-                                            Resource management
+                                            Data entry
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/view-cive-created-resources') }}">
+                                            Track asset
                                         </a>
                                     </li>
 
@@ -361,13 +369,19 @@
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/add-chas-resources') }}">
-                                            Resource management
+                                            Data entry
                                         </a>
                                     </li>
 
                                 </ul>
 
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/view-chas-created-resources') }}">
+                                            Track asset
+                                        </a>
+                                    </li>
 
+                                </ul>
                             </li>
                         @endif
 

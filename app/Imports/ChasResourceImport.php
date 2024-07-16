@@ -11,26 +11,19 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class ChasResourceImport implements ToCollection, WithChunkReading, WithHeadingRow, ShouldQueue
 {
-
-    private $chasResource;
-    public function __construct()
-    {
-        $this->chasResource = ChasResource::with(['category', 'user'])->get();
-    }
-
     /**
     * @param Collection $collection
     */
     public function collection(Collection $collection)
     {
         foreach ($collection as $row) {
-            $chasResources = ChasResource::create([
-                'store manager' => $row['user_id'],
-                'category' => $row['category_id'],
-                'resource' => $row['resource_name'],
-                'status' => $row['status'],
-                'college' => $row['college_name']
-
+            ChasResource::create([
+                'category_id' => $row['category_id'],
+                'resource_name' => $row['resource_name'],
+                'resource_cost' => $row['resource_cost'],
+                'region' => $row['region'],
+                'user_id' => $row['user_id'],
+                'college_name' => $row['college_name'],
             ]);
         }
     }
