@@ -11,6 +11,9 @@
             <span class="font-weight-bold">Role : </span>
             <span class="font-weight-bold text-danger uppercase">{{ auth()->user()->post }}</span>
         </div>
+
+
+
         @else
         @if (auth()->user()->college_name === 'Not set' && auth()->user()->post === 'store')
 
@@ -22,6 +25,18 @@
             <span class="font-weight-bold">Role : </span>
             <span class="font-weight-bold text-danger uppercase">{{ auth()->user()->post }}</span>
         </div>
+
+        @if (auth()->user()->post === 'Chief Supplier Officer ( CSO )' || auth()->user()->post === 'Director of Finance ( DoF )' || auth()->user()->post === 'Chief Supplier Officer ( CSO )' || auth()->user()->post === 'Vice Chansellor ( VC )')
+        <div class="role relative left-5">
+
+        </div>
+        @else
+        <div class="role relative left-5">
+            <span class="font-weight-bold">Department : </span>
+            <span class="font-weight-bold text-danger uppercase">{{ auth()->user()->department }}</span>
+        </div>
+        @endif
+
         @endif
 
     </div>
@@ -111,9 +126,6 @@
                     <th class="font-weight-bold">Building</th>
                     <th class="font-weight-bold">Floor</th>
                     <th class="font-weight-bold">Room</th>
-                    <th class="font-weight-bold">Status</th>
-
-
                     <th class="font-weight-bold">Select resource to print</th>
                     <th class="datatable-nosort font-weight-bold">Action</th>
                     @endif
@@ -238,11 +250,11 @@
 
                         @if ($resource->repair_status == 'Repair')
                         <td style="text-decoration:normal"><i class="bi bi-pencil p-2"></i>
-                            <span class="font-weight-bold bg-red-500 p-2 text-white rounded">{{ $resource->repair_status }}</span>
+                            <span class="font-weight-bold text-red-500 p-2 rounded">{{ $resource->repair_status }}</span>
                         </td>
                         @else
                         <td style="text-decoration:normal"><i class="bi bi-pencil p-2"></i>
-                            <span class="font-weight-bold bg-green-500 p-2 text-white rounded">{{ $resource->repair_status }}</span>
+                            <span class="font-weight-bold text-green-500 p-2 rounded">{{ $resource->repair_status }}</span>
                         </td>
                         @endif
 

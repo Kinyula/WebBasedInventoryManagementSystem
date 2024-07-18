@@ -369,7 +369,7 @@
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/add-chas-resources') }}">
-                                            Data entry
+                                            Asset registration
                                         </a>
                                     </li>
 
@@ -382,16 +382,6 @@
                                     </li>
 
                                 </ul>
-                            </li>
-                        @endif
-
-
-                        @if (auth()->user()->college_name == 'College of Health and Allied Science ( CHAS )')
-                            <li class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle">
-                                    <span class="micon bi bi-cart"></span><span class="mtext">Asset
-                                        movement</span>
-                                </a>
 
                                 <ul class="submenu">
                                     <li><a href="{{ asset('UIMS/asset-transfer') }}">
@@ -400,10 +390,10 @@
                                     </li>
 
                                 </ul>
-
-
                             </li>
                         @endif
+
+
 
                         @if (auth()->user()->college_name == 'College of Health and Allied Science ( CHAS )')
                             <li class="dropdown">
@@ -636,7 +626,7 @@
 
                                 <ul class="submenu">
 
-                                    <li><a wire:navigate href="{{ asset('UIMS/chas-details-report') }}">
+                                    <li><a wire:navigate href="{{ asset('UIMS/detail-reports/chas') }}">
                                             Details report</a>
                                     </li>
 

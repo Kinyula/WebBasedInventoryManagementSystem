@@ -21,7 +21,7 @@ class ResourceAllocationToAreasLivewire extends Component
     public function render()
     {
         return view('livewire.resource-allocation-to-areas-livewire', [
-            'Assets' => ChasResource::search($this->searchAsset)->where('allocation_status', 'Transfered')->where('status', '=', 'Approved')->get(),
+            'Assets' => ChasResource::search($this->searchAsset)->where('allocation_status', 'Transfered')->where('status', '=', 'Approved')->where('room', '=', 'Not yet set')->where('building', '=', 'Not yet set')->get(),
             'Areas' => AreaOfAllocation::where('user_id', auth()->user()->id)->where('college_name', auth()->user()->college_name)->paginate(15),
             // 'Resources' => ResourceAllocation::where('user_id', auth()->user()->id)->where('college_name', auth()->user()->college_name)->get(),
         ]);
@@ -31,7 +31,7 @@ class ResourceAllocationToAreasLivewire extends Component
     public function allocateResourceToAreas()
     {
 
-        $this->validate(['resource_name' => 'required', 'quantity' => 'required', 'building' => 'required', 'room' => 'required', 'department' => 'required', 'floor' => 'required']);
+        $this->validate(['resource_name' => 'required', 'building' => 'required', 'room' => 'required', 'department' => 'required', 'floor' => 'required']);
 
         $allocate = new AreaOfAllocation();
 
@@ -43,7 +43,7 @@ class ResourceAllocationToAreasLivewire extends Component
 
         $allocate->college_name = auth()->user()->college_name;
 
-        $allocate->quantity = $this->quantity;
+
 
         $allocate->area_of_allocation = $this->building;
 
@@ -93,8 +93,7 @@ class ResourceAllocationToAreasLivewire extends Component
     public function exportChasReportExcel(){
 
         session()->flash('report', 'Data is exported successfully');
-
-        return Excel::download(new ChasReportExcelExport, 'CHAS-report-data.xlsx');
+        return Excel::download(new ChasReportExcelExport, 'CHAS-report-data');
     }
 
     public function decrementAssetsQuantity()

@@ -11,6 +11,8 @@
                 <span class="font-weight-bold text-danger uppercase">Dean of Finance ( DOF )</span>
             </div>
 
+
+
         @else
             <h2 class="h5 pd-20">View summary of created items from the {{ auth()->user()->college_name }}</h2>
             <img src="{{ asset('vendors/images/udom.png') }}" class="float-end  udom-logo" alt="" srcset=""
@@ -18,6 +20,11 @@
             <div class="role relative left-5">
                 <span class="font-weight-bold">Role : </span>
                 <span class="font-weight-bold text-danger uppercase">{{ auth()->user()->post }}</span>
+            </div>
+            <br>
+            <div class="role relative left-5">
+                <span class="font-weight-bold">Department : </span>
+                <span class="font-weight-bold text-danger uppercase">{{ auth()->user()->department }}</span>
             </div>
         @endif
 
@@ -65,14 +72,23 @@
 
         </div> --}}
 
-        <x-primary-button class="ms-4 float-end">
+        @if ($Resources->count() > 0)
+        <button class = 'inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 float-end'>
             <a href="{{ asset('UIMS/view-all-chas-resources') }}">
                 <i class="fas fa-eye px-1"></i>
                 {{ __('View all assets') }}
             </a>
+        </button>
+        @else
 
-        </x-primary-button>
+        <button disabled class = 'inline-flex items-center px-4 py-2 bg-gray-300 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-300 uppercase tracking-widest hover:bg-gray-300 dark:hover:bg-white focus:bg-gray-300 dark:focus:bg-white active:bg-gray-300 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 float-end'>
+                <i class="fas fa-eye px-1"></i>
+                {{ __('View all assets') }}
+            </a>
+        </button>
+        @endif
 
+        @if ($Resources->count() > 0)
         <div class="header-search mb-5">
             <form class="d-flex">
                 <div class="form-group mb-0">
@@ -83,6 +99,19 @@
                 </div>
             </form>
         </div>
+        @else
+        <div class="header-search mb-5">
+            <form class="d-flex">
+                <div class="form-group mb-0">
+
+                    <input disabled type="search" class="form-control search-input" placeholder="Search Here..."
+                        wire:model.live = 'chasResourceSearch' />
+
+                </div>
+            </form>
+        </div>
+        @endif
+
 
 
 

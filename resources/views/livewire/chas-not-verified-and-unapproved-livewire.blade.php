@@ -5,6 +5,18 @@
             <span>Mark all</span>
         </span>
         <h2 class="h5 pd-20">View Unapproved items</h2>
+
+        <div class="header-search mb-5">
+            <form class="d-flex">
+                <div class="form-group mb-0">
+
+                    <input type="search" class="form-control search-input" placeholder="Search Here..."
+                        wire:model.live = 'chasResourceSearch' />
+
+                </div>
+            </form>
+        </div>
+
         @if (session()->has('done'))
             <div role="alert" class="alert alert-success alert-dismissible fade show">
                 <strong>{{ session('done') }}</strong>
@@ -13,11 +25,11 @@
         @endif
 
         @if (session()->has('error'))
-        <div role="alert" class="alert alert-danger alert-dismissible fade show">
-            <strong>{{ session('error') }}</strong>
-            <button class="btn btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    @endif
+            <div role="alert" class="alert alert-danger alert-dismissible fade show">
+                <strong>{{ session('error') }}</strong>
+                <button class="btn btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        @endif
         <table class="data-table table nowrap">
             <thead>
                 <tr>
@@ -56,7 +68,8 @@
                                     {{ $verified->asset_status }}
                                 </button>
                             @elseif ($verified->asset_status == 'Good')
-                                <button type="button" class="bg-green-800 hover:bg-yellow-800 text-white font-bold p-2 rounded">
+                                <button type="button"
+                                    class="bg-green-800 hover:bg-yellow-800 text-white font-bold p-2 rounded">
                                     {{ $verified->asset_status }}
                                 </button>
                             @elseif ($verified->asset_status == 'Fair')
@@ -80,7 +93,8 @@
                             </button>
                         </td>
                         <td style="text-decoration: normal">
-                            <input type="checkbox" wire:model="resourceId" value="{{ $verified->id }}" class="checked cursor-pointer">
+                            <input type="checkbox" wire:model="resourceId" value="{{ $verified->id }}"
+                                class="checked cursor-pointer">
                         </td>
                         {{-- <td>
                             <div class="dropdown">
@@ -102,10 +116,21 @@
             </tbody>
         </table>
         <span>{{ $NotVerifiedApproval->links() }}</span>
-        <button wire:click = 'verifySelected' type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ms-4 mb-10"
-        onclick="confirm(`Are you sure you want to approve the status of this resource  ?`) || event.StopImmediatePropagation()">
-            <i class="fas fa-check p-1"></i>
-            Verify
-        </button>
+        @if ($NotVerifiedApproval->count() > 0)
+            <button wire:click = 'verifySelected' type="submit"
+                class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ms-4 mb-10"
+                onclick="confirm(`Are you sure you want to approve the status of this resource  ?`) || event.StopImmediatePropagation()">
+                <i class="fas fa-check p-1"></i>
+                Verify
+            </button>
+        @else
+            <button disabled wire:click = 'verifySelected' type="submit"
+                class="inline-flex items-center px-4 py-2 bg-gray-300 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-300 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ms-4 mb-10"
+                onclick="confirm(`Are you sure you want to approve the status of this resource  ?`) || event.StopImmediatePropagation()">
+                <i class="fas fa-check p-1"></i>
+                Verify
+            </button>
+        @endif
+
     </div>
 </div>

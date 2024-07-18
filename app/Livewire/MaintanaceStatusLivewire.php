@@ -26,11 +26,19 @@ class MaintanaceStatusLivewire extends Component
             ]);
         }
 
-        elseif (auth()->user()->post == 'accountant') {
+        elseif (auth()->user()->post == 'accountant' || auth()->user()->post == 'Principal' || auth()->user()->post == 'store') {
             return view('livewire.maintanace-status-livewire', [
                 'Resources' => ChasResource::searchRepair($this->chasResourceSearch)->with(
                     ['user', 'category', 'allocation']
                 )->where('repair_status', 'Repaired')->paginate(15)
+            ]);
+        }
+
+        if (auth()->user()->department == 'department 1') {
+            return view('livewire.maintanace-status-livewire', [
+                'Resources' => ChasResource::searchRepair($this->chasResourceSearch)->with(
+                    ['user', 'category', 'allocation']
+                )->whereIn('repair_status',['Repair', 'Repaired'])->paginate(15)
             ]);
         }
 

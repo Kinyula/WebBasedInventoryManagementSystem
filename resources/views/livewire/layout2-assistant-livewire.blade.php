@@ -277,13 +277,6 @@
 
                             </ul>
 
-                            <ul class="submenu">
-
-                                <li><a wire:navigate href="{{ asset('UIMS/chas-summary-report') }}">
-                                        View summary report</a>
-                                </li>
-
-                            </ul>
 
                         </li>
 

@@ -6,6 +6,7 @@
             style="float:inline-end">
     </div>
 
+
     <div class="card-box mb-30 p-3">
 
         <div class="previous-information">

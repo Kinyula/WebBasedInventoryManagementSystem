@@ -23,7 +23,7 @@ class InventorySheetLivewire extends Component
 
 
         [
-            'Details' => ChasResource::searchResourceInventory($this->chasdetailSearch)->with(['category'])->paginate(15),
+            'Details' => ChasResource::searchResourceInventory($this->chasdetailSearch)->with(['category'])->whereNot('category_id', '=', '8')->paginate(15),
         ]
 
     );

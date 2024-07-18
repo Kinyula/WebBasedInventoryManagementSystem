@@ -85,7 +85,7 @@ class QrCodeDataController extends Controller
 
             $civeResource->resource_name = $request->input('resource_name');
 
-            $civeResource->asset_status = $request->input('resource_status');
+            $civeResource->repair_status = $request->input('resource_status');
 
 
             $civeResource->update();
@@ -101,7 +101,7 @@ class QrCodeDataController extends Controller
 
             $cnmsResource->resource_name = $request->input('resource_name');
 
-            $cnmsResource->asset_status = $request->input('resource_status');
+            $cnmsResource->repair_status = $request->input('resource_status');
 
 
             $cnmsResource->update();
@@ -117,7 +117,7 @@ class QrCodeDataController extends Controller
 
             $chasResource->resource_name = $request->input('resource_name');
 
-            $chasResource->asset_status = $request->input('resource_status');
+            $chasResource->repair_status = $request->input('resource_status');
 
 
             $chasResource->update();
@@ -132,7 +132,7 @@ class QrCodeDataController extends Controller
 
             $coEDResource->resource_name = $request->input('resource_name');
 
-            $coEDResource->asset_status = $request->input('resource_status');
+            $coEDResource->repair_status = $request->input('resource_status');
 
 
             $coEDResource->update();
@@ -148,7 +148,7 @@ class QrCodeDataController extends Controller
 
             $coBEResource->resource_name = $request->input('resource_name');
 
-            $coBEResource->asset_status = $request->input('resource_status');
+            $coBEResource->repair_status = $request->input('resource_status');
 
 
             $coBEResource->update();
@@ -164,7 +164,7 @@ class QrCodeDataController extends Controller
 
             $coESEResource->resource_name = $request->input('resource_name');
 
-            $coESEResource->asset_status = $request->input('resource_status');
+            $coESEResource->repair_status = $request->input('resource_status');
 
 
             $coESEResource->update();
@@ -180,7 +180,7 @@ class QrCodeDataController extends Controller
 
             $chssResource->resource_name = $request->input('resource_name');
 
-            $chssResource->asset_status = $request->input('resource_status');
+            $chssResource->repair_status = $request->input('resource_status');
 
 
             $chssResource->update();

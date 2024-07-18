@@ -44,13 +44,91 @@ class ViewChasCreatedResourcesLivewire extends Component
             $this->pdfFiles[] = $file->getPathname();
         }
 
-        return view('livewire.view-chas-created-resources-livewire', [
-            'Resources' => ChasResource::search($this->chasResourceSearch)->with(
-                ['user', 'category']
-            )->distinct('resource_name')->paginate(15),
+        if (auth()->user()->department == 'DICT') {
+
+            return view('livewire.view-chas-created-resources-livewire',
+
+            [
+                'Resources' => ChasResource::search($this->chasResourceSearch)->with(
+                    ['user', 'category']
+                )->distinct('resource_name')->where('repair_status', '=', 'Repair')->whereIn('category_id', ['5', '15'])->paginate(15),
 
 
-        ]);
+            ]);
+        }
+
+        elseif (auth()->user()->post == 'Head of department ( HOD )' && auth()->user()->department == 'department 1') {
+            return view('livewire.view-chas-created-resources-livewire',
+
+            [
+                'Resources' => ChasResource::search($this->chasResourceSearch)->with(
+                    ['user', 'category']
+                )->distinct('resource_name')->where('department', '=', 'department 1')->paginate(15),
+
+
+            ]);
+        }
+
+        elseif (auth()->user()->post == 'Head of department ( HOD )' && auth()->user()->department == 'ESTATE') {
+            return view('livewire.view-chas-created-resources-livewire',
+
+            [
+                'Resources' => ChasResource::search($this->chasResourceSearch)->with(
+                    ['user', 'category']
+                )->distinct('resource_name')->distinct('resource_name')->whereIn('category_id', ['3', '4', '6','7','13'])->paginate(15),
+
+
+            ]);
+        }
+
+        elseif (auth()->user()->post == 'Head of department ( HOD )' && auth()->user()->department == 'department 2') {
+            return view('livewire.view-chas-created-resources-livewire',
+
+            [
+                'Resources' => ChasResource::search($this->chasResourceSearch)->with(
+                    ['user', 'category']
+                )->distinct('resource_name')->where('department', '=', 'department 2')->paginate(15),
+
+
+            ]);
+        }
+
+        elseif (auth()->user()->post == 'Head of department ( HOD )' && auth()->user()->department == 'department 3') {
+            return view('livewire.view-chas-created-resources-livewire',
+
+            [
+                'Resources' => ChasResource::search($this->chasResourceSearch)->with(
+                    ['user', 'category']
+                )->distinct('resource_name')->where('department', '=', 'department 3')->paginate(15),
+
+
+            ]);
+        }
+
+        elseif (auth()->user()->post == 'Head of department ( HOD )' && auth()->user()->department == 'department 4') {
+            return view('livewire.view-chas-created-resources-livewire',
+
+            [
+                'Resources' => ChasResource::search($this->chasResourceSearch)->with(
+                    ['user', 'category']
+                )->distinct('resource_name')->where('department', '=', 'department 4')->paginate(15),
+
+
+            ]);
+        }
+
+        elseif (auth()->user()->post == 'Head of department ( HOD )' && auth()->user()->department == 'department 5') {
+            return view('livewire.view-chas-created-resources-livewire',
+
+            [
+                'Resources' => ChasResource::search($this->chasResourceSearch)->with(
+                    ['user', 'category']
+                )->distinct('resource_name')->where('department', '=', 'department 5')->paginate(15),
+
+
+            ]);
+        }
+
     }
 
     public function deleteFiles($pdf)

@@ -288,8 +288,16 @@
                             @if (auth()->user()->post == 'Head of department ( HOD )')
                             <ul class="submenu">
                                 <li><a class="active:bg-red-800" wire:navigate
-                                        href="{{ asset('UIMS/view-chas-created-resources') }}">
-                                        Track asset
+                                        href="{{ asset('UIMS/view-all-chas-resources') }}">
+                                        Track asset & allocation
+                                    </a></li>
+
+                            </ul>
+
+                            <ul class="submenu">
+                                <li><a class="active:bg-red-800" wire:navigate
+                                        href="{{ asset('UIMS/asset-transfer') }}">
+                                        Asset movement
                                     </a></li>
 
                             </ul>
@@ -372,11 +380,32 @@
 
                             </ul>
 
+                            @if (auth()->user()->post == 'Chief Supplier Officer ( CSO )')
                             <ul class="submenu">
                                 <li><a wire:navigate href="{{ asset('UIMS/maintainance/') }}">Maintanance status
                                     </a></li>
 
                             </ul>
+                            @endif
+
+
+                            @if (auth()->user()->department == 'department 1')
+                            <ul class="submenu">
+                                <li><a wire:navigate href="{{ asset('UIMS/maintainance/chas') }}">Maintanance status
+                                    </a></li>
+
+                            </ul>
+                            @endif
+                            @if (auth()->user()->department == 'DICT')
+                            <ul class="submenu">
+
+                                <li><a wire:navigate href="{{ asset('UIMS/view-chas-created-resources') }}">Repair asset
+                                    </a></li>
+
+                            </ul>
+                            @else
+
+                            @endif
                         </li>
 
                         <li class="dropdown">

@@ -2,6 +2,6 @@
 
 @section('content')
 
-@livewire('asset-movement-livewire')
+@livewire('repair-assets-livewire')
 
 @endsection

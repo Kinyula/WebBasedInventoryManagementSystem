@@ -22,14 +22,13 @@ class ChasResourceImport implements ToCollection, WithChunkReading, WithHeadingR
                 'resource_name' => $row['resource_name'],
                 'resource_cost' => $row['resource_cost'],
                 'region' => $row['region'],
-                'user_id' => $row['user_id'],
-                'college_name' => $row['college_name'],
+
             ]);
         }
     }
 
     public function chunkSize(): int
     {
-        return 100;
+        return 50;
     }
 }

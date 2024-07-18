@@ -16,7 +16,7 @@ class SummaryReportLivewire extends Component
             'livewire.summary-report-livewire',
 
             [
-                'Details' => ChasResource::search($this->chasdetailSearch)->with(['category'])->distinct('category_id')->paginate(15),
+                'Details' => ChasResource::search($this->chasdetailSearch)->with(['category'])->distinct('category_id')->whereNot('category_id', '=', '8')->paginate(15),
             ]
         );
     }

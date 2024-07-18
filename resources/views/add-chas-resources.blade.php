@@ -4,4 +4,4 @@
 
 @livewire('add-chas-resources-livewire')
 
-@endsection
+@section

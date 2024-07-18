@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\File;
 use App\Models\ChasResource;
 use App\Jobs\ExportChasQrCodesJob;
 use App\Jobs\ExportChasResourcesPdfJob;
+use Illuminate\Support\Facades\DB;
 
 class ViewAllChasAssetsLivewire extends Component
 {
@@ -21,6 +22,81 @@ class ViewAllChasAssetsLivewire extends Component
 
     public $pdfFiles = [];
 
+    public $allChecked = false;
+
+    public $room, $floor, $building;
+
+    public function markAll()
+    {
+        if ($this->allChecked) {
+            // Mark all checkboxes
+            $this->resourceId = ChasResource::search($this->chasResourceSearch)
+                ->where('repair_status', '=', 'Repair')
+                ->pluck('id')
+                ->toArray();
+        } else {
+            // Unmark all checkboxes
+            $this->resourceId = [];
+        }
+    }
+
+    public function verifySelected()
+    {
+        if (empty($this->resourceId)) {
+            session()->flash('error', 'No items selected for the approval after verification.');
+            return;
+        }
+
+        DB::transaction(function () {
+            ChasResource::whereIn('id', $this->resourceId)
+                ->update([
+                    'repair_status' => 'Repaired',
+                ]);
+        });
+
+        session()->flash('done', 'Approved successfully.');
+        // Reset selection and checkbox state
+        $this->resourceId = [];
+        $this->allChecked = false;
+
+
+    }
+
+    public function allMark(){
+        if ($this->allChecked) {
+            // Mark all checkboxes
+            $this->resourceId = ChasResource::search($this->chasResourceSearch)
+                ->where('allocation_status', '=', 'Transfered')
+                ->pluck('id')
+                ->toArray();
+        } else {
+            // Unmark all checkboxes
+            $this->resourceId = [];
+        }
+    }
+
+    public function allocateSelected(){
+
+        if (empty($this->resourceId)) {
+            session()->flash('error', 'No items selected for the approval after verification.');
+            return;
+        }
+
+        DB::transaction(function () {
+            ChasResource::whereIn('id', $this->resourceId)
+                ->update([
+                    'allocation_status' => 'Allocated',
+                    'building' => $this->building,
+                    'specific_area' => $this->floor,
+                    'room' => $this->room
+                ]);
+        });
+
+        session()->flash('done', 'Allocated successfully.');
+        // Reset selection and checkbox state
+        $this->resourceId = [];
+        $this->allChecked = false;
+    }
     public function render()
     {
 
@@ -32,12 +108,119 @@ class ViewAllChasAssetsLivewire extends Component
             $this->pdfFiles[] = $file->getPathname();
         }
 
+        if (auth()->user()->department == 'DICT') {
+            return view('livewire.view-all-chas-assets-livewire', [
+                'Resources' => ChasResource::search($this->chasResourceSearch)->with(
+                    ['user', 'category', 'allocation']
+                )->where('repair_status', '=', 'Repair')->whereIn('category_id',['5', '15'])->paginate(15),
+
+                'NotAllocatedResources' => ChasResource::search($this->chasResourceSearch)->with(
+                    ['user', 'category', 'allocation']
+                )->whereIn('category_id',['5', '15'])->paginate(15),
+
+            ]);
+        } elseif (auth()->user()->post == 'Head of department ( HOD )' && auth()->user()->department == 'department 1') {
+            return view('livewire.view-all-chas-assets-livewire', [
+                'Resources' => ChasResource::search($this->chasResourceSearch)->with(
+                    ['user', 'category', 'allocation']
+                )->where('department', '=', 'department 1')->paginate(15),
+
+
+                'NotAllocatedResources' => ChasResource::search($this->chasResourceSearch)->with(
+                    ['user', 'category', 'allocation']
+                )->where('building', '=', 'Not yet set')->where('specific_area', '=', 'Not yet set')->where('room', '=', 'Not yet set')->where('department', '=', 'department 1')->paginate(15),
+
+
+            ]);
+        }
+
+        elseif (auth()->user()->post == 'Head of department ( HOD )' && auth()->user()->department == 'ESTATE') {
+            return view('livewire.view-all-chas-assets-livewire', [
+                'Resources' => ChasResource::search($this->chasResourceSearch)->with(
+                    ['user', 'category', 'allocation']
+                )->whereIn('category_id', ['3', '4', '6','7','13'])->where('allocation_status', '=', 'Allocated')->paginate(15),
+
+
+                'NotAllocatedResources' => ChasResource::search($this->chasResourceSearch)->with(
+                    ['user', 'category', 'allocation']
+                )->whereIn('category_id', ['3', '4', '6','7','13'])->where('building', '=', 'Not yet set')->where('specific_area', '=', 'Not yet set')->where('room', '=', 'Not yet set')->where('department', '=', 'ESTATE')->paginate(15),
+
+
+            ]);
+        }
+
+        elseif (auth()->user()->post == 'Head of department ( HOD )' && auth()->user()->department == 'department 2') {
+            return view('livewire.view-all-chas-assets-livewire', [
+                'Resources' => ChasResource::search($this->chasResourceSearch)->with(
+                    ['user', 'category', 'allocation']
+                )->where('department', '=', 'department 2')->paginate(15),
+
+                'NotAllocatedResources' => ChasResource::search($this->chasResourceSearch)->with(
+                    ['user', 'category', 'allocation']
+                )->where('building', '=', 'Not yet set')->where('specific_area', '=', 'Not yet set')->where('room', '=', 'Not yet set')->where('department', '=', 'department 1')->paginate(15),
+
+
+            ]);
+        } elseif (auth()->user()->post == 'Head of department ( HOD )' && auth()->user()->department == 'department 3') {
+            return view('livewire.view-all-chas-assets-livewire', [
+                'Resources' => ChasResource::search($this->chasResourceSearch)->with(
+                    ['user', 'category', 'allocation']
+                )->where('department', '=', 'department 3')->paginate(15),
+
+                'NotAllocatedResources' => ChasResource::search($this->chasResourceSearch)->with(
+                    ['user', 'category', 'allocation']
+                )->where('building', '=', 'Not yet set')->where('specific_area', '=', 'Not yet set')->where('room', '=', 'Not yet set')->where('department', '=', 'department 1')->paginate(15),
+
+
+            ]);
+        }elseif (auth()->user()->post == 'Head of department ( HOD )' && auth()->user()->department == 'department 4') {
+            return view('livewire.view-all-chas-assets-livewire', [
+                'Resources' => ChasResource::search($this->chasResourceSearch)->with(
+                    ['user', 'category', 'allocation']
+                )->where('department', '=', 'department 4')->paginate(15),
+
+                'NotAllocatedResources' => ChasResource::search($this->chasResourceSearch)->with(
+                    ['user', 'category', 'allocation']
+                )->where('building', '=', 'Not yet set')->where('specific_area', '=', 'Not yet set')->where('room', '=', 'Not yet set')->where('department', '=', 'department 1')->paginate(15),
+
+            ]);
+        }elseif (auth()->user()->post == 'Head of department ( HOD )' && auth()->user()->department == 'department 5') {
+            return view('livewire.view-all-chas-assets-livewire', [
+                'Resources' => ChasResource::search($this->chasResourceSearch)->with(
+                    ['user', 'category', 'allocation']
+                )->where('department', '=', 'department 5')->paginate(15),
+
+                'NotAllocatedResources' => ChasResource::search($this->chasResourceSearch)->with(
+                    ['user', 'category', 'allocation']
+                )->where('building', '=', 'Not yet set')->where('specific_area', '=', 'Not yet set')->where('room', '=', 'Not yet set')->where('department', '=', 'department 1')->paginate(15),
+
+            ]);
+
+
+        }else{
+            return view('livewire.view-all-chas-assets-livewire', [
+                'Resources' => ChasResource::search($this->chasResourceSearch)->with(
+                    ['user', 'category', 'allocation']
+                )->paginate(15),
+
+
+
+                'NotAllocatedResources' => ChasResource::search($this->chasResourceSearch)->with(
+                    ['user', 'category', 'allocation']
+                )->where('building', '=', 'Not yet set')->where('specific_area', '=', 'Not yet set')->where('room', '=', 'Not yet set')->paginate(15),
+
+
+            ]);
+        }
+
         return view('livewire.view-all-chas-assets-livewire', [
             'Resources' => ChasResource::search($this->chasResourceSearch)->with(
                 ['user', 'category', 'allocation']
             )->paginate(15),
 
-
+            'NotAllocatedResources' => ChasResource::search($this->chasResourceSearch)->with(
+                ['user', 'category', 'allocation']
+            )->where('building', '=', 'Not yet set')->where('specific_area', '=', 'Not yet set')->where('room', '=', 'Not yet set')->paginate(15),
         ]);
     }
 

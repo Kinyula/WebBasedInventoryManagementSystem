@@ -16,7 +16,7 @@ class AddChasResourcesLivewire extends Component
     use WithFileUploads;
 
     public $resource_name, $category_type, $chasResourceImport,
-      $import_quantity, $resource_cost, $region;
+      $import_quantity, $resource_cost, $region, $department;
 
     public function render()
     {
@@ -43,8 +43,8 @@ class AddChasResourcesLivewire extends Component
             Excel::queueImport(new ChasResourceImport, $filePath);
 
             $this->reset(['chasResourceImport']);
-            
-            session()->flash('message', 'Import started. You will be notified once it is completed.');
+
+            session()->flash('message', 'Import completed...');
         } catch (\Exception $e) {
             Log::error('Import Error: ' . $e->getMessage());
             session()->flash('error', 'An error occurred while importing. Please try again.');

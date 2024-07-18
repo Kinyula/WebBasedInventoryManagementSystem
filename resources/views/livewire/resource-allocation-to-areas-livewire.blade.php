@@ -38,7 +38,7 @@
                 @enderror
             </div>
 
-            <div class="mt-4">
+            {{-- <div class="mt-4">
                 <label for="quantity" class='block font-medium text-sm text-gray-700 dark:text-gray-300'>Asset
                     quantity<span class="text-danger text-xl">*</span></label>
                 <input type="number" wire:model= "quantity"
@@ -47,7 +47,7 @@
                 @error('quantity')
                     <strong class= 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>{{ $message }}</strong>
                 @enderror
-            </div>
+            </div> --}}
 
             <div class="mt-3">
                 <label for="department"
@@ -185,8 +185,6 @@
 
                         <th class="table-plus datatable-nosort font-weight-bold">Asset name</th>
 
-                        <th class="table-plus datatable-nosort font-weight-bold">Asset quantity</th>
-
                         <th class="table-plus datatable-nosort font-weight-bold">Asset's cost</th>
 
                         <th class="table-plus datatable-nosort font-weight-bold">Building</th>
@@ -222,10 +220,7 @@
 
                             </td>
 
-                            <td style="text-decoration:normal"><i class="bi bi-pencil p-2"></i>
-                                <span class="font-weight-bold text-danger">{{ $area->quantity }}</span>
-                                <span class="font-weight-bold">{{ $area->chasAreas->resource_name }}(s)</span>
-                            </td>
+
 
                             <td style="text-decoration:normal"><i class="bi bi-pencil p-2"></i>
                                 <span class="font-weight-bold">Tsh</span>

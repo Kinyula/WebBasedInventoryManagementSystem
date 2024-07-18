@@ -18,7 +18,7 @@ class ChasDetailsReportLivewire extends Component
         return view('livewire.chas-details-report-livewire',
 
         [
-            'Details' => ChasResource::search($this->chasDetailSearch)->with(['category'])->paginate(15),
+            'Details' => ChasResource::search($this->chasDetailSearch)->with(['category'])->whereNot('category_id', '=', '8')->paginate(15),
         ]
 
     );

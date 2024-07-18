@@ -84,7 +84,6 @@
             <thead>
                 <tr>
                     <th class="table-plus datatable-nosort font-weight-bold">SNO</th>
-                    <th class="font-weight-bold">College name</th>
                     <th class="font-weight-bold">Class/Category</th>
                     {{-- <th class="font-weight-bold">Qr code</th> --}}
                     <th class="font-weight-bold">Quantity</th>
@@ -113,9 +112,6 @@
                             {{ QrCode::size('30')->generate($detail->id) }}
                         </td> --}}
 
-                        <td style="text-decoration:normal">
-                            <span class="font-weight-bold">{{ $detail->college_name }}</span>
-                        </td>
                         <td style="text-decoration:normal">
                             <span class="font-weight-bold">{{ $detail->category->category_type }}</span>
                         </td>
