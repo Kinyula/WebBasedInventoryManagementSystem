@@ -19,10 +19,15 @@
                 <span class="font-weight-bold text-danger uppercase">{{ auth()->user()->post }}</span>
             </div>
 
+            @if (auth()->user()->post == 'store')
+
+            @else
             <div class="role relative left-5">
                 <span class="font-weight-bold">Department : </span>
                 <span class="font-weight-bold text-danger uppercase">{{ auth()->user()->department }}</span>
             </div>
+            @endif
+
         @endif
 
     </div>

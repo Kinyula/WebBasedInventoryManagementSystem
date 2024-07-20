@@ -69,6 +69,19 @@ class ViewChasCreatedResourcesLivewire extends Component
             ]);
         }
 
+
+        elseif (auth()->user()->post == 'store') {
+            return view('livewire.view-chas-created-resources-livewire',
+
+            [
+                'Resources' => ChasResource::search($this->chasResourceSearch)->with(
+                    ['user', 'category']
+                )->distinct('resource_name')->paginate(15),
+
+
+            ]);
+        }
+
         elseif (auth()->user()->post == 'Head of department ( HOD )' && auth()->user()->department == 'ESTATE') {
             return view('livewire.view-chas-created-resources-livewire',
 
