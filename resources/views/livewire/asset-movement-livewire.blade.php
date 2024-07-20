@@ -40,7 +40,7 @@
         </span>
     @else
     @endif
-    
+
         <div class="header-search mb-5">
             <form class="d-flex">
                 <div class="form-group mb-0">
@@ -146,7 +146,6 @@
                             auth()->user()->post == 'store')
                         <th class="font-weight-bold">Alocation time created at</th>
                         <th class="font-weight-bold">Alocation time updated at</th>
-                        <th class="font-weight-bold">Select resource to print</th>
                         <th class="datatable-nosort font-weight-bold">Action</th>
                     @else
                     @endif
@@ -189,6 +188,40 @@
                             <td style="text-decoration:normal">
                                 <span class="font-weight-bold">{{ $resource->department }}</span>
                             </td>
+
+                             <td style="text-decoration:normal">
+
+                            @if ($resource->asset_status == 'Very good')
+                                <button type="button"
+                                    onclick="confirm(`Ooops!! this action can't be done here `) || event.stopImmediatePropagation()"
+                                    class="bg-green-600 text-white font-bold p-2 rounded">{{ $resource->asset_status }}</button>
+                            @elseif ($resource->asset_status == 'Good')
+                                <button type="button"
+                                    onclick="confirm(`Ooops!! this action can't be done here `) || event.stopImmediatePropagation()"
+                                    class="bg-green-800 hover:bg-yellow-800 text-white font-bold p-2 rounded">{{ $resource->asset_status }}</button>
+                            @elseif ($resource->asset_status == 'Fair')
+                                <button type="button"
+                                    onclick="confirm(`Ooops!! this action can't be done here `) || event.stopImmediatePropagation()"
+                                    class="bg-yellow-600 text-white font-bold p-2 rounded">{{ $resource->asset_status }}</button>
+                            @elseif ($resource->asset_status == 'New')
+                                <button type="button"
+                                    onclick="confirm(`Ooops!! this action can't be done here `) || event.stopImmediatePropagation()"
+                                    class="bg-blue-600 text-white font-bold p-2 rounded">{{ $resource->asset_status }}</button>
+                            @else
+                                <button type="button"
+                                    onclick="confirm(`Ooops!! this action can't be done here `) || event.stopImmediatePropagation()"
+                                    class="bg-red-600 text-white font-bold p-2 rounded">{{ $resource->asset_status }}</button>
+                            @endif
+                        </td>
+
+                        <td style="text-decoration: normal">
+
+                            <input type="checkbox" wire:model = "resourceId" value="{{ $resource->id }}"
+                                class="checked" onclick="checkAll()">
+
+                        </td>
+
+                        
                         @else
                         @endif
 
@@ -295,12 +328,6 @@
                                 <span>{{ $resource->updated_at->format('d M Y h:i:s') }}</span>
                             </td>
 
-                            <td style="text-decoration: normal">
-
-                                <input type="checkbox" wire:model = "resourceId" value="{{ $resource->id }}"
-                                    class="checked" onclick="checkAll()">
-
-                            </td>
                             <td>
 
                                 <div class="dropdown">
