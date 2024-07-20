@@ -20,12 +20,11 @@
             </div>
 
             @if (auth()->user()->post == 'store')
-
             @else
-            <div class="role relative left-5">
-                <span class="font-weight-bold">Department : </span>
-                <span class="font-weight-bold text-danger uppercase">{{ auth()->user()->department }}</span>
-            </div>
+                <div class="role relative left-5">
+                    <span class="font-weight-bold">Department : </span>
+                    <span class="font-weight-bold text-danger uppercase">{{ auth()->user()->department }}</span>
+                </div>
             @endif
 
         @endif
@@ -193,7 +192,6 @@
                             auth()->user()->post == 'store')
                         <th class="font-weight-bold">Alocation time created at</th>
                         <th class="font-weight-bold">Alocation time updated at</th>
-                        <th class="font-weight-bold">Select resource to print</th>
                         <th class="datatable-nosort font-weight-bold">Action</th>
                     @else
                     @endif
@@ -243,13 +241,6 @@
                             <td style="text-decoration:normal">
                                 <span class="font-weight-bold">{{ $resource->repair_status }}</span>
                             </td>
-
-                            <td style="text-decoration: normal">
-
-                                <input type="checkbox" wire:model = "resourceId" value="{{ $resource->id }}"
-                                    class="checked" onclick="checkAll()">
-
-                            </td>
                         @else
                         @endif
                         {{--
@@ -278,7 +269,8 @@
 
                         </td> --}}
 
-                        {{-- <td style="text-decoration:normal">
+
+                        <td style="text-decoration:normal">
 
                             @if ($resource->asset_status == 'Very good')
                                 <button type="button"
@@ -300,10 +292,19 @@
                                 <button type="button"
                                     onclick="confirm(`Ooops!! this action can't be done here `) || event.stopImmediatePropagation()"
                                     class="bg-red-600 text-white font-bold p-2 rounded">{{ $resource->asset_status }}</button>
-                            @endif
-                        </td> --}}
 
-                        {{-- <td style="text-decoration:normal">
+
+                @endif
+                </td>
+
+                <td style="text-decoration: normal">
+
+                    <input type="checkbox" wire:model = "resourceId" value="{{ $resource->id }}"
+                        class="checked" onclick="checkAll()">
+
+                </td>
+
+                {{-- <td style="text-decoration:normal">
 
                             @if ($resource->allocation_status == 'Not Allocated')
                                 <button type="button"
@@ -318,69 +319,64 @@
 
                         </td> --}}
 
-                        @if (auth()->user()->department == 'department 1' || auth()->user()->post == 'store')
-                            <td style="text-decoration:normal">
-                                <span class="font-weight-bold">{{ $resource->building }}</span>
-                            </td>
+                @if (auth()->user()->department == 'department 1' || auth()->user()->post == 'store')
+                    <td style="text-decoration:normal">
+                        <span class="font-weight-bold">{{ $resource->building }}</span>
+                    </td>
 
-                            <td style="text-decoration:normal">
-                                <span class="font-weight-bold">{{ $resource->specific_area }}</span>
-                            </td>
+                    <td style="text-decoration:normal">
+                        <span class="font-weight-bold">{{ $resource->specific_area }}</span>
+                    </td>
 
-                            <td style="text-decoration:normal">
-                                <span class="font-weight-bold">{{ $resource->room }}</span>
-                            </td>
+                    <td style="text-decoration:normal">
+                        <span class="font-weight-bold">{{ $resource->room }}</span>
+                    </td>
 
-                            <td style="text-decoration:normal">
+                    <td style="text-decoration:normal">
 
-                                <span>{{ $resource->created_at->format('d M Y h:i:s') }}</span>
-                            </td>
+                        <span>{{ $resource->created_at->format('d M Y h:i:s') }}</span>
+                    </td>
 
 
-                            <td style="text-decoration:normal">
+                    <td style="text-decoration:normal">
 
-                                <span>{{ $resource->updated_at->format('d M Y h:i:s') }}</span>
-                            </td>
+                        <span>{{ $resource->updated_at->format('d M Y h:i:s') }}</span>
+                    </td>
 
-                            <td style="text-decoration: normal">
 
-                                <input type="checkbox" wire:model = "resourceId" value="{{ $resource->id }}"
-                                    class="checked" onclick="checkAll()">
+                    <td>
 
-                            </td>
-                            <td>
+                        <div class="dropdown">
+                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#"
+                                role="button" data-toggle="dropdown">
+                                <i class="dw dw-more"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 
-                                <div class="dropdown">
-                                    <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
-                                        href="#" role="button" data-toggle="dropdown">
-                                        <i class="dw dw-more"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-
-                                        <a class="dropdown-item"
-                                            href="{{ asset('UIMS/edit-chas-resource/' . $resource->id) }}"><i
-                                                class="dw dw-edit2"></i> Edit</a>
+                                <a class="dropdown-item"
+                                    href="{{ asset('UIMS/edit-chas-resource/' . $resource->id) }}"><i
+                                        class="dw dw-edit2"></i> Edit</a>
 
 
 
-                                        <button type="submit" class="dropdown-item"
-                                            wire:click = "deleteChasCreatedResource({{ $resource->id }})"
-                                            onclick="confirm(`Are you sure you want to delete this {{ $resource->resource_name }} asset  from the list ? `) || event.stopImmediatePropagation()"><i
-                                                class="dw dw-delete-3"></i>Delete</button>
+                                <button type="submit" class="dropdown-item"
+                                    wire:click = "deleteChasCreatedResource({{ $resource->id }})"
+                                    onclick="confirm(`Are you sure you want to delete this {{ $resource->resource_name }} asset  from the list ? `) || event.stopImmediatePropagation()"><i
+                                        class="dw dw-delete-3"></i>Delete</button>
 
 
 
-                                    </div>
-                                </div>
-                            </td>
-                        @else
-                        @endif
+                            </div>
+                        </div>
+                    </td>
+                @else
+                @endif
 
 
 
 
 
-                    </tr>
+                </tr>
                 @endforeach
 
             </tbody>
@@ -569,7 +565,6 @@
                             auth()->user()->post == 'store')
                         <th class="font-weight-bold">Alocation time created at</th>
                         <th class="font-weight-bold">Alocation time updated at</th>
-                        <th class="font-weight-bold">Select resource to print</th>
                         <th class="datatable-nosort font-weight-bold">Action</th>
                     @else
                     @endif
@@ -612,6 +607,40 @@
                             <td style="text-decoration:normal">
                                 <span class="font-weight-bold">{{ $resource->department }}</span>
                             </td>
+
+                         <td style="text-decoration:normal">
+
+                            @if ($resource->asset_status == 'Very good')
+                                <button type="button"
+                                    onclick="confirm(`Ooops!! this action can't be done here `) || event.stopImmediatePropagation()"
+                                    class="bg-green-600 text-white font-bold p-2 rounded">{{ $resource->asset_status }}</button>
+                            @elseif ($resource->asset_status == 'Good')
+                                <button type="button"
+                                    onclick="confirm(`Ooops!! this action can't be done here `) || event.stopImmediatePropagation()"
+                                    class="bg-green-800 hover:bg-yellow-800 text-white font-bold p-2 rounded">{{ $resource->asset_status }}</button>
+                            @elseif ($resource->asset_status == 'Fair')
+                                <button type="button"
+                                    onclick="confirm(`Ooops!! this action can't be done here `) || event.stopImmediatePropagation()"
+                                    class="bg-yellow-600 text-white font-bold p-2 rounded">{{ $resource->asset_status }}</button>
+                            @elseif ($resource->asset_status == 'New')
+                                <button type="button"
+                                    onclick="confirm(`Ooops!! this action can't be done here `) || event.stopImmediatePropagation()"
+                                    class="bg-blue-600 text-white font-bold p-2 rounded">{{ $resource->asset_status }}</button>
+
+
+                            @else
+                                <button type="button"
+                                    onclick="confirm(`Ooops!! this action can't be done here `) || event.stopImmediatePropagation()"
+                                    class="bg-red-600 text-white font-bold p-2 rounded">{{ $resource->asset_status }}</button>
+                            @endif
+                        </td>
+
+                        <td style="text-decoration: normal">
+
+                            <input type="checkbox" wire:model = "resourceId" value="{{ $resource->id }}"
+                                class="checked" onclick="checkAll()">
+
+                        </td>
                         @else
                         @endif
 
@@ -620,12 +649,7 @@
                                 <span class="font-weight-bold">{{ $resource->repair_status }}</span>
                             </td>
 
-                            <td style="text-decoration: normal">
 
-                                <input type="checkbox" wire:model = "resourceId" value="{{ $resource->id }}"
-                                    class="checked" onclick="checkAll()">
-
-                            </td>
                         @else
                         @endif
                         {{--
@@ -719,12 +743,7 @@
                                 <span>{{ $resource->updated_at->format('d M Y h:i:s') }}</span>
                             </td>
 
-                            <td style="text-decoration: normal">
 
-                                <input type="checkbox" wire:model = "resourceId" value="{{ $resource->id }}"
-                                    class="checked" onclick="checkAll()">
-
-                            </td>
                             <td>
 
                                 <div class="dropdown">
