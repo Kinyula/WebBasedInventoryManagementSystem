@@ -8,25 +8,34 @@ use Livewire\Component;
 
 class StaffManagementLivewire extends Component
 {
-    public $role_id, $username, $email, $password, $post, $college, $profile_image,$department;
-    public $colleges = [];
+    public $role_id, $username, $email, $password, $post, $college, $profile_image, $department;
     public $departments = [];
 
     public function mount(){
 
         $this->password = time();
 
-        $this->colleges = [
-            'College of Informatics and Virtual Educationn ( CIVE )' => ['Electronics and Telecommunications Engineering ( ETE )', 'Computer Science and Engineering ( CSE )', 'Information System and Technology ( IST )'],
-            'College of Health and Allied Science ( CHAS )' => ['department 1', 'department 2', 'department 3'],
 
-        ];
     }
 
     public function updatedCollege($value)
     {
-        $this->departments = $this->colleges[$value] ?? [];
-        $this->department = '';
+        $this->departments = $this->getDepartmentsByCollege($value);
+    }
+
+    private function getDepartmentsByCollege($college)
+    {
+        $departments = [
+            'College of Informatics and Virtual Education ( CIVE )' => ['Electronics and Telecommunications Engineering ( ETE )', 'Computer Science and Engineering ( CSE )', 'Informartion Systems and Technology ( IST )'],
+            'College of Natural Mathematical Science ( CNMS )' => ['Department Of Mathematics', 'Department Of Physics', 'Department Of Chemistry', 'Department Of Biology', 'Department Of Geography'],
+            'College of Health and Allied Science ( CHAS )' => ['Department 1', 'Department 2','Department 3', 'Department 4','Department 5'],
+            'College of Education ( CoED )' => ['Department 7', 'Department 8'],
+            'College of Humanities and Social Science ( CHSS )' => ['Department 9', 'Department 10'],
+            'College of Business and Economics ( CoBE )' => ['Department 11', 'Department 12'],
+            'College of Earth Sciences and Engineering ( CoESE )' => ['Department 13', 'Department 14'],
+        ];
+
+        return $departments[$college] ?? [];
     }
 
 
