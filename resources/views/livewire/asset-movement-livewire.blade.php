@@ -4,82 +4,81 @@
 
         @if ($Resources->count() > 0)
 
-        <div style="float: inline-end">
+            <div style="float: inline-end">
 
-            <button type="submit" wire:loading.attr = "disabled" wire:click = "printChasQrCodePdf"
-                onclick="confirm('Dont\'t forget to refresh the page to view files to be downloaded') || event.stopImmediatePropagation()"
-                class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ms-4 float-end">
-                <i class="bi bi-download font-weight-bold p-1"></i>
-                print qr codes PDF
-            </button>
-
-            <button type="submit" wire:loading.attr = "disabled" wire:click = "exportChasResourcesPdf"
-                onclick="confirm('Dont\'t forget to refresh the page to view files to be downloaded') || event.stopImmediatePropagation()"
-                class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ms-4 float-end">
-                <i class="bi bi-download font-weight-bold p-1"></i>
-                Export resources PDF
-            </button>
-
-            @if (auth()->user()->post === 'store' &&
-                    auth()->user()->college_name === 'College of Health and Allied Science ( CHAS )')
-                <a wire:navigate href="{{ asset('UIMS/add-chas-resources') }}"
+                <button type="submit" wire:loading.attr = "disabled" wire:click = "printChasQrCodePdf"
+                    onclick="confirm('Dont\'t forget to refresh the page to view files to be downloaded') || event.stopImmediatePropagation()"
                     class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ms-4 float-end">
-                    <i class="fa-solid fa-arrow-left px-1"></i>
-                    Back
-                </a>
-            @else
-            @endif
-
-        </div>
-
-        <h2 class="h5 pd-20">View un moved items</h2>
-        @if (auth()->user()->post == 'Head of department ( HOD )')
-        <span class="float-end">
-            <input type="checkbox" wire:model="allChecked" wire:click="markAll" class="cursor-pointer">
-            <span>Mark all</span>
-        </span>
-    @else
-    @endif
-
-        <div class="header-search mb-5">
-            <form class="d-flex">
-                <div class="form-group mb-0">
-
-                    <input type="search" class="form-control search-input" placeholder="Search Here..."
-                        wire:model.live = 'chasResourceSearch' />
-
-                </div>
-            </form>
-        </div>
-        @else
-
-        <div style="float: inline-end">
-
-            <button disabled type="submit" wire:loading.attr = "disabled" wire:click = "printChasQrCodePdf"
-                onclick="confirm('Dont\'t forget to refresh the page to view files to be downloaded') || event.stopImmediatePropagation()"
-                class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ms-4 float-end">
-                <i class="bi bi-download font-weight-bold p-1"></i>
-                print qr codes PDF
-            </button>
-
-            <button disabled type="submit" wire:loading.attr = "disabled" wire:click = "exportChasResourcesPdf"
-                onclick="confirm('Dont\'t forget to refresh the page to view files to be downloaded') || event.stopImmediatePropagation()"
-                class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ms-4 float-end">
-                <i class="bi bi-download font-weight-bold p-1"></i>
-                Export resources PDF
-            </button>
-
-            @if (auth()->user()->post === 'store' &&
-                    auth()->user()->college_name === 'College of Health and Allied Science ( CHAS )')
-                <button
-                    class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ms-4 float-end">
-                    <i class="fa-solid fa-arrow-left px-1"></i>
-                    Back
+                    <i class="bi bi-download font-weight-bold p-1"></i>
+                    print qr codes PDF
                 </button>
+
+                <button type="submit" wire:loading.attr = "disabled" wire:click = "exportChasResourcesPdf"
+                    onclick="confirm('Dont\'t forget to refresh the page to view files to be downloaded') || event.stopImmediatePropagation()"
+                    class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ms-4 float-end">
+                    <i class="bi bi-download font-weight-bold p-1"></i>
+                    Export resources PDF
+                </button>
+
+                @if (auth()->user()->post === 'store' &&
+                        auth()->user()->college_name === 'College of Health and Allied Science ( CHAS )')
+                    <a wire:navigate href="{{ asset('UIMS/add-chas-resources') }}"
+                        class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ms-4 float-end">
+                        <i class="fa-solid fa-arrow-left px-1"></i>
+                        Back
+                    </a>
+                @else
+                @endif
+
+            </div>
+
+            <h2 class="h5 pd-20">View un moved items</h2>
+            @if (auth()->user()->post == 'Head of department ( HOD )' || auth()->user()->post == 'store')
+                <span class="float-end">
+                    <input type="checkbox" wire:model="allChecked" wire:click="markAll" class="cursor-pointer">
+                    <span>Mark all</span>
+                </span>
             @else
             @endif
 
-        </div>
+            <div class="header-search mb-5">
+                <form class="d-flex">
+                    <div class="form-group mb-0">
+
+                        <input type="search" class="form-control search-input" placeholder="Search Here..."
+                            wire:model.live = 'chasResourceSearch' />
+
+                    </div>
+                </form>
+            </div>
+        @else
+            <div style="float: inline-end">
+
+                <button disabled type="submit" wire:loading.attr = "disabled" wire:click = "printChasQrCodePdf"
+                    onclick="confirm('Dont\'t forget to refresh the page to view files to be downloaded') || event.stopImmediatePropagation()"
+                    class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ms-4 float-end">
+                    <i class="bi bi-download font-weight-bold p-1"></i>
+                    print qr codes PDF
+                </button>
+
+                <button disabled type="submit" wire:loading.attr = "disabled" wire:click = "exportChasResourcesPdf"
+                    onclick="confirm('Dont\'t forget to refresh the page to view files to be downloaded') || event.stopImmediatePropagation()"
+                    class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ms-4 float-end">
+                    <i class="bi bi-download font-weight-bold p-1"></i>
+                    Export resources PDF
+                </button>
+
+                @if (auth()->user()->post === 'store' &&
+                        auth()->user()->college_name === 'College of Health and Allied Science ( CHAS )')
+                    <button
+                        class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ms-4 float-end">
+                        <i class="fa-solid fa-arrow-left px-1"></i>
+                        Back
+                    </button>
+                @else
+                @endif
+
+            </div>
         @endif
 
 
@@ -97,7 +96,7 @@
         @endif
 
         @if (session()->has('error'))
-            <div role="alert" class="alert alert-success alert-dismissible fade show">
+            <div role="alert" class="alert alert-danger alert-dismissible fade show">
                 <strong>{{ session('error') }}</strong>
                 <button class="btn btn-close" data-bs-dismiss="alert"></button>
             </div>
@@ -183,45 +182,43 @@
                         </td>
 
                         @if (
-                            (auth()->user()->post == 'Head of department ( HOD )' && auth()->user()->department == 'DICT') ||
+                            ((auth()->user()->post == 'Head of department ( HOD )' && auth()->user()->department == 'DICT')) ||
                                 auth()->user()->post == 'store')
                             <td style="text-decoration:normal">
                                 <span class="font-weight-bold">{{ $resource->department }}</span>
                             </td>
 
-                             <td style="text-decoration:normal">
+                            <td style="text-decoration:normal">
 
-                            @if ($resource->asset_status == 'Very good')
-                                <button type="button"
-                                    onclick="confirm(`Ooops!! this action can't be done here `) || event.stopImmediatePropagation()"
-                                    class="bg-green-600 text-white font-bold p-2 rounded">{{ $resource->asset_status }}</button>
-                            @elseif ($resource->asset_status == 'Good')
-                                <button type="button"
-                                    onclick="confirm(`Ooops!! this action can't be done here `) || event.stopImmediatePropagation()"
-                                    class="bg-green-800 hover:bg-yellow-800 text-white font-bold p-2 rounded">{{ $resource->asset_status }}</button>
-                            @elseif ($resource->asset_status == 'Fair')
-                                <button type="button"
-                                    onclick="confirm(`Ooops!! this action can't be done here `) || event.stopImmediatePropagation()"
-                                    class="bg-yellow-600 text-white font-bold p-2 rounded">{{ $resource->asset_status }}</button>
-                            @elseif ($resource->asset_status == 'New')
-                                <button type="button"
-                                    onclick="confirm(`Ooops!! this action can't be done here `) || event.stopImmediatePropagation()"
-                                    class="bg-blue-600 text-white font-bold p-2 rounded">{{ $resource->asset_status }}</button>
-                            @else
-                                <button type="button"
-                                    onclick="confirm(`Ooops!! this action can't be done here `) || event.stopImmediatePropagation()"
-                                    class="bg-red-600 text-white font-bold p-2 rounded">{{ $resource->asset_status }}</button>
-                            @endif
-                        </td>
+                                @if ($resource->asset_status == 'Very good')
+                                    <button type="button"
+                                        onclick="confirm(`Ooops!! this action can't be done here `) || event.stopImmediatePropagation()"
+                                        class="bg-green-600 text-white font-bold p-2 rounded">{{ $resource->asset_status }}</button>
+                                @elseif ($resource->asset_status == 'Good')
+                                    <button type="button"
+                                        onclick="confirm(`Ooops!! this action can't be done here `) || event.stopImmediatePropagation()"
+                                        class="bg-green-800 hover:bg-yellow-800 text-white font-bold p-2 rounded">{{ $resource->asset_status }}</button>
+                                @elseif ($resource->asset_status == 'Fair')
+                                    <button type="button"
+                                        onclick="confirm(`Ooops!! this action can't be done here `) || event.stopImmediatePropagation()"
+                                        class="bg-yellow-600 text-white font-bold p-2 rounded">{{ $resource->asset_status }}</button>
+                                @elseif ($resource->asset_status == 'New')
+                                    <button type="button"
+                                        onclick="confirm(`Ooops!! this action can't be done here `) || event.stopImmediatePropagation()"
+                                        class="bg-blue-600 text-white font-bold p-2 rounded">{{ $resource->asset_status }}</button>
+                                @else
+                                    <button type="button"
+                                        onclick="confirm(`Ooops!! this action can't be done here `) || event.stopImmediatePropagation()"
+                                        class="bg-red-600 text-white font-bold p-2 rounded">{{ $resource->asset_status }}</button>
+                                @endif
+                            </td>
 
-                        <td style="text-decoration: normal">
+                            <td style="text-decoration: normal">
 
-                            <input type="checkbox" wire:model = "resourceId" value="{{ $resource->id }}"
-                                class="checked" onclick="checkAll()">
+                                <input type="checkbox" wire:model = "resourceId" value="{{ $resource->id }}"
+                                    class="checked cursor-pointer" >
 
-                        </td>
-
-                        
+                            </td>
                         @else
                         @endif
 
@@ -230,13 +227,8 @@
                                 <span class="font-weight-bold">{{ $resource->repair_status }}</span>
                             </td>
 
-                            <td style="text-decoration: normal">
-
-                                <input type="checkbox" wire:model = "resourceId" value="{{ $resource->id }}"
-                                    class="checked" onclick="checkAll()">
-
-                            </td>
                         @else
+
                         @endif
                         {{--
                         <td style="text-decoration:normal">
@@ -368,6 +360,40 @@
         </table>
         <span>{{ $Resources->links() }}</span>
         @if ($Resources->count() > 0)
+            @if (auth()->user()->post == 'store')
+
+            <div class="mt-3">
+                <label for=""
+                    class='block font-medium text-sm text-gray-700 dark:text-gray-300'>department
+                    <span class="text-danger text-xl">*</span></label>
+                <select type="select" wire:model= "department"
+                    class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full'>
+                    <option value="">-- Move to --</option>
+
+                    <option value="department 1">department 1</option>
+                    <option value="department 2">department 2</option>
+                    <option value="department 3">department 3</option>
+                    <option value="department 4">department 4</option>
+                    <option value="department 5">department 5</option>
+                </select>
+                @error('department')
+                    <strong class= 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>{{ $message }}</strong>
+                @enderror
+            </div>
+
+
+
+
+
+            <br>
+            <button wire:click = 'moveSelected' type="submit"
+                class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ms-4 mb-10"
+                onclick="confirm(`Are you sure you want to approve the status of this resource  ?`) || event.StopImmediatePropagation()">
+                <i class="fas fa-check p-1"></i>
+                Move
+            </button>
+            @else
+
             <div class="mt-3">
                 <label for="area_of_allocation"
                     class='block font-medium text-sm text-gray-700 dark:text-gray-300'>Building
@@ -427,6 +453,8 @@
                 <i class="fas fa-check p-1"></i>
                 Move
             </button>
+            @endif
+
         @else
             <button disabled wire:click = 'moveSelected' type="submit"
                 class="inline-flex items-center px-4 py-2 bg-gray-300 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-300 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ms-4 mb-10"
@@ -475,12 +503,12 @@
 
 
         @if (auth()->user()->post == 'Head of department ( HOD )')
-        <span class="float-end">
-            <input type="checkbox" wire:model="allChecked" wire:click="markAll" class="cursor-pointer">
-            <span>Mark all</span>
-        </span>
-    @else
-    @endif
+            <span class="float-end">
+                <input type="checkbox" wire:model="allChecked" wire:click="markAll" class="cursor-pointer">
+                <span>Mark all</span>
+            </span>
+        @else
+        @endif
         <div class="header-search mb-5">
             <form class="d-flex">
                 <div class="form-group mb-0">
@@ -499,13 +527,13 @@
                 <button class="btn btn-close" data-bs-dismiss="alert"></button>
             </div>
         @endif
-
+{{--
         @if (session()->has('error'))
-            <div role="alert" class="alert alert-success alert-dismissible fade show">
+            <div role="alert" class="alert alert-danger alert-dismissible fade show">
                 <strong>{{ session('error') }}</strong>
                 <button class="btn btn-close" data-bs-dismiss="alert"></button>
             </div>
-        @endif
+        @endif --}}
 
         <table class="data-table table nowrap ">
             <thead>

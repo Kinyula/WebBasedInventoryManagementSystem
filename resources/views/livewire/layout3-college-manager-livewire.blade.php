@@ -393,7 +393,23 @@
                             </li>
                         @endif
 
+                        @if (auth()->user()->college_name == 'College of Health and Allied Science ( CHAS )')
+                            <li class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle">
+                                    <span class="micon bi bi-cart"></span><span class="mtext">Asset
+                                        movement</span>
+                                </a>
 
+                                <ul class="submenu">
+                                    <li><a href="{{ asset('UIMS/asset-transfer') }}">
+                                            Asset movement
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+                        @endif
 
                         @if (auth()->user()->college_name == 'College of Health and Allied Science ( CHAS )')
                             <li class="dropdown">

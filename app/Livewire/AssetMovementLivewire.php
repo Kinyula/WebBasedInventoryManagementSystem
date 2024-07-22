@@ -25,9 +25,7 @@ class AssetMovementLivewire extends Component
 
     public $allChecked = false;
 
-    public $room, $floor, $building;
-
-
+    public $room, $floor, $building, $department;
 
     public function markAll()
     {
@@ -43,43 +41,66 @@ class AssetMovementLivewire extends Component
         }
     }
 
+    public function singleMark()
+    {
+
+        if ($this->resourceId) {
+            $this->resourceId = ChasResource::search($this->chasResourceSearch)
+                ->where('movement_status', '=', 'Not moved')
+                ->pluck('id')
+                ->toArray();
+        } else {
+            $this->resourceId = [];
+        }
+    }
+
+
     public function moveSelected()
     {
+
+        dd($this->resourceId);
+
         if (empty($this->resourceId)) {
-            session()->flash('error', 'No items selected please select to continue.');
+            session()->flash('error', 'No items selected for asset movement activity.');
             return;
         }
 
         DB::transaction(function () {
-            ChasResource::whereIn('id', $this->resourceId)
 
-                ->update([
-                    'movement_status' => 'Moved',
-                    'building' => $this->building,
-                    'specific_area' => $this->floor,
-                    'room' => $this->room
-                ]);
+            if (auth()->user()->post == 'store') {
+
+                ChasResource::whereIn('id', $this->resourceId)
+
+                    ->update([
+                        'movement_status' => 'Moved',
+                        'department' => $this->department,
+
+                    ]);
+            } else {
+                ChasResource::whereIn('id', $this->resourceId)
+
+                    ->update([
+                        'movement_status' => 'Moved',
+                        'building' => $this->building,
+                        'specific_area' => $this->floor,
+                        'room' => $this->room
+                    ]);
+            }
         });
 
         session()->flash('done', 'Moved successfully.');
         // Reset selection and checkbox state
         $this->resourceId = [];
         $this->allChecked = false;
-
-
     }
 
     public function render()
     {
-        return view('livewire.asset-movement-livewire',[
+        return view('livewire.asset-movement-livewire', [
 
             'Resources' => ChasResource::searchMoved($this->chasResourceSearch)->where('allocation_status', '=', 'Allocated')->where('movement_status', '=', 'Not moved')->paginate(15),
             'MovedAssetToAreas' => ChasResource::searchUnmoved($this->chasResourceSearch)->where('allocation_status', '=', 'Transfered')->where('movement_status', '=', 'Moved')->paginate(15),
 
         ]);
-
     }
-
-
-
 }

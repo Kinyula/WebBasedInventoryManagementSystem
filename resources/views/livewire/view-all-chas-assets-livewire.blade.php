@@ -38,7 +38,7 @@
     <div class="card-box p-2">
 
         <h2 class="h5 pd-20">View un allocated items</h2>
-        @if (auth()->user()->post == 'Head of department ( HOD )')
+        @if (auth()->user()->post == 'Head of department ( HOD )' || auth()->user()->post == 'store')
             <span class="float-end">
                 <input type="checkbox" wire:model="allChecked" wire:click="allMark" class="cursor-pointer">
                 <span>Mark all</span>
@@ -143,7 +143,7 @@
         @endif
 
         @if (session()->has('error'))
-            <div role="alert" class="alert alert-success alert-dismissible fade show">
+            <div role="alert" class="alert alert-danger alert-dismissible fade show">
                 <strong>{{ session('error') }}</strong>
                 <button class="btn btn-close" data-bs-dismiss="alert"></button>
             </div>
@@ -300,7 +300,7 @@
                 <td style="text-decoration: normal">
 
                     <input type="checkbox" wire:model = "resourceId" value="{{ $resource->id }}"
-                        class="checked" onclick="checkAll()">
+                        class="checked cursor-pointer" onclick="checkAll()">
 
                 </td>
 
@@ -447,7 +447,7 @@
         @else
             <button disabled wire:click = 'allocateSelected' type="submit"
                 class="inline-flex items-center px-4 py-2 bg-gray-300 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-300 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ms-4 mb-10"
-                onclick="confirm(`Are you sure you want to approve the status of this resource  ?`) || event.StopImmediatePropagation()">
+                onclick="confirm(`Are you sure you want to allocate resource  ?`) || event.StopImmediatePropagation()">
                 <i class="fas fa-check p-1"></i>
                 Allocate
             </button>

@@ -71,6 +71,7 @@ class ViewAllChasAssetsLivewire extends Component
                 ->toArray();
         } else {
             // Unmark all checkboxes
+            
             $this->resourceId = [];
         }
     }
@@ -78,11 +79,12 @@ class ViewAllChasAssetsLivewire extends Component
     public function allocateSelected(){
 
         if (empty($this->resourceId)) {
-            session()->flash('error', 'No items selected for the approval after verification.');
+            session()->flash('error', 'No items selected for allocation activity');
             return;
         }
 
         DB::transaction(function () {
+            dd($this->resourceId);
             ChasResource::whereIn('id', $this->resourceId)
                 ->update([
                     'allocation_status' => 'Allocated',

@@ -9,10 +9,24 @@ use Livewire\Component;
 class StaffManagementLivewire extends Component
 {
     public $role_id, $username, $email, $password, $post, $college, $profile_image,$department;
+    public $colleges = [];
+    public $departments = [];
 
     public function mount(){
 
         $this->password = time();
+
+        $this->colleges = [
+            'College of Informatics and Virtual Educationn ( CIVE )' => ['Electronics and Telecommunications Engineering ( ETE )', 'Computer Science and Engineering ( CSE )', 'Information System and Technology ( IST )'],
+            'College of Health and Allied Science ( CHAS )' => ['department 1', 'department 2', 'department 3'],
+
+        ];
+    }
+
+    public function updatedCollege($value)
+    {
+        $this->departments = $this->colleges[$value] ?? [];
+        $this->department = '';
     }
 
 
